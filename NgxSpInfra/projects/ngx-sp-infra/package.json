@@ -1,6 +1,6 @@
 {
   "name": "ngx-sp-infra",
-  "version": "0.1.75",
+  "version": "0.2.75",
   "description": "Biblioteca de utilitários da Infra.",
   "keywords": ["Infra", "Sispro", "Utilitários", "P&D"],
   "bugs": {
