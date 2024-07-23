@@ -102,7 +102,7 @@ export class SvgStorageComponent implements OnChanges {
   public size: number;
   public color: string;
   public strokeWidth: number;
-  // #endregion PU
+  // #endregion PUBLIC
 
   // #endregion PROPERTIES
 
