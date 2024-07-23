@@ -1,0 +1,32 @@
+import * as i0 from "@angular/core";
+import * as i1 from "./widgets/loading/loading.component";
+import * as i2 from "./widgets/field-control-error/field-control-error.component";
+import * as i3 from "./widgets/field-error-message/field-error-message.component";
+import * as i4 from "./widgets/loading-button/loading-button.component";
+import * as i5 from "./message/alert/alert.component";
+import * as i6 from "./message/confirm/confirm.component";
+import * as i7 from "./message/confirm-modal/confirm-modal.component";
+import * as i8 from "./message/save/save.component";
+import * as i9 from "./widgets/breadcrumb/infra-breadcrumb/infra-breadcrumb.component";
+import * as i10 from "./widgets/breadcrumb/infra-breadcrumb-item/infra-breadcrumb-item.component";
+import * as i11 from "./widgets/breadcrumb/portalrh-breadcrumb/breadcrumb.component";
+import * as i12 from "./widgets/combobox/combobox.component";
+import * as i13 from "./widgets/svg-storage/svg-storage.component";
+import * as i14 from "./widgets/tree/tree.component";
+import * as i15 from "./pipes/to-url.pipe";
+import * as i16 from "./pipes/cpf-cnpj.pipe";
+import * as i17 from "./widgets/combobox/pipes/filter-by.pipe";
+import * as i18 from "./widgets/combobox/pipes/limit-to.pipe";
+import * as i19 from "./widgets/tree/pipes/search-tree.pipe";
+import * as i20 from "./widgets/click-outside/clickoutside.directive";
+import * as i21 from "./widgets/ordering/ordering.component";
+import * as i22 from "@angular/common";
+import * as i23 from "ngx-bootstrap/modal";
+import * as i24 from "ngx-bootstrap/accordion";
+import * as i25 from "@angular/forms";
+import * as i26 from "@angular/router";
+export declare class InfraModule {
+    static ɵfac: i0.ɵɵFactoryDeclaration<InfraModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<InfraModule, [typeof i1.LoadingComponent, typeof i2.FieldControlErrorComponent, typeof i3.FieldErrorMessageComponent, typeof i4.LoadingButtonComponent, typeof i5.AlertComponent, typeof i6.ConfirmComponent, typeof i7.ConfirmModalComponent, typeof i8.SaveComponent, typeof i9.InfraBreadcrumbComponent, typeof i10.InfraBreadcrumbItemComponent, typeof i11.BreadcrumbComponent, typeof i12.ComboboxComponent, typeof i13.SvgStorageComponent, typeof i14.TreeComponent, typeof i15.ToUrlPipe, typeof i16.CpfCnpjPipe, typeof i17.FilterByPipe, typeof i18.LimitToPipe, typeof i19.SearchTreePipe, typeof i20.ClickOutsideDirective, typeof i21.OrderingComponent], [typeof i22.CommonModule, typeof i23.ModalModule, typeof i24.AccordionModule, typeof i25.FormsModule, typeof i25.ReactiveFormsModule, typeof i26.RouterModule], [typeof i1.LoadingComponent, typeof i2.FieldControlErrorComponent, typeof i3.FieldErrorMessageComponent, typeof i4.LoadingButtonComponent, typeof i5.AlertComponent, typeof i6.ConfirmComponent, typeof i7.ConfirmModalComponent, typeof i8.SaveComponent, typeof i9.InfraBreadcrumbComponent, typeof i10.InfraBreadcrumbItemComponent, typeof i11.BreadcrumbComponent, typeof i12.ComboboxComponent, typeof i13.SvgStorageComponent, typeof i14.TreeComponent, typeof i15.ToUrlPipe, typeof i16.CpfCnpjPipe, typeof i20.ClickOutsideDirective, typeof i21.OrderingComponent]>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<InfraModule>;
+}

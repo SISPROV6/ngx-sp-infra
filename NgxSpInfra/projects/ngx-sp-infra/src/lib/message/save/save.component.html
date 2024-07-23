@@ -1,0 +1,35 @@
+<div class="modal-content ">
+  <div class="modal-header">
+      <h4 class="modal-title">{{ title }}</h4>
+      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="closeConfirm()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <h4>{{ message }}</h4>
+
+    <div class="body-config ">
+      <form>
+        <fieldset>
+          <legend> dados </legend>
+
+          <div class="input-config" *ngFor="let field of fields ; let i = index" >
+            <form>
+              <div class="input-group">
+                <input type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>{{field}}</label>
+              </div>
+            </form>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="confirm()">{{okText}}</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeConfirm()">{{ cancelText }}</button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<!-- FILTER -->
+<ng-template [ngIf]="filter">
+  <!-- <app-search-filters></app-search-filters> -->
+
+  <div class="input-group glb-search-input my-3">
+    <span class="input-group-text search px-2 glb-bg-color-white">
+      <app-svg-storage svgName="search" svgColor="gray" svgSize="medium-small"
+        class="d-flex align-items-center"></app-svg-storage>
+    </span>
+    <input type="text" class="form-control border-left-none ps-0" [(ngModel)]="search">
+  </div>
+  
+</ng-template>
+<!-- TREE -->
+<ul class="tree-view">
+  <ng-container *ngFor="let item of items | TreeFilter : search; index as i">
+    <div class="container py-1" [class]="!item.has_children ? 'children' : null ">
+      <app-svg-storage
+        class="chevron"
+        *ngIf="item.has_children"
+        [class]="item.aplicClass ? 'rotate' : null"
+        (click)="
+          onExpand(item);
+          item.aplicClass ? (item.aplicClass = false) : (item.aplicClass = true)
+        "
+        svgSize="medium-small"
+        svgName="chevron-right"
+      ></app-svg-storage>
+      <!-- CHECKBOX -->
+      <ng-template [ngIf]="checkbox">
+        <input
+          type="checkbox"
+          class="form-check-input m-0 position-relative"
+          [checked]="onCheckEvent(items)"
+          (change)="onCheck(items, item)"
+          [(ngModel)]="item.is_selected"
+        />
+      </ng-template>
+      <label class="label mb-0 ms-2">{{ item.label }}</label>
+    </div>
+    <!-- NODES -->
+    <ul *ngIf="item.expanded">
+      <app-tree
+        (onSelect)="item.is_selected = $event"
+        (onEvent)="item.is_selected = $event"
+        [items]="item.children"
+        [checkbox]="checkbox"
+      ></app-tree>
+    </ul>
+  </ng-container>
+</ul>

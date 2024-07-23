@@ -1,0 +1,39 @@
+<div class="modal-header modal-style modal-dialog-centered">
+  <h4 class="modal-title pull-left"> {{ customTitle === '' ? [modalType + ' ' + modalSubject] : customTitle }} </h4>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+    (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+  <div class="modal-message" [class.text-danger.fw-bold]="importantMessage">
+    <span *ngIf="customMessage === ''; else showCustomMessage"> Tem certeza que você quer {{ firstLetterIsLowercase(modalType) }}
+      <span [ngSwitch]="genreAndPluralitySubject">
+        <span *ngSwitchCase="'masc singular'"> este </span>
+        <span *ngSwitchCase="'masc plural'"> estes </span>
+        <span *ngSwitchCase="'fem singular'"> esta </span>
+        <span *ngSwitchCase="'fem plural'"> estas </span>
+      </span>
+      {{ firstLetterIsLowercase(modalSubject) }}?
+    </span>
+
+    <ng-template #showCustomMessage>
+      <span> {{ customMessage }} </span>
+    </ng-template>
+
+    <span *ngIf="modalType == 'Excluir'" class="text-danger fw-bold"> (esta ação é irreversível) </span>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary modal-button"
+    (click)="closeModal()"> Cancelar </button>
+
+  <button *ngIf="!showSpinner; else loadingButton" type="button" class="btn btn-primary modal-button"
+    (click)="showSpinner = true; closeModal(true)"> {{ customButton === '' ? modalType : customButton }} </button>
+
+  <ng-template #loadingButton>
+    <button class="btn btn-primary modal-button" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span> {{ customButtonLoading === '' ? [modalType == 'Excluir' ? 'Excluindo...' : [modalType == 'Ativar' ? 'Ativando...' : 'Inativando...']] : customButtonLoading }} </span>
+    </button>
+  </ng-template>
+
+</div>

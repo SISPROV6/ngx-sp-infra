@@ -1,0 +1,40 @@
+<div class="ngx-dropdown-container" tabindex="0">
+  <button type="button" tabindex="-1" class="ngx-dropdown-button" [ngClass]="{ 'ngx-disabled': disabled }"
+    [disabled]="disabled" (click)="toggleSelectDropdown()">
+    <span class="display-text">{{ selectedDisplayText }} </span>
+    <app-svg-storage svgName="chevron-down" svgColor="#343A40" svgSize="small"/>
+  </button>
+  <div class="ngx-dropdown-list-container scroll-y" *ngIf="toggleDropdown" [style.maxHeight]="config.height">
+    <div class="search-container d-flex justify-content-between" *ngIf="config.search">
+      <input (change)="changeSearchText($event)" [style.direction]="config.inputDirection" name="search-text"
+        (input)="searchTextChanged()" [(ngModel)]="searchText" tabindex="-1" autocomplete="off" />
+      <label [ngClass]="{ active: searchText }">
+        <span class="nsdicon-search"></span>
+        {{ config.searchPlaceholder }}</label>
+    </div>
+    <ul class="selected-items">
+      <li class="d-flex flex-row" tabindex="-1" *ngFor="let selected of selectedItems; let i = index"
+        (click)="deselectItem(selected, i)">
+        <input type="checkbox" class="form-check nsdicon-close me-2" checked="true">
+        <div style="margin-top: 2px;">{{
+          config.displayFn
+          ? config.displayFn(selected)
+          : selected[config.displayKey] || selected
+          }}</div>
+      </li>
+    </ul>
+    <hr *ngIf="selectedItems.length > 0 && availableItems.length > 0" />
+    <ul class="available-items">
+      <li class="d-flex flex-row" #availableOption *ngFor="let item of availableItems | filterBy: searchText: config.searchOnKey
+			| limitTo: config.limitTo; let i = index" tabindex="-1"
+        [ngClass]="{ active: focusedItemIndex == i && !item.disabled, disabled: item.disabled }"
+        (click)="selectItem(item, i)">
+        <input type="checkbox" class="form-check nsdicon-close me-2">
+        <div style="margin-top: 2px;">
+          {{ config.displayFn ? config.displayFn(item) : item[config.displayKey] || item }}
+        </div>
+      </li>
+      <li *ngIf="showNotFound">{{ config.noResultsFound }}</li>
+    </ul>
+  </div>
+</div>
