@@ -1,6 +1,6 @@
 {
   "name": "ngx-sp-infra",
-  "version": "0.1.75",
+  "version": "0.3.76",
   "description": "Biblioteca de utilitários da Infra.",
   "keywords": [
     "Infra",
@@ -11,7 +11,7 @@
   "bugs": {
     "email": "sispropesqdesenv@sispro.com.br"
   },
-  "repository": "https://siscanosdes.sispro.com.br:8443/svn/SisproCloud/trunk/INFRA",
+  "repository": "https://github.com/SISPROV6/ngx-sp-infra",
   "peerDependencies": {
     "@angular/common": "^16.2.2",
     "@angular/core": "^16.2.2",
