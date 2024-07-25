@@ -27,6 +27,8 @@ import { LimitToPipe } from './widgets/combobox/pipes/limit-to.pipe';
 import { SearchTreePipe } from './widgets/tree/pipes/search-tree.pipe';
 import { ClickOutsideDirective } from './widgets/click-outside/clickoutside.directive';
 import { OrderingComponent } from './widgets/ordering/ordering.component';
+import { SearchComboboxComponent } from './widgets/search-combobox/search-combobox.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -50,12 +52,14 @@ import { OrderingComponent } from './widgets/ordering/ordering.component';
     LimitToPipe,
     SearchTreePipe,
     ClickOutsideDirective,
-    OrderingComponent
+    OrderingComponent,
+    SearchComboboxComponent
   ],
   imports: [
     CommonModule,
     ModalModule.forRoot(),
     AccordionModule.forRoot(),
+    TooltipModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     RouterModule
@@ -79,6 +83,7 @@ import { OrderingComponent } from './widgets/ordering/ordering.component';
     CpfCnpjPipe,
     ClickOutsideDirective,
     OrderingComponent,
+    SearchComboboxComponent
   ],
   providers: [],
 })

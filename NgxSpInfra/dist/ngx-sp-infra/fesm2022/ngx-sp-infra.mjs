@@ -11,6 +11,8 @@ import * as i1 from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import * as i1$2 from '@angular/platform-browser';
+import * as i3 from 'ngx-bootstrap/tooltip';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { take } from 'rxjs/operators';
 import * as i1$3 from '@angular/common/http';
 
@@ -1447,7 +1449,7 @@ class OrderingComponent {
         this.sortDirection = '';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: OrderingComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: OrderingComponent, selector: "app-ordering", inputs: { isColumnClicked: "isColumnClicked", sortDirection: "sortDirection", sortAttributes: "sortAttributes" }, outputs: { sortDirectionChange: "sortDirectionChange", sortChange: "sortChange" }, ngImport: i0, template: "<ng-template [ngIf]=\"sortDirection !== 'desc'\">\n  <app-svg-storage\n    (click)=\"sort()\"\n    [svgName]=\"'arrow-up'\"\n    [class.rotate]=\"sortDirection !== ''\"\n    [svgColor]=\"getSvgColor()\"\n    tooltip=\"'Ascendente'\"\n    style=\"cursor: pointer;\"\n  ></app-svg-storage>\n  <!-- Ordenar Ascendente -->\n</ng-template>\n\n<ng-template [ngIf]=\"sortDirection === 'desc'\">\n  <app-svg-storage\n    (click)=\"sort()\"\n    [svgName]=\"'arrow-down'\"\n    [class.rotate]=\"true\"\n    [svgColor]=\"'blue'\"\n    tooltip=\"'Descendente'\"\n    style=\"cursor: pointer;\"\n  ></app-svg-storage>\n  <!-- Ordenar Descendente -->\n</ng-template>\n", styles: [""], dependencies: [{ kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: SvgStorageComponent, selector: "app-svg-storage", inputs: ["svgName", "svgColor", "svgFill", "svgSize", "svgStrokeWidth"] }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: OrderingComponent, selector: "app-ordering", inputs: { isColumnClicked: "isColumnClicked", sortDirection: "sortDirection", sortAttributes: "sortAttributes" }, outputs: { sortDirectionChange: "sortDirectionChange", sortChange: "sortChange" }, ngImport: i0, template: "<ng-template [ngIf]=\"sortDirection !== 'desc'\">\n  <app-svg-storage\n    (click)=\"sort()\"\n    [svgName]=\"'arrow-up'\"\n    [class.rotate]=\"sortDirection !== ''\"\n    [svgColor]=\"getSvgColor()\"\n    tooltip=\"'Ascendente'\"\n    style=\"cursor: pointer;\"\n  ></app-svg-storage>\n  <!-- Ordenar Ascendente -->\n</ng-template>\n\n<ng-template [ngIf]=\"sortDirection === 'desc'\">\n  <app-svg-storage\n    (click)=\"sort()\"\n    [svgName]=\"'arrow-down'\"\n    [class.rotate]=\"true\"\n    [svgColor]=\"'blue'\"\n    tooltip=\"'Descendente'\"\n    style=\"cursor: pointer;\"\n  ></app-svg-storage>\n  <!-- Ordenar Descendente -->\n</ng-template>\n", styles: [""], dependencies: [{ kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.TooltipDirective, selector: "[tooltip], [tooltipHtml]", inputs: ["adaptivePosition", "tooltip", "placement", "triggers", "container", "containerClass", "boundariesElement", "isOpen", "isDisabled", "delay", "tooltipHtml", "tooltipPlacement", "tooltipIsOpen", "tooltipEnable", "tooltipAppendToBody", "tooltipAnimation", "tooltipClass", "tooltipContext", "tooltipPopupDelay", "tooltipFadeDuration", "tooltipTrigger"], outputs: ["tooltipChange", "onShown", "onHidden", "tooltipStateChanged"], exportAs: ["bs-tooltip"] }, { kind: "component", type: SvgStorageComponent, selector: "app-svg-storage", inputs: ["svgName", "svgColor", "svgFill", "svgSize", "svgStrokeWidth"] }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: OrderingComponent, decorators: [{
             type: Component,
@@ -1461,6 +1463,133 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
             }], sortDirectionChange: [{
                 type: Output
             }], sortChange: [{
+                type: Output
+            }] } });
+
+/**
+ * @file search-combobox.component.ts
+ * @description Este arquivo contém a implementação do componente SearchComboboxComponent, que é um componente de interface do usuário
+ * para realizar pesquisas e seleções em uma lista de opções apresentada em um combobox.
+ *
+ * @component SearchComboboxComponent
+ * @selector search-combobox
+ * @standalone true
+ * @imports CommonModule, ProjectModule
+ * @templateUrl ./search-combobox.component.html
+ * @styleUrl ./search-combobox.component.scss
+ *
+ * @description
+ * O componente SearchComboboxComponent é projetado para fornecer aos usuários uma interface para pesquisar e selecionar itens de uma lista.
+ * Ele suporta a filtragem de itens com base na entrada do usuário, permitindo uma seleção mais fácil em listas extensas.
+ *
+ * ## Funcionalidades:
+ * - Pesquisa e filtragem de itens na lista do combobox.
+ * - Seleção de itens com feedback visual.
+ * - Emissão de eventos personalizados para interações do usuário, como recarregar a lista ou selecionar um item.
+ *
+ * ## Inputs:
+ * - `comboboxList`: Array de objetos representando os itens disponíveis para seleção.
+ * - `labelText`: Texto de etiqueta associado ao combobox.
+ * - `colorTheme`: Tema de cores para o componente.
+ * - `inputGroupIconName`: Nome do ícone a ser exibido no grupo de entrada.
+ * - `inputGroupIconTooltip`: Texto de dica de ferramenta para o ícone do grupo de entrada.
+ * - `mainInputPlaceholder`: Texto de espaço reservado para o input principal.
+ * - `searchInputPlaceholder`: Texto de espaço reservado para o input de pesquisa.
+ *
+ * ## Outputs:
+ * - `onReloadList`: Evento emitido quando a lista precisa ser recarregada.
+ * - `onSelectItem`: Evento emitido quando um item é selecionado.
+ *
+ * ## Métodos Públicos:
+ * - `reloadList(search: string)`: Método para recarregar a lista de itens com base na pesquisa fornecida.
+ * - `setFilterValue(id: string | number, label: string)`: Método para definir o valor do filtro.
+ *
+ * ## Propriedades:
+ * - `selectedItem`: Getter e Setter para o item selecionado atualmente.
+ * - `FormUtils`: Getter para utilitários de formulário.
+ * - `_searchInput`: Getter para o valor do input de pesquisa.
+ *
+ * ## Eventos:
+ * - `ngOnInit()`: Inicializa o componente.
+ * - `ngOnChanges(changes: SimpleChanges)`: Responde a mudanças nas propriedades de entrada.
+ *
+ * ## Utilitários:
+ * - `createFilterForm()`: Cria o formulário de filtro para a pesquisa.
+ * - `mapComboboxList()`: Mapeia a lista de combobox para o formato necessário.
+ *
+ * @note Este componente é marcado como `standalone`, permitindo seu uso sem a necessidade de importá-lo em um módulo.
+ */
+class SearchComboboxComponent {
+    constructor(_formBuilder) {
+        this._formBuilder = _formBuilder;
+        this.colorTheme = "primary";
+        this.inputGroupIconTooltip = "";
+        this.mainInputPlaceholder = "Selecione uma opção...";
+        this.searchInputPlaceholder = "Pesquisa...";
+        this.onReloadList = new EventEmitter();
+        this.onSelectItem = new EventEmitter();
+        this.mappedComboboxList = [];
+        this.searchCombobox = "";
+    }
+    ngOnInit() {
+        this.createFilterForm();
+    }
+    ngOnChanges(changes) {
+        if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
+            this.mappedComboboxList = this.comboboxList;
+        }
+    }
+    get selectedItem() { return this._selectedItem; }
+    set selectedItem(value) {
+        this._selectedItem = value;
+        this.onSelectItem.emit(value);
+    }
+    get FormUtils() { return FormUtils; }
+    // #region FORM DATA
+    get _searchInput() { return this.filterForm.get("_searchInput")?.value; }
+    // #endregion FORM DATA
+    // #region FORM VALIDATORS
+    createFilterForm() {
+        this.filterForm = this._formBuilder.group({
+            _searchInput: [""]
+        });
+    }
+    // #endregion FORM VALIDATORS
+    // #endregion ==========> FORM BUILDER <==========
+    // #region ==========> UTILITIES <==========
+    setFilterValue(id, label) {
+        this.filterForm.controls["_searchInput"].setValue(`${id} - ${label}`);
+        this.selectedText = label;
+        this.selectedItem = { ID: id, LABEL: label, AdditionalStringProperty1: "", IS_SELECTED: true };
+    }
+    reloadList(search) {
+        this.onReloadList.emit(search);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: SearchComboboxComponent, deps: [{ token: i2.FormBuilder }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: SearchComboboxComponent, selector: "lib-search-combobox", inputs: { comboboxList: "comboboxList", labelText: "labelText", colorTheme: "colorTheme", inputGroupIconName: "inputGroupIconName", inputGroupIconTooltip: "inputGroupIconTooltip", mainInputPlaceholder: "mainInputPlaceholder", searchInputPlaceholder: "searchInputPlaceholder" }, outputs: { onReloadList: "onReloadList", onSelectItem: "onSelectItem" }, usesOnChanges: true, ngImport: i0, template: "<label class=\"form-label\">{{ labelText }}</label>\r\n<div class=\"input-group dropdown flex-fill glb-max-height-350px\">\r\n   <button *ngIf=\"inputGroupIconName\" class=\"btn btn-{{colorTheme}}\" type=\"button\" [tooltip]=\"inputGroupIconTooltip\">\r\n      <app-svg-storage [svgName]=\"inputGroupIconName\" svgSize=\"medium-small\" />\r\n   </button>\r\n\r\n   <input class=\"form-select text-start rounded-end\" type=\"text\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" data-bs-auto-close=\"outside\" aria-expanded=\"false\" readonly>\r\n   <ul class=\"dropdown-menu p-2 w-100 glb-max-height-350px overflow-y-scroll\">\r\n      <div class=\"input-group mb-2\">\r\n         <input #searchInput type=\"text\" id=\"searchInput\" class=\"form-control glb-input-no-glow\" [placeholder]=\"searchInputPlaceholder\" (keyup.enter)=\"reloadList(searchInput.value)\">\r\n         <button class=\"btn btn-{{colorTheme}}\" (click)=\"reloadList(searchInput.value)\"> <app-svg-storage svgName=\"lupa\" svgSize=\"medium-small\" /> Pesquisar </button>\r\n      </div>\r\n\r\n      <ng-container *ngIf=\"mappedComboboxList; else loadingList\">\r\n         <ng-container *ngIf=\"mappedComboboxList.length > 0; else emptyItemList\">\r\n            <li *ngIf=\"selectedItem && selectedItem.ID\" class=\"dropdown-item\" (click)=\"setFilterValue('', '')\"> <span class=\"fw-bold\">Limpar op\u00E7\u00E3o selecionada</span> </li>\r\n            <li class=\"dropdown-item\" *ngFor=\"let item of mappedComboboxList\" (click)=\"setFilterValue(item.ID, item.LABEL); selectedItem = item\">\r\n               <span *ngIf=\"item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''\" class=\"glb-fs-12 fw-bold d-inline-block w-125\">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}\r\n            </li>\r\n         </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #loadingList> <li class=\"dropdown-item text-center\"> <div class=\"spinner-border\" role=\"status\"><span class=\"visually-hidden\">Carregando dados...</span></div> </li> </ng-template>\r\n      <ng-template #emptyItemList> <li class=\"dropdown-item fst-italic\">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>\r\n   </ul>\r\n</div>\r\n", styles: [".glb-max-height-350px{max-height:350px!important}\n"], dependencies: [{ kind: "directive", type: i1$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.TooltipDirective, selector: "[tooltip], [tooltipHtml]", inputs: ["adaptivePosition", "tooltip", "placement", "triggers", "container", "containerClass", "boundariesElement", "isOpen", "isDisabled", "delay", "tooltipHtml", "tooltipPlacement", "tooltipIsOpen", "tooltipEnable", "tooltipAppendToBody", "tooltipAnimation", "tooltipClass", "tooltipContext", "tooltipPopupDelay", "tooltipFadeDuration", "tooltipTrigger"], outputs: ["tooltipChange", "onShown", "onHidden", "tooltipStateChanged"], exportAs: ["bs-tooltip"] }, { kind: "directive", type: i2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: SvgStorageComponent, selector: "app-svg-storage", inputs: ["svgName", "svgColor", "svgFill", "svgSize", "svgStrokeWidth"] }] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: SearchComboboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'lib-search-combobox', template: "<label class=\"form-label\">{{ labelText }}</label>\r\n<div class=\"input-group dropdown flex-fill glb-max-height-350px\">\r\n   <button *ngIf=\"inputGroupIconName\" class=\"btn btn-{{colorTheme}}\" type=\"button\" [tooltip]=\"inputGroupIconTooltip\">\r\n      <app-svg-storage [svgName]=\"inputGroupIconName\" svgSize=\"medium-small\" />\r\n   </button>\r\n\r\n   <input class=\"form-select text-start rounded-end\" type=\"text\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" data-bs-auto-close=\"outside\" aria-expanded=\"false\" readonly>\r\n   <ul class=\"dropdown-menu p-2 w-100 glb-max-height-350px overflow-y-scroll\">\r\n      <div class=\"input-group mb-2\">\r\n         <input #searchInput type=\"text\" id=\"searchInput\" class=\"form-control glb-input-no-glow\" [placeholder]=\"searchInputPlaceholder\" (keyup.enter)=\"reloadList(searchInput.value)\">\r\n         <button class=\"btn btn-{{colorTheme}}\" (click)=\"reloadList(searchInput.value)\"> <app-svg-storage svgName=\"lupa\" svgSize=\"medium-small\" /> Pesquisar </button>\r\n      </div>\r\n\r\n      <ng-container *ngIf=\"mappedComboboxList; else loadingList\">\r\n         <ng-container *ngIf=\"mappedComboboxList.length > 0; else emptyItemList\">\r\n            <li *ngIf=\"selectedItem && selectedItem.ID\" class=\"dropdown-item\" (click)=\"setFilterValue('', '')\"> <span class=\"fw-bold\">Limpar op\u00E7\u00E3o selecionada</span> </li>\r\n            <li class=\"dropdown-item\" *ngFor=\"let item of mappedComboboxList\" (click)=\"setFilterValue(item.ID, item.LABEL); selectedItem = item\">\r\n               <span *ngIf=\"item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''\" class=\"glb-fs-12 fw-bold d-inline-block w-125\">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}\r\n            </li>\r\n         </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #loadingList> <li class=\"dropdown-item text-center\"> <div class=\"spinner-border\" role=\"status\"><span class=\"visually-hidden\">Carregando dados...</span></div> </li> </ng-template>\r\n      <ng-template #emptyItemList> <li class=\"dropdown-item fst-italic\">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>\r\n   </ul>\r\n</div>\r\n", styles: [".glb-max-height-350px{max-height:350px!important}\n"] }]
+        }], ctorParameters: () => [{ type: i2.FormBuilder }], propDecorators: { comboboxList: [{
+                type: Input,
+                args: [{ required: true }]
+            }], labelText: [{
+                type: Input,
+                args: [{ required: true }]
+            }], colorTheme: [{
+                type: Input
+            }], inputGroupIconName: [{
+                type: Input
+            }], inputGroupIconTooltip: [{
+                type: Input
+            }], mainInputPlaceholder: [{
+                type: Input
+            }], searchInputPlaceholder: [{
+                type: Input
+            }], onReloadList: [{
+                type: Output
+            }], onSelectItem: [{
                 type: Output
             }] } });
 
@@ -1486,7 +1615,8 @@ class InfraModule {
             LimitToPipe,
             SearchTreePipe,
             ClickOutsideDirective,
-            OrderingComponent], imports: [CommonModule, i1.ModalModule, i2$1.AccordionModule, FormsModule,
+            OrderingComponent,
+            SearchComboboxComponent], imports: [CommonModule, i1.ModalModule, i2$1.AccordionModule, i3.TooltipModule, FormsModule,
             ReactiveFormsModule,
             RouterModule], exports: [LoadingComponent,
             FieldControlErrorComponent,
@@ -1505,10 +1635,12 @@ class InfraModule {
             ToUrlPipe,
             CpfCnpjPipe,
             ClickOutsideDirective,
-            OrderingComponent] }); }
+            OrderingComponent,
+            SearchComboboxComponent] }); }
     static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraModule, imports: [CommonModule,
             ModalModule.forRoot(),
             AccordionModule.forRoot(),
+            TooltipModule.forRoot(),
             FormsModule,
             ReactiveFormsModule,
             RouterModule] }); }
@@ -1537,12 +1669,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
                         LimitToPipe,
                         SearchTreePipe,
                         ClickOutsideDirective,
-                        OrderingComponent
+                        OrderingComponent,
+                        SearchComboboxComponent
                     ],
                     imports: [
                         CommonModule,
                         ModalModule.forRoot(),
                         AccordionModule.forRoot(),
+                        TooltipModule.forRoot(),
                         FormsModule,
                         ReactiveFormsModule,
                         RouterModule
@@ -1566,6 +1700,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
                         CpfCnpjPipe,
                         ClickOutsideDirective,
                         OrderingComponent,
+                        SearchComboboxComponent
                     ],
                     providers: [],
                 }]
@@ -2339,5 +2474,5 @@ class TreeItem {
  * Generated bundle index. Do not edit.
  */
 
-export { AlertComponent, BreadcrumbComponent, CheckUrlAndMethodService, ClickOutsideDirective, ComboboxComponent, ConfirmComponent, ConfirmModalComponent, CpfCnpjPipe, CpfCnpjValidator, CpfCnpjValidatorDirective, CurrencyPipe, DownloadArquivos, EmailAnexoRecord, EmailModel, FieldControlErrorComponent, FieldErrorMessageComponent, FormUtils, InfraBreadcrumbComponent, InfraBreadcrumbItemComponent, InfraModule, IpServiceService, LoadingButtonComponent, LoadingComponent, MessageService, OrderingComponent, ReportFile, RetError, RetFeedbackMessage, RetReportFile, RetTree, SaveComponent, SearchTreePipe, SettingsService, SvgStorageComponent, ToUrlPipe, TreeComponent, TreeItem, Utils, alertIds, alertTypes };
+export { AlertComponent, BreadcrumbComponent, CheckUrlAndMethodService, ClickOutsideDirective, ComboboxComponent, ConfirmComponent, ConfirmModalComponent, CpfCnpjPipe, CpfCnpjValidator, CpfCnpjValidatorDirective, CurrencyPipe, DownloadArquivos, EmailAnexoRecord, EmailModel, FieldControlErrorComponent, FieldErrorMessageComponent, FormUtils, InfraBreadcrumbComponent, InfraBreadcrumbItemComponent, InfraModule, IpServiceService, LoadingButtonComponent, LoadingComponent, MessageService, OrderingComponent, ReportFile, RetError, RetFeedbackMessage, RetReportFile, RetTree, SaveComponent, SearchComboboxComponent, SearchTreePipe, SettingsService, SvgStorageComponent, ToUrlPipe, TreeComponent, TreeItem, Utils, alertIds, alertTypes };
 //# sourceMappingURL=ngx-sp-infra.mjs.map
