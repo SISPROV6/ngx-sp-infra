@@ -71,6 +71,8 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
 
   public ngOnInit(): void {
     this.createFilterForm();
+
+    if (this.initializedValueID) { this.initializeSelectedValue() }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -89,7 +91,7 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
   @Input({ required: true }) public comboboxList: RecordCombobox[];
   @Input({ required: true }) public labelText: string;
 
-  @Input() public currentSelectedOption: string | number;
+  @Input() public initializedValueID: string | number;
   
   @Input() public colorTheme: string = "primary";
   @Input() public inputGroupIconName: string;
@@ -105,7 +107,9 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
   public get selectedItem(): RecordCombobox { return this._selectedItem; }
   public set selectedItem(value: RecordCombobox) {
     this._selectedItem = value;
-    this.onSelectItem.emit(value);
+
+    console.log("public set selectedItem");
+    if (!this.initializedValueID) { this.onSelectItem.emit(value); }
   }
   // #endregion PUBLIC
 
@@ -140,8 +144,11 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
   }
 
   private initializeSelectedValue(): void {
-    if (this.comboboxList && this.comboboxList.find(item => item.ID == this.currentSelectedOption)) {
-      this.selectedText = this.comboboxList.find(item => item.ID == this.currentSelectedOption)!.LABEL;
+    let initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
+
+    if (this.comboboxList && initializedValue) {
+      this.selectedText = initializedValue.LABEL;
+      this.selectedItem = { ID: initializedValue.ID, LABEL: initializedValue.LABEL, AdditionalStringProperty1: "", IS_SELECTED: true };
     }
   }
 

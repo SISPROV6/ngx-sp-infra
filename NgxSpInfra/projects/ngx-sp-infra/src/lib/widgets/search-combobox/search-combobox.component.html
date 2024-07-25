@@ -1,8 +1,9 @@
-<label class="form-label" [innerHTML]="labelText"></label>
+<label class="form-label fw-bold" [innerHTML]="labelText"></label>
 <div class="input-group dropdown flex-fill glb-max-height-350px">
-   <button *ngIf="inputGroupIconName" class="btn btn-{{colorTheme}}" type="button" [tooltip]="inputGroupIconTooltip">
-      <app-svg-storage [svgName]="inputGroupIconName" svgSize="medium-small" />
-   </button>
+
+   <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.
+   Ao usar o atributo [btnLeft], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
+   <ng-content select="[btnLeft]"></ng-content>
 
    <input class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" aria-expanded="false" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" data-bs-auto-close="outside" aria-expanded="false" readonly>
    <ul class="dropdown-menu p-2 w-100 glb-max-height-350px overflow-y-scroll">
@@ -23,4 +24,9 @@
       <ng-template #loadingList> <li class="dropdown-item text-center"> <div class="spinner-border" role="status"><span class="visually-hidden">Carregando dados...</span></div> </li> </ng-template>
       <ng-template #emptyItemList> <li class="dropdown-item fst-italic">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>
    </ul>
+
+   <!-- Este elemento ng-content com o atributo [btnRight] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado direito do combobox de pesquisa.
+   Ao usar o atributo [btnRight], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
+   <ng-content select="[btnRight]"></ng-content>
+
 </div>
