@@ -64,6 +64,7 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges {
     private _selectedItem;
     comboboxList: RecordCombobox[];
     labelText: string;
+    currentSelectedOption: string | number;
     colorTheme: string;
     inputGroupIconName: string;
     inputGroupIconTooltip: string;
@@ -71,8 +72,6 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges {
     searchInputPlaceholder: string;
     onReloadList: EventEmitter<string>;
     onSelectItem: EventEmitter<any>;
-    mappedComboboxList: RecordCombobox[];
-    searchCombobox: string;
     selectedText: string;
     get selectedItem(): RecordCombobox;
     set selectedItem(value: RecordCombobox);
@@ -81,7 +80,8 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges {
     get _searchInput(): string;
     private createFilterForm;
     setFilterValue(id: string | number, label: string): void;
+    private initializeSelectedValue;
     reloadList(search: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SearchComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "inputGroupIconName": { "alias": "inputGroupIconName"; "required": false; }; "inputGroupIconTooltip": { "alias": "inputGroupIconTooltip"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "currentSelectedOption": { "alias": "currentSelectedOption"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "inputGroupIconName": { "alias": "inputGroupIconName"; "required": false; }; "inputGroupIconTooltip": { "alias": "inputGroupIconTooltip"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, never, false, never>;
 }

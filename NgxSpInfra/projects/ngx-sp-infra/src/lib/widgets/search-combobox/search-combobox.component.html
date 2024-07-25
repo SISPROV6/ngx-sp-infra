@@ -1,4 +1,4 @@
-<label class="form-label">{{ labelText }}</label>
+<label class="form-label" [innerHTML]="labelText"></label>
 <div class="input-group dropdown flex-fill glb-max-height-350px">
    <button *ngIf="inputGroupIconName" class="btn btn-{{colorTheme}}" type="button" [tooltip]="inputGroupIconTooltip">
       <app-svg-storage [svgName]="inputGroupIconName" svgSize="medium-small" />
@@ -11,10 +11,10 @@
          <button class="btn btn-{{colorTheme}}" (click)="reloadList(searchInput.value)"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> Pesquisar </button>
       </div>
 
-      <ng-container *ngIf="mappedComboboxList; else loadingList">
-         <ng-container *ngIf="mappedComboboxList.length > 0; else emptyItemList">
+      <ng-container *ngIf="comboboxList; else loadingList">
+         <ng-container *ngIf="comboboxList.length > 0; else emptyItemList">
             <li *ngIf="selectedItem && selectedItem.ID" class="dropdown-item" (click)="setFilterValue('', '')"> <span class="fw-bold">Limpar opção selecionada</span> </li>
-            <li class="dropdown-item" *ngFor="let item of mappedComboboxList" (click)="setFilterValue(item.ID, item.LABEL); selectedItem = item">
+            <li class="dropdown-item" *ngFor="let item of comboboxList" (click)="setFilterValue(item.ID, item.LABEL); selectedItem = item">
                <span *ngIf="item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''" class="glb-fs-12 fw-bold d-inline-block w-125">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}
             </li>
          </ng-container>

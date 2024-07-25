@@ -74,8 +74,8 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
-      this.mappedComboboxList = this.comboboxList;
+    if (changes["currentSelectedOption"] != undefined && changes["currentSelectedOption"].currentValue != undefined) {
+      this.initializeSelectedValue();
     }
   }
 
@@ -88,6 +88,8 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
   // #region PUBLIC
   @Input({ required: true }) public comboboxList: RecordCombobox[];
   @Input({ required: true }) public labelText: string;
+
+  @Input() public currentSelectedOption: string | number;
   
   @Input() public colorTheme: string = "primary";
   @Input() public inputGroupIconName: string;
@@ -97,9 +99,6 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
 
   @Output() public onReloadList: EventEmitter<string> = new EventEmitter<string>();
   @Output() public onSelectItem: EventEmitter<any> = new EventEmitter<any>();
-
-  public mappedComboboxList: RecordCombobox[] = [];
-  public searchCombobox: string = "";
 
   public selectedText: string;
 
@@ -138,6 +137,12 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
     this.selectedText = label;
 
     this.selectedItem = { ID: id, LABEL: label, AdditionalStringProperty1: "", IS_SELECTED: true };
+  }
+
+  private initializeSelectedValue(): void {
+    if (this.comboboxList && this.comboboxList.find(item => item.ID == this.currentSelectedOption)) {
+      this.selectedText = this.comboboxList.find(item => item.ID == this.currentSelectedOption)!.LABEL;
+    }
   }
 
 
