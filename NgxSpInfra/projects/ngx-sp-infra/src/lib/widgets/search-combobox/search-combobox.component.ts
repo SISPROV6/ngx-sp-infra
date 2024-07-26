@@ -82,9 +82,9 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["currentSelectedOption"] != undefined && changes["currentSelectedOption"].currentValue != undefined) {
+    if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
       console.log("ngOnChanges");
-      console.log(changes["currentSelectedOption"].currentValue);
+      console.log(changes["initializedValueID"].currentValue);
       this.initializeSelectedValue();
     }
   }

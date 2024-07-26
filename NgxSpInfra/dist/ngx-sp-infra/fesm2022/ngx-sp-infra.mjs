@@ -1548,9 +1548,9 @@ class SearchComboboxComponent {
         this.adjustDropdownWidth();
     }
     ngOnChanges(changes) {
-        if (changes["currentSelectedOption"] != undefined && changes["currentSelectedOption"].currentValue != undefined) {
+        if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
             console.log("ngOnChanges");
-            console.log(changes["currentSelectedOption"].currentValue);
+            console.log(changes["initializedValueID"].currentValue);
             this.initializeSelectedValue();
         }
     }
