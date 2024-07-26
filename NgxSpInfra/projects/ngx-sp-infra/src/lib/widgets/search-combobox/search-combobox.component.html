@@ -14,7 +14,7 @@
 
       <ng-container *ngIf="comboboxList; else loadingList">
          <ng-container *ngIf="comboboxList.length > 0; else emptyItemList">
-            <li *ngIf="selectedItem && selectedItem.ID" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
+            <li *ngIf="selectedItem && selectedItem.ID != ''" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
             <li class="dropdown-item" *ngFor="let item of comboboxList" (click)="setFilterValue(item)">
                <span *ngIf="item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''" class="glb-fs-12 fw-bold d-inline-block w-125">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}
             </li>
