@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { FormUtils } from "../../utils/form-utils";
@@ -12,9 +12,7 @@ import { RecordCombobox } from "../../models/combobox/record-combobox";
  * para realizar pesquisas e seleções em uma lista de opções apresentada em um combobox.
  * 
  * @component SearchComboboxComponent
- * @selector search-combobox
- * @standalone true
- * @imports CommonModule, ProjectModule
+ * @selector lib-search-combobox
  * @templateUrl ./search-combobox.component.html
  * @styleUrl ./search-combobox.component.scss
  * 
@@ -26,45 +24,47 @@ import { RecordCombobox } from "../../models/combobox/record-combobox";
  * - Pesquisa e filtragem de itens na lista do combobox.
  * - Seleção de itens com feedback visual.
  * - Emissão de eventos personalizados para interações do usuário, como recarregar a lista ou selecionar um item.
+ * - Ajuste dinâmico da largura do dropdown para corresponder ao input principal.
+ * - Inicialização de um valor selecionado, se fornecido.
  * 
  * ## Inputs:
- * - `comboboxList`: Array de objetos representando os itens disponíveis para seleção.
- * - `labelText`: Texto de etiqueta associado ao combobox.
- * - `colorTheme`: Tema de cores para o componente.
- * - `inputGroupIconName`: Nome do ícone a ser exibido no grupo de entrada.
- * - `inputGroupIconTooltip`: Texto de dica de ferramenta para o ícone do grupo de entrada.
- * - `mainInputPlaceholder`: Texto de espaço reservado para o input principal.
- * - `searchInputPlaceholder`: Texto de espaço reservado para o input de pesquisa.
+ * - `comboboxList` (RecordCombobox[]): Array de objetos representando os itens disponíveis para seleção.
+ * - `labelText` (string): Texto de etiqueta associado ao combobox.
+ * - `initializedValueID` (string | number): ID de um item inicialmente selecionado no combobox.
+ * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Tema de cores para o componente.
+ * - `mainInputPlaceholder` (string): Texto de espaço reservado para o input principal.
+ * - `searchInputPlaceholder` (string): Texto de espaço reservado para o input de pesquisa.
  * 
  * ## Outputs:
- * - `onReloadList`: Evento emitido quando a lista precisa ser recarregada.
- * - `onSelectItem`: Evento emitido quando um item é selecionado.
+ * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
+ * - `onSelectItem` (EventEmitter<any>): Evento emitido quando um item é selecionado.
+ * 
+ * ## Propriedades:
+ * - `selectedItem` (RecordCombobox): Getter e Setter para o item selecionado atualmente.
+ * - `FormUtils` (typeof FormUtils): Getter para utilitários de formulário.
+ * - `_searchInput` (string): Getter para o valor do input de pesquisa.
+ * - `filterForm` (FormGroup): Grupo de formulário para o filtro de pesquisa.
  * 
  * ## Métodos Públicos:
  * - `reloadList(search: string)`: Método para recarregar a lista de itens com base na pesquisa fornecida.
- * - `setFilterValue(id: string | number, label: string)`: Método para definir o valor do filtro.
- * 
- * ## Propriedades:
- * - `selectedItem`: Getter e Setter para o item selecionado atualmente.
- * - `FormUtils`: Getter para utilitários de formulário.
- * - `_searchInput`: Getter para o valor do input de pesquisa.
+ * - `setFilterValue(item?: RecordCombobox)`: Método para definir o valor do filtro com base no item selecionado.
  * 
  * ## Eventos:
  * - `ngOnInit()`: Inicializa o componente.
+ * - `ngAfterViewInit()`: Ajusta a largura do dropdown após a visualização do componente.
  * - `ngOnChanges(changes: SimpleChanges)`: Responde a mudanças nas propriedades de entrada.
  * 
  * ## Utilitários:
  * - `createFilterForm()`: Cria o formulário de filtro para a pesquisa.
- * - `mapComboboxList()`: Mapeia a lista de combobox para o formato necessário.
- * 
- * @note Este componente é marcado como `standalone`, permitindo seu uso sem a necessidade de importá-lo em um módulo.
+ * - `initializeSelectedValue()`: Inicializa o valor selecionado no combobox, se fornecido.
+ * - `adjustDropdownWidth()`: Ajusta a largura do dropdown para corresponder à largura do input principal.
  */
 @Component({
   selector: 'lib-search-combobox',
   templateUrl: './search-combobox.component.html',
   styleUrl: './search-combobox.component.scss'
 })
-export class SearchComboboxComponent implements OnInit, OnChanges {
+export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     private _formBuilder: FormBuilder
   ) {}
@@ -73,6 +73,10 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
     this.createFilterForm();
 
     if (this.initializedValueID) { this.initializeSelectedValue() }
+  }
+
+  public ngAfterViewInit(): void {
+    this.adjustDropdownWidth();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -88,27 +92,48 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
   // #endregion PRIVATE
 
   // #region PUBLIC
+
+  /** Lista de itens disponíveis para seleção no combobox. */
   @Input({ required: true }) public comboboxList: RecordCombobox[];
+
+  /** Texto de label associado ao combobox. */
   @Input({ required: true }) public labelText: string;
 
+  /** ID de um item inicialmente selecionado no combobox. */
   @Input() public initializedValueID: string | number;
   
-  @Input() public colorTheme: string = "primary";
-  @Input() public inputGroupIconName: string;
-  @Input() public inputGroupIconTooltip: string = "";
+  /** Tema de cores para o componente (baseado nas cores do Bootstrap). */
+  @Input() public colorTheme: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" = "primary";
+  
+  /** Placeholder para o input principal. */
   @Input() public mainInputPlaceholder: string = "Selecione uma opção...";
+  
+  /** Placeholder para o input de pesquisa. */
   @Input() public searchInputPlaceholder: string = "Pesquisa...";
 
+  
+  /**
+   * Evento emitido quando a lista precisa ser recarregada.
+   * Leva uma string que é usada para pesquisa.
+   */
   @Output() public onReloadList: EventEmitter<string> = new EventEmitter<string>();
+
+  /** Evento emitido quando um item é selecionado. */
   @Output() public onSelectItem: EventEmitter<any> = new EventEmitter<any>();
 
-  public selectedText: string;
+
+  @ViewChild('mainInput') private _mainInput!: ElementRef;
+  @ViewChild('dropdownMenu') private _dropdownMenu!: ElementRef;
+
+
+  public selectedText?: string;
 
   public get selectedItem(): RecordCombobox { return this._selectedItem; }
   public set selectedItem(value: RecordCombobox) {
     this._selectedItem = value;
 
     console.log("public set selectedItem");
+    console.log(this.initializedValueID);
     if (!this.initializedValueID) { this.onSelectItem.emit(value); }
   }
   // #endregion PUBLIC
@@ -136,13 +161,23 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
 
 
   // #region ==========> UTILITIES <==========
-  public setFilterValue(id: string | number, label: string): void {
-    this.filterForm.controls["_searchInput"].setValue(`${id as string} - ${label}`);
-    this.selectedText = label;
 
-    this.selectedItem = { ID: id, LABEL: label, AdditionalStringProperty1: "", IS_SELECTED: true };
+  /**
+   * Atualiza o valor do filtro com base no item selecionado.
+   * @param item Objeto de item selecionado.
+   */
+  public setFilterValue(item?: RecordCombobox): void {
+    if (item) {
+      this.filterForm.controls["_searchInput"].setValue(`${item.ID as string} - ${item.LABEL}`);
+      this.selectedText = item.LABEL;
+    }
+    else {
+      this.filterForm.controls["_searchInput"].setValue("");
+      delete this.selectedText;
+    }
   }
 
+  /** Chamado caso um valor inicial seja fornecido para o combobox. */
   private initializeSelectedValue(): void {
     let initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
 
@@ -152,7 +187,17 @@ export class SearchComboboxComponent implements OnInit, OnChanges {
     }
   }
 
+  /** Ajusta a largura do dropdown para corresponder à largura do input principal. */
+  private adjustDropdownWidth() {
+    const inputWidth = this._mainInput.nativeElement.offsetWidth;
+    this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
+  }
 
+
+  /**
+   * Emite um evento para recarregar a lista de itens com base na pesquisa fornecida.
+   * @param search Texto de pesquisa para recarregar a lista.
+   */
   public reloadList(search: string): void {
     this.onReloadList.emit(search);
   }
