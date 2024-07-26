@@ -69,18 +69,22 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
     private _formBuilder: FormBuilder
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.createFilterForm();
 
+    console.log("ngOnInit");
+    console.log(this.initializedValueID);
     if (this.initializedValueID) { this.initializeSelectedValue() }
   }
 
-  public ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     this.adjustDropdownWidth();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["currentSelectedOption"] != undefined && changes["currentSelectedOption"].currentValue != undefined) {
+    if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
+      console.log("ngOnChanges");
+      console.log(changes["initializedValueID"].currentValue);
       this.initializeSelectedValue();
     }
   }
@@ -167,13 +171,20 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
    * @param item Objeto de item selecionado.
    */
   public setFilterValue(item?: RecordCombobox): void {
+    console.log("public setFilterValue");
+    console.log(item);
+
     if (item) {
       this.filterForm.controls["_searchInput"].setValue(`${item.ID as string} - ${item.LABEL}`);
       this.selectedText = item.LABEL;
+
+      this.selectedItem = { ID: item.ID, LABEL: item.LABEL, AdditionalStringProperty1: item.AdditionalStringProperty1, IS_SELECTED: item.IS_SELECTED };
     }
     else {
       this.filterForm.controls["_searchInput"].setValue("");
       delete this.selectedText;
+
+      this.selectedItem = { ID: "", LABEL: "", AdditionalStringProperty1: "", IS_SELECTED: false };
     }
   }
 
