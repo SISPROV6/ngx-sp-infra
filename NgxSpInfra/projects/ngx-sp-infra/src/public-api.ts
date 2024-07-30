@@ -28,6 +28,9 @@ export * from './lib/pipes/cpf-cnpj.pipe';
 export * from './lib/pipes/currency.pipe';
 export * from './lib/pipes/to-url.pipe';
 
+/** Directives */
+export * from './lib/directives/required.directive';
+
 /** Utils */
 export * from './lib/utils/check-url-and-method.service';
 export * from './lib/utils/form-utils';
@@ -55,4 +58,7 @@ export * from './lib/widgets/tree/tree.component';
 export * from './lib/widgets/tree/models/ret-tree';
 export * from './lib/widgets/tree/models/tree-item';
 export * from './lib/widgets/tree/pipes/search-tree.pipe';
+
 export * from './lib/widgets/search-combobox/search-combobox.component';
+export * from './lib/widgets/dynamic-table/dynamic-table.component';
+export * from './lib/widgets/static-table/static-table.component';

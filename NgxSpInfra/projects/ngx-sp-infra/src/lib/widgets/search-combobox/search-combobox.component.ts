@@ -71,9 +71,6 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   ngOnInit(): void {
     this.createFilterForm();
-
-    console.log("ngOnInit");
-    console.log(this.initializedValueID);
     if (this.initializedValueID) { this.initializeSelectedValue() }
   }
 
@@ -83,8 +80,6 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
-      console.log("ngOnChanges");
-      console.log(changes["initializedValueID"].currentValue);
       this.initializeSelectedValue();
     }
   }
@@ -115,6 +110,9 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   /** Placeholder para o input de pesquisa. */
   @Input() public searchInputPlaceholder: string = "Pesquisa...";
 
+  /** Informa se o input será exibido como desabilitado. */
+  @Input() public disabled: boolean = false;
+
   
   /**
    * Evento emitido quando a lista precisa ser recarregada.
@@ -135,10 +133,7 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   public get selectedItem(): RecordCombobox { return this._selectedItem; }
   public set selectedItem(value: RecordCombobox) {
     this._selectedItem = value;
-
-    console.log("public set selectedItem");
-    console.log(this.initializedValueID);
-    if (!this.initializedValueID) { this.onSelectItem.emit(value); }
+    this.onSelectItem.emit(value);
   }
   // #endregion PUBLIC
 
@@ -171,9 +166,6 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
    * @param item Objeto de item selecionado.
    */
   public setFilterValue(item?: RecordCombobox): void {
-    console.log("public setFilterValue");
-    console.log(item);
-
     if (item) {
       this.filterForm.controls["_searchInput"].setValue(`${item.ID as string} - ${item.LABEL}`);
       this.selectedText = item.LABEL;
@@ -190,7 +182,11 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   /** Chamado caso um valor inicial seja fornecido para o combobox. */
   private initializeSelectedValue(): void {
-    let initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
+    let initializedValue;
+
+    if (this.comboboxList && this.comboboxList.length > 0) {
+      initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
+    }
 
     if (this.comboboxList && initializedValue) {
       this.selectedText = initializedValue.LABEL;
