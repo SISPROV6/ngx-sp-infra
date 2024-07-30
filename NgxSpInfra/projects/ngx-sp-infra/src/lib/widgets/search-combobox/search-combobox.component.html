@@ -5,11 +5,11 @@
    Ao usar o atributo [btnLeft], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
    <ng-content select="[btnLeft]"></ng-content>
 
-   <input  #mainInput  class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" aria-expanded="false" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" data-bs-auto-close="outside" aria-expanded="false" readonly>
+   <input  #mainInput   *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" aria-expanded="false" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" data-bs-auto-close="outside" aria-expanded="false" readonly>
    <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll">
       <div class="input-group mb-2">
          <input #searchInput type="text" id="searchInput" class="form-control glb-input-no-glow" [placeholder]="searchInputPlaceholder" (keyup.enter)="reloadList(searchInput.value)">
-         <button class="btn btn-{{colorTheme}}" (click)="reloadList(searchInput.value)"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> Pesquisar </button>
+         <button class="btn btn-{{colorTheme}}" (click)="reloadList(searchInput.value)"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> </button>
       </div>
 
       <ng-container *ngIf="comboboxList; else loadingList">
@@ -24,6 +24,10 @@
       <ng-template #loadingList> <li class="dropdown-item text-center"> <div class="spinner-border" role="status"><span class="visually-hidden">Carregando dados...</span></div> </li> </ng-template>
       <ng-template #emptyItemList> <li class="dropdown-item fst-italic">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>
    </ul>
+
+   <ng-template #disabledInput>
+      <input  #mainInput  class="form-select text-start rounded-end" type="text" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" readonly disabled>
+   </ng-template>
 
    <!-- Este elemento ng-content com o atributo [btnRight] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado direito do combobox de pesquisa.
    Ao usar o atributo [btnRight], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
