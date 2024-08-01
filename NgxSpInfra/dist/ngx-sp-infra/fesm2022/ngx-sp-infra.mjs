@@ -1012,16 +1012,16 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
             }] } });
 
 class FormUtils {
-    // Verifica se um campo é inválido (Template Driven)
+    /** Verifica se um campo é inválido (Template Driven) */
     static isInvalidFieldTemplate(control) {
         const ret = !control.valid && (control.dirty || control.touched);
         return (ret ? ret : false);
     }
-    // Verifica se um campo é inválido (Data Driven)
+    /** Verifica se um campo é inválido (Data Driven) */
     static isInvalidField(control) {
         return (control ? !control.valid && (control.dirty || control.touched) : false);
     }
-    // Valida todos os campos do formulário
+    /** Valida todos os campos do formulário */
     static validateFields(formGroup) {
         Object.keys(formGroup.controls).forEach(field => {
             const control = formGroup.get(field);
@@ -1032,24 +1032,28 @@ class FormUtils {
             }
         });
     }
-    // Obtém a mensagem de erro conforme o validador utilizado
+    /** Obtém a mensagem de erro conforme o validador utilizado */
     static getErrorMessage(fieldName, validatorName, validatorValue) {
         const config = {
-            'required': `${fieldName} é obrigatório.`,
-            'minlength': `${fieldName} precisa ter no mínimo ${validatorValue.requiredLength} caracteres.`,
-            'maxlength': `${fieldName} precisa ter no máximo ${validatorValue.requiredLength} caracteres.`,
-            'min': `${fieldName} precisam ser no mínimo ${validatorValue.min}.`,
-            'max': `${fieldName} podem ser no máximo ${validatorValue.max}.`,
-            'cpcnpjInvalid': `${fieldName} é inválido.`,
-            'cpcnpjInvalidDigit': `${fieldName} com digito inválido.`,
-            'incorrect': `O valor de ${fieldName} é inválido.`,
-            'email': `${fieldName} é inválido.`
+            'required': `Este campo é obrigatório.`,
+            'minlength': `Este campo deve possuir no mínimo ${validatorValue.requiredLength} caracteres.`,
+            'maxlength': `Este campo deve possuir no máximo ${validatorValue.requiredLength} caracteres.`,
+            'min': `Este campo deve ser no mínimo ${validatorValue.min}.`,
+            'max': `Este campo deve ser no máximo ${validatorValue.max}.`,
+            'cpcnpjInvalid': `Este ${fieldName} está inválido.`,
+            'cpcnpjInvalidDigit': `Este ${fieldName} tem um dígito inválido.`,
+            'incorrect': `Este campo está inválido.`,
+            'email': `Este e-mail está inválido.`
         };
-        return (config[validatorName] ? config[validatorName] : `${validatorName} não implementado`);
+        return (config[validatorName] ? config[validatorName] : `Este validador - ${validatorName} - não implementado`);
     }
 }
 
 class FieldErrorMessageComponent {
+    constructor(_renderer, _elementRef) {
+        this._renderer = _renderer;
+        this._elementRef = _elementRef;
+    }
     get errorMessage() {
         for (let propertyName in this.control?.errors) {
             if (this.control?.errors.hasOwnProperty(propertyName) &&
@@ -1059,20 +1063,19 @@ class FieldErrorMessageComponent {
         }
         return null;
     }
-    constructor(renderer, elementRef) {
-        this.renderer = renderer;
-        this.elementRef = elementRef;
-    }
     ngOnInit() {
-        this.renderer.setStyle(this.elementRef.nativeElement, 'width', '100%');
+        this._renderer.setStyle(this._elementRef.nativeElement, 'width', '100%');
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: FieldErrorMessageComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: FieldErrorMessageComponent, selector: "app-field-error-message", inputs: { control: "control", label: "label" }, ngImport: i0, template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"errorMessage !== null\">\r\n    {{ errorMessage }}\r\n</div>\r\n", styles: [""], dependencies: [{ kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: FieldErrorMessageComponent, selector: "app-field-error-message", inputs: { customErrorMessage: ["customMessage", "customErrorMessage"], control: "control", label: "label" }, ngImport: i0, template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"errorMessage !== null\">\r\n    {{ errorMessage }}\r\n</div>\r\n\r\n", styles: [""], dependencies: [{ kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: FieldErrorMessageComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'app-field-error-message', template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"errorMessage !== null\">\r\n    {{ errorMessage }}\r\n</div>\r\n" }]
-        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ElementRef }], propDecorators: { control: [{
+            args: [{ selector: 'app-field-error-message', template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"errorMessage !== null\">\r\n    {{ errorMessage }}\r\n</div>\r\n\r\n" }]
+        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ElementRef }], propDecorators: { customErrorMessage: [{
+                type: Input,
+                args: ['customMessage']
+            }], control: [{
                 type: Input
             }], label: [{
                 type: Input
@@ -1551,6 +1554,9 @@ class SearchComboboxComponent {
         if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
             this.initializeSelectedValue();
         }
+        if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
+            this.initializeSelectedValue();
+        }
     }
     get selectedItem() { return this._selectedItem; }
     set selectedItem(value) {
@@ -1741,7 +1747,7 @@ class RequiredDirective {
         }
         const spanElement = document.createElement("span");
         spanElement.className = "text-danger";
-        spanElement.innerHTML = "*";
+        spanElement.innerHTML = " *";
         spanElement.id = this.spanID;
         this._renderer.appendChild(this._elementRef.nativeElement, spanElement);
     }

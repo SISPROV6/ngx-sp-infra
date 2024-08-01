@@ -82,6 +82,9 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
     if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
       this.initializeSelectedValue();
     }
+    if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
+      this.initializeSelectedValue();
+    }
   }
 
   // #region ==========> PROPERTIES <==========
