@@ -44,7 +44,7 @@ export class FormUtils {
       'email': `Este e-mail está inválido.`
     };
 
-    return (config[validatorName] ? config[validatorName] : `Este validador - ${validatorName} - não implementado`);
+    return (config[validatorName] ? config[validatorName] : `Este validador - ${validatorName} - não foi implementado`);
   }
 
 }

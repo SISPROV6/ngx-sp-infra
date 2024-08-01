@@ -1,5 +1,7 @@
-<div class="invalid-feedback d-block" role="alert"
-    *ngIf="errorMessage !== null">
-    {{ errorMessage }}
+<div *ngIf="customErrorMessage && customErrorMessage !== ''; else defaultValidatorMessage">
+    <div class="text-danger d-block" role="alert"> {{ customErrorMessage }} </div>
 </div>
 
+<ng-template #defaultValidatorMessage>
+    <div class="invalid-feedback d-block" role="alert" *ngIf="errorMessage !== null"> {{ errorMessage }} </div>
+</ng-template>
