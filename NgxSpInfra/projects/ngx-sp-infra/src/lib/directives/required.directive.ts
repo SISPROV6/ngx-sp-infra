@@ -79,7 +79,7 @@ export class RequiredDirective implements OnInit, OnChanges {
 
     const spanElement = document.createElement("span");
     spanElement.className = "text-danger";
-    spanElement.innerHTML = "*";
+    spanElement.innerHTML = " *";
     spanElement.id = this.spanID;
     this._renderer.appendChild(this._elementRef.nativeElement, spanElement);
   }
