@@ -1011,6 +1011,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
                 type: Input
             }] } });
 
+/**
+ * @summary Contém diversos métodos de utilidade para formulários
+ */
 class FormUtils {
     /** Verifica se um campo é inválido (Template Driven) */
     static isInvalidFieldTemplate(control) {
@@ -1020,6 +1023,20 @@ class FormUtils {
     /** Verifica se um campo é inválido (Data Driven) */
     static isInvalidField(control) {
         return (control ? !control.valid && (control.dirty || control.touched) : false);
+    }
+    /** Verifica se um campo é inválido ou se possui algum erro customizado (Data Driven) */
+    static isInvalidFieldError(control) {
+        if (control) {
+            if (!control.valid && (control.dirty || control.touched)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
     /** Valida todos os campos do formulário */
     static validateFields(formGroup) {
@@ -1033,7 +1050,7 @@ class FormUtils {
         });
     }
     /** Obtém a mensagem de erro conforme o validador utilizado */
-    static getErrorMessage(fieldName, validatorName, validatorValue) {
+    static getErrorMessage(fieldName, validatorName, validatorValue, customErrorMessage) {
         const config = {
             'required': `Este campo é obrigatório.`,
             'minlength': `Este campo deve possuir no mínimo ${validatorValue.requiredLength} caracteres.`,
@@ -1045,7 +1062,59 @@ class FormUtils {
             'incorrect': `Este campo está inválido.`,
             'email': `Este e-mail está inválido.`
         };
-        return (config[validatorName] ? config[validatorName] : `Este validador - ${validatorName} - não implementado`);
+        return (customErrorMessage
+            ? customErrorMessage
+            : config[validatorName]
+                ? config[validatorName]
+                : `Este validador - ${validatorName} - não foi implementado`);
+    }
+    /**
+     * @summary Mapeia os valores de um formulário reativo para um objeto de modelo.
+     *
+     * @description
+     * O método `mapFormToModel` recebe um objeto de modelo e um `FormGroup` do Angular,
+     * e retorna um novo objeto que combina as propriedades do modelo original com os valores
+     * atuais do formulário. Este método é útil para atualizar dinamicamente as propriedades
+     * de um modelo com base nos valores inseridos pelo usuário em um formulário.
+     *
+     * Se o objeto `record` ou o `formGroup` forem nulos ou indefinidos, o método retornará `null`.
+     * Caso contrário, o método retorna um novo objeto que inclui todas as propriedades
+     * do objeto original, sobrescrevendo-as com os valores atuais do formulário, se disponíveis.
+     *
+     * @param {object} record - O objeto de modelo original que será atualizado com os valores do formulário.
+     * @param {FormGroup} formGroup - O `FormGroup` contendo os valores inseridos pelo usuário.
+     * @returns {object | null} - Um novo objeto combinando o modelo original e os valores do formulário, ou `null` se `record` ou `formGroup` forem nulos ou indefinidos.
+     *
+     * @example
+     * // Suponha que você tenha um objeto de modelo `person` e um `FormGroup` chamado `personForm`.
+     * const person = {
+     *   name: 'John Doe',
+     *   age: 30,
+     *   email: 'john.doe@example.com'
+     * };
+     *
+     * const personForm: FormGroup = this.formBuilder.group({
+     *   name: ['Jane Doe'],
+     *   age: [25],
+     *   email: ['jane.doe@example.com']
+     * });
+     *
+     * const updatedPerson = this.mapFormToModel(person, personForm);
+     * // `updatedPerson` agora contém:
+     * // {
+     * //   name: 'Jane Doe',
+     * //   age: 25,
+     * //   email: 'jane.doe@example.com'
+     * // }
+    */
+    mapFormToModel(record, formGroup) {
+        if ((record === null || record === undefined) || (formGroup === null || formGroup === undefined)) {
+            return null;
+        }
+        return {
+            ...record,
+            ...formGroup.value
+        };
     }
 }
 
@@ -1058,7 +1127,7 @@ class FieldErrorMessageComponent {
         for (let propertyName in this.control?.errors) {
             if (this.control?.errors.hasOwnProperty(propertyName) &&
                 (this.control?.dirty || this.control?.touched)) {
-                return FormUtils.getErrorMessage(this.label, propertyName, this.control?.errors[propertyName]);
+                return FormUtils.getErrorMessage(this.label, propertyName, this.control?.errors[propertyName], this.customErrorMessage);
             }
         }
         return null;
@@ -1067,11 +1136,11 @@ class FieldErrorMessageComponent {
         this._renderer.setStyle(this._elementRef.nativeElement, 'width', '100%');
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: FieldErrorMessageComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: FieldErrorMessageComponent, selector: "app-field-error-message", inputs: { customErrorMessage: ["customMessage", "customErrorMessage"], control: "control", label: "label" }, ngImport: i0, template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"errorMessage !== null\">\r\n    {{ errorMessage }}\r\n</div>\r\n\r\n", styles: [""], dependencies: [{ kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.3.11", type: FieldErrorMessageComponent, selector: "app-field-error-message", inputs: { customErrorMessage: ["customMessage", "customErrorMessage"], control: "control", label: "label" }, ngImport: i0, template: "@if (customErrorMessage && customErrorMessage != \"\") {\r\n    <div class=\"invalid-feedback d-block\" role=\"alert\" *ngIf=\"customErrorMessage !== null\"> {{ customErrorMessage }} </div>\r\n} @else {\r\n    <div class=\"invalid-feedback d-block\" role=\"alert\" *ngIf=\"errorMessage !== null\"> {{ errorMessage }} </div>\r\n}", styles: [""], dependencies: [{ kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: FieldErrorMessageComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'app-field-error-message', template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"errorMessage !== null\">\r\n    {{ errorMessage }}\r\n</div>\r\n\r\n" }]
+            args: [{ selector: 'app-field-error-message', template: "@if (customErrorMessage && customErrorMessage != \"\") {\r\n    <div class=\"invalid-feedback d-block\" role=\"alert\" *ngIf=\"customErrorMessage !== null\"> {{ customErrorMessage }} </div>\r\n} @else {\r\n    <div class=\"invalid-feedback d-block\" role=\"alert\" *ngIf=\"errorMessage !== null\"> {{ errorMessage }} </div>\r\n}" }]
         }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ElementRef }], propDecorators: { customErrorMessage: [{
                 type: Input,
                 args: ['customMessage']
