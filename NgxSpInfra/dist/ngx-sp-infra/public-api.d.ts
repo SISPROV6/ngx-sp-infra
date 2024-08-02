@@ -28,6 +28,8 @@ export * from './lib/utils/form-utils';
 export * from './lib/utils/settings.service';
 export * from './lib/utils/ip-service.service';
 export * from './lib/utils/utils';
+/** Services */
+export * from './lib/service/modal-utils.service';
 /** Validators */
 export * from './lib/validators/cpf-cnpj.validator.directive';
 export * from './lib/validators/cpf-cnpj.validator';
