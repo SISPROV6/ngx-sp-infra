@@ -1107,7 +1107,7 @@ class FormUtils {
      * //   email: 'jane.doe@example.com'
      * // }
     */
-    mapFormToModel(record, formGroup) {
+    static mapFormToModel(record, formGroup) {
         if ((record === null || record === undefined) || (formGroup === null || formGroup === undefined)) {
             return null;
         }
