@@ -1107,7 +1107,7 @@ class FormUtils {
      * //   email: 'jane.doe@example.com'
      * // }
     */
-    mapFormToModel(record, formGroup) {
+    static mapFormToModel(record, formGroup) {
         if ((record === null || record === undefined) || (formGroup === null || formGroup === undefined)) {
             return null;
         }
@@ -2646,6 +2646,50 @@ class Utils {
     }
 }
 
+class ModalUtilsService {
+    constructor(_bsModalService) {
+        this._bsModalService = _bsModalService;
+    }
+    /**
+     * Método simples com o objetivo de abrir os modais no centro da tela.
+     * @param template Template HTML do modal que será aberto.
+     * @param modalID ID do modal que será aberto, para que possa ser referenciado depois.
+     * @param customClass Classes customizadas para o modal, valor default é "modal-dialog-centered"
+    */
+    openModal(template, modalID, customClass = "modal-dialog-centered") {
+        this._bsModalService.show(template, {
+            id: modalID,
+            class: customClass,
+            ignoreBackdropClick: false,
+            keyboard: false
+        });
+    }
+    /**
+     * Método simples com o objetivo de abrir os modais no centro da tela.
+     * @param template Template HTML do modal que será aberto.
+     * @param modalID ID do modal que será aberto, para que possa ser referenciado depois.
+     * @param {ModalOptions} options - Estrutura de opções informadas para configurar o modal mais aprofundadamente
+    */
+    openModalCustom(template, modalID, options = { id: modalID, class: "modal-dialog-centered", ignoreBackdropClick: false, keyboard: false }) {
+        this._bsModalService.show(template, options);
+    }
+    /**
+     * Método para fechar um modal que estiver aberto na tela
+     * @param modalID ID do modal que será fechado, é necessário um ID para fechar o modal correto.
+    */
+    closeModal(modalID) {
+        this._bsModalService.hide(modalID);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: ModalUtilsService, deps: [{ token: i1.BsModalService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: ModalUtilsService, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: ModalUtilsService, decorators: [{
+            type: Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
+        }], ctorParameters: () => [{ type: i1.BsModalService }] });
+
 //Origem  https://pedrohtbranco.com.br/validacao-cpf-e-cnpj-com-angular-12/
 class CpfCnpjValidator {
     static { this.cpfLength = 11; }
@@ -2739,5 +2783,5 @@ class TreeItem {
  * Generated bundle index. Do not edit.
  */
 
-export { AlertComponent, BreadcrumbComponent, CheckUrlAndMethodService, ClickOutsideDirective, ComboboxComponent, ConfirmComponent, ConfirmModalComponent, CpfCnpjPipe, CpfCnpjValidator, CpfCnpjValidatorDirective, CurrencyPipe, DownloadArquivos, DynamicTableComponent, EmailAnexoRecord, EmailModel, FieldControlErrorComponent, FieldErrorMessageComponent, FormUtils, InfraBreadcrumbComponent, InfraBreadcrumbItemComponent, InfraModule, IpServiceService, LoadingButtonComponent, LoadingComponent, MessageService, OrderingComponent, ReportFile, RequiredDirective, RetError, RetFeedbackMessage, RetReportFile, RetTree, SaveComponent, SearchComboboxComponent, SearchTreePipe, SettingsService, StaticTableComponent, SvgStorageComponent, ToUrlPipe, TreeComponent, TreeItem, Utils, alertIds, alertTypes };
+export { AlertComponent, BreadcrumbComponent, CheckUrlAndMethodService, ClickOutsideDirective, ComboboxComponent, ConfirmComponent, ConfirmModalComponent, CpfCnpjPipe, CpfCnpjValidator, CpfCnpjValidatorDirective, CurrencyPipe, DownloadArquivos, DynamicTableComponent, EmailAnexoRecord, EmailModel, FieldControlErrorComponent, FieldErrorMessageComponent, FormUtils, InfraBreadcrumbComponent, InfraBreadcrumbItemComponent, InfraModule, IpServiceService, LoadingButtonComponent, LoadingComponent, MessageService, ModalUtilsService, OrderingComponent, ReportFile, RequiredDirective, RetError, RetFeedbackMessage, RetReportFile, RetTree, SaveComponent, SearchComboboxComponent, SearchTreePipe, SettingsService, StaticTableComponent, SvgStorageComponent, ToUrlPipe, TreeComponent, TreeItem, Utils, alertIds, alertTypes };
 //# sourceMappingURL=ngx-sp-infra.mjs.map

@@ -52,5 +52,5 @@ export declare class FormUtils {
      * //   email: 'jane.doe@example.com'
      * // }
     */
-    mapFormToModel(record: object, formGroup: FormGroup): object | null;
+    static mapFormToModel(record: object, formGroup: FormGroup): object | null;
 }
