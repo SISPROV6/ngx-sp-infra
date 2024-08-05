@@ -105,7 +105,7 @@ export class FormUtils {
    * //   email: 'jane.doe@example.com'
    * // }
   */
-  public mapFormToModel(record: object, formGroup: FormGroup): object | null {
+  static mapFormToModel(record: object, formGroup: FormGroup): object | null {
     if ((record === null || record === undefined) || (formGroup === null || formGroup === undefined)) { return null; }
     
     return {
