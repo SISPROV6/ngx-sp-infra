@@ -97,10 +97,10 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   /** Lista de itens disponíveis para seleção no combobox. */
   @Input({ required: true }) public comboboxList: RecordCombobox[];
-
+  
   /** Texto de label associado ao combobox. */
   @Input({ required: true }) public labelText: string;
-
+  
   /** ID de um item inicialmente selecionado no combobox. */
   @Input() public initializedValueID: string | number;
   
@@ -112,11 +112,13 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   
   /** Placeholder para o input de pesquisa. */
   @Input() public searchInputPlaceholder: string = "Pesquisa...";
-
+  
   /** Informa se o input será exibido como desabilitado. */
   @Input() public disabled: boolean = false;
-
   
+  @Input() public libRequired: boolean = false;
+
+
   /**
    * Evento emitido quando a lista precisa ser recarregada.
    * Leva uma string que é usada para pesquisa.
