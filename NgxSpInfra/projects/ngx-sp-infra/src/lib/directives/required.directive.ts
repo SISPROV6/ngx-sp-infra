@@ -33,7 +33,7 @@ import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChang
  *   - Útil para manipulação direta do DOM ou testes.
  */
 @Directive({
-  selector: "label[libRequired]"
+  selector: "label[libRequired], span[libRequired], p[libRequired]"
 })
 export class RequiredDirective implements OnInit, OnChanges {
   private _showMarker: boolean = true; // Valor padrão

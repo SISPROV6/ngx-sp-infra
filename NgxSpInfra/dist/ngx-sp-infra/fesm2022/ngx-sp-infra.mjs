@@ -1539,212 +1539,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
             }] } });
 
 /**
- * @file search-combobox.component.ts
- * @description Este arquivo contém a implementação do componente SearchComboboxComponent, que é um componente de interface do usuário
- * para realizar pesquisas e seleções em uma lista de opções apresentada em um combobox.
- *
- * @component SearchComboboxComponent
- * @selector lib-search-combobox
- * @templateUrl ./search-combobox.component.html
- * @styleUrl ./search-combobox.component.scss
- *
- * @description
- * O componente SearchComboboxComponent é projetado para fornecer aos usuários uma interface para pesquisar e selecionar itens de uma lista.
- * Ele suporta a filtragem de itens com base na entrada do usuário, permitindo uma seleção mais fácil em listas extensas.
- *
- * ## Funcionalidades:
- * - Pesquisa e filtragem de itens na lista do combobox.
- * - Seleção de itens com feedback visual.
- * - Emissão de eventos personalizados para interações do usuário, como recarregar a lista ou selecionar um item.
- * - Ajuste dinâmico da largura do dropdown para corresponder ao input principal.
- * - Inicialização de um valor selecionado, se fornecido.
- *
- * ## Inputs:
- * - `comboboxList` (RecordCombobox[]): Array de objetos representando os itens disponíveis para seleção.
- * - `labelText` (string): Texto de etiqueta associado ao combobox.
- * - `initializedValueID` (string | number): ID de um item inicialmente selecionado no combobox.
- * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Tema de cores para o componente.
- * - `mainInputPlaceholder` (string): Texto de espaço reservado para o input principal.
- * - `searchInputPlaceholder` (string): Texto de espaço reservado para o input de pesquisa.
- *
- * ## Outputs:
- * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
- * - `onSelectItem` (EventEmitter<any>): Evento emitido quando um item é selecionado.
- *
- * ## Propriedades:
- * - `selectedItem` (RecordCombobox): Getter e Setter para o item selecionado atualmente.
- * - `FormUtils` (typeof FormUtils): Getter para utilitários de formulário.
- * - `_searchInput` (string): Getter para o valor do input de pesquisa.
- * - `filterForm` (FormGroup): Grupo de formulário para o filtro de pesquisa.
- *
- * ## Métodos Públicos:
- * - `reloadList(search: string)`: Método para recarregar a lista de itens com base na pesquisa fornecida.
- * - `setFilterValue(item?: RecordCombobox)`: Método para definir o valor do filtro com base no item selecionado.
- *
- * ## Eventos:
- * - `ngOnInit()`: Inicializa o componente.
- * - `ngAfterViewInit()`: Ajusta a largura do dropdown após a visualização do componente.
- * - `ngOnChanges(changes: SimpleChanges)`: Responde a mudanças nas propriedades de entrada.
- *
- * ## Utilitários:
- * - `createFilterForm()`: Cria o formulário de filtro para a pesquisa.
- * - `initializeSelectedValue()`: Inicializa o valor selecionado no combobox, se fornecido.
- * - `adjustDropdownWidth()`: Ajusta a largura do dropdown para corresponder à largura do input principal.
- */
-class SearchComboboxComponent {
-    constructor(_formBuilder) {
-        this._formBuilder = _formBuilder;
-        /** Tema de cores para o componente (baseado nas cores do Bootstrap). */
-        this.colorTheme = "primary";
-        /** Placeholder para o input principal. */
-        this.mainInputPlaceholder = "Selecione uma opção...";
-        /** Placeholder para o input de pesquisa. */
-        this.searchInputPlaceholder = "Pesquisa...";
-        /** Informa se o input será exibido como desabilitado. */
-        this.disabled = false;
-        /**
-         * Evento emitido quando a lista precisa ser recarregada.
-         * Leva uma string que é usada para pesquisa.
-         */
-        this.onReloadList = new EventEmitter();
-        /** Evento emitido quando um item é selecionado. */
-        this.onSelectItem = new EventEmitter();
-    }
-    ngOnInit() {
-        this.createFilterForm();
-        if (this.initializedValueID) {
-            this.initializeSelectedValue();
-        }
-    }
-    ngAfterViewInit() {
-        this.adjustDropdownWidth();
-    }
-    ngOnChanges(changes) {
-        if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
-            this.initializeSelectedValue();
-        }
-        if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
-            this.initializeSelectedValue();
-        }
-    }
-    get selectedItem() { return this._selectedItem; }
-    set selectedItem(value) {
-        this._selectedItem = value;
-        this.onSelectItem.emit(value);
-    }
-    get FormUtils() { return FormUtils; }
-    // #region FORM DATA
-    get _searchInput() { return this.filterForm.get("_searchInput")?.value; }
-    // #endregion FORM DATA
-    // #region FORM VALIDATORS
-    createFilterForm() {
-        this.filterForm = this._formBuilder.group({
-            _searchInput: [""]
-        });
-    }
-    // #endregion FORM VALIDATORS
-    // #endregion ==========> FORM BUILDER <==========
-    // #region ==========> UTILITIES <==========
-    /**
-     * Atualiza o valor do filtro com base no item selecionado.
-     * @param item Objeto de item selecionado.
-     */
-    setFilterValue(item) {
-        if (item) {
-            this.filterForm.controls["_searchInput"].setValue(`${item.ID} - ${item.LABEL}`);
-            this.selectedText = item.LABEL;
-            this.selectedItem = { ID: item.ID, LABEL: item.LABEL, AdditionalStringProperty1: item.AdditionalStringProperty1, IS_SELECTED: item.IS_SELECTED };
-        }
-        else {
-            this.filterForm.controls["_searchInput"].setValue("");
-            delete this.selectedText;
-            this.selectedItem = { ID: "", LABEL: "", AdditionalStringProperty1: "", IS_SELECTED: false };
-        }
-    }
-    /** Chamado caso um valor inicial seja fornecido para o combobox. */
-    initializeSelectedValue() {
-        let initializedValue;
-        if (this.comboboxList && this.comboboxList.length > 0) {
-            initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
-        }
-        if (this.comboboxList && initializedValue) {
-            this.selectedText = initializedValue.LABEL;
-            this.selectedItem = { ID: initializedValue.ID, LABEL: initializedValue.LABEL, AdditionalStringProperty1: "", IS_SELECTED: true };
-        }
-    }
-    /** Ajusta a largura do dropdown para corresponder à largura do input principal. */
-    adjustDropdownWidth() {
-        const inputWidth = this._mainInput.nativeElement.offsetWidth;
-        this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
-    }
-    /**
-     * Emite um evento para recarregar a lista de itens com base na pesquisa fornecida.
-     * @param search Texto de pesquisa para recarregar a lista.
-     */
-    reloadList(search) {
-        this.onReloadList.emit(search);
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: SearchComboboxComponent, deps: [{ token: i2.FormBuilder }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: SearchComboboxComponent, selector: "lib-search-combobox", inputs: { comboboxList: "comboboxList", labelText: "labelText", initializedValueID: "initializedValueID", colorTheme: "colorTheme", mainInputPlaceholder: "mainInputPlaceholder", searchInputPlaceholder: "searchInputPlaceholder", disabled: "disabled" }, outputs: { onReloadList: "onReloadList", onSelectItem: "onSelectItem" }, viewQueries: [{ propertyName: "_mainInput", first: true, predicate: ["mainInput"], descendants: true }, { propertyName: "_dropdownMenu", first: true, predicate: ["dropdownMenu"], descendants: true }], usesOnChanges: true, ngImport: i0, template: "<label class=\"form-label fw-bold\" [innerHTML]=\"labelText\"></label>\r\n<div class=\"input-group dropdown flex-fill glb-max-height-350px\">\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.\r\n   Ao usar o atributo [btnLeft], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnLeft]\"></ng-content>\r\n\r\n   <input  #mainInput   *ngIf=\"!disabled; else disabledInput\" class=\"form-select text-start rounded-end\" type=\"text\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" data-bs-auto-close=\"outside\" aria-expanded=\"false\" readonly>\r\n   <ul  #dropdownMenu  class=\"dropdown-menu p-2 glb-max-height-350px overflow-y-scroll\">\r\n      <div class=\"input-group mb-2\">\r\n         <input #searchInput type=\"text\" id=\"searchInput\" class=\"form-control glb-input-no-glow\" [placeholder]=\"searchInputPlaceholder\" (keyup.enter)=\"reloadList(searchInput.value)\">\r\n         <button class=\"btn btn-{{colorTheme}}\" (click)=\"reloadList(searchInput.value)\"> <app-svg-storage svgName=\"lupa\" svgSize=\"medium-small\" /> </button>\r\n      </div>\r\n\r\n      <ng-container *ngIf=\"comboboxList; else loadingList\">\r\n         <ng-container *ngIf=\"comboboxList.length > 0; else emptyItemList\">\r\n            <li *ngIf=\"selectedItem && selectedItem.ID != ''\" class=\"dropdown-item\" (click)=\"setFilterValue()\"> <span class=\"fw-bold\">Limpar op\u00E7\u00E3o selecionada</span> </li>\r\n            <li class=\"dropdown-item\" *ngFor=\"let item of comboboxList\" (click)=\"setFilterValue(item)\">\r\n               <span *ngIf=\"item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''\" class=\"glb-fs-12 fw-bold d-inline-block w-125\">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}\r\n            </li>\r\n         </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #loadingList> <li class=\"dropdown-item text-center\"> <div class=\"spinner-border\" role=\"status\"><span class=\"visually-hidden\">Carregando dados...</span></div> </li> </ng-template>\r\n      <ng-template #emptyItemList> <li class=\"dropdown-item fst-italic\">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>\r\n   </ul>\r\n\r\n   <ng-template #disabledInput>\r\n      <input  #mainInput  class=\"form-select text-start rounded-end\" type=\"text\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" readonly disabled>\r\n   </ng-template>\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnRight] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado direito do combobox de pesquisa.\r\n   Ao usar o atributo [btnRight], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnRight]\"></ng-content>\r\n\r\n</div>\r\n", styles: [".glb-max-height-350px{max-height:350px!important}\n"], dependencies: [{ kind: "directive", type: i1$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: SvgStorageComponent, selector: "app-svg-storage", inputs: ["svgName", "svgColor", "svgFill", "svgSize", "svgStrokeWidth"] }] }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: SearchComboboxComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'lib-search-combobox', template: "<label class=\"form-label fw-bold\" [innerHTML]=\"labelText\"></label>\r\n<div class=\"input-group dropdown flex-fill glb-max-height-350px\">\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.\r\n   Ao usar o atributo [btnLeft], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnLeft]\"></ng-content>\r\n\r\n   <input  #mainInput   *ngIf=\"!disabled; else disabledInput\" class=\"form-select text-start rounded-end\" type=\"text\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" data-bs-auto-close=\"outside\" aria-expanded=\"false\" readonly>\r\n   <ul  #dropdownMenu  class=\"dropdown-menu p-2 glb-max-height-350px overflow-y-scroll\">\r\n      <div class=\"input-group mb-2\">\r\n         <input #searchInput type=\"text\" id=\"searchInput\" class=\"form-control glb-input-no-glow\" [placeholder]=\"searchInputPlaceholder\" (keyup.enter)=\"reloadList(searchInput.value)\">\r\n         <button class=\"btn btn-{{colorTheme}}\" (click)=\"reloadList(searchInput.value)\"> <app-svg-storage svgName=\"lupa\" svgSize=\"medium-small\" /> </button>\r\n      </div>\r\n\r\n      <ng-container *ngIf=\"comboboxList; else loadingList\">\r\n         <ng-container *ngIf=\"comboboxList.length > 0; else emptyItemList\">\r\n            <li *ngIf=\"selectedItem && selectedItem.ID != ''\" class=\"dropdown-item\" (click)=\"setFilterValue()\"> <span class=\"fw-bold\">Limpar op\u00E7\u00E3o selecionada</span> </li>\r\n            <li class=\"dropdown-item\" *ngFor=\"let item of comboboxList\" (click)=\"setFilterValue(item)\">\r\n               <span *ngIf=\"item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''\" class=\"glb-fs-12 fw-bold d-inline-block w-125\">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}\r\n            </li>\r\n         </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #loadingList> <li class=\"dropdown-item text-center\"> <div class=\"spinner-border\" role=\"status\"><span class=\"visually-hidden\">Carregando dados...</span></div> </li> </ng-template>\r\n      <ng-template #emptyItemList> <li class=\"dropdown-item fst-italic\">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>\r\n   </ul>\r\n\r\n   <ng-template #disabledInput>\r\n      <input  #mainInput  class=\"form-select text-start rounded-end\" type=\"text\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" readonly disabled>\r\n   </ng-template>\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnRight] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado direito do combobox de pesquisa.\r\n   Ao usar o atributo [btnRight], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnRight]\"></ng-content>\r\n\r\n</div>\r\n", styles: [".glb-max-height-350px{max-height:350px!important}\n"] }]
-        }], ctorParameters: () => [{ type: i2.FormBuilder }], propDecorators: { comboboxList: [{
-                type: Input,
-                args: [{ required: true }]
-            }], labelText: [{
-                type: Input,
-                args: [{ required: true }]
-            }], initializedValueID: [{
-                type: Input
-            }], colorTheme: [{
-                type: Input
-            }], mainInputPlaceholder: [{
-                type: Input
-            }], searchInputPlaceholder: [{
-                type: Input
-            }], disabled: [{
-                type: Input
-            }], onReloadList: [{
-                type: Output
-            }], onSelectItem: [{
-                type: Output
-            }], _mainInput: [{
-                type: ViewChild,
-                args: ['mainInput']
-            }], _dropdownMenu: [{
-                type: ViewChild,
-                args: ['dropdownMenu']
-            }] } });
-
-class DynamicTableComponent {
-    constructor() { }
-    ngOnInit() { }
-    ngOnChanges(changes) { }
-    ngAfterViewInit() { }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: DynamicTableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: DynamicTableComponent, selector: "lib-dynamic-table", usesOnChanges: true, ngImport: i0, template: "<p>dynamic-table works!</p>\r\n", styles: [""] }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: DynamicTableComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'lib-dynamic-table', template: "<p>dynamic-table works!</p>\r\n" }]
-        }], ctorParameters: () => [] });
-
-class StaticTableComponent {
-    constructor() { }
-    ngOnInit() { }
-    ngOnChanges(changes) { }
-    ngAfterViewInit() { }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: StaticTableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: StaticTableComponent, selector: "lib-static-table", usesOnChanges: true, ngImport: i0, template: "<p>static-table works!</p>\r\n", styles: [""] }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: StaticTableComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'lib-static-table', template: "<p>static-table works!</p>\r\n" }]
-        }], ctorParameters: () => [] });
-
-/**
  * Diretiva que adiciona um asterisco vermelho (*) ao lado de um elemento <label>
  * para indicar que o campo é obrigatório.
  *
@@ -1831,12 +1625,12 @@ class RequiredDirective {
         }
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: RequiredDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.11", type: RequiredDirective, selector: "label[libRequired]", inputs: { showMarker: ["libRequired", "showMarker"], spanID: ["sisID", "spanID"] }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.11", type: RequiredDirective, selector: "label[libRequired], span[libRequired], p[libRequired]", inputs: { showMarker: ["libRequired", "showMarker"], spanID: ["sisID", "spanID"] }, usesOnChanges: true, ngImport: i0 }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: RequiredDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "label[libRequired]"
+                    selector: "label[libRequired], span[libRequired], p[libRequired]"
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { showMarker: [{
                 type: Input,
@@ -1845,6 +1639,222 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImpo
                 type: Input,
                 args: ["sisID"]
             }] } });
+
+/**
+ * @file search-combobox.component.ts
+ * @description Este arquivo contém a implementação do componente SearchComboboxComponent, que é um componente de interface do usuário
+ * para realizar pesquisas e seleções em uma lista de opções apresentada em um combobox.
+ *
+ * @component SearchComboboxComponent
+ * @selector lib-search-combobox
+ * @templateUrl ./search-combobox.component.html
+ * @styleUrl ./search-combobox.component.scss
+ *
+ * @description
+ * O componente SearchComboboxComponent é projetado para fornecer aos usuários uma interface para pesquisar e selecionar itens de uma lista.
+ * Ele suporta a filtragem de itens com base na entrada do usuário, permitindo uma seleção mais fácil em listas extensas.
+ *
+ * ## Funcionalidades:
+ * - Pesquisa e filtragem de itens na lista do combobox.
+ * - Seleção de itens com feedback visual.
+ * - Emissão de eventos personalizados para interações do usuário, como recarregar a lista ou selecionar um item.
+ * - Ajuste dinâmico da largura do dropdown para corresponder ao input principal.
+ * - Inicialização de um valor selecionado, se fornecido.
+ *
+ * ## Inputs:
+ * - `comboboxList` (RecordCombobox[]): Array de objetos representando os itens disponíveis para seleção.
+ * - `labelText` (string): Texto de etiqueta associado ao combobox.
+ * - `initializedValueID` (string | number): ID de um item inicialmente selecionado no combobox.
+ * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Tema de cores para o componente.
+ * - `mainInputPlaceholder` (string): Texto de espaço reservado para o input principal.
+ * - `searchInputPlaceholder` (string): Texto de espaço reservado para o input de pesquisa.
+ *
+ * ## Outputs:
+ * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
+ * - `onSelectItem` (EventEmitter<any>): Evento emitido quando um item é selecionado.
+ *
+ * ## Propriedades:
+ * - `selectedItem` (RecordCombobox): Getter e Setter para o item selecionado atualmente.
+ * - `FormUtils` (typeof FormUtils): Getter para utilitários de formulário.
+ * - `_searchInput` (string): Getter para o valor do input de pesquisa.
+ * - `filterForm` (FormGroup): Grupo de formulário para o filtro de pesquisa.
+ *
+ * ## Métodos Públicos:
+ * - `reloadList(search: string)`: Método para recarregar a lista de itens com base na pesquisa fornecida.
+ * - `setFilterValue(item?: RecordCombobox)`: Método para definir o valor do filtro com base no item selecionado.
+ *
+ * ## Eventos:
+ * - `ngOnInit()`: Inicializa o componente.
+ * - `ngAfterViewInit()`: Ajusta a largura do dropdown após a visualização do componente.
+ * - `ngOnChanges(changes: SimpleChanges)`: Responde a mudanças nas propriedades de entrada.
+ *
+ * ## Utilitários:
+ * - `createFilterForm()`: Cria o formulário de filtro para a pesquisa.
+ * - `initializeSelectedValue()`: Inicializa o valor selecionado no combobox, se fornecido.
+ * - `adjustDropdownWidth()`: Ajusta a largura do dropdown para corresponder à largura do input principal.
+ */
+class SearchComboboxComponent {
+    constructor(_formBuilder) {
+        this._formBuilder = _formBuilder;
+        this._ariaExpanded = false;
+        /** Tema de cores para o componente (baseado nas cores do Bootstrap). */
+        this.colorTheme = "primary";
+        /** Placeholder para o input principal. */
+        this.mainInputPlaceholder = "Selecione uma opção...";
+        /** Placeholder para o input de pesquisa. */
+        this.searchInputPlaceholder = "Pesquisa...";
+        /** Informa se o input será exibido como desabilitado. */
+        this.disabled = false;
+        this.libRequired = false;
+        /**
+         * Evento emitido quando a lista precisa ser recarregada.
+         * Leva uma string que é usada para pesquisa.
+         */
+        this.onReloadList = new EventEmitter();
+        /** Evento emitido quando um item é selecionado. */
+        this.onSelectItem = new EventEmitter();
+    }
+    ngOnInit() {
+        this.createFilterForm();
+        if (this.initializedValueID) {
+            this.initializeSelectedValue();
+        }
+    }
+    ngAfterViewInit() {
+        this.adjustDropdownWidth();
+    }
+    ngOnChanges(changes) {
+        if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
+            this.initializeSelectedValue();
+        }
+        if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
+            this.initializeSelectedValue();
+        }
+    }
+    get ariaExpanded() { return this._ariaExpanded; }
+    set ariaExpanded(value) {
+        this._ariaExpanded = value;
+        console.log("Valor mudou para: " + value);
+    }
+    get selectedItem() { return this._selectedItem; }
+    set selectedItem(value) {
+        this._selectedItem = value;
+        this.onSelectItem.emit(value);
+    }
+    get FormUtils() { return FormUtils; }
+    // #region FORM DATA
+    get _searchInput() { return this.filterForm.get("_searchInput")?.value; }
+    // #endregion FORM DATA
+    // #region FORM VALIDATORS
+    createFilterForm() {
+        this.filterForm = this._formBuilder.group({
+            _searchInput: [""]
+        });
+    }
+    // #endregion FORM VALIDATORS
+    // #endregion ==========> FORM BUILDER <==========
+    // #region ==========> UTILITIES <==========
+    /**
+     * Atualiza o valor do filtro com base no item selecionado.
+     * @param item Objeto de item selecionado.
+     */
+    setFilterValue(item) {
+        if (item) {
+            this.filterForm.controls["_searchInput"].setValue(`${item.ID} - ${item.LABEL}`);
+            this.selectedText = item.LABEL;
+            this.selectedItem = { ID: item.ID, LABEL: item.LABEL, AdditionalStringProperty1: item.AdditionalStringProperty1, IS_SELECTED: item.IS_SELECTED };
+        }
+        else {
+            this.filterForm.controls["_searchInput"].setValue("");
+            delete this.selectedText;
+            this.selectedItem = { ID: "", LABEL: "", AdditionalStringProperty1: "", IS_SELECTED: false };
+        }
+        this.ariaExpanded = false;
+    }
+    /** Chamado caso um valor inicial seja fornecido para o combobox. */
+    initializeSelectedValue() {
+        let initializedValue;
+        if (this.comboboxList && this.comboboxList.length > 0) {
+            initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
+        }
+        if (this.comboboxList && initializedValue) {
+            this.selectedText = initializedValue.LABEL;
+            this.selectedItem = { ID: initializedValue.ID, LABEL: initializedValue.LABEL, AdditionalStringProperty1: "", IS_SELECTED: true };
+        }
+    }
+    /** Ajusta a largura do dropdown para corresponder à largura do input principal. */
+    adjustDropdownWidth() {
+        const inputWidth = this._mainInput.nativeElement.offsetWidth;
+        this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
+    }
+    /**
+     * Emite um evento para recarregar a lista de itens com base na pesquisa fornecida.
+     * @param search Texto de pesquisa para recarregar a lista.
+     */
+    reloadList(search) {
+        this.onReloadList.emit(search);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: SearchComboboxComponent, deps: [{ token: i2.FormBuilder }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: SearchComboboxComponent, selector: "lib-search-combobox", inputs: { comboboxList: "comboboxList", labelText: "labelText", initializedValueID: "initializedValueID", colorTheme: "colorTheme", mainInputPlaceholder: "mainInputPlaceholder", searchInputPlaceholder: "searchInputPlaceholder", disabled: "disabled", libRequired: "libRequired" }, outputs: { onReloadList: "onReloadList", onSelectItem: "onSelectItem" }, viewQueries: [{ propertyName: "_mainInput", first: true, predicate: ["mainInput"], descendants: true }, { propertyName: "_dropdownMenu", first: true, predicate: ["dropdownMenu"], descendants: true }], usesOnChanges: true, ngImport: i0, template: "<label [libRequired]=\"libRequired\" class=\"form-label fw-bold\" [innerHTML]=\"labelText\"></label>\r\n<div class=\"input-group dropdown flex-fill glb-max-height-350px\">\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.\r\n   Ao usar o atributo [btnLeft], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnLeft]\"></ng-content>\r\n\r\n   <input  #mainInput   *ngIf=\"!disabled; else disabledInput\" class=\"form-select text-start rounded-end\" type=\"text\" data-bs-toggle=\"dropdown\" [placeholder]=\"mainInputPlaceholder\"\r\n      [(ngModel)]=\"selectedText\" data-bs-auto-close=\"outside\" aria-expanded=\"false\" readonly (click)=\"ariaExpanded = !ariaExpanded; searchInput.focus()\" (focus)=\"searchInput.focus()\">\r\n   <ul  #dropdownMenu  class=\"dropdown-menu p-2 glb-max-height-350px overflow-y-scroll\" [class.show]=\"ariaExpanded\">\r\n      <div class=\"input-group mb-2\">\r\n         <input #searchInput type=\"text\" id=\"searchInput\" class=\"form-control glb-input-no-glow\" [placeholder]=\"searchInputPlaceholder\" (keyup.enter)=\"reloadList(searchInput.value)\">\r\n         <button class=\"btn btn-{{colorTheme}}\" (click)=\"reloadList(searchInput.value)\"> <app-svg-storage svgName=\"lupa\" svgSize=\"medium-small\" /> </button>\r\n      </div>\r\n\r\n      <ng-container *ngIf=\"comboboxList; else loadingList\">\r\n         <ng-container *ngIf=\"comboboxList.length > 0; else emptyItemList\">\r\n            <li *ngIf=\"selectedItem && selectedItem.ID != ''\" class=\"dropdown-item\" (click)=\"setFilterValue()\"> <span class=\"fw-bold\">Limpar op\u00E7\u00E3o selecionada</span> </li>\r\n            <li class=\"dropdown-item\" *ngFor=\"let item of comboboxList\" (click)=\"setFilterValue(item)\">\r\n               <span *ngIf=\"item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''\" class=\"glb-fs-12 fw-bold d-inline-block w-125\">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}\r\n            </li>\r\n         </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #loadingList> <li class=\"dropdown-item text-center\"> <div class=\"spinner-border\" role=\"status\"><span class=\"visually-hidden\">Carregando dados...</span></div> </li> </ng-template>\r\n      <ng-template #emptyItemList> <li class=\"dropdown-item fst-italic\">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>\r\n   </ul>\r\n\r\n   <ng-template #disabledInput>\r\n      <input  #mainInput  class=\"form-select text-start rounded-end\" type=\"text\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" readonly disabled>\r\n   </ng-template>\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnRight] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado direito do combobox de pesquisa.\r\n   Ao usar o atributo [btnRight], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnRight]\"></ng-content>\r\n\r\n</div>\r\n", styles: [".glb-max-height-350px{max-height:350px!important}\n"], dependencies: [{ kind: "directive", type: i1$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: SvgStorageComponent, selector: "app-svg-storage", inputs: ["svgName", "svgColor", "svgFill", "svgSize", "svgStrokeWidth"] }, { kind: "directive", type: RequiredDirective, selector: "label[libRequired], span[libRequired], p[libRequired]", inputs: ["libRequired", "sisID"] }] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: SearchComboboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'lib-search-combobox', template: "<label [libRequired]=\"libRequired\" class=\"form-label fw-bold\" [innerHTML]=\"labelText\"></label>\r\n<div class=\"input-group dropdown flex-fill glb-max-height-350px\">\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.\r\n   Ao usar o atributo [btnLeft], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnLeft]\"></ng-content>\r\n\r\n   <input  #mainInput   *ngIf=\"!disabled; else disabledInput\" class=\"form-select text-start rounded-end\" type=\"text\" data-bs-toggle=\"dropdown\" [placeholder]=\"mainInputPlaceholder\"\r\n      [(ngModel)]=\"selectedText\" data-bs-auto-close=\"outside\" aria-expanded=\"false\" readonly (click)=\"ariaExpanded = !ariaExpanded; searchInput.focus()\" (focus)=\"searchInput.focus()\">\r\n   <ul  #dropdownMenu  class=\"dropdown-menu p-2 glb-max-height-350px overflow-y-scroll\" [class.show]=\"ariaExpanded\">\r\n      <div class=\"input-group mb-2\">\r\n         <input #searchInput type=\"text\" id=\"searchInput\" class=\"form-control glb-input-no-glow\" [placeholder]=\"searchInputPlaceholder\" (keyup.enter)=\"reloadList(searchInput.value)\">\r\n         <button class=\"btn btn-{{colorTheme}}\" (click)=\"reloadList(searchInput.value)\"> <app-svg-storage svgName=\"lupa\" svgSize=\"medium-small\" /> </button>\r\n      </div>\r\n\r\n      <ng-container *ngIf=\"comboboxList; else loadingList\">\r\n         <ng-container *ngIf=\"comboboxList.length > 0; else emptyItemList\">\r\n            <li *ngIf=\"selectedItem && selectedItem.ID != ''\" class=\"dropdown-item\" (click)=\"setFilterValue()\"> <span class=\"fw-bold\">Limpar op\u00E7\u00E3o selecionada</span> </li>\r\n            <li class=\"dropdown-item\" *ngFor=\"let item of comboboxList\" (click)=\"setFilterValue(item)\">\r\n               <span *ngIf=\"item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''\" class=\"glb-fs-12 fw-bold d-inline-block w-125\">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}\r\n            </li>\r\n         </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #loadingList> <li class=\"dropdown-item text-center\"> <div class=\"spinner-border\" role=\"status\"><span class=\"visually-hidden\">Carregando dados...</span></div> </li> </ng-template>\r\n      <ng-template #emptyItemList> <li class=\"dropdown-item fst-italic\">Nenhum registro encontrado com esta pesquisa...</li> </ng-template>\r\n   </ul>\r\n\r\n   <ng-template #disabledInput>\r\n      <input  #mainInput  class=\"form-select text-start rounded-end\" type=\"text\" [placeholder]=\"mainInputPlaceholder\" [(ngModel)]=\"selectedText\" readonly disabled>\r\n   </ng-template>\r\n\r\n   <!-- Este elemento ng-content com o atributo [btnRight] permite que o usu\u00E1rio final forne\u00E7a conte\u00FAdo personalizado para ser exibido no lado direito do combobox de pesquisa.\r\n   Ao usar o atributo [btnRight], o usu\u00E1rio pode facilmente adicionar bot\u00F5es ou outros elementos para melhorar a funcionalidade ou apar\u00EAncia do combobox de pesquisa. -->\r\n   <ng-content select=\"[btnRight]\"></ng-content>\r\n\r\n</div>\r\n", styles: [".glb-max-height-350px{max-height:350px!important}\n"] }]
+        }], ctorParameters: () => [{ type: i2.FormBuilder }], propDecorators: { comboboxList: [{
+                type: Input,
+                args: [{ required: true }]
+            }], labelText: [{
+                type: Input,
+                args: [{ required: true }]
+            }], initializedValueID: [{
+                type: Input
+            }], colorTheme: [{
+                type: Input
+            }], mainInputPlaceholder: [{
+                type: Input
+            }], searchInputPlaceholder: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], libRequired: [{
+                type: Input
+            }], onReloadList: [{
+                type: Output
+            }], onSelectItem: [{
+                type: Output
+            }], _mainInput: [{
+                type: ViewChild,
+                args: ['mainInput']
+            }], _dropdownMenu: [{
+                type: ViewChild,
+                args: ['dropdownMenu']
+            }] } });
+
+class DynamicTableComponent {
+    constructor() { }
+    ngOnInit() { }
+    ngOnChanges(changes) { }
+    ngAfterViewInit() { }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: DynamicTableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: DynamicTableComponent, selector: "lib-dynamic-table", usesOnChanges: true, ngImport: i0, template: "<p>dynamic-table works!</p>\r\n", styles: [""] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: DynamicTableComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'lib-dynamic-table', template: "<p>dynamic-table works!</p>\r\n" }]
+        }], ctorParameters: () => [] });
+
+class StaticTableComponent {
+    constructor() { }
+    ngOnInit() { }
+    ngOnChanges(changes) { }
+    ngAfterViewInit() { }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: StaticTableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: StaticTableComponent, selector: "lib-static-table", usesOnChanges: true, ngImport: i0, template: "<p>static-table works!</p>\r\n", styles: [""] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: StaticTableComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'lib-static-table', template: "<p>static-table works!</p>\r\n" }]
+        }], ctorParameters: () => [] });
 
 class InfraModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }

@@ -56,5 +56,5 @@ export declare class RequiredDirective implements OnInit, OnChanges {
     /** Remove o marcador de asterisco do elemento <label>. */
     private removeMarker;
     static ɵfac: i0.ɵɵFactoryDeclaration<RequiredDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredDirective, "label[libRequired]", never, { "showMarker": { "alias": "libRequired"; "required": false; }; "spanID": { "alias": "sisID"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredDirective, "label[libRequired], span[libRequired], p[libRequired]", never, { "showMarker": { "alias": "libRequired"; "required": false; }; "spanID": { "alias": "sisID"; "required": false; }; }, {}, never, never, false, never>;
 }

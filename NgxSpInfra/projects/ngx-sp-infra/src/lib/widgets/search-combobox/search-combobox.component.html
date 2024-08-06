@@ -5,8 +5,9 @@
    Ao usar o atributo [btnLeft], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
    <ng-content select="[btnLeft]"></ng-content>
 
-   <input  #mainInput   *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" aria-expanded="false" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" data-bs-auto-close="outside" aria-expanded="false" readonly>
-   <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll">
+   <input  #mainInput   *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
+      [(ngModel)]="selectedText" data-bs-auto-close="outside" aria-expanded="false" readonly (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
+   <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll" [class.show]="ariaExpanded">
       <div class="input-group mb-2">
          <input #searchInput type="text" id="searchInput" class="form-control glb-input-no-glow" [placeholder]="searchInputPlaceholder" (keyup.enter)="reloadList(searchInput.value)">
          <button class="btn btn-{{colorTheme}}" (click)="reloadList(searchInput.value)"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> </button>

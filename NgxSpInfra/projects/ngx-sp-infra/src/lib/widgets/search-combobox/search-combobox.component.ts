@@ -91,6 +91,7 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   // #region PRIVATE
   private _selectedItem: RecordCombobox;
+  private _ariaExpanded: boolean = false;
   // #endregion PRIVATE
 
   // #region PUBLIC
@@ -135,6 +136,12 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   public selectedText?: string;
 
+  public get ariaExpanded(): boolean { return this._ariaExpanded; }
+  public set ariaExpanded(value: boolean) {
+    this._ariaExpanded = value;
+    console.log("Valor mudou para: " + value);
+  }
+
   public get selectedItem(): RecordCombobox { return this._selectedItem; }
   public set selectedItem(value: RecordCombobox) {
     this._selectedItem = value;
@@ -176,13 +183,14 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
       this.selectedText = item.LABEL;
 
       this.selectedItem = { ID: item.ID, LABEL: item.LABEL, AdditionalStringProperty1: item.AdditionalStringProperty1, IS_SELECTED: item.IS_SELECTED };
-    }
-    else {
+    } else {
       this.filterForm.controls["_searchInput"].setValue("");
       delete this.selectedText;
 
       this.selectedItem = { ID: "", LABEL: "", AdditionalStringProperty1: "", IS_SELECTED: false };
     }
+
+    this.ariaExpanded = false;
   }
 
   /** Chamado caso um valor inicial seja fornecido para o combobox. */

@@ -63,6 +63,7 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private _selectedItem;
+    private _ariaExpanded;
     /** Lista de itens disponíveis para seleção no combobox. */
     comboboxList: RecordCombobox[];
     /** Texto de label associado ao combobox. */
@@ -77,6 +78,7 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     searchInputPlaceholder: string;
     /** Informa se o input será exibido como desabilitado. */
     disabled: boolean;
+    libRequired: boolean;
     /**
      * Evento emitido quando a lista precisa ser recarregada.
      * Leva uma string que é usada para pesquisa.
@@ -87,6 +89,8 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     private _mainInput;
     private _dropdownMenu;
     selectedText?: string;
+    get ariaExpanded(): boolean;
+    set ariaExpanded(value: boolean);
     get selectedItem(): RecordCombobox;
     set selectedItem(value: RecordCombobox);
     filterForm: FormGroup;
@@ -108,5 +112,5 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
      */
     reloadList(search: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SearchComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }
