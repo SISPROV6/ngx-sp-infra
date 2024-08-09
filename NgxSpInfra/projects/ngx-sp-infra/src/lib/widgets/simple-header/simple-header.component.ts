@@ -25,58 +25,26 @@ export class SimpleHeaderComponent implements OnInit, OnChanges {
   // #region PUBLIC
   @Input({ required: true }) public breadcrumbList: string[] = [];
 
-  @Input() public pageTitle: string | undefined;
+  @Input() public pageTitle: string | undefined = "Carregando...";
 
-
-  /**
-   * Modo em que o Header será inicializado
-   * @default "list"
-  */
+  /** Modo em que o Header será inicializado
+   * @default "list" */
   @Input() public mode: "add" | "edit" | "list" = "list";
 
-  @Input() public titulo: string = "";
-
-  /**
-   * Define se o botão de Auditoria estará visível
-   * @default false
-  */
-  @Input() public visibleAuditBtn: boolean = false;
-
-  /**
-   * Informa a opção de Menu selecionada para chegar à tela
-   * @default ""
-  */
-  @Input() public menuGroup: string = "";
-
-  /**
-   * Opção que deve ser informada caso você deseje que um dos botões seja escondido
-   * @default null
-   */
-  @Input() public buttonToOmit: "Todos" | "Cancelar" | "Salvar" | null = null;
-
-  @Input() public useCustomPageTitle: boolean = false;
-
-  @Input() public customPageTitle: string = "";
+  /** Deve ser informada caso você deseje que um dos botões seja escondido
+   * @default null */
+  @Input() public hideButton?: "Todos" | "Cancelar" | "Salvar";
 
   @Input() public showSpinner: boolean = false;
 
-  /** Deve ser informada para sobreescrever o título principal em situações de múltiplos títulos com base em condições */
-  @Input() public pageTitleSecondary: string = "";
-
-  @Input() public customBreadcrumbEnd: string = "";
-
-  @Input() public customBreadcrumbMode: string = "";
-
-  /** Emissor de evento para Retorno */
+  /** Emissor de evento ao clicar no "Cancelar" */
 	@Output() public onReturn = new EventEmitter<void>();
 
-  /** Emissor de evento para Criação */
+  /** Emissor de evento ao clicar no "Salvar" em modo de criação */
   @Output() public onCreate = new EventEmitter<void>();
 
-  /** Emissor de evento para Atualização */
+  /** Emissor de evento ao clicar no "Salvar" em modo de edição */
   @Output() public onUpdate = new EventEmitter<void>();
-
-  public pageAction: string = "";
   // #endregion PUBLIC
 
   // #endregion ==========> PROPERTIES <==========
@@ -85,27 +53,18 @@ export class SimpleHeaderComponent implements OnInit, OnChanges {
   // #region ==========> UTILITIES <==========
 
   /** Emite um evento para retornar à página anterior */
-  public return(): void {
-    this.onReturn.emit();
-  }
+  public return(): void { this.onReturn.emit() }
 
-  /** Emite um evento para informar quando o botão de "Criar" foi clicado */
-  public create(): void {
-    this.onCreate.emit();
-  }
+  /** Emite um evento quando o botão de "Salvar" em modo de criação foi clicado */
+  public create(): void { this.onCreate.emit() }
   
-  /** Emite um evento para informar quando o botão de "Atualizar" foi clicado */
-  public update(): void {
-    this.onUpdate.emit();
-  }
+  /** Emite um evento quando o botão de "Salvar" em modo de edição foi clicado */
+  public update(): void { this.onUpdate.emit() }
 
-
-  public redirectTextByMode(): string {
+  public setSaveText(): string {
     if (this.mode == "list") return "Adicionar";
     else return "Salvar";
-
   }
-
   // #endregion ==========> UTILITIES <==========
 
 }

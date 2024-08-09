@@ -1,0 +1,18 @@
+@use '../../css/global-variables' as global-var;
+@import '../../css/global-styles.scss';
+
+
+// #region CONTENT
+.breadcrumb {
+  font-size: .75rem !important;
+  color: var(--sp-dark-text-disabled) !important;
+
+  .breadcrumb-item+.breadcrumb-item::before {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+hr { margin-bottom: 12px; }
+.bottom-spacing { margin-bottom: 32px !important; }
+// #endregion CONTENT

@@ -1,3 +1,5 @@
 NgxSpInfra/node_modules/
 NgxSpInfra/.angular/
-NgxSpInfra/projects/SpGerenciamento1Portal/
+
+NgxSpInfra/projects/SpGerenciamento1Portal/.angular
+NgxSpInfra/projects/SpGerenciamento1Portal/node_modules
