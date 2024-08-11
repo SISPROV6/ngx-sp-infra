@@ -33,6 +33,7 @@ import { SearchComboboxComponent } from './widgets/search-combobox/search-combob
 import { DynamicTableComponent } from './widgets/dynamic-table/dynamic-table.component';
 import { StaticTableComponent } from './widgets/static-table/static-table.component';
 import { RequiredDirective } from './directives/required.directive';
+import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RequiredDirective } from './directives/required.directive';
     DynamicTableComponent,
     StaticTableComponent,
 
-    RequiredDirective
+    RequiredDirective,
+    SimpleHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -97,7 +99,8 @@ import { RequiredDirective } from './directives/required.directive';
     DynamicTableComponent,
     StaticTableComponent,
 
-    RequiredDirective
+    RequiredDirective,
+    SimpleHeaderComponent,
   ],
   providers: [],
 })

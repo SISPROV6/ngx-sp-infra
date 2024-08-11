@@ -1,0 +1,101 @@
+<!-- #region HEADER -->
+<simple-header [breadcrumbList]="[ 'Configurações', 'Lista de Grupos' ]" mode="list">
+  <a class="btn-adicionar btn btn-primary d-flex" [routerLink]="['/grupos/editar', '0']" routerLinkActive="active"> 
+    <app-svg-storage svgName="mais"></app-svg-storage>
+    <span class="ms-2 fw-bold">Adicionar</span>
+  </a>
+</simple-header>
+<!-- #endregion HEADER -->
+
+<!-- #region Corpo -->
+<div class="glb-main-container p-3">
+
+  <!-- #region SEARCH AND FILTERS -->
+  <app-search-filters (_executeGetBySearch)="getGrupos($event)"
+    placeholder="Digite o grupo ou a descrição" [useIsActive]="false"
+    class="d-flex col-12 mb-4">
+  </app-search-filters>
+  <!-- #endregion SEARCH AND FILTERS -->
+
+  <!-- #region TABLE -->
+  <div class="table-list w-100 position-relative">
+    <div class="table-list mt-4" *ngIf="$retGrupoList.Grupos; else loading">
+      <span class="ms-1">Exibindo {{ this.counter }} Registros</span>
+      <table class="table table-bordered table-hover mb-0">
+        <thead>
+          <tr>
+            <th scope="col" class="col-3 align-middle">Grupo
+              <app-ordering [(sortDirection)]="sortDirection['NOME']"
+                (sortChange)="onSortChange({ direction: $event.direction, column: 'NOME' })"></app-ordering>
+            </th>
+            <th scope="col" class="col-8 align-middle">Descrição
+              <app-ordering [(sortDirection)]="sortDirection['DESCRICAO']"
+                (sortChange)="onSortChange({ direction: $event.direction, column: 'DESCRICAO' })"></app-ordering>
+            </th>
+            <th scope="col" class="col-1 align-middle text-center">Ações</th>
+          </tr>
+        </thead>
+        
+        <tbody *ngIf="$grupoList.length > 0;else emptyList" class="bg-light fade-in-row">
+          <tr *ngFor="let grupo of $grupoList | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+            <td class="align-middle">
+              <a class="text-primary text-decoration-none fw-bold" [routerLink]="['/grupos/editar', grupo.ID]" tooltip="Editar"> {{ grupo.NOME }} </a>
+            </td>
+            <td class="align-middle">{{ grupo.DESCRICAO }}</td>
+            <td class="text-center align-middle">
+              <div class="d-flex align-items-center justify-content-evenly">
+                <app-svg-storage svgName="editar" tooltip="Editar" class="glb-cursor-pointer text-primary"
+                  [routerLink]="['/grupos/editar', grupo.ID]"></app-svg-storage>
+                <app-svg-storage svgName="lixeira" tooltip="Excluir" class="glb-cursor-pointer text-primary"
+                  (click)="openModal(confirmDeleteModal, MODAL_DELETE, grupo.ID)"></app-svg-storage>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- #region PAGINATION -->
+      <div class="d-flex justify-content-end mt-2" *ngIf="$grupoList.length > 0">
+        <div class="d-flex align-items-center">
+          <label class="me-2" style="white-space: nowrap;">Itens por página</label>
+          <select class="form-select select-search" (change)="onSelectChange($event)">
+            <option class="selected" value="10" selected>10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+
+        <pagination-controls class="sp-pagination mt-3" (pageChange)="page = $event" previousLabel="«&nbsp;&nbsp;&nbsp;"
+          nextLabel="&nbsp;&nbsp;&nbsp;»" [maxSize]="5">
+        </pagination-controls>
+      </div>
+      <!-- #endregion PAGINATION -->
+    </div>
+  </div>
+  <!-- #endregion TABLE -->
+
+  <!-- #region SPINNER -->
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+  <!-- #endregion SPINNER -->
+
+  <!-- #region EMPTY LIST -->
+  <ng-template #emptyList>
+    <tbody class="fade-in">
+      <tr>
+        <td colspan="12" class="align-middle"> <span class="fw-light fst-italic text-center"> Consulta
+            não retornou registros... </span> </td>
+      </tr>
+    </tbody>
+  </ng-template>
+  <!-- #endregion EMPTY LIST -->
+
+</div>
+
+<!-- #region MODALS -->
+<ng-template #confirmDeleteModal>
+  <app-confirm-modal modalType="Excluir" modalSubject="Grupo"
+    (_closingModal)="closeModalDelete(MODAL_DELETE, $event)"></app-confirm-modal>
+</ng-template>
+<!-- #endregion MODALS -->

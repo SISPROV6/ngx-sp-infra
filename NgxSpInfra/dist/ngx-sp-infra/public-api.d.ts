@@ -16,6 +16,8 @@ export * from './lib/models/report-file';
 export * from './lib/models/ret-error';
 export * from './lib/models/ret-feedback-message';
 export * from './lib/models/ret-report-file';
+export * from './lib/models/combobox/record-combobox';
+export * from './lib/models/combobox/ret-records-combobox';
 /** Pipes */
 export * from './lib/pipes/cpf-cnpj.pipe';
 export * from './lib/pipes/currency.pipe';
@@ -50,5 +52,6 @@ export * from './lib/widgets/tree/models/ret-tree';
 export * from './lib/widgets/tree/models/tree-item';
 export * from './lib/widgets/tree/pipes/search-tree.pipe';
 export * from './lib/widgets/search-combobox/search-combobox.component';
+export * from './lib/widgets/simple-header/simple-header.component';
 export * from './lib/widgets/dynamic-table/dynamic-table.component';
 export * from './lib/widgets/static-table/static-table.component';

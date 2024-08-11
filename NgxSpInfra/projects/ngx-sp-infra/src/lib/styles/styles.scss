@@ -1,0 +1,74 @@
+// #region VARIABLES
+:root {
+	--text-color: #212529;
+	--main-color: #007BFF;
+	--footer-color: #2847A0;
+	--border-color: #C4C4C4;
+	--background-color: #EEEEEE;
+
+	--main-padding: 25px;
+
+	--8-pixel-Y-margin: .5rem 0;
+	--8-pixel-X-margin: 0 .5rem;
+	
+	--8-pixel-sizing: .5rem;
+	--4-pixel-sizing: .25rem;
+
+	/* Variáveis de estilo do novo figma. (29/06/2023) */
+	--sp-default: #2847A0;
+	--sp-primary: #0D6EFD;
+	--sp-primary-disabled: #5697F5;
+	--sp-hover: #CCE5FF;
+	--sp-secondary: #BD643E;
+	--sp-secondary-placeholder: #6C757D;
+	--sp-secondary-disabled: #2847A0;
+	--sp-success: #198754;
+	--sp-success-disabled: #5EA787;
+	--sp-danger: #DC3545;
+	--sp-danger-disabled: #DD727D;
+	--sp-warning: #FFC107;
+	--sp-warning-disabled: #F3CD55;
+	--sp-info: #0DCAF0;
+	--sp-light: #F8F9FA;
+	--sp-light-disabled: #EFF1F3;
+	--sp-dark-text: #212529;
+	--sp-dark-text-disabled: #63676B;
+	--sp-white: #FFFFFF;
+	--sp-tooltip: #191919;
+	--sp-input-outline: #C7C7C7;
+	--sp-background-neutral: #F5F5F5;
+	--sp-green: #009EAB;
+}
+// #endregino VARIABLES
+
+
+/* #region OVERRIDE BOOTSTRAP VARIABLES */
+
+/* #region SPACING */
+
+/* #endregion SPACING */
+
+/* #region THEME COLORS */
+$theme-colors: (
+  "primary": #3767b2,       // Azul principal
+  "secondary": #BD643E,
+  "success": #0F5132,       // Verde principal
+  "danger": #B23737,        // Vermelho principal
+  "warning": #FFC107        // Amarelo principal
+);
+
+/* #endregion THEME COLORS */
+
+/* #region INPUT RELATED COLORS */
+$form-check-input-checked-bg-color: #3767b2;      // Cor de fundo dos inputs de checkbox quando estão "checked"
+
+/* #endregion INPUT RELATED COLORS */
+
+/* #endregion OVERRIDE BOOTSTRAP VARIABLES */
+
+
+
+@import "../../../../../node_modules/bootstrap/scss/bootstrap.scss";
+// * Import do Bootstrap DEVE estar depois dos overrides, pois nos arquivos internos da biblioteca eles possuem a flag de "!default" junto com os valores.
+// * A ideia é que caso um novo valor seja declarado, o que é !default vai ser sobreescrito com esse novo valor,
+// * o !default serve só pra definir um valor caso nenhum outro seja declarado explicitamente. Por isso o import do Bootstrap nesse caso deve estar depois dos overrides.
