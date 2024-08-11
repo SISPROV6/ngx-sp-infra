@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-header',
@@ -31,9 +32,11 @@ export class SimpleHeaderComponent implements OnInit, OnChanges {
    * @default "list" */
   @Input() public mode: "add" | "edit" | "list" = "list";
 
-  /** Deve ser informada caso você deseje que um dos botões seja escondido
-   * @default null */
-  @Input() public hideButton?: "Todos" | "Cancelar" | "Salvar";
+  /** Deve ser informada caso você deseje que um dos botões seja escondido */
+  //@Input() public hideButton?: "Todos" | "Cancelar" | "Salvar" | "customButton1" | "customButton2" | "customButton3" | "customButton4";
+  @Input() public hideButton?: string[];
+
+  @Input() public formGroup?: FormGroup;
 
   @Input() public showSpinner: boolean = false;
 

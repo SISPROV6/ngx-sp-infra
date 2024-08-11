@@ -1,9 +1,16 @@
 <!-- #region HEADER -->
-<simple-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" [mode]="editingMode ? 'edit' : 'add'"
-   (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" />
-
-<!-- <lib-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" [mode]="editingMode ? 'edit' : 'add'"
+<!-- <simple-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" [mode]="editingMode ? 'edit' : 'add'"
    (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" /> -->
+
+<lib-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" [mode]="editingMode ? 'edit' : 'add'"
+   (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" [formGroup]="dadosBasicosForm" >
+
+   <button customButton1 class="btn btn-outline-primary">
+      <app-svg-storage svgName="disquete"></app-svg-storage>
+      <span class="ms-2"> Exportar </span>
+   </button>
+
+</lib-header>
 <!-- #endregion HEADER -->
 
 <div class="glb-main-container p-3">
@@ -96,7 +103,6 @@
       }
    </form>
 </div>
-
 
 <!-- #region TEMPLATES -->
 <ng-template #confirmDeleteModal>

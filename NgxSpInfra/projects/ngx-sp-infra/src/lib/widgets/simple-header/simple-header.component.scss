@@ -4,6 +4,7 @@
 // #region CONTENT
 .breadcrumb {
   font-size: .75rem !important;
+  color: var(--sp-dark-text-disabled) !important;
 
   .breadcrumb-item+.breadcrumb-item::before {
     padding-left: 0.5rem;
@@ -11,8 +12,7 @@
   }
 }
 
-hr { margin-bottom: 12px; }
-
-
 .lib-fs-24 { font-size: 24px !important; }
+
+.header { background-color: #EEEEEE !important; }
 // #endregion CONTENT
