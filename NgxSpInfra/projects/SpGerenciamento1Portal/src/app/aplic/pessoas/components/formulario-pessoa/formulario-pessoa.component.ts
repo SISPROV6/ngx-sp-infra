@@ -96,7 +96,7 @@ export class FormularioPessoaComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.getPapeisPessoaCombobox("");
+     this.getPapeisPessoaCombobox("");
   }
 
   public initializeView(): void {
@@ -114,10 +114,19 @@ export class FormularioPessoaComponent implements OnInit {
 
   // #region PREPARATION
   public getPapeisPessoaCombobox(pesquisa: string): void {
-    this._pessoasService.getPapeisPessoaCombobox(pesquisa).subscribe({
-      next: response => { this.$papeisCombobox = response.Records },
-      error: error => { this._projectUtilService.showHttpError(error) }
-    });
+    this.$papeisCombobox = [
+      { ID: "TESTE 1", LABEL: "TESTE 1" },
+      { ID: "TESTE 2", LABEL: "TESTE 2" },
+      { ID: "TESTE 3", LABEL: "TESTE 3" },
+      { ID: "TESTE 4", LABEL: "TESTE 4" },
+      { ID: "TESTE 5", LABEL: "TESTE 5" },
+    ];
+
+    // this._pessoasService.getPapeisPessoaCombobox(pesquisa).subscribe({
+    //   next: response => {
+    //   },
+    //   error: error => { this._projectUtilService.showHttpError(error) }
+    // });
   }
   // #endregion PREPARATION
 

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 import { FormUtils } from "../../utils/form-utils";
 
@@ -72,6 +72,11 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   ngOnInit(): void {
     this.createFilterForm();
     if (this.initializedValueID) { this.initializeSelectedValue() }
+
+    // Emit an event whenever the control's value changes
+    this.control.valueChanges.subscribe(value => {
+      this.controlValueChange.emit(value);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -95,6 +100,16 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   // #endregion PRIVATE
 
   // #region PUBLIC
+
+  @Input() control: FormControl;
+  @Output() controlValueChange = new EventEmitter<any>();
+
+
+  onInput(newValue: any): void {
+    // Emit the new value when the user types something
+    this.controlValueChange.emit(newValue);
+  }
+
 
   /** Lista de itens disponíveis para seleção no combobox. */
   @Input({ required: true }) public comboboxList: RecordCombobox[];

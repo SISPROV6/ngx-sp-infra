@@ -1,16 +1,6 @@
 <!-- #region HEADER -->
-<!-- <simple-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" [mode]="editingMode ? 'edit' : 'add'"
-   (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" /> -->
-
-<lib-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" [mode]="editingMode ? 'edit' : 'add'"
-   (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" [formGroup]="dadosBasicosForm" >
-
-   <button customButton1 class="btn btn-outline-primary">
-      <app-svg-storage svgName="disquete"></app-svg-storage>
-      <span class="ms-2"> Exportar </span>
-   </button>
-
-</lib-header>
+<lib-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" mode="add" pageTitle="pessoa" [showSpinner]="isSaving"
+   (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" />
 <!-- #endregion HEADER -->
 
 <div class="glb-main-container p-3">
@@ -90,6 +80,12 @@
             <label libRequired for="dtInicioVinculo" class="form-label">Data de início do vínculo</label>
             <input type="date" class="form-control" id="dtInicioVinculo" formControlName="DT_INICIOVINCULO">
             <app-field-error-message [control]="dadosBasicosForm.get('DT_INICIOVINCULO')"></app-field-error-message>
+         </div>
+
+         <div class="col-4">
+            <lib-search-combobox [comboboxList]="$papeisCombobox" labelText="Papel">
+
+            </lib-search-combobox>
          </div>
       </div>
 

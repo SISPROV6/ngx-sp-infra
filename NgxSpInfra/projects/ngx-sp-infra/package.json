@@ -1,12 +1,16 @@
 {
   "name": "ngx-sp-infra",
-  "version": "1.6.7",
+  "version": "1.7.0",
   "description": "Biblioteca de utilitários da Infra.",
-  "keywords": ["Infra", "Sispro", "Utilitários", "P&D"],
+  "author": "P&D",
+  "keywords": [ "Infra", "Sispro", "Utilitários", "P&D", "angular", "typescript", "bootstrap" ],
   "bugs": {
     "email": "sispropesqdesenv@sispro.com.br"
   },
-  "repository": "https://github.com/SISPROV6/ngx-sp-infra",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SISPROV6/ngx-sp-infra"
+  },
   "peerDependencies": {
     "@angular/common": "^16.2.2",
     "@angular/core": "^16.2.2",

@@ -8,25 +8,24 @@
         </ol>
       </nav>
 
-      @if (pageTitle) { <h2 class="fs-2 fw-bold mb-0">{{ pageTitle }}</h2> }
-      @else { <p class="fs-2 placeholder-glow"> <span class="placeholder col-3"></span> </p> }
+      <h2 class="fw-bold mb-0">{{ pageTitle }}</h2>
     </div>
 
     <div class="w-50 d-flex flex-row align-items-center justify-content-end">
-      @if (!hideButton || !hideButton.includes("Todos")) {
-        @if (!hideButton || !hideButton.includes("customButton1")) { <ng-content select="[customButton1]"></ng-content> }
-        @if (!hideButton || !hideButton.includes("customButton2")) { <ng-content select="[customButton2]"></ng-content> }
-        @if (!hideButton || !hideButton.includes("customButton3")) { <ng-content select="[customButton3]"></ng-content> }
-        @if (!hideButton || !hideButton.includes("customButton4")) { <ng-content select="[customButton4]"></ng-content> }
+      @if (!hideButtons || !hideButtons.includes("Todos")) {
+        @if (!hideButtons || !hideButtons.includes("customButton1")) { <ng-content select="[customButton1]"></ng-content> }
+        @if (!hideButtons || !hideButtons.includes("customButton2")) { <ng-content select="[customButton2]"></ng-content> }
+        @if (!hideButtons || !hideButtons.includes("customButton3")) { <ng-content select="[customButton3]"></ng-content> }
+        @if (!hideButtons || !hideButtons.includes("customButton4")) { <ng-content select="[customButton4]"></ng-content> }
 
         @if (mode !== 'list') {
-          @if (!hideButton || !hideButton.includes("Cancelar")) {
+          @if (!hideButtons || !hideButtons.includes("Cancelar")) {
             <a class="btn d-flex flex-row align-items-center btn-outline-primary mx-3" (click)="return()">
               <app-svg-storage svgName="fechar"></app-svg-storage>
               <span class="ms-2">Cancelar</span>
             </a>
           }
-          @if (!hideButton || !hideButton.includes("Salvar")) {
+          @if (!hideButtons || !hideButtons.includes("Salvar")) {
             @if (formGroup && !formGroup.valid) {
               <div class="me-0" tooltip="Há um campo inválido no formulário, preencha-o corretamente para prosseguir!">
                 <a class="btn btn-primary d-flex flex-row align-items-center disabled" type="button">

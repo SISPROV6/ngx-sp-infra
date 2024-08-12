@@ -1,5 +1,5 @@
 import { AfterViewInit, EventEmitter, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { FormUtils } from "../../utils/form-utils";
 import { RecordCombobox } from "../../models/combobox/record-combobox";
 import * as i0 from "@angular/core";
@@ -64,6 +64,9 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     ngOnChanges(changes: SimpleChanges): void;
     private _selectedItem;
     private _ariaExpanded;
+    control: FormControl;
+    controlValueChange: EventEmitter<any>;
+    onInput(newValue: any): void;
     /** Lista de itens disponíveis para seleção no combobox. */
     comboboxList: RecordCombobox[];
     /** Texto de label associado ao combobox. */
@@ -112,5 +115,5 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
      */
     reloadList(search: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SearchComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "control": { "alias": "control"; "required": false; }; "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; }, { "controlValueChange": "controlValueChange"; "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }
