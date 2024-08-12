@@ -36,6 +36,7 @@ import { RequiredDirective } from './directives/required.directive';
 import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.component';
 import { LibIconsComponent } from './widgets/lib-icons/lib-icons.component';
 import { TextFilterPipe } from './pipes/text-filter.pipe';
+import { ContentContainerComponent } from './widgets/content-container/content-container.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TextFilterPipe } from './pipes/text-filter.pipe';
     RequiredDirective,
     SimpleHeaderComponent,
     LibIconsComponent,
-    TextFilterPipe
+    TextFilterPipe,
+    ContentContainerComponent
   ],
   imports: [
     CommonModule,
@@ -106,7 +108,8 @@ import { TextFilterPipe } from './pipes/text-filter.pipe';
     RequiredDirective,
     SimpleHeaderComponent,
     LibIconsComponent,
-    TextFilterPipe
+    TextFilterPipe,
+    ContentContainerComponent
   ],
   providers: [],
 })

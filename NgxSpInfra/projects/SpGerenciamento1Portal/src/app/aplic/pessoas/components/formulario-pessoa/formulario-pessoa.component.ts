@@ -62,6 +62,7 @@ export class FormularioPessoaComponent implements OnInit {
 
 
     papelCombobox: new FormControl<string | number>("", [Validators.required]),
+    doisPapeisCombobox: new FormControl<string | number>(""),
   });
   // #endregion FORM BUILDER
 
@@ -69,6 +70,7 @@ export class FormularioPessoaComponent implements OnInit {
   public get FormUtils(): typeof FormUtils { return FormUtils; }
 
   public get papelCombobox(): FormControl { return this.dadosBasicosForm.get("papelCombobox") as FormControl; }
+  public get doisPapeisCombobox(): FormControl { return this.dadosBasicosForm.get("doisPapeisCombobox") as FormControl; }
   
   public get TX_NOMEPESSOA(): string { return this.dadosBasicosForm.get("TX_NOMEPESSOA")?.value; }
   public get TIPOPESSOA_CD(): string { return this.dadosBasicosForm.get("TIPOPESSOA_CD")?.value; }

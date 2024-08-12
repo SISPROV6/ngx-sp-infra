@@ -3,9 +3,9 @@
    (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" />
 <!-- #endregion HEADER -->
 
-<div class="glb-main-container p-3">
-   <h5 class="fw-bold border-bottom mb-3 pb-3">Dados básicos</h5>
-   <form [formGroup]="dadosBasicosForm">
+
+<lib-container containerTitle="Dados básicos" [tabs]="[ 'Dados básicos', 'Endereços', 'Contatos' ]">
+   <form innerContent1 [formGroup]="dadosBasicosForm">
       <div class="row mb-3">
          <div class="col-3">
             <div class="form-check form-switch">
@@ -84,9 +84,63 @@
             <input type="date" class="form-control" id="dtInicioVinculo" formControlName="DT_INICIOVINCULO">
             <app-field-error-message [control]="dadosBasicosForm.get('DT_INICIOVINCULO')"></app-field-error-message>
          </div>
+      </div>
 
-         <div class="col-4">
-            <lib-search-combobox [libRequired]="true" [comboboxList]="$papeisCombobox" labelText="Papel" controlType="formControl" [control]="papelCombobox" (controlValueChange)="onControlValueChange($event)" />
+      @if ($pessoaRecord) {
+         <div class="row">
+            <div class="col-3 offset-9">
+               <p class="mb-0 glb-text-dark-disabled"><b>Data de criação:</b> {{ $pessoaRecord.DT_CRIACAO | date: 'dd/MM/yyyy, HH:mm:ss' }} </p>
+               <p class="mb-0 glb-text-dark-disabled"><b>Data da última alteração:</b> {{ ($pessoaRecord.DT_ULTIMAALTERACAO | date: 'dd/MM/yyyy') == "01/01/1900" ? "Nenhuma alteração recente" : $pessoaRecord.DT_ULTIMAALTERACAO | date: 'dd/MM/yyyy, HH:mm:ss' }} </p>
+            </div>
+         </div>
+      }
+   </form>
+
+   <form innerContent2 [formGroup]="dadosBasicosForm">
+      <div class="row mb-3">
+         <div class="col-3">
+            <div class="form-check form-switch">
+               <input class="form-check-input" type="checkbox" role="switch" id="registroStatus" formControlName="IS_ACTIVE">
+               <label class="form-check-label" for="registroStatus"> Registro ativo? </label>
+             </div>
+         </div>
+      </div>
+
+      <div class="row mb-3">
+         <div class="col-md-7 col-sm-12">
+            <label libRequired for="inputTeste" class="form-label">{{ TIPOPESSOA_CD == 'FIS' ? 'Nome' : 'Razão social' }}</label>
+            <input type="text" class="form-control" formControlName="TX_NOMEPESSOA" [class.is-invalid]="FormUtils.isInvalidField(dadosBasicosForm.get('TX_NOMEPESSOA'))">
+            <app-field-error-message [control]="dadosBasicosForm.get('TX_NOMEPESSOA')" [label]="TIPOPESSOA_CD == 'FIS' ? 'Nome' : 'Razão social'" [customMessage]="customErrorMessage"></app-field-error-message>
+         </div>
+         <div class="col-md-5 col-sm-12">
+            <label libRequired for="inputTeste" class="form-label">{{ TIPOPESSOA_CD == 'FIS' ? 'CPF' : 'CNPJ' }}</label>
+            <input type="text" class="form-control" formControlName="TX_DOCUMENTO" [class.is-invalid]="FormUtils.isInvalidField(dadosBasicosForm.get('TX_DOCUMENTO'))" mask="CPF_CNPJ" [dropSpecialCharacters]="false">
+            <app-field-error-message [control]="dadosBasicosForm.get('TX_DOCUMENTO')" [label]="TIPOPESSOA_CD == 'FIS' ? 'CPF' : 'CNPJ'"></app-field-error-message>
+         </div>
+      </div>
+
+      <div class="row mb-3">
+         @switch (TIPOPESSOA_CD) {
+            @case ("FIS") {
+               <div class="col-3">
+                  <label libRequired for="dtNascimentoPessoa" class="form-label">Data de nascimento</label>
+                  <input type="date" class="form-control" id="dtNascimentoPessoa" formControlName="DT_NASCIMENTO">
+                  <app-field-error-message [control]="dadosBasicosForm.get('DT_NASCIMENTO')"></app-field-error-message>
+               </div>
+            }
+            @case ("JUR") {
+               <div class="col-3">
+                  <label libRequired for="dtFundacao" class="form-label">Data de fundação</label>
+                  <input type="date" class="form-control" id="dtFundacao" formControlName="DT_FUNDACAO">
+                  <app-field-error-message [control]="dadosBasicosForm.get('DT_FUNDACAO')"></app-field-error-message>
+               </div>
+            }
+         }
+
+         <div class="col-3">
+            <label libRequired for="dtInicioVinculo" class="form-label">Data de início do vínculo</label>
+            <input type="date" class="form-control" id="dtInicioVinculo" formControlName="DT_INICIOVINCULO">
+            <app-field-error-message [control]="dadosBasicosForm.get('DT_INICIOVINCULO')"></app-field-error-message>
          </div>
       </div>
 
@@ -99,7 +153,78 @@
          </div>
       }
    </form>
-</div>
+
+   <form innerContent3 [formGroup]="dadosBasicosForm">
+      <div class="row mb-3">
+         <div class="col-7">
+            <p libRequired class="form-label me-3">
+               <lib-icon iconName="info" iconColor="blue" iconSize="small" />
+               Tipo de pessoa
+            </p>
+            <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" id="tipoPessoaFis" [value]="'FIS'" formControlName="TIPOPESSOA_CD">
+               <label class="form-check-label" for="tipoPessoaFis">Física</label>
+            </div>
+            <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" id="tipoPessoaJur" [value]="'JUR'" formControlName="TIPOPESSOA_CD">
+               <label class="form-check-label" for="tipoPessoaJur">Jurídica</label>
+            </div>
+            <div class="form-check form-check-inline">
+               <input class="form-check-input" type="checkbox" id="pessoaEstrangeira" formControlName="IS_ESTRANGEIRO">
+               <label class="form-check-label" for="pessoaEstrangeira">Estrangeiro?</label>
+             </div>
+         </div>
+         <div class="col-5">
+            <p libRequired class="form-label me-3">Relacionamento <span class="fst-italic fw-light glb-fs-12">(papéis mais comuns para Pessoa)</span> </p>
+            <div class="btn-group" role="group" aria-label="Relacionamentos da pessoa (papéis mais comuns para Pessoa)">
+               <input type="radio" class="btn-check" id="pessoaFornecedorRadio" value="FOR" formControlName="PAPEL_CD">
+               <label class="btn btn-outline-primary" for="pessoaFornecedorRadio">Fornecedor</label>
+             
+               <input type="radio" class="btn-check" id="pessoaClienteRadio" value="CLI" formControlName="PAPEL_CD">
+               <label class="btn btn-outline-primary" for="pessoaClienteRadio">Cliente</label>
+             
+               <input type="radio" class="btn-check" id="pessoaFuncionarioRadio" value="FUNC" formControlName="PAPEL_CD">
+               <label class="btn btn-outline-primary" for="pessoaFuncionarioRadio">Funcionário</label>
+             </div>
+         </div>
+      </div>
+
+      <div class="row mb-3">
+         @switch (TIPOPESSOA_CD) {
+            @case ("FIS") {
+               <div class="col-3">
+                  <label libRequired for="dtNascimentoPessoa" class="form-label">Data de nascimento</label>
+                  <input type="date" class="form-control" id="dtNascimentoPessoa" formControlName="DT_NASCIMENTO">
+                  <app-field-error-message [control]="dadosBasicosForm.get('DT_NASCIMENTO')"></app-field-error-message>
+               </div>
+            }
+            @case ("JUR") {
+               <div class="col-3">
+                  <label libRequired for="dtFundacao" class="form-label">Data de fundação</label>
+                  <input type="date" class="form-control" id="dtFundacao" formControlName="DT_FUNDACAO">
+                  <app-field-error-message [control]="dadosBasicosForm.get('DT_FUNDACAO')"></app-field-error-message>
+               </div>
+            }
+         }
+
+         <div class="col-3">
+            <label libRequired for="dtInicioVinculo" class="form-label">Data de início do vínculo</label>
+            <input type="date" class="form-control" id="dtInicioVinculo" formControlName="DT_INICIOVINCULO">
+            <app-field-error-message [control]="dadosBasicosForm.get('DT_INICIOVINCULO')"></app-field-error-message>
+         </div>
+      </div>
+
+      @if ($pessoaRecord) {
+         <div class="row">
+            <div class="col-3 offset-9">
+               <p class="mb-0 glb-text-dark-disabled"><b>Data de criação:</b> {{ $pessoaRecord.DT_CRIACAO | date: 'dd/MM/yyyy, HH:mm:ss' }} </p>
+               <p class="mb-0 glb-text-dark-disabled"><b>Data da última alteração:</b> {{ ($pessoaRecord.DT_ULTIMAALTERACAO | date: 'dd/MM/yyyy') == "01/01/1900" ? "Nenhuma alteração recente" : $pessoaRecord.DT_ULTIMAALTERACAO | date: 'dd/MM/yyyy, HH:mm:ss' }} </p>
+            </div>
+         </div>
+      }
+   </form>
+</lib-container>
+
 
 <!-- #region TEMPLATES -->
 <ng-template #confirmDeleteModal>

@@ -1,0 +1,31 @@
+@if (navTabsList && navTabsList.length > 0) {
+   <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      @for (item of navTabsList; track $index) {
+         <button [class]="currentTab === item ? 'nav-link active' : 'nav-link'" (click)="currentTab = item; currentContent = $index+1" id="nav-tab-{{$index}}" type="button" role="tab" aria-controls="nav-home" aria-selected="true"> {{ item }} </button>
+      }
+   </div>
+
+   <div class="content-container tab p-3" [class.rounded]="currentContent !== 1">
+      @switch (currentContent) {
+         @case (1) { <ng-content select="[innerContent1]"></ng-content> }
+         @case (2) { <ng-content select="[innerContent2]"></ng-content> }
+         @case (3) { <ng-content select="[innerContent3]"></ng-content> }
+         @case (4) { <ng-content select="[innerContent4]"></ng-content> }
+         @case (5) { <ng-content select="[innerContent5]"></ng-content> }
+         @case (6) { <ng-content select="[innerContent6]"></ng-content> }
+         @case (7) { <ng-content select="[innerContent7]"></ng-content> }
+         @case (8) { <ng-content select="[innerContent8]"></ng-content> }
+         @case (9) { <ng-content select="[innerContent9]"></ng-content> }
+         @case (10) { <ng-content select="[innerContent10]"></ng-content> }
+
+         @default { <p class="my-3 text-center">Conteúdo da aba não encontrado...</p> }
+      }
+   </div>
+}
+@else {
+   <div class="content-container p-3">
+      <h5 *ngIf="containerTitle" class="fw-bold border-bottom mb-3 pb-3"> {{ containerTitle }} </h5>
+   
+      <ng-content select="[innerContent]"></ng-content>
+   </div>
+}
