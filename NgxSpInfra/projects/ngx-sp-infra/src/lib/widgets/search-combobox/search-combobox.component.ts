@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 import { FormUtils } from "../../utils/form-utils";
 
 import { RecordCombobox } from "../../models/combobox/record-combobox";
+import { Subscription } from "rxjs/internal/Subscription";
 
 
 /**
@@ -64,18 +65,13 @@ import { RecordCombobox } from "../../models/combobox/record-combobox";
   templateUrl: './search-combobox.component.html',
   styleUrl: './search-combobox.component.scss'
 })
-export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit {
-  constructor(
-    private _formBuilder: FormBuilder
-  ) {}
+export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.createFilterForm();
     if (this.initializedValueID) { this.initializeSelectedValue() }
-
-    // Emit an event whenever the control's value changes
-    this.control.valueChanges.subscribe(value => {
-      this.controlValueChange.emit(value);
+    this._subscription = this.formControl.valueChanges.subscribe(value => {
+      this.controlValueChange.emit(this.idControl)
     });
   }
 
@@ -84,78 +80,48 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["initializedValueID"] != undefined && changes["initializedValueID"].currentValue != undefined) {
-      this.initializeSelectedValue();
-    }
-    if (changes["comboboxList"] != undefined && changes["comboboxList"].currentValue != undefined) {
-      this.initializeSelectedValue();
-    }
+    if (changes["initializedValueID"]?.currentValue || changes["comboboxList"]?.currentValue) { this.initializeSelectedValue() }
   }
 
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
+  }
+
+  
   // #region ==========> PROPERTIES <==========
 
   // #region PRIVATE
   private _selectedItem: RecordCombobox;
   private _ariaExpanded: boolean = false;
+  private _subscription: Subscription;
   // #endregion PRIVATE
 
   // #region PUBLIC
+  @Input('control') formControl: FormControl = new FormControl();
 
-  @Input() control: FormControl;
-  @Output() controlValueChange = new EventEmitter<any>();
-
-
-  onInput(newValue: any): void {
-    // Emit the new value when the user types something
-    this.controlValueChange.emit(newValue);
-  }
-
-
-  /** Lista de itens disponíveis para seleção no combobox. */
   @Input({ required: true }) public comboboxList: RecordCombobox[];
-  
-  /** Texto de label associado ao combobox. */
   @Input({ required: true }) public labelText: string;
-  
-  /** ID de um item inicialmente selecionado no combobox. */
-  @Input() public initializedValueID: string | number;
-  
-  /** Tema de cores para o componente (baseado nas cores do Bootstrap). */
-  @Input() public colorTheme: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" = "primary";
-  
-  /** Placeholder para o input principal. */
-  @Input() public mainInputPlaceholder: string = "Selecione uma opção...";
-  
-  /** Placeholder para o input de pesquisa. */
-  @Input() public searchInputPlaceholder: string = "Pesquisa...";
-  
-  /** Informa se o input será exibido como desabilitado. */
-  @Input() public disabled: boolean = false;
-  
+
+  @Input() public controlType: "ngModel" | "formControl" = "ngModel";
   @Input() public libRequired: boolean = false;
-
-
-  /**
-   * Evento emitido quando a lista precisa ser recarregada.
-   * Leva uma string que é usada para pesquisa.
-   */
+  @Input() public disabled: boolean = false;
+  @Input() public initializedValueID: string | number;
+  @Input() public mainInputPlaceholder: string = "Selecione uma opção...";
+  @Input() public searchInputPlaceholder: string = "Pesquisa...";
+  @Input() public colorTheme: string = "primary";
+  
   @Output() public onReloadList: EventEmitter<string> = new EventEmitter<string>();
-
-  /** Evento emitido quando um item é selecionado. */
   @Output() public onSelectItem: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() public controlValueChange = new EventEmitter<FormControl>();
 
   @ViewChild('mainInput') private _mainInput!: ElementRef;
   @ViewChild('dropdownMenu') private _dropdownMenu!: ElementRef;
 
-
   public selectedText?: string;
+  public textoPesquisa: string = "";
 
   public get ariaExpanded(): boolean { return this._ariaExpanded; }
-  public set ariaExpanded(value: boolean) {
-    this._ariaExpanded = value;
-    console.log("Valor mudou para: " + value);
-  }
+  public set ariaExpanded(value: boolean) { this._ariaExpanded = value; }
 
   public get selectedItem(): RecordCombobox { return this._selectedItem; }
   public set selectedItem(value: RecordCombobox) {
@@ -168,79 +134,61 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
 
   // #region ==========> FORM BUILDER <==========
-  public filterForm: FormGroup;
-  public get FormUtils(): typeof FormUtils { return FormUtils; }
-
-  // #region FORM DATA
-  public get _searchInput(): string { return this.filterForm.get("_searchInput")?.value; }
-  // #endregion FORM DATA
-
-  // #region FORM VALIDATORS
-  private createFilterForm(): void {
-    this.filterForm = this._formBuilder.group({
-      _searchInput: [ "" ]
-    });
-  }
-  // #endregion FORM VALIDATORS
-
+  private idControl: FormControl = new FormControl<string | number>("")
+  public filterForm: FormGroup = new FormGroup({
+    _searchInput: new FormControl<string>("")
+  });
   // #endregion ==========> FORM BUILDER <==========
 
 
   // #region ==========> UTILITIES <==========
-
-  /**
-   * Atualiza o valor do filtro com base no item selecionado.
-   * @param item Objeto de item selecionado.
-   */
   public setFilterValue(item?: RecordCombobox): void {
+    const itemValue = item ? `${item.ID as string} - ${item.LABEL}` : "";
+    this.filterForm.controls["_searchInput"].setValue(itemValue);
+
+    this.textoPesquisa = "";
+    this.formControl.markAsDirty();
+
     if (item) {
-      this.filterForm.controls["_searchInput"].setValue(`${item.ID as string} - ${item.LABEL}`);
       this.selectedText = item.LABEL;
-
-      this.selectedItem = { ID: item.ID, LABEL: item.LABEL, AdditionalStringProperty1: item.AdditionalStringProperty1, IS_SELECTED: item.IS_SELECTED };
+      this.selectedItem = { ...item, IS_SELECTED: true };
+      if (this.controlType === "formControl") {
+        this.idControl.setValue(item.ID);
+        this.formControl.setValue(item.LABEL);
+      }
     } else {
-      this.filterForm.controls["_searchInput"].setValue("");
-      delete this.selectedText;
-
+      this.selectedText = undefined;
       this.selectedItem = { ID: "", LABEL: "", AdditionalStringProperty1: "", IS_SELECTED: false };
+      if (this.controlType === "formControl") {
+        this.idControl.setValue("");
+        this.formControl.setValue("");
+      }
     }
 
     this.ariaExpanded = false;
   }
 
-  /** Chamado caso um valor inicial seja fornecido para o combobox. */
   private initializeSelectedValue(): void {
-    let initializedValue;
+    if (!this.comboboxList || !this.comboboxList.length) return;
 
-    if (this.comboboxList && this.comboboxList.length > 0) {
-      initializedValue = this.comboboxList.find(item => item.ID == this.initializedValueID);
-    }
+    const initializedValue = this.controlType === "ngModel"
+      ? this.comboboxList.find(item => item.ID == this.initializedValueID)
+      : this.comboboxList.find(item => item.ID == this.formControl.value);
 
-    if (this.comboboxList && initializedValue) {
+    if (initializedValue) {
       this.selectedText = initializedValue.LABEL;
-      this.selectedItem = { ID: initializedValue.ID, LABEL: initializedValue.LABEL, AdditionalStringProperty1: "", IS_SELECTED: true };
+      this.selectedItem = { ...initializedValue, IS_SELECTED: true };
     }
   }
 
-  /** Ajusta a largura do dropdown para corresponder à largura do input principal. */
-  private adjustDropdownWidth() {
-    const inputWidth = this._mainInput.nativeElement.offsetWidth;
-    this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
+  private adjustDropdownWidth(): void {
+    if (this._mainInput && this._dropdownMenu) {
+      const inputWidth = this._mainInput.nativeElement.offsetWidth;
+      this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
+    }
   }
 
-
-  /**
-   * Emite um evento para recarregar a lista de itens com base na pesquisa fornecida.
-   * @param search Texto de pesquisa para recarregar a lista.
-   */
-  public reloadList(search: string): void {
-    this.onReloadList.emit(search);
-  }
+  public reloadList(search: string): void { this.onReloadList.emit(search) }
   // #endregion ==========> UTILITIES <==========
-
-
-  // #region ==========> MODALS <==========
-  // [...]
-  // #endregion ==========> MODALS <==========
 
 }

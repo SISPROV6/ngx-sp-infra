@@ -34,6 +34,8 @@ import { DynamicTableComponent } from './widgets/dynamic-table/dynamic-table.com
 import { StaticTableComponent } from './widgets/static-table/static-table.component';
 import { RequiredDirective } from './directives/required.directive';
 import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.component';
+import { LibIconsComponent } from './widgets/lib-icons/lib-icons.component';
+import { TextFilterPipe } from './pipes/text-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.com
 
     RequiredDirective,
     SimpleHeaderComponent,
+    LibIconsComponent,
+    TextFilterPipe
   ],
   imports: [
     CommonModule,
@@ -101,6 +105,8 @@ import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.com
 
     RequiredDirective,
     SimpleHeaderComponent,
+    LibIconsComponent,
+    TextFilterPipe
   ],
   providers: [],
 })

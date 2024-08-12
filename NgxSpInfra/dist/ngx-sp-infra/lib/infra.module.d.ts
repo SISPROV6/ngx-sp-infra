@@ -25,14 +25,16 @@ import * as i23 from "./widgets/dynamic-table/dynamic-table.component";
 import * as i24 from "./widgets/static-table/static-table.component";
 import * as i25 from "./directives/required.directive";
 import * as i26 from "./widgets/simple-header/simple-header.component";
-import * as i27 from "@angular/common";
-import * as i28 from "ngx-bootstrap/modal";
-import * as i29 from "ngx-bootstrap/accordion";
-import * as i30 from "ngx-bootstrap/tooltip";
-import * as i31 from "@angular/forms";
-import * as i32 from "@angular/router";
+import * as i27 from "./widgets/lib-icons/lib-icons.component";
+import * as i28 from "./pipes/text-filter.pipe";
+import * as i29 from "@angular/common";
+import * as i30 from "ngx-bootstrap/modal";
+import * as i31 from "ngx-bootstrap/accordion";
+import * as i32 from "ngx-bootstrap/tooltip";
+import * as i33 from "@angular/forms";
+import * as i34 from "@angular/router";
 export declare class InfraModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<InfraModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<InfraModule, [typeof i1.LoadingComponent, typeof i2.FieldControlErrorComponent, typeof i3.FieldErrorMessageComponent, typeof i4.LoadingButtonComponent, typeof i5.AlertComponent, typeof i6.ConfirmComponent, typeof i7.ConfirmModalComponent, typeof i8.SaveComponent, typeof i9.InfraBreadcrumbComponent, typeof i10.InfraBreadcrumbItemComponent, typeof i11.BreadcrumbComponent, typeof i12.ComboboxComponent, typeof i13.SvgStorageComponent, typeof i14.TreeComponent, typeof i15.ToUrlPipe, typeof i16.CpfCnpjPipe, typeof i17.FilterByPipe, typeof i18.LimitToPipe, typeof i19.SearchTreePipe, typeof i20.ClickOutsideDirective, typeof i21.OrderingComponent, typeof i22.SearchComboboxComponent, typeof i23.DynamicTableComponent, typeof i24.StaticTableComponent, typeof i25.RequiredDirective, typeof i26.SimpleHeaderComponent], [typeof i27.CommonModule, typeof i28.ModalModule, typeof i29.AccordionModule, typeof i30.TooltipModule, typeof i31.FormsModule, typeof i31.ReactiveFormsModule, typeof i32.RouterModule], [typeof i1.LoadingComponent, typeof i2.FieldControlErrorComponent, typeof i3.FieldErrorMessageComponent, typeof i4.LoadingButtonComponent, typeof i5.AlertComponent, typeof i6.ConfirmComponent, typeof i7.ConfirmModalComponent, typeof i8.SaveComponent, typeof i9.InfraBreadcrumbComponent, typeof i10.InfraBreadcrumbItemComponent, typeof i11.BreadcrumbComponent, typeof i12.ComboboxComponent, typeof i13.SvgStorageComponent, typeof i14.TreeComponent, typeof i15.ToUrlPipe, typeof i16.CpfCnpjPipe, typeof i20.ClickOutsideDirective, typeof i21.OrderingComponent, typeof i22.SearchComboboxComponent, typeof i23.DynamicTableComponent, typeof i24.StaticTableComponent, typeof i25.RequiredDirective, typeof i26.SimpleHeaderComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<InfraModule, [typeof i1.LoadingComponent, typeof i2.FieldControlErrorComponent, typeof i3.FieldErrorMessageComponent, typeof i4.LoadingButtonComponent, typeof i5.AlertComponent, typeof i6.ConfirmComponent, typeof i7.ConfirmModalComponent, typeof i8.SaveComponent, typeof i9.InfraBreadcrumbComponent, typeof i10.InfraBreadcrumbItemComponent, typeof i11.BreadcrumbComponent, typeof i12.ComboboxComponent, typeof i13.SvgStorageComponent, typeof i14.TreeComponent, typeof i15.ToUrlPipe, typeof i16.CpfCnpjPipe, typeof i17.FilterByPipe, typeof i18.LimitToPipe, typeof i19.SearchTreePipe, typeof i20.ClickOutsideDirective, typeof i21.OrderingComponent, typeof i22.SearchComboboxComponent, typeof i23.DynamicTableComponent, typeof i24.StaticTableComponent, typeof i25.RequiredDirective, typeof i26.SimpleHeaderComponent, typeof i27.LibIconsComponent, typeof i28.TextFilterPipe], [typeof i29.CommonModule, typeof i30.ModalModule, typeof i31.AccordionModule, typeof i32.TooltipModule, typeof i33.FormsModule, typeof i33.ReactiveFormsModule, typeof i34.RouterModule], [typeof i1.LoadingComponent, typeof i2.FieldControlErrorComponent, typeof i3.FieldErrorMessageComponent, typeof i4.LoadingButtonComponent, typeof i5.AlertComponent, typeof i6.ConfirmComponent, typeof i7.ConfirmModalComponent, typeof i8.SaveComponent, typeof i9.InfraBreadcrumbComponent, typeof i10.InfraBreadcrumbItemComponent, typeof i11.BreadcrumbComponent, typeof i12.ComboboxComponent, typeof i13.SvgStorageComponent, typeof i14.TreeComponent, typeof i15.ToUrlPipe, typeof i16.CpfCnpjPipe, typeof i20.ClickOutsideDirective, typeof i21.OrderingComponent, typeof i22.SearchComboboxComponent, typeof i23.DynamicTableComponent, typeof i24.StaticTableComponent, typeof i25.RequiredDirective, typeof i26.SimpleHeaderComponent, typeof i27.LibIconsComponent, typeof i28.TextFilterPipe]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<InfraModule>;
 }

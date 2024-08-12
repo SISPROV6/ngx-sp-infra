@@ -1,5 +1,5 @@
 <!-- #region HEADER -->
-<lib-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" mode="add" pageTitle="pessoa" [showSpinner]="isSaving"
+<lib-header [breadcrumbList]="[ 'Painel de Pessoas', 'Formulário', 'Dados básicos' ]" mode="add" pageTitle="pessoa"
    (onReturn)="returnToList()" (onCreate)="createPessoa()" (onUpdate)="updatePessoa()" />
 <!-- #endregion HEADER -->
 
@@ -16,7 +16,10 @@
       </div>
       <div class="row mb-3">
          <div class="col-7">
-            <p libRequired class="form-label me-3">Tipo de pessoa</p>
+            <p libRequired class="form-label me-3">
+               <lib-icon iconName="info" iconColor="blue" iconSize="small" />
+               Tipo de pessoa
+            </p>
             <div class="form-check form-check-inline">
                <input class="form-check-input" type="radio" id="tipoPessoaFis" [value]="'FIS'" formControlName="TIPOPESSOA_CD">
                <label class="form-check-label" for="tipoPessoaFis">Física</label>
@@ -83,9 +86,7 @@
          </div>
 
          <div class="col-4">
-            <lib-search-combobox [comboboxList]="$papeisCombobox" labelText="Papel">
-
-            </lib-search-combobox>
+            <lib-search-combobox [libRequired]="true" [comboboxList]="$papeisCombobox" labelText="Papel" controlType="formControl" [control]="papelCombobox" (controlValueChange)="onControlValueChange($event)" />
          </div>
       </div>
 

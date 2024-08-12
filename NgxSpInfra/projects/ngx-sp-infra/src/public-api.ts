@@ -29,6 +29,7 @@ export * from './lib/models/combobox/ret-records-combobox';
 export * from './lib/pipes/cpf-cnpj.pipe';
 export * from './lib/pipes/currency.pipe';
 export * from './lib/pipes/to-url.pipe';
+export * from './lib/pipes/text-filter.pipe';
 
 /** Directives */
 export * from './lib/directives/required.directive';
@@ -66,5 +67,7 @@ export * from './lib/widgets/tree/pipes/search-tree.pipe';
 
 export * from './lib/widgets/search-combobox/search-combobox.component';
 export * from './lib/widgets/simple-header/simple-header.component';
+export * from './lib/widgets/lib-icons/lib-icons.component';
+
 export * from './lib/widgets/dynamic-table/dynamic-table.component';
 export * from './lib/widgets/static-table/static-table.component';

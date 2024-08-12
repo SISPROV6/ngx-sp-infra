@@ -59,12 +59,17 @@ export class FormularioPessoaComponent implements OnInit {
     DT_INICIOVINCULO: new FormControl<Date | string>(new Date()),
     IS_ACTIVE: new FormControl<boolean>(true),
     IS_ESTRANGEIRO: new FormControl<boolean>(false),
+
+
+    papelCombobox: new FormControl<string | number>("", [Validators.required]),
   });
   // #endregion FORM BUILDER
 
   // #region FORM FIELDS
   public get FormUtils(): typeof FormUtils { return FormUtils; }
 
+  public get papelCombobox(): FormControl { return this.dadosBasicosForm.get("papelCombobox") as FormControl; }
+  
   public get TX_NOMEPESSOA(): string { return this.dadosBasicosForm.get("TX_NOMEPESSOA")?.value; }
   public get TIPOPESSOA_CD(): string { return this.dadosBasicosForm.get("TIPOPESSOA_CD")?.value; }
   public get PAPEL_CD(): string { return this.dadosBasicosForm.get("PAPEL_CD")?.value; }
@@ -114,19 +119,18 @@ export class FormularioPessoaComponent implements OnInit {
 
   // #region PREPARATION
   public getPapeisPessoaCombobox(pesquisa: string): void {
-    this.$papeisCombobox = [
-      { ID: "TESTE 1", LABEL: "TESTE 1" },
-      { ID: "TESTE 2", LABEL: "TESTE 2" },
-      { ID: "TESTE 3", LABEL: "TESTE 3" },
-      { ID: "TESTE 4", LABEL: "TESTE 4" },
-      { ID: "TESTE 5", LABEL: "TESTE 5" },
-    ];
+    // this.$papeisCombobox = [
+    //   { ID: "TESTE 1", LABEL: "TESTE 1" },
+    //   { ID: "TESTE 2", LABEL: "TESTE 2" },
+    //   { ID: "TESTE 3", LABEL: "TESTE 3" },
+    //   { ID: "TESTE 4", LABEL: "TESTE 4" },
+    //   { ID: "TESTE 5", LABEL: "TESTE 5" },
+    // ];
 
-    // this._pessoasService.getPapeisPessoaCombobox(pesquisa).subscribe({
-    //   next: response => {
-    //   },
-    //   error: error => { this._projectUtilService.showHttpError(error) }
-    // });
+    this._pessoasService.getPapeisPessoaCombobox(pesquisa).subscribe({
+      next: response => { this.$papeisCombobox = response.Records },
+      error: error => { this._projectUtilService.showHttpError(error) }
+    });
   }
   // #endregion PREPARATION
 
@@ -163,7 +167,6 @@ export class FormularioPessoaComponent implements OnInit {
     console.log(this.$pessoaRecord);
 
     this.dadosBasicosForm.getRawValue() as EstPessoaRecord;   // Aqui apenas convertemos automaticamente os valores do formulário para o objeto, preferível a utilização em Create
-    FormUtils.mapFormToModel(this.$pessoaRecord, this.dadosBasicosForm);  // Aqui podemos utilizar objetos que já têm propriedades preenchidas, modificando apenas o que temos no form
   }
 
   public updatePessoa(): void {
@@ -188,6 +191,12 @@ export class FormularioPessoaComponent implements OnInit {
   public clearErrors(): void {
     this.customErrorMessage = "";
     this.dadosBasicosForm.controls["TX_NOMEPESSOA"].setErrors(null);
+  }
+
+  public onControlValueChange(newControl: FormControl) {
+    console.log('Controle mudou:', newControl);
+
+    this.dadosBasicosForm.controls["PAPEL_CD"].setValue(newControl.value);
   }
 
 

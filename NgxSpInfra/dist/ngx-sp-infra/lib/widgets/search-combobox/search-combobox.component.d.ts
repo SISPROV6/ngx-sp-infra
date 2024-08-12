@@ -1,6 +1,5 @@
-import { AfterViewInit, EventEmitter, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { AfterViewInit, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { FormUtils } from "../../utils/form-utils";
 import { RecordCombobox } from "../../models/combobox/record-combobox";
 import * as i0 from "@angular/core";
 /**
@@ -56,64 +55,43 @@ import * as i0 from "@angular/core";
  * - `initializeSelectedValue()`: Inicializa o valor selecionado no combobox, se fornecido.
  * - `adjustDropdownWidth()`: Ajusta a largura do dropdown para corresponder à largura do input principal.
  */
-export declare class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit {
+export declare class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     private _formBuilder;
     constructor(_formBuilder: FormBuilder);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
     private _selectedItem;
     private _ariaExpanded;
-    control: FormControl;
-    controlValueChange: EventEmitter<any>;
-    onInput(newValue: any): void;
-    /** Lista de itens disponíveis para seleção no combobox. */
+    private _subscription;
+    formControl: FormControl;
     comboboxList: RecordCombobox[];
-    /** Texto de label associado ao combobox. */
     labelText: string;
-    /** ID de um item inicialmente selecionado no combobox. */
-    initializedValueID: string | number;
-    /** Tema de cores para o componente (baseado nas cores do Bootstrap). */
-    colorTheme: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
-    /** Placeholder para o input principal. */
-    mainInputPlaceholder: string;
-    /** Placeholder para o input de pesquisa. */
-    searchInputPlaceholder: string;
-    /** Informa se o input será exibido como desabilitado. */
-    disabled: boolean;
+    controlType: "ngModel" | "formControl";
     libRequired: boolean;
-    /**
-     * Evento emitido quando a lista precisa ser recarregada.
-     * Leva uma string que é usada para pesquisa.
-     */
+    disabled: boolean;
+    initializedValueID: string | number;
+    mainInputPlaceholder: string;
+    searchInputPlaceholder: string;
+    colorTheme: string;
     onReloadList: EventEmitter<string>;
-    /** Evento emitido quando um item é selecionado. */
     onSelectItem: EventEmitter<any>;
+    controlValueChange: EventEmitter<FormControl<any>>;
     private _mainInput;
     private _dropdownMenu;
     selectedText?: string;
+    textoPesquisa: string;
     get ariaExpanded(): boolean;
     set ariaExpanded(value: boolean);
     get selectedItem(): RecordCombobox;
     set selectedItem(value: RecordCombobox);
+    private idControl;
     filterForm: FormGroup;
-    get FormUtils(): typeof FormUtils;
-    get _searchInput(): string;
-    private createFilterForm;
-    /**
-     * Atualiza o valor do filtro com base no item selecionado.
-     * @param item Objeto de item selecionado.
-     */
     setFilterValue(item?: RecordCombobox): void;
-    /** Chamado caso um valor inicial seja fornecido para o combobox. */
     private initializeSelectedValue;
-    /** Ajusta a largura do dropdown para corresponder à largura do input principal. */
     private adjustDropdownWidth;
-    /**
-     * Emite um evento para recarregar a lista de itens com base na pesquisa fornecida.
-     * @param search Texto de pesquisa para recarregar a lista.
-     */
     reloadList(search: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SearchComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "control": { "alias": "control"; "required": false; }; "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; }, { "controlValueChange": "controlValueChange"; "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "formControl": { "alias": "control"; "required": false; }; "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "controlType": { "alias": "controlType"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; "controlValueChange": "controlValueChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }
