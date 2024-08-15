@@ -49,21 +49,9 @@ import { FormGroup } from '@angular/forms';
 export class SimpleHeaderComponent implements OnInit, OnChanges {
   constructor() { }
   
-  ngOnInit(): void {
-
-    // Modifica o título e adiciona o "Adicionar" ou "Editar" logo antes do nome realmente informado
-    switch(this.mode) {
-      case 'add': this.pageTitle = `Adicionar ${this.pageTitle}`; break;
-      case 'edit': this.pageTitle = `Editar ${this.pageTitle}`; break;
-    }
-
-  }
+  ngOnInit(): void { }
   
-  ngOnChanges(changes: SimpleChanges): void {
-    // Exemplo de uso para quem desejar realizar manutenção
-    // if (changes["pageTitle"] && changes["pageTitle"].currentValue) {  }
-    
-  }
+  ngOnChanges(changes: SimpleChanges): void { }
   
 
   // #region ==========> PROPERTIES <==========

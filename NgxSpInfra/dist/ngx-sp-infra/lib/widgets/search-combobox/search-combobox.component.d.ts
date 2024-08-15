@@ -66,9 +66,9 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     private _ariaExpanded;
     private _subscription;
     formControl: FormControl;
+    controlType: "ngModel" | "formControl";
     comboboxList: RecordCombobox[];
     labelText: string;
-    controlType: "ngModel" | "formControl";
     libRequired: boolean;
     disabled: boolean;
     initializedValueID: string | number;
@@ -93,5 +93,5 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     private adjustDropdownWidth;
     reloadList(search: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SearchComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "formControl": { "alias": "control"; "required": false; }; "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "controlType": { "alias": "controlType"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; "controlValueChange": "controlValueChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SearchComboboxComponent, "lib-search-combobox", never, { "formControl": { "alias": "control"; "required": false; }; "controlType": { "alias": "controlType"; "required": true; }; "comboboxList": { "alias": "comboboxList"; "required": true; }; "labelText": { "alias": "labelText"; "required": true; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "initializedValueID": { "alias": "initializedValueID"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; }, { "onReloadList": "onReloadList"; "onSelectItem": "onSelectItem"; "controlValueChange": "controlValueChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }

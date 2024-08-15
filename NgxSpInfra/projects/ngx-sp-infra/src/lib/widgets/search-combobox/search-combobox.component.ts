@@ -69,7 +69,11 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    if (this.initializedValueID) { this.initializeSelectedValue() }
+    this.initializeSelectedValue();
+
+    // console.log("OnInit: ");
+    // console.log(this.formControl);
+    
     this._subscription = this.formControl.valueChanges.subscribe(value => {
       this.controlValueChange.emit(this.idControl)
     });
@@ -98,11 +102,11 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
 
   // #region PUBLIC
   @Input('control') formControl: FormControl = new FormControl();
+  @Input({ required: true }) public controlType: "ngModel" | "formControl" = "ngModel";
 
   @Input({ required: true }) public comboboxList: RecordCombobox[];
   @Input({ required: true }) public labelText: string;
 
-  @Input() public controlType: "ngModel" | "formControl" = "ngModel";
   @Input() public libRequired: boolean = false;
   @Input() public disabled: boolean = false;
   @Input() public initializedValueID: string | number;
@@ -176,6 +180,9 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
       : this.comboboxList.find(item => item.ID == this.formControl.value);
 
     if (initializedValue) {
+      this.idControl.setValue(initializedValue.ID ?? "");
+      this.formControl.setValue(initializedValue.LABEL ?? "");
+      
       this.selectedText = initializedValue.LABEL;
       this.selectedItem = { ...initializedValue, IS_SELECTED: true };
     }
