@@ -1,0 +1,57 @@
+* {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  color: #000;
+  box-sizing: border-box;
+  list-style: none;
+  font-size: 1rem;
+}
+
+.tree-view {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  transition: all .3s ease-in-out;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.chevron {
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .3s ease-in-out;
+  -moz-transition: .3s ease-in-out;
+  -o-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  color: #000;
+  cursor: pointer;
+}
+
+.chevron:hover {
+  color: #0D6EFD;
+  transform: rotate(30deg);
+}
+
+.chevron.rotate {
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transition: 0.3s;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.children{
+  padding-left: 20px;
+}

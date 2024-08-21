@@ -1,0 +1,5 @@
+@if (customErrorMessage && customErrorMessage != "") {
+    <div class="invalid-feedback d-block" role="alert" *ngIf="customErrorMessage !== null"> {{ customErrorMessage }} </div>
+} @else {
+    <div class="invalid-feedback d-block" role="alert" *ngIf="errorMessage !== null"> {{ errorMessage }} </div>
+}
