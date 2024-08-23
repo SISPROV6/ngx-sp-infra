@@ -2,7 +2,7 @@ import { Injectable, TemplateRef } from '@angular/core';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class ModalUtilsService {
   constructor( private _bsModalService: BsModalService ) { }

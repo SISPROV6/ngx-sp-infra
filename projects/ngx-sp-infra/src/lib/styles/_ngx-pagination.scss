@@ -1,0 +1,25 @@
+// #region PAGINATION 
+.sp-pagination ::ng-deep .ngx-pagination .current {
+   background: #3767B2;
+   border-radius: 0.375rem;
+}
+
+.sp-pagination ::ng-deep .ngx-pagination a:hover,
+.sp-pagination ::ng-deep .ngx-pagination button:hover {
+   border-radius: 0.375rem;
+}
+
+.sp-pagination ::ng-deep .ngx-pagination .pagination-previous a::before,
+.sp-pagination ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+   content: '';
+   display: inline-block;
+   margin-right: 0.5rem;
+}
+
+.sp-pagination ::ng-deep .ngx-pagination .pagination-next a::after,
+.sp-pagination ::ng-deep .ngx-pagination .pagination-next.disabled::after {
+   content: '';
+   display: inline-block;
+   margin-left: 0.5rem;
+}
+// #endregion PAGINATION 

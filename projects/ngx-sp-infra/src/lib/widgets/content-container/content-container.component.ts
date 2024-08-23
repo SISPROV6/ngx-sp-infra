@@ -37,10 +37,6 @@ export class ContentContainerComponent implements OnInit, OnChanges {
       this.currentTab = this.navTabsList[0];
       this.currentContent = 1;
     }
-    
-    console.log(this.currentTab);
-    console.log(this.currentContent);
-    console.log(this.navTabsList);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

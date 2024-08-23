@@ -1,0 +1,66 @@
+@if (recordsList) {
+   <div class="table-list w-100 position-relative">
+      <!-- Exibe o número de itens mostrados e o total de registros -->
+      <span class="ms-1"> Exibindo {{ itemsPerPage <= recordsList.length ? itemsPerPage : recordsList.length }} de {{ recordsList.length }} registros </span>
+      
+      <!-- Container da tabela -->
+      <div class="table-list overflow-hidden border-bottom-0 rounded-bottom rounded">
+         <table class="table table-hover border mb-0">
+            <thead>
+               <tr>
+                  <!-- Itera sobre a lista de cabeçalhos para criar as colunas -->
+                  <th *ngFor="let header of headersList" scope="col"
+                     class="align-middle text-dark-grey {{ header.col > 0 ? 'col-'+header.col : 'col' }} {{ header.customClasses }}">
+                     {{ header.name }}
+                  </th>
+               </tr>
+            </thead>
+
+            <tbody class="bg-light fade-in-row">
+               @if (recordsList.length > 0) {
+                  <!-- Conteúdo das linhas da tabela -->
+                  <ng-content select="[innerRows]"></ng-content>
+               }
+               @else {
+                  <!-- Mensagem de ausência de registros -->
+                  <tr>
+                     <td colspan="12" class="align-middle">
+                        <span class="fw-light fst-italic text-center"> Consulta não retornou registros... </span>
+                     </td>
+                  </tr>
+               }
+            </tbody>
+         </table>
+
+         <!-- #region PAGINAÇÃO -->
+         <div *ngIf="usePagination && recordsList.length > 0" class="d-flex mt-2"
+            [ngClass]="{
+               'justify-content-start': paginationPlacement == 'start',
+               'justify-content-center': paginationPlacement == 'center',
+               'justify-content-end': paginationPlacement == 'end',
+               'justify-content-between': paginationPlacement == 'between'
+            }">
+            <div class="d-flex align-items-center">
+               <label class="me-2" style="white-space: nowrap;"> Itens por página </label>
+               <select class="form-select select-search" (change)="onSelectChange($event)">
+                  <option *ngFor="let count of countOptions; let i = index" [value]="count"
+                     [selected]="countOptions.length > 0 && i == 0">{{ count }}</option>
+               </select>
+            </div>
+
+            <!-- Controle de paginação -->
+            <pagination-controls class="sp-pagination mt-3"
+               (pageChange)="page = $event; pageChange.emit($event)"
+               previousLabel="«&nbsp;&nbsp;&nbsp;" nextLabel="&nbsp;&nbsp;&nbsp;»"
+               [maxSize]="5">
+            </pagination-controls>
+         </div>
+         <!-- #endregion PAGINAÇÃO -->
+      </div>
+   </div>
+} @else {
+   <!-- Loader enquanto os registros são carregados -->
+   <div class="w-100 text-center">
+      <div class="spinner-border" role="status"> <span class="visually-hidden">Carregando informações...</span> </div>
+   </div>
+}

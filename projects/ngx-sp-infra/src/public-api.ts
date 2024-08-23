@@ -33,6 +33,7 @@ export * from './lib/pipes/text-filter.pipe';
 
 /** Directives */
 export * from './lib/directives/required.directive';
+export * from './lib/directives/copy-clipboard.directive';
 
 /** Utils */
 export * from './lib/utils/check-url-and-method.service';
@@ -70,5 +71,4 @@ export * from './lib/widgets/simple-header/simple-header.component';
 export * from './lib/widgets/lib-icons/lib-icons.component';
 export * from './lib/widgets/content-container/content-container.component';
 
-export * from './lib/widgets/dynamic-table/dynamic-table.component';
-export * from './lib/widgets/static-table/static-table.component';
+export * from './lib/widgets/table/table.component';

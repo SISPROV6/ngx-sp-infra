@@ -1,3 +1,4 @@
+import { ModalUtilsService } from './service/modal-utils.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,13 +31,15 @@ import { OrderingComponent } from './widgets/ordering/ordering.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { SearchComboboxComponent } from './widgets/search-combobox/search-combobox.component';
-import { DynamicTableComponent } from './widgets/dynamic-table/dynamic-table.component';
-import { StaticTableComponent } from './widgets/static-table/static-table.component';
 import { RequiredDirective } from './directives/required.directive';
 import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.component';
 import { LibIconsComponent } from './widgets/lib-icons/lib-icons.component';
 import { TextFilterPipe } from './pipes/text-filter.pipe';
 import { ContentContainerComponent } from './widgets/content-container/content-container.component';
+import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
+import { TableComponent } from './widgets/table/table.component';
+
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -63,14 +66,15 @@ import { ContentContainerComponent } from './widgets/content-container/content-c
     OrderingComponent,
     
     SearchComboboxComponent,
-    DynamicTableComponent,
-    StaticTableComponent,
 
     RequiredDirective,
     SimpleHeaderComponent,
     LibIconsComponent,
     TextFilterPipe,
-    ContentContainerComponent
+    ContentContainerComponent,
+
+    CopyClipboardDirective,
+    TableComponent,
   ],
   imports: [
     CommonModule,
@@ -78,6 +82,7 @@ import { ContentContainerComponent } from './widgets/content-container/content-c
     AccordionModule.forRoot(),
     TooltipModule.forRoot(),
     FormsModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
     RouterModule
   ],
@@ -102,14 +107,15 @@ import { ContentContainerComponent } from './widgets/content-container/content-c
     OrderingComponent,
 
     SearchComboboxComponent,
-    DynamicTableComponent,
-    StaticTableComponent,
 
     RequiredDirective,
     SimpleHeaderComponent,
     LibIconsComponent,
     TextFilterPipe,
-    ContentContainerComponent
+    ContentContainerComponent,
+
+    CopyClipboardDirective,
+    TableComponent,
   ],
   providers: [],
 })

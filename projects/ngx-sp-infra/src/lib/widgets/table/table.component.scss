@@ -1,0 +1,24 @@
+@import '../../styles/ngx-pagination';
+
+.text-dark-grey { color: #63676b !important; }
+
+table {
+   border-color: #C4C4C4;
+
+   thead {
+      height: 50px;
+      font-size: 1rem;
+      background-color: #E9ECEF;
+   }
+
+   tbody {
+      font-size: .875rem;
+
+      > tr { height: 50px; }
+      > tr:hover { background-color: #CCE5FF; }
+   }
+}
+
+table.table > tbody {
+   border-top: none;
+}
