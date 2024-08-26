@@ -8,10 +8,10 @@ function commit(branch) {
   
   // Adiciona alterações no commit e realiza o push
   execSync(`git add .`, { stdio: 'inherit' });
-  execSync(`git commit --allow-empty -m "v${packageJson.version} | Commit automático"`, { stdio: 'inherit' });
+  execSync(`git commit --allow-empty -m "v${packageJson.version} | Commit automático" -m "Commit automático realizado via script pós build"`, { stdio: 'inherit' });
   execSync(`git push origin ${branch}`, { stdio: 'inherit' });
 
-  console.log("\n\nCommit automático realizado com sucesso. Acompanhe o processo de publicação pelo GitHub Actions!\n");
+  console.log("\n\nCommit automático realizado com sucesso via script. Acompanhe o processo de publicação pelo GitHub Actions!\n");
 }
 
 // Branch que será selecionada
