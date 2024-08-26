@@ -41,5 +41,3 @@ jobs:
         elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
           npm publish --tag test
         fi
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-        npm publish
