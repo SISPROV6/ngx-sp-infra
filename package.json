@@ -12,10 +12,6 @@
     "build:minor": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/tags.js && cd ../../ && ng build",
     "build:major": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/tags.js && cd ../../ && ng build",
 
-    "build:patch:test": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/tags.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
-    "build:minor:test": "cd projects/ngx-sp-infra && npm version minor --no-git-tag-version && node src/scripts/tags.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
-    "build:major:test": "cd projects/ngx-sp-infra && npm version major --no-git-tag-version && node src/scripts/tags.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
-
     "build:patch:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/tags.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
     "build:minor:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/tags.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
     "build:major:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/tags.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js"
