@@ -16,8 +16,13 @@ function updateVersion(version, suffix) {
   // Adiciona o sufixo à versão
   let newVersion;
 
-  if (suffix.includes('-')) { newVersion = `${packageJson.version}${suffix}`; }
-  else { newVersion = `${packageJson.version}-${suffix}`; }
+  if (suffix) {
+    if (suffix.includes('-')) { newVersion = `${packageJson.version}${suffix}`; }
+    else { newVersion = `${packageJson.version}-${suffix}`; }
+  }
+  else {
+    newVersion = `${packageJson.version}`;
+  }
 
   packageJson.version = newVersion;
 

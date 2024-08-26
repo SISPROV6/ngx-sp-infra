@@ -7,6 +7,8 @@ function commit(branch) {
   const packageJson = JSON.parse(fs.readFileSync('projects/ngx-sp-infra/package.json', 'utf8'));
   
   // Adiciona alterações no commit e realiza o push
+  execSync(`git checkout ${branch}`, { stdio: 'inherit' });
+
   execSync(`git add .`, { stdio: 'inherit' });
   execSync(`git commit --allow-empty -m "v${packageJson.version} | Commit automático" -m "Commit automático realizado via script pós build"`, { stdio: 'inherit' });
   execSync(`git push origin ${branch}`, { stdio: 'inherit' });
