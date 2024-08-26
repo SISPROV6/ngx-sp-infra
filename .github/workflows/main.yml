@@ -27,15 +27,14 @@ jobs:
     - name: Build the library and add tags
       run: npm run build
 
-    - name: Go to lib directory
-      run: cd dist/ngx-sp-infra
-
     - name: Publish to NPM
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
       run: |
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
+        cd dist/ngx-sp-infra
+        
         # Condicional para definir a tag de publicação
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           npm publish --tag latest
