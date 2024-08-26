@@ -37,7 +37,7 @@ jobs:
         
         # Condicional para definir a tag de publicação
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          npm publish --tag latest
+          npm publish --access public --tag latest
         elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
-          npm publish --tag test
+          npm publish --access public --tag test
         fi
