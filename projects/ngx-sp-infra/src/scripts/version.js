@@ -2,12 +2,12 @@ const fs = require('fs');
 const execSync = require('child_process').execSync;
 
 // Função para atualizar a versão
-function updateVersion() {
+function updateVersion(suffix) {
   // Lê o package.json
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
   // Adiciona o sufixo à versão
-  const newVersion = `${packageJson.version}`;
+  const newVersion = `${packageJson.version}${suffix}`;
   packageJson.version = newVersion;
 
   // Escreve a nova versão no package.json
@@ -18,4 +18,6 @@ function updateVersion() {
   execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
 }
 
-updateVersion();
+// Sufixo a ser adicionado, se não informado não terá nada
+const suffix = process.argv[2] || '-test';
+updateVersion(suffix);

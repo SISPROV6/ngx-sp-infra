@@ -9,13 +9,12 @@ function commit(branch) {
   // Adiciona o sufixo à versão
   const packageVersion = packageJson.version;
   
-  console.log(packageJson);
-  console.log(packageVersion);
-
   // Adiciona alterações no commit e realiza o push
   execSync(`git add .`, { stdio: 'inherit' });
   execSync(`git commit --allow-empty -m "v${packageVersion} | Commit automático"`, { stdio: 'inherit' });
   execSync(`git push origin ${branch}`, { stdio: 'inherit' });
+
+  console.log("Commit automático realizado com sucesso. Acompanhe o processo de publicação pelo GitHub Actions!");
 }
 
 // Branch que será selecionada
