@@ -14,7 +14,7 @@ function commit() {
 
   // Adiciona alterações no commit e realiza o push
   execSync(`git add .`, { stdio: 'inherit' });
-  execSync(`git commit -m "v${packageVersion} | Commit automático"`, { stdio: 'inherit' });
+  execSync(`git commit --allow-empty -m "v${packageVersion} | Commit automático"`, { stdio: 'inherit' });
   execSync(`git push origin main`, { stdio: 'inherit' });
 }
 
