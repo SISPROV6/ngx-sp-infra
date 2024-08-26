@@ -4,7 +4,7 @@ const execSync = require('child_process').execSync;
 // Função para atualizar a versão
 function commit() {
   // Lê o package.json
-  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const packageJson = JSON.parse(fs.readFileSync('projects/ngx-sp-infra/package.json', 'utf8'));
 
   // Adiciona o sufixo à versão
   const packageVersion = packageJson.version;
