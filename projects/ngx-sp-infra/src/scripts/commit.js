@@ -5,16 +5,13 @@ const execSync = require('child_process').execSync;
 function commit(branch) {
   // Lê o package.json
   const packageJson = JSON.parse(fs.readFileSync('projects/ngx-sp-infra/package.json', 'utf8'));
-
-  // Adiciona o sufixo à versão
-  const packageVersion = packageJson.version;
   
   // Adiciona alterações no commit e realiza o push
   execSync(`git add .`, { stdio: 'inherit' });
-  execSync(`git commit --allow-empty -m "v${packageVersion} | Commit automático"`, { stdio: 'inherit' });
+  execSync(`git commit --allow-empty -m "v${packageJson.version} | Commit automático"`, { stdio: 'inherit' });
   execSync(`git push origin ${branch}`, { stdio: 'inherit' });
 
-  console.log("Commit automático realizado com sucesso. Acompanhe o processo de publicação pelo GitHub Actions!");
+  console.log("\n\nCommit automático realizado com sucesso. Acompanhe o processo de publicação pelo GitHub Actions!\n");
 }
 
 // Branch que será selecionada
