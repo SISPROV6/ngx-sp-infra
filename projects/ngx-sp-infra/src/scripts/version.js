@@ -18,6 +18,6 @@ function updateVersion(suffix) {
   execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
 }
 
-// Sufixo a ser adicionado, por exemplo, '-beta'
-const suffix = process.argv[2] || '-test';
+// Sufixo a ser adicionado, se não informado não terá nada
+const suffix = process.argv[2] || '';
 updateVersion(suffix);
