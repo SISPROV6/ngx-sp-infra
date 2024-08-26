@@ -8,6 +8,9 @@ function commit() {
 
   // Adiciona o sufixo à versão
   const packageVersion = packageJson.version;
+  
+  console.log(packageJson);
+  console.log(packageVersion);
 
   // Adiciona alterações no commit e realiza o push
   execSync(`git add .`, { stdio: 'inherit' });
