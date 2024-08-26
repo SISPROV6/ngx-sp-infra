@@ -3,10 +3,10 @@ import * as i0 from "@angular/core";
 import * as i1 from "@angular/common";
 export class LoadingButtonComponent {
     constructor() { }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: LoadingButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: LoadingButtonComponent, selector: "app-loading-button", inputs: { isLoading: "isLoading" }, ngImport: i0, template: "<img class=\"button-spinner\" src=\"assets/imgs/spinner.gif\"\r\n    *ngIf=\"isLoading\">", styles: [".button-spinner{width:24px}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LoadingButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: LoadingButtonComponent, selector: "app-loading-button", inputs: { isLoading: "isLoading" }, ngImport: i0, template: "<img class=\"button-spinner\" src=\"assets/imgs/spinner.gif\"\r\n    *ngIf=\"isLoading\">", styles: [".button-spinner{width:24px}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: LoadingButtonComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LoadingButtonComponent, decorators: [{
             type: Component,
             args: [{ selector: 'app-loading-button', template: "<img class=\"button-spinner\" src=\"assets/imgs/spinner.gif\"\r\n    *ngIf=\"isLoading\">", styles: [".button-spinner{width:24px}\n"] }]
         }], ctorParameters: () => [], propDecorators: { isLoading: [{

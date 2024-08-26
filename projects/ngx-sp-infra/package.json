@@ -1,6 +1,6 @@
 {
   "name": "ngx-sp-infra",
-  "version": "1.9.1-test",
+  "version": "1.9.2-test",
   "description": "Biblioteca de utilitários da Infra.",
   "author": "P&D",
   "keywords": [
@@ -22,8 +22,7 @@
   "peerDependencies": {
     "@angular/common": "^17.3.12",
     "@angular/core": "^17.3.12",
-    "ngx-bootstrap": "^12.0.0",
-    "ngx-pagination": "^6.0.3"
+    "ngx-bootstrap": "^12.0.0"
   },
   "dependencies": {
     "tslib": "^2.6.1"

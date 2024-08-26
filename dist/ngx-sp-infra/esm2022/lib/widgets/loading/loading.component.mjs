@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import * as i0 from "@angular/core";
 export class LoadingComponent {
     constructor() { }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: LoadingComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: LoadingComponent, selector: "app-loading", ngImport: i0, template: "<!-- Loading -->\r\n<div class=\"container-spinner\">\r\n    <img class=\"view-spinner\" src=\"assets/imgs/spinner.gif\" alt=\"Carregando\" title=\"Carregando informa\u00E7\u00F5es..\">\r\n</div>\r\n", styles: [".container-spinner{margin-left:50%}.view-spinner{width:30px}\n"] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LoadingComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: LoadingComponent, selector: "app-loading", ngImport: i0, template: "<!-- Loading -->\r\n<div class=\"container-spinner\">\r\n    <img class=\"view-spinner\" src=\"assets/imgs/spinner.gif\" alt=\"Carregando\" title=\"Carregando informa\u00E7\u00F5es..\">\r\n</div>\r\n", styles: [".container-spinner{margin-left:50%}.view-spinner{width:30px}\n"] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: LoadingComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LoadingComponent, decorators: [{
             type: Component,
             args: [{ selector: 'app-loading', template: "<!-- Loading -->\r\n<div class=\"container-spinner\">\r\n    <img class=\"view-spinner\" src=\"assets/imgs/spinner.gif\" alt=\"Carregando\" title=\"Carregando informa\u00E7\u00F5es..\">\r\n</div>\r\n", styles: [".container-spinner{margin-left:50%}.view-spinner{width:30px}\n"] }]
         }], ctorParameters: () => [] });

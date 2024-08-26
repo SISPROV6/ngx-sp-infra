@@ -6,7 +6,15 @@
     "start": "ng serve",
     "build": "ng build ngx-sp-infra --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    
+    "build:patch": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/generate-tags.js && cd ../../ && ng build",
+    "build:minor": "cd projects/ngx-sp-infra && npm version minor --no-git-tag-version && node src/scripts/generate-tags.js && cd ../../ && ng build",
+    "build:major": "cd projects/ngx-sp-infra && npm version major --no-git-tag-version && node src/scripts/generate-tags.js && cd ../../ && ng build",
+
+    "build:patch:test": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/update-version.js -test && cd ../../ && ng build",
+    "build:minor:test": "cd projects/ngx-sp-infra && npm version minor --no-git-tag-version && node src/scripts/update-version.js -test && cd ../../ && ng build",
+    "build:major:test": "cd projects/ngx-sp-infra && npm version major --no-git-tag-version && node src/scripts/update-version.js -test && cd ../../ && ng build"
   },
   "private": false,
   "dependencies": {
@@ -20,6 +28,7 @@
     "@angular/router": "^17.3.12",
     "bootstrap": "^5.3.1",
     "ngx-bootstrap": "^12.0.0",
+    "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.1",
     "zone.js": "~0.14.7"

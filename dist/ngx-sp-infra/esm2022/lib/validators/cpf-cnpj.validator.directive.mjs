@@ -3,14 +3,14 @@ import { NG_VALIDATORS } from '@angular/forms';
 import { CpfCnpjValidator } from './cpf-cnpj.validator';
 import * as i0 from "@angular/core";
 export class CpfCnpjValidatorDirective extends CpfCnpjValidator {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: CpfCnpjValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.11", type: CpfCnpjValidatorDirective, selector: "[appCpfCnpjValidate][ngModel]", providers: [{
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CpfCnpjValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: CpfCnpjValidatorDirective, selector: "[appCpfCnpjValidate][ngModel]", providers: [{
                 provide: NG_VALIDATORS,
                 useExisting: CpfCnpjValidatorDirective,
                 multi: true
             }], usesInheritance: true, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: CpfCnpjValidatorDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CpfCnpjValidatorDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[appCpfCnpjValidate][ngModel]',

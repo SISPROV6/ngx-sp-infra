@@ -4,10 +4,10 @@ export class TextFilterPipe {
     transform(options, search) {
         return options.filter(e => e.LABEL.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || e.ID.toLocaleString().toLocaleLowerCase().includes(search.toLocaleLowerCase()));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: TextFilterPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.3.11", ngImport: i0, type: TextFilterPipe, name: "textFilter", pure: false }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TextFilterPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.3.12", ngImport: i0, type: TextFilterPipe, name: "textFilter", pure: false }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: TextFilterPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TextFilterPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'textFilter',

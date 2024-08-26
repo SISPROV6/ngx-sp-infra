@@ -40,8 +40,8 @@ import * as i1 from "ngx-bootstrap/modal";
 import * as i2 from "ngx-bootstrap/accordion";
 import * as i3 from "ngx-bootstrap/tooltip";
 export class InfraModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.11", ngImport: i0, type: InfraModule, declarations: [LoadingComponent,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: InfraModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.12", ngImport: i0, type: InfraModule, declarations: [LoadingComponent,
             FieldControlErrorComponent,
             FieldErrorMessageComponent,
             LoadingButtonComponent,
@@ -98,7 +98,7 @@ export class InfraModule {
             ContentContainerComponent,
             CopyClipboardDirective,
             TableComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraModule, imports: [CommonModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: InfraModule, imports: [CommonModule,
             ModalModule.forRoot(),
             AccordionModule.forRoot(),
             TooltipModule.forRoot(),
@@ -107,7 +107,7 @@ export class InfraModule {
             ReactiveFormsModule,
             RouterModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: InfraModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [

@@ -7,10 +7,10 @@ export class BreadcrumbComponent {
     }
     ngOnInit() {
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: BreadcrumbComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: BreadcrumbComponent, selector: "app-breadcrumb", inputs: { menu: "menu", opcao: "opcao" }, ngImport: i0, template: "<!-- Breadcrumb -->\r\n<ol class=\"breadcrumb\">\r\n    <li class=\"breadcrumb-item active\">{{ menu }}</li>\r\n    <li class=\"breadcrumb-item\">{{ opcao }}</li>\r\n</ol>\r\n", styles: [""] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BreadcrumbComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: BreadcrumbComponent, selector: "app-breadcrumb", inputs: { menu: "menu", opcao: "opcao" }, ngImport: i0, template: "<!-- Breadcrumb -->\r\n<ol class=\"breadcrumb\">\r\n    <li class=\"breadcrumb-item active\">{{ menu }}</li>\r\n    <li class=\"breadcrumb-item\">{{ opcao }}</li>\r\n</ol>\r\n", styles: [""] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: BreadcrumbComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BreadcrumbComponent, decorators: [{
             type: Component,
             args: [{ selector: 'app-breadcrumb', template: "<!-- Breadcrumb -->\r\n<ol class=\"breadcrumb\">\r\n    <li class=\"breadcrumb-item active\">{{ menu }}</li>\r\n    <li class=\"breadcrumb-item\">{{ opcao }}</li>\r\n</ol>\r\n" }]
         }], ctorParameters: () => [], propDecorators: { menu: [{

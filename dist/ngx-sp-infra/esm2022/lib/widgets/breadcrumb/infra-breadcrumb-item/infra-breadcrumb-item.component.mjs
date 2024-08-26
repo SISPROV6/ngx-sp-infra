@@ -18,10 +18,10 @@ export class InfraBreadcrumbItemComponent {
             }
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraBreadcrumbItemComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.11", type: InfraBreadcrumbItemComponent, selector: "li[infra-breadcrumb-item]", ngImport: i0, template: "<ng-content></ng-content>", styles: [""] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: InfraBreadcrumbItemComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: InfraBreadcrumbItemComponent, selector: "li[infra-breadcrumb-item]", ngImport: i0, template: "<ng-content></ng-content>", styles: [""] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.11", ngImport: i0, type: InfraBreadcrumbItemComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: InfraBreadcrumbItemComponent, decorators: [{
             type: Component,
             args: [{ selector: 'li[infra-breadcrumb-item]', template: "<ng-content></ng-content>" }]
         }], ctorParameters: () => [{ type: i0.ElementRef }] });
