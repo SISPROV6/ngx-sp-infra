@@ -1,9 +1,10 @@
-name: Publicar lib no NPM
+name: Publicar pacote no NPM com tags corretas
 
 on:
   push:
     branches:
-      - main
+      - main # Branch principal para publicação de versões estáveis
+      - test # Branch para publicação de versões de teste
 
 jobs:
   publish:
@@ -23,12 +24,23 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build the library
+    - name: Build the library and add tags
       run: npm run build
+
+    - name: Go to lib directory
+      run: cd dist/ngx-sp-infra
 
     - name: Publish to NPM
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
       run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+        # Condicional para definir a tag de publicação
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          npm publish --tag latest
+        elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
+          npm publish --tag test
+        fi
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         npm publish
