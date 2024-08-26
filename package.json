@@ -12,13 +12,17 @@
     "build:minor": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build",
     "build:major": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build",
 
-    "build:patch:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
-    "build:minor:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build",
-    "build:major:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build",
+    "build:patch:test": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+    "build:minor:test": "cd projects/ngx-sp-infra && npm version minor --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+    "build:major:test": "cd projects/ngx-sp-infra && npm version major --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
 
-    "build:patch:test": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build",
-    "build:minor:test": "cd projects/ngx-sp-infra && npm version minor --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build",
-    "build:major:test": "cd projects/ngx-sp-infra && npm version major --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build"
+    "build:patch:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+    "build:minor:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+    "build:major:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+
+    "build:patch:test:commit": "cd projects/ngx-sp-infra && npm version patch --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+    "build:minor:test:commit": "cd projects/ngx-sp-infra && npm version minor --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
+    "build:major:test:commit": "cd projects/ngx-sp-infra && npm version major --no-git-tag-version && node src/scripts/version.js -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js"
   },
   "private": false,
   "dependencies": {
