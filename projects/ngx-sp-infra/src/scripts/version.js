@@ -11,6 +11,9 @@ function updateVersion(version, suffix) {
     execSync(`npm version ${version} --no-git-tag-version`, { stdio: 'inherit' });
     execSync(`npm version ${version} --no-git-tag-version`, { stdio: 'inherit' });
     packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));    // Atualiza a variável do arquivo
+  } else {
+    execSync(`npm version ${version} --no-git-tag-version`, { stdio: 'inherit' });
+    packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));    // Atualiza a variável do arquivo
   }
 
   // Adiciona o sufixo à versão
