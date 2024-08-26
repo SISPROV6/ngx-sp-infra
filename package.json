@@ -16,9 +16,9 @@
     "build:minor:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js minor && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
     "build:major:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js major && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
 
-    "build:patch:test:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js patch -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
-    "build:minor:test:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js minor -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
-    "build:major:test:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js major -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js"
+    "build:patch:test:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js patch -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js test",
+    "build:minor:test:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js minor -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js test",
+    "build:major:test:commit": "cd projects/ngx-sp-infra && node src/scripts/version.js major -test && cd ../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js test"
   },
   "private": false,
   "dependencies": {
