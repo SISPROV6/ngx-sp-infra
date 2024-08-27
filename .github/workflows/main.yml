@@ -21,9 +21,11 @@ jobs:
         git fetch --depth=2
         PREV_COMMIT=$(git log -n 1 --skip=1 --pretty=format:%H || echo ${{ github.sha }})
         if git diff --name-only $PREV_COMMIT HEAD | grep '^dist/'; then
-          echo "dist changes detected"
+          echo "dist changes"
+          echo "::set-output name=result::dist changes"
         else
           echo "no dist changes"
+          echo "::set-output name=result::no dist changes"
           exit 0
         fi
 
@@ -40,7 +42,7 @@ jobs:
       run: npm run build
 
     - name: Publish to NPM
-      if: ${{ steps.check_dist.outputs.result != 'no dist changes' }}
+      if: ${{ steps.check_dist.outputs.result == 'dist changes' }}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
       run: |
