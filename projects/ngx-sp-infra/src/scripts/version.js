@@ -34,13 +34,24 @@ function updateVersion(version, suffix, useGit) {
 
   // Atualiza a tag Git se for utilizar Git
   if (useGit && (useGit == true || useGit == 'true')) {
-    execSync(`git tag -d v${newVersion}`, { stdio: 'inherit' }); // Remove a tag prévia com o mesmo nome
-    execSync(`git push --delete origin v${newVersion}`, { stdio: 'inherit' }); // Remove a tag prévia com o mesmo nome
+    try {
+      execSync(`git tag -d v${newVersion}`, { stdio: 'inherit' }); // Remove a tag prévia com o mesmo nome
+      execSync(`git push --delete origin v${newVersion}`, { stdio: 'inherit' }); // Remove a tag prévia com o mesmo nome
 
-    execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
-    execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
+      execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
+      execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
 
-    console.log("\n\nTag de versão commitada e enviada!\n");
+      console.log("\n\nTag de versão commitada e enviada!\n");
+    }
+    catch(error) {
+      if (error.message.includes('Command failed: git tag -d') || error.message.includes('Command failed: git push --delete')) {
+        execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
+        execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
+
+        console.log("\n\nTag de versão commitada e enviada!\n");
+      }
+      else { console.log("\n\nOcorreu um erro ao realizar o commit da tag!\nABORTANDO PROCESSO..."); }
+    }
   }
 }
 
