@@ -1,4 +1,4 @@
-name: Publicar pacote no NPM com tags corretas
+name: Deploy no NPM
 
 on:
   push:
@@ -15,6 +15,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Check if dist was modified
+      id: check_dist
+      run: |
+        git fetch origin main --depth=1
+        git diff --name-only HEAD^ HEAD | grep '^dist/' || echo "no dist changes"
+        continue-on-error: true
+
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
@@ -28,6 +35,7 @@ jobs:
       run: npm run build
 
     - name: Publish to NPM
+      if: ${{ steps.check_dist.outputs.result != 'no dist changes' }}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
       run: |
