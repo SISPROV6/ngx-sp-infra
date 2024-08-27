@@ -32,9 +32,11 @@ function updateVersion(version, suffix) {
   // Escreve a nova versão no package.json
   fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2) + '\n');
 
-  // Atualiza a tag Git [DEPRECIADO]
-  // execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
-  // execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
+  // Atualiza a tag Git
+  execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
+  execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
+
+  console.log("\n\nTag de versão commitada e enviada!\n");
 }
 
 // Sufixo a ser adicionado, se não informado não terá nada

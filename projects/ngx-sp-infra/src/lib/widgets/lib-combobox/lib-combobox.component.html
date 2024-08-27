@@ -1,0 +1,43 @@
+<label *ngIf="labelText && labelText != ''" [libRequired]="libRequired ?? false" class="form-label fw-bold">{{ labelText }}</label>
+<div class="input-group dropdown flex-fill glb-max-height-350px">
+
+   <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.
+   Ao usar o atributo [btnLeft], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
+   <ng-content select="[btnLeft]"></ng-content>
+
+   <input  #mainInput *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
+            [formControl]="formControl" data-bs-auto-close="outside" aria-expanded="false" readonly
+            [class.is-invalid]="formControl && (!formControl.valid && (formControl.touched && formControl.dirty))"
+            (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
+
+   <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll" [class.show]="ariaExpanded">
+      <div class="input-group mb-2">
+         <input #searchInput (input)="textoPesquisa = searchInput.value" type="text" id="searchInput" class="form-control glb-input-no-glow" [placeholder]="searchInputPlaceholder" (keyup.enter)="reloadList(searchInput.value)">
+         <button class="btn btn-{{colorTheme}}" (click)="reloadList(searchInput.value)"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> </button>
+      </div>
+
+      @if (comboboxList) {
+         <li *ngIf="formControl.value != ''" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
+         @for (item of comboboxList | textFilter:textoPesquisa; track $index) {
+            <li class="dropdown-item" (click)="setFilterValue(item)">
+               <span *ngIf="item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''" class="glb-fs-12 fw-bold d-inline-block w-125">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}
+            </li>
+         }
+         @empty { <li class="dropdown-item fst-italic">Nenhum registro encontrado com esta pesquisa...</li> }
+      }
+      @else { <li class="dropdown-item text-center"> <div class="spinner-border" role="status"><span class="visually-hidden">Carregando dados...</span></div> </li> }
+   </ul>
+
+   <ng-template #disabledInput>
+      <input  #mainInput  class="form-select text-start rounded-end" type="text" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" readonly disabled>
+   </ng-template>
+
+   <!-- Este elemento ng-content com o atributo [btnRight] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado direito do combobox de pesquisa.
+   Ao usar o atributo [btnRight], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
+   <ng-content select="[btnRight]"></ng-content>
+
+</div>
+
+<!-- #region MENSAGEM DE ERRO DE VALIDAÇÃO -->
+<app-field-error-message *ngIf="formControl && (!formControl.valid && (formControl.touched && formControl.dirty))" [control]="formControl" />
+<!-- #endregion MENSAGEM DE ERRO DE VALIDAÇÃO -->

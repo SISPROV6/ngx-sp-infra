@@ -40,6 +40,7 @@ import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
 import { TableComponent } from './widgets/table/table.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     OrderingComponent,
     
     SearchComboboxComponent,
+    LibComboboxComponent, // Novo combobox, substituirá o Search futuramente
 
     RequiredDirective,
     SimpleHeaderComponent,
@@ -107,6 +109,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     OrderingComponent,
 
     SearchComboboxComponent,
+    LibComboboxComponent,
 
     RequiredDirective,
     SimpleHeaderComponent,

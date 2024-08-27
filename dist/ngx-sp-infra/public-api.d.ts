@@ -54,6 +54,7 @@ export * from './lib/widgets/tree/models/ret-tree';
 export * from './lib/widgets/tree/models/tree-item';
 export * from './lib/widgets/tree/pipes/search-tree.pipe';
 export * from './lib/widgets/search-combobox/search-combobox.component';
+export * from './lib/widgets/lib-combobox/lib-combobox.component';
 export * from './lib/widgets/simple-header/simple-header.component';
 export * from './lib/widgets/lib-icons/lib-icons.component';
 export * from './lib/widgets/content-container/content-container.component';
