@@ -50,11 +50,12 @@ export class LibComboboxComponent {
 
   // #region PUBLIC
   @Input({ alias: 'control', required: true })
-  public set formControl(value: FormControl<any> | AbstractControl<any, any>) {
-    console.log(value);
-    this.idControl = value as FormControl;
+  public set inputControl(value: FormControl<any> | AbstractControl<any, any>) {
+    console.log(!this.inputControl.value || this.inputControl.value != '' || this.inputControl.value != null);
+    
+    this._valueControl = value as FormControl
   }
-  public get formControl(): FormControl<any> { return this.idControl }
+  public get inputControl(): FormControl<any> { return this._valueControl }
 
   @Input({ alias: 'list', required: true }) public comboboxList: RecordCombobox[];
 
@@ -82,7 +83,7 @@ export class LibComboboxComponent {
 
 
   // #region ==========> FORM BUILDER <==========
-  private idControl: FormControl = new FormControl<string | number>("")
+  private _valueControl: FormControl = new FormControl<string | number | null>("");
   public filterForm: FormGroup = new FormGroup({
     _searchInput: new FormControl<string>("")
   });
@@ -95,8 +96,8 @@ export class LibComboboxComponent {
   ngOnInit(): void {
     this.initializeSelectedValue();
     
-    this._subscription = this.formControl.valueChanges.subscribe(value => {
-      this.controlValueChange.emit(this.idControl)
+    this._subscription = this.inputControl.valueChanges.subscribe(value => {
+      this.controlValueChange.emit(this._valueControl)
     });
   }
 
@@ -108,7 +109,7 @@ export class LibComboboxComponent {
     if (changes["list"]?.currentValue) { this.initializeSelectedValue() }
 
     if (changes["control"]?.currentValue) {
-      if (!this.formControl) { throw new Error("Nenhum [control] (FormControl) informado") }
+      if (!this.inputControl) { throw new Error("Nenhum [control] (FormControl) informado") }
     }
   }
 
@@ -145,18 +146,18 @@ export class LibComboboxComponent {
     this.filterForm.controls["_searchInput"].setValue(itemValue);
 
     this.textoPesquisa = "";
-    this.formControl.markAsDirty();
+    this.inputControl.markAsDirty();
 
     if (item) {
       this.selectedText = item.LABEL;
       
-      this.idControl.setValue(item.ID);
-      this.formControl.setValue(item.LABEL);
+      this._valueControl.setValue(item.ID);
+      this.inputControl.setValue(item.LABEL);
     } else {
       this.selectedText = undefined;
 
-      this.idControl.setValue("");
-      this.formControl.setValue("");
+      this._valueControl.setValue("");
+      this.inputControl.setValue("");
     }
 
     this.ariaExpanded = false;
@@ -165,11 +166,11 @@ export class LibComboboxComponent {
   private initializeSelectedValue(): void {
     if (!this.comboboxList || !this.comboboxList.length) return;
 
-    const initializedValue = this.comboboxList.find(item => item.ID == this.formControl.value)
+    const initializedValue = this.comboboxList.find(item => item.ID == this.inputControl.value)
 
     if (initializedValue) {
-      this.idControl.setValue(initializedValue.ID ?? "");
-      this.formControl.setValue(initializedValue.LABEL ?? "");
+      this._valueControl.setValue(initializedValue.ID ?? "");
+      this.inputControl.setValue(initializedValue.LABEL ?? "");
       
       this.selectedText = initializedValue.LABEL;
     }

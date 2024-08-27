@@ -36,8 +36,8 @@ import * as i0 from "@angular/core";
 export declare class LibComboboxComponent {
     private _ariaExpanded;
     private _subscription;
-    set formControl(value: FormControl<any> | AbstractControl<any, any>);
-    get formControl(): FormControl<any>;
+    set inputControl(value: FormControl<any> | AbstractControl<any, any>);
+    get inputControl(): FormControl<any>;
     comboboxList: RecordCombobox[];
     labelText?: string;
     libRequired?: boolean;
@@ -53,7 +53,7 @@ export declare class LibComboboxComponent {
     textoPesquisa: string;
     get ariaExpanded(): boolean;
     set ariaExpanded(value: boolean);
-    private idControl;
+    private _valueControl;
     filterForm: FormGroup;
     constructor();
     ngOnInit(): void;
@@ -65,5 +65,5 @@ export declare class LibComboboxComponent {
     private adjustDropdownWidth;
     reloadList(search: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "formControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; }, { "onReloadList": "onReloadList"; "controlValueChange": "controlValueChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "inputControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; }, { "onReloadList": "onReloadList"; "controlValueChange": "controlValueChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }

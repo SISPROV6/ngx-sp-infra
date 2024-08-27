@@ -6,8 +6,8 @@
    <ng-content select="[btnLeft]"></ng-content>
 
    <input  #mainInput *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
-            [formControl]="formControl" data-bs-auto-close="outside" aria-expanded="false" readonly
-            [class.is-invalid]="formControl && (!formControl.valid && (formControl.touched && formControl.dirty))"
+            [formControl]="inputControl" data-bs-auto-close="outside" aria-expanded="false" readonly
+            [class.is-invalid]="inputControl && (!inputControl.valid && (inputControl.touched && inputControl.dirty))"
             (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
 
    <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll z-2" [class.show]="ariaExpanded">
@@ -17,7 +17,7 @@
       </div>
 
       @if (comboboxList) {
-         <li *ngIf="formControl.value != ''" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
+         <li *ngIf="!inputControl.value || inputControl.value != '' || inputControl.value != null" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
          @for (item of comboboxList | textFilter:textoPesquisa; track $index) {
             <li class="dropdown-item" (click)="setFilterValue(item)">
                <span *ngIf="item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''" class="glb-fs-12 fw-bold d-inline-block w-125">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}
@@ -39,5 +39,5 @@
 </div>
 
 <!-- #region MENSAGEM DE ERRO DE VALIDAÇÃO -->
-<app-field-error-message *ngIf="formControl && (!formControl.valid && (formControl.touched && formControl.dirty))" [control]="formControl" />
+<app-field-error-message *ngIf="inputControl && (!inputControl.valid && (inputControl.touched && inputControl.dirty))" [control]="inputControl" />
 <!-- #endregion MENSAGEM DE ERRO DE VALIDAÇÃO -->
