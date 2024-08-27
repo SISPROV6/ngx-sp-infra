@@ -36,7 +36,7 @@ import * as i0 from "@angular/core";
 export declare class LibComboboxComponent {
     private _ariaExpanded;
     private _subscription;
-    set formControl(value: FormControl<any> | AbstractControl<any>);
+    set formControl(value: FormControl<any> | AbstractControl<any, any>);
     get formControl(): FormControl<any>;
     comboboxList: RecordCombobox[];
     labelText?: string;

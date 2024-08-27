@@ -50,7 +50,7 @@ export class LibComboboxComponent {
 
   // #region PUBLIC
   @Input({ alias: 'control', required: true })
-  public set formControl(value: FormControl<any> | AbstractControl<any>) {
+  public set formControl(value: FormControl<any> | AbstractControl<any, any>) {
     console.log(value);
     this.idControl = value as FormControl;
   }
