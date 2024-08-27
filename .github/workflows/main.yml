@@ -15,12 +15,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Check if dist was modified
-      id: check_dist
+    - name: Verificar alterações no diretório dist
       run: |
-        git fetch origin main --depth=1
-        git diff --name-only HEAD^ HEAD | grep '^dist/' || echo "no dist changes"
-        continue-on-error: true
+        git fetch --depth=2
+        if git diff --name-only HEAD^ HEAD | grep '^dist/'; then
+          echo "dist changes detected"
+        else
+          echo "no dist changes"
+          exit 0
+        fi
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
