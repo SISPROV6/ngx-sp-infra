@@ -17,5 +17,5 @@ function commit(branch) {
 }
 
 // Branch que será selecionada
-const branch = process.argv[2];
+const branch = process.argv[2] || 'main';
 commit(branch);
