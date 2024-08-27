@@ -18,7 +18,8 @@ jobs:
     - name: Verificar alterações no diretório dist
       run: |
         git fetch --depth=2
-        if git diff --name-only HEAD^ HEAD | grep '^dist/'; then
+        PREV_COMMIT=$(git rev-parse HEAD^ || echo ${{ github.sha }})
+        if git diff --name-only $PREV_COMMIT HEAD | grep '^dist/'; then
           echo "dist changes detected"
         else
           echo "no dist changes"
