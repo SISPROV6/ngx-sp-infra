@@ -51,7 +51,11 @@ export class LibComboboxComponent {
   // #region PUBLIC
   @Input({ alias: 'control', required: true })
   public set inputControl(value: FormControl<any> | AbstractControl<any, any>) {
-    console.log(!this.inputControl.value && this.inputControl.value != '' && this.inputControl.value != null);
+    console.log(value);
+    console.log(typeof value.value);
+    console.log(!value.value);
+    console.log(value.value != '');
+    console.log(value.value != null);
     
     this._valueControl = value as FormControl
   }
