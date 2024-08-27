@@ -1,7 +1,7 @@
 # NgxSpInfra - Biblioteca de funcionalidades e componentes 🚀
 [![Deploy no NPM](https://github.com/SISPROV6/ngx-sp-infra/actions/workflows/main.yml/badge.svg)](https://github.com/SISPROV6/ngx-sp-infra/actions/workflows/main.yml)
-![Versão NPM](https://img.shields.io/npm/v/ngx-sp-infra.svg)
-![Downloads NPM](https://img.shields.io/npm/dm/ngx-sp-infra.svg)
+[![versão mais recente](https://badge.fury.io/js/ngx-sp-infra.svg)](//npmjs.com/package/ngx-sp-infra)
+![downloads](https://img.shields.io/npm/dm/ngx-sp-infra.svg)
 
 ## Índice
 
