@@ -17,7 +17,7 @@
       </div>
 
       @if (comboboxList) {
-         <li *ngIf="!inputControl.value || inputControl.value != '' || inputControl.value != null" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
+         <li *ngIf="!inputControl.value && inputControl.value != '' && inputControl.value != null" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
          @for (item of comboboxList | textFilter:textoPesquisa; track $index) {
             <li class="dropdown-item" (click)="setFilterValue(item)">
                <span *ngIf="item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''" class="glb-fs-12 fw-bold d-inline-block w-125">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}
