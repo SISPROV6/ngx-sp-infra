@@ -1,6 +1,6 @@
 import { EventEmitter, SimpleChanges } from '@angular/core';
 import { RecordCombobox } from '../../models/combobox/record-combobox';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import * as i0 from "@angular/core";
 /**
  * @file lib-combobox.component.ts
@@ -22,7 +22,7 @@ import * as i0 from "@angular/core";
  * - Inicialização de um valor selecionado, se fornecido.
  *
  * ## Inputs:
- * - `formControl` (FormControl): Control para seleção dos valores.
+ * - `formControl` (FormControl | AbstractControl): Control para seleção dos valores.
  * - `comboboxList` (RecordCombobox[]): Array de objetos representando os itens disponíveis para seleção.
  * - `labelText` (string): Texto de etiqueta associado ao combobox.
  * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Tema de cores para o componente.
@@ -36,7 +36,8 @@ import * as i0 from "@angular/core";
 export declare class LibComboboxComponent {
     private _ariaExpanded;
     private _subscription;
-    formControl: FormControl;
+    set formControl(value: FormControl<any> | AbstractControl<any>);
+    get formControl(): FormControl<any>;
     comboboxList: RecordCombobox[];
     labelText?: string;
     libRequired?: boolean;
