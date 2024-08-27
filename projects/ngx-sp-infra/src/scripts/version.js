@@ -34,6 +34,9 @@ function updateVersion(version, suffix, useGit) {
 
   // Atualiza a tag Git se for utilizar Git
   if (useGit && (useGit == true || useGit == 'true')) {
+    execSync(`git tag -d v${newVersion}`, { stdio: 'inherit' }); // Remove a tag prévia com o mesmo nome
+    execSync(`git push --delete origin v${newVersion}`, { stdio: 'inherit' }); // Remove a tag prévia com o mesmo nome
+
     execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
     execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
 
