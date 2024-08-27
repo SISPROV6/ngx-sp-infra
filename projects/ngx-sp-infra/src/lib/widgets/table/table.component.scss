@@ -8,7 +8,10 @@ table {
    thead {
       height: 50px;
       font-size: 1rem;
-      background-color: #f9fafb !important;
+
+      > tr {
+         background-color: #f9fafb !important;
+      }
    }
 
    tbody {
