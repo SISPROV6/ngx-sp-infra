@@ -108,7 +108,7 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
   @Input({ required: true }) public controlType: "ngModel" | "formControl" = "ngModel";
 
   @Input({ required: true }) public comboboxList: RecordCombobox[];
-  @Input({ required: true }) public labelText: string;
+  @Input() public labelText: string;
 
   @Input() public libRequired: boolean = false;
   @Input() public disabled: boolean = false;
