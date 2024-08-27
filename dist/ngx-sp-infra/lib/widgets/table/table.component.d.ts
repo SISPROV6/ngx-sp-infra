@@ -19,7 +19,7 @@ export declare class TableComponent implements OnInit, OnChanges {
     usePagination: boolean;
     /** Lista de registros a serem exibidos na tabela.
      * @required */
-    recordsList: any[];
+    recordsList: any[] | undefined;
     /** Opções de contagem de itens por página disponíveis para o usuário.
      * @required */
     countOptions: number[];

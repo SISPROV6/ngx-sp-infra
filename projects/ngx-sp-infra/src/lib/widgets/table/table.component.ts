@@ -34,7 +34,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   /** Lista de registros a serem exibidos na tabela.
    * @required */
-  @Input({ alias: 'list', required: true }) public recordsList: any[];
+  @Input({ alias: 'list', required: true }) public recordsList: any[] | undefined;
 
   /** Opções de contagem de itens por página disponíveis para o usuário.
    * @required */
@@ -77,14 +77,15 @@ export class TableComponent implements OnInit, OnChanges {
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {
-    this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length;
+    if (this.recordsList) { this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length }
+    else { this.itemsPerPage = this.countOptions[0] ?? 10 }
   }
 
   /** Monitora as mudanças nas entradas do componente e realiza ajustes, como resetar a paginação ou validar o layout das colunas.
    * @param changes Objeto que contém as mudanças nas entradas do componente. */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['recordsList'].currentValue) {
-      this.resetPagination(this.recordsList);
+      this.resetPagination(this.recordsList ?? []);
 
       let maxColumns = this.headersList.reduce((n, {col}) => n + col, 0);
       if (maxColumns >= 13) {
