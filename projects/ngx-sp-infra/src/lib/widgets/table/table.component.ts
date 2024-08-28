@@ -52,6 +52,9 @@ export class TableComponent implements OnInit, OnChanges {
     customClasses?: string
   }[];
 
+  /** Mensagem customizada para lista vazia */
+  @Input('emptyListMessage') public emptyListMessage?: string;
+
   /** Evento emitido quando o número de itens por página é alterado. */
   @Output() public itemsPerPageChange: EventEmitter<number> = new EventEmitter<number>();
 

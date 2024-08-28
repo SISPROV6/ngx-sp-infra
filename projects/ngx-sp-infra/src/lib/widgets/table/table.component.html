@@ -25,7 +25,7 @@
                   <!-- Mensagem de ausência de registros -->
                   <tr>
                      <td colspan="12" class="align-middle">
-                        <span class="fw-light fst-italic text-center"> Consulta não retornou registros... </span>
+                        <span class="fw-light fst-italic text-center"> {{ emptyListMessage ? emptyListMessage : "Consulta não retornou registros..." }} </span>
                      </td>
                   </tr>
                }

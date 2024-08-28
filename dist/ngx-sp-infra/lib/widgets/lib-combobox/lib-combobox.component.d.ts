@@ -1,13 +1,9 @@
 import { EventEmitter, SimpleChanges } from '@angular/core';
-import { RecordCombobox } from '../../models/combobox/record-combobox';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { RecordCombobox } from '../../models/combobox/record-combobox';
 import * as i0 from "@angular/core";
 /**
- * @file lib-combobox.component.ts
- * @description Este arquivo contém a implementação do componente LibComboboxComponent, que é um componente de interface do usuário
- * para realizar pesquisas e seleções em uma lista de opções apresentada em um combobox.
- *
- * @component ComboboxComponent
+ * @component LibComboboxComponent
  * @selector lib-combobox
  *
  * @description
@@ -22,13 +18,14 @@ import * as i0 from "@angular/core";
  * - Inicialização de um valor selecionado, se fornecido.
  *
  * ## Inputs:
- * - `valueControl` (FormControl | AbstractControl): Control para seleção dos valores.
- * - `comboboxList` (RecordCombobox[]): Array de objetos representando os itens disponíveis para seleção.
- * - `labelText` (string): Texto de etiqueta associado ao combobox.
- * - `libRequired` (boolean): Indica se o label será exibido como obrigatório ou não
- * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Tema de cores para o componente.
- * - `mainInputPlaceholder` (string): Texto de espaço reservado para o input principal.
- * - `searchInputPlaceholder` (string): Texto de espaço reservado para o input de pesquisa.
+ * - `outerControl` (FormControl | AbstractControl): Control para seleção dos valores, atualizará automaticamente o control do componente pai também
+ * - `comboboxList` (RecordCombobox[]): Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
+ * - `labelText` (string): Texto do rótulo que será exibido acima do combo. Caso não informado nada será exibido
+ * - `disabled` (boolean): Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
+ * - `libRequired` (boolean): Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
+ * - `mainInputPlaceholder` (string): Placeholder do campo principal do combo
+ * - `searchInputPlaceholder` (string): Placeholder do campo de pesquisa dentro do combo
+ * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Define o tema de cor do componente, como "primary", "success", ou "danger"
  *
  * ## Outputs:
  * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
@@ -36,16 +33,47 @@ import * as i0 from "@angular/core";
 export declare class LibComboboxComponent {
     private _ariaExpanded;
     private _subscription;
-    private _valueControl;
-    set valueControl(value: FormControl<any> | AbstractControl<any>);
-    get valueControl(): FormControl<any>;
+    private _outerControl;
+    /** (obrigatório) Control para seleção dos valores, atualizará automaticamente o control do componente pai também
+     * @alias 'control'
+     * @type {FormControl<any> | AbstractControl<any>} */
+    set outerControl(value: FormControl<any> | AbstractControl<any>);
+    get outerControl(): FormControl<any>;
+    /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
+     * @alias 'list'
+     * @type {RecordCombobox[]} */
     comboboxList?: RecordCombobox[];
+    /** (opcional) Texto do rótulo que será exibido acima do combo. Caso não informado nada será exibido
+     * @type {string} */
     labelText?: string;
+    /** (opcional) Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
+     * @type {boolean}
+     * @default false */
     libRequired?: boolean;
+    /** (opcional) Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
+     * @type {boolean}
+     * @default false */
     disabled?: boolean;
+    /** (opcional) Placeholder do campo principal do combo
+     * @alias 'mainPlaceholder'
+     * @type {string}
+     * @default "Selecione uma opção..." */
     mainInputPlaceholder?: string;
+    /** (opcional) Placeholder do campo de pesquisa dentro do combo
+     * @alias 'searchPlaceholder'
+     * @type {string}
+     * @default "Pesquisa..." */
     searchInputPlaceholder?: string;
+    /** (opcional) Define o tema de cor do componente, como "primary", "success", ou "danger"
+     * @alias 'theme'
+     * @type {string}
+     * @default "primary"
+    */
     colorTheme?: string;
+    /** Evento emitido ao recarregar a lista de registros
+     * @example Ao ser emitido, o componente pai pode refazer o GET da lista, por exemplo.
+     * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
+     * @type {EventEmitter<string>} */
     onReloadList: EventEmitter<string>;
     private _mainInput;
     private _dropdownMenu;
@@ -65,5 +93,5 @@ export declare class LibComboboxComponent {
     private adjustDropdownWidth;
     reloadList(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "valueControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainInputPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchInputPlaceholder"; "required": false; }; "colorTheme": { "alias": "colorTheme"; "required": false; }; }, { "onReloadList": "onReloadList"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; }, { "onReloadList": "onReloadList"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }

@@ -33,6 +33,8 @@ export declare class TableComponent implements OnInit, OnChanges {
         col: number;
         customClasses?: string;
     }[];
+    /** Mensagem customizada para lista vazia */
+    emptyListMessage?: string;
     /** Evento emitido quando o número de itens por página é alterado. */
     itemsPerPageChange: EventEmitter<number>;
     /** Evento emitido quando a página é alterada. */
@@ -56,5 +58,5 @@ export declare class TableComponent implements OnInit, OnChanges {
      * @param list Lista de registros para resetar a paginação. */
     resetPagination(list: any[]): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<TableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<TableComponent, "lib-table", never, { "usePagination": { "alias": "usePagination"; "required": false; }; "recordsList": { "alias": "list"; "required": true; }; "countOptions": { "alias": "counts"; "required": false; }; "paginationPlacement": { "alias": "placement"; "required": false; }; "headersList": { "alias": "headers"; "required": true; }; }, { "itemsPerPageChange": "itemsPerPageChange"; "pageChange": "pageChange"; }, never, ["[innerRows]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TableComponent, "lib-table", never, { "usePagination": { "alias": "usePagination"; "required": false; }; "recordsList": { "alias": "list"; "required": true; }; "countOptions": { "alias": "counts"; "required": false; }; "paginationPlacement": { "alias": "placement"; "required": false; }; "headersList": { "alias": "headers"; "required": true; }; "emptyListMessage": { "alias": "emptyListMessage"; "required": false; }; }, { "itemsPerPageChange": "itemsPerPageChange"; "pageChange": "pageChange"; }, never, ["[innerRows]"], false, never>;
 }
