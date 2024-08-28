@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -55,7 +55,15 @@ export class LibComboboxComponent {
    * @alias 'control'
    * @type {FormControl<any> | AbstractControl<any>} */
   @Input({ alias: 'control', required: true })
-  public set outerControl(value: FormControl<any> | AbstractControl<any>) { this._outerControl = value as FormControl }
+  public set outerControl(value: FormControl<any> | AbstractControl<any>) {
+    this._outerControl = value as FormControl
+
+    // Cancela a subscrição anterior (se houver) para evitar múltiplas subscrições
+    if (this._subscription) this._subscription.unsubscribe();
+
+    // Subscrição ao observável valueChanges para reagir a mudanças no valor
+    this._subscription = this._outerControl.valueChanges.subscribe(() => { this.initializeSelectedValue() });
+  }
   public get outerControl(): FormControl<any> { return this._outerControl }
 
   /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
@@ -132,6 +140,7 @@ export class LibComboboxComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) { this.initializeSelectedValue() }
+    if (changes["outerControl"]?.currentValue) { this.initializeSelectedValue() }
   }
 
   ngOnDestroy(): void {
@@ -173,7 +182,6 @@ export class LibComboboxComponent {
     const initializedValue = this.comboboxList.find(item => item.ID == this.outerControl.value)
     
     if (initializedValue) {
-      this.outerControl.setValue(initializedValue.ID);
       this.innerControl.setValue(initializedValue.LABEL);
       
       this.selectedText = initializedValue.LABEL;
