@@ -91,6 +91,7 @@ export declare class LibComboboxComponent {
     clearValue(): void;
     private initializeSelectedValue;
     private adjustDropdownWidth;
+    private setValidator;
     reloadList(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; }, { "onReloadList": "onReloadList"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;

@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
@@ -122,6 +122,7 @@ export class LibComboboxComponent {
   constructor() {}
 
   ngOnInit(): void {
+    this.setValidator();
     this.initializeSelectedValue();
   }
 
@@ -182,6 +183,10 @@ export class LibComboboxComponent {
       const inputWidth = this._mainInput.nativeElement.offsetWidth;
       this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
     }
+  }
+
+  private setValidator(): void {
+    if (this.outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
   }
 
   public reloadList(): void { this.onReloadList.emit(this.textoPesquisa) }
