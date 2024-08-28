@@ -23,16 +23,16 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
  * - Inicialização de um valor selecionado, se fornecido.
  * 
  * ## Inputs:
- * - `formControl` (FormControl | AbstractControl): Control para seleção dos valores.
+ * - `valueControl` (FormControl | AbstractControl): Control para seleção dos valores.
  * - `comboboxList` (RecordCombobox[]): Array de objetos representando os itens disponíveis para seleção.
  * - `labelText` (string): Texto de etiqueta associado ao combobox.
+ * - `libRequired` (boolean): Indica se o label será exibido como obrigatório ou não
  * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Tema de cores para o componente.
  * - `mainInputPlaceholder` (string): Texto de espaço reservado para o input principal.
  * - `searchInputPlaceholder` (string): Texto de espaço reservado para o input de pesquisa.
  * 
  * ## Outputs:
  * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
- * - `controlValueChange` (EventEmitter<FormControl>): Evento emitido quando um item é selecionado.
  */
 @Component({
   selector: 'lib-combobox',
@@ -45,23 +45,17 @@ export class LibComboboxComponent {
 
   // #region PRIVATE
   private _ariaExpanded: boolean = false;
-  private _subscription: Subscription;
+  private _subscription: Subscription = new Subscription();
+
+  private _valueControl: FormControl = new FormControl<string | number | null>(null);
   // #endregion PRIVATE
 
   // #region PUBLIC
   @Input({ alias: 'control', required: true })
-  public set inputControl(value: FormControl<any> | AbstractControl<any, any>) {
-    console.log(value);
-    console.log(typeof value.value);
-    console.log(!value.value);
-    console.log(value.value != '');
-    console.log(value.value != null);
-    
-    this._valueControl = value as FormControl
-  }
-  public get inputControl(): FormControl<any> { return this._valueControl }
+  public set valueControl(value: FormControl<any> | AbstractControl<any>) { this._valueControl = value as FormControl }
+  public get valueControl(): FormControl<any> { return this._valueControl }
 
-  @Input({ alias: 'list', required: true }) public comboboxList: RecordCombobox[];
+  @Input({ alias: 'list', required: true }) public comboboxList?: RecordCombobox[];
 
   @Input() public labelText?: string;
   @Input() public libRequired?: boolean = false;
@@ -71,7 +65,6 @@ export class LibComboboxComponent {
   @Input() public colorTheme?: string = "primary";
   
   @Output() public onReloadList: EventEmitter<string> = new EventEmitter<string>();
-  @Output() public controlValueChange = new EventEmitter<FormControl>();
 
   @ViewChild('mainInput') private _mainInput!: ElementRef;
   @ViewChild('dropdownMenu') private _dropdownMenu!: ElementRef;
@@ -81,17 +74,11 @@ export class LibComboboxComponent {
 
   public get ariaExpanded(): boolean { return this._ariaExpanded; }
   public set ariaExpanded(value: boolean) { this._ariaExpanded = value; }
+
+  public innerControl: FormControl = new FormControl<string | number | null>(null);
   // #endregion PUBLIC
 
   // #endregion ==========> PROPERTIES <==========
-
-
-  // #region ==========> FORM BUILDER <==========
-  private _valueControl: FormControl = new FormControl<string | number | null>("");
-  public filterForm: FormGroup = new FormGroup({
-    _searchInput: new FormControl<string>("")
-  });
-  // #endregion ==========> FORM BUILDER <==========
 
 
   // #region ==========> INITIALIZATION <==========
@@ -99,10 +86,6 @@ export class LibComboboxComponent {
 
   ngOnInit(): void {
     this.initializeSelectedValue();
-    
-    this._subscription = this.inputControl.valueChanges.subscribe(value => {
-      this.controlValueChange.emit(this._valueControl)
-    });
   }
 
   ngAfterViewInit(): void {
@@ -110,11 +93,7 @@ export class LibComboboxComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["list"]?.currentValue) { this.initializeSelectedValue() }
-
-    if (changes["control"]?.currentValue) {
-      if (!this.inputControl) { throw new Error("Nenhum [control] (FormControl) informado") }
-    }
+    if (changes["comboboxList"]?.currentValue) { this.initializeSelectedValue() }
   }
 
   ngOnDestroy(): void {
@@ -123,58 +102,39 @@ export class LibComboboxComponent {
   // #endregion ==========> INITIALIZATION <==========
 
 
-  // #region ==========> SERVICE METHODS <==========
-
-  // #region PREPARATION
-  // [...]
-  // #endregion PREPARATION
-
-  // #region GET
-  // [...]
-  // #endregion GET
-
-  // #region POST
-  // [...]
-  // #endregion POST
-
-  // #region DELETE
-  // [...]
-  // #endregion DELETE
-
-  // #endregion ==========> SERVICE METHODS <==========
-
-
   // #region ==========> UTILS <==========
-  public setFilterValue(item?: RecordCombobox): void {
-    const itemValue = item ? `${item.ID as string} - ${item.LABEL}` : "";
-    this.filterForm.controls["_searchInput"].setValue(itemValue);
-
+  public setValue(item: RecordCombobox): void {
     this.textoPesquisa = "";
-    this.inputControl.markAsDirty();
+    this.valueControl.markAsDirty();
 
-    if (item) {
-      this.selectedText = item.LABEL;
-      
-      this._valueControl.setValue(item.ID);
-      this.inputControl.setValue(item.LABEL);
-    } else {
-      this.selectedText = undefined;
+    this.selectedText = item.LABEL;
+    
+    this.valueControl.setValue(item.ID);
+    this.innerControl.setValue(item.LABEL);
 
-      this._valueControl.setValue("");
-      this.inputControl.setValue("");
-    }
+    this.ariaExpanded = false;
+  }
+
+  public clearValue(): void {
+    this.textoPesquisa = "";
+    this.valueControl.markAsDirty();
+
+    this.selectedText = undefined;
+
+    this.valueControl.setValue(null);
+    this.innerControl.setValue(null);
 
     this.ariaExpanded = false;
   }
 
   private initializeSelectedValue(): void {
-    if (!this.comboboxList || !this.comboboxList.length) return;
+    if (!this.comboboxList || (this.valueControl.value == null && this.valueControl.value == '')) return;
 
-    const initializedValue = this.comboboxList.find(item => item.ID == this.inputControl.value)
-
+    const initializedValue = this.comboboxList.find(item => item.ID == this.valueControl.value)
+    
     if (initializedValue) {
-      this._valueControl.setValue(initializedValue.ID ?? "");
-      this.inputControl.setValue(initializedValue.LABEL ?? "");
+      this.valueControl.setValue(initializedValue.ID);
+      this.innerControl.setValue(initializedValue.LABEL);
       
       this.selectedText = initializedValue.LABEL;
     }
@@ -187,7 +147,7 @@ export class LibComboboxComponent {
     }
   }
 
-  public reloadList(search: string): void { this.onReloadList.emit(search) }
+  public reloadList(): void { this.onReloadList.emit(this.textoPesquisa) }
   // #endregion ==========> UTILS <==========
 
 }

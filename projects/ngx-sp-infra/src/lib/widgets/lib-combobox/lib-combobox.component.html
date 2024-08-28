@@ -6,20 +6,20 @@
    <ng-content select="[btnLeft]"></ng-content>
 
    <input  #mainInput *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
-            [formControl]="inputControl" data-bs-auto-close="outside" aria-expanded="false" readonly
-            [class.is-invalid]="inputControl && (!inputControl.valid && (inputControl.touched && inputControl.dirty))"
+            [formControl]="innerControl" data-bs-auto-close="outside" aria-expanded="false" readonly
+            [class.is-invalid]="innerControl && (!innerControl.valid && (innerControl.touched && innerControl.dirty))"
             (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
 
-   <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll z-2" [class.show]="ariaExpanded">
+   <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll z-index-1020" [class.show]="ariaExpanded">
       <div class="input-group mb-2">
-         <input #searchInput (input)="textoPesquisa = searchInput.value" type="text" id="searchInput" class="form-control glb-input-no-glow" [placeholder]="searchInputPlaceholder" (keyup.enter)="reloadList(searchInput.value)">
-         <button class="btn btn-{{colorTheme}}" (click)="reloadList(searchInput.value)"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> </button>
+         <input #searchInput (input)="textoPesquisa = searchInput.value" type="text" id="searchInput" class="form-control glb-input-no-glow" [placeholder]="searchInputPlaceholder" (keyup.enter)="reloadList()">
+         <button class="btn btn-{{colorTheme}}" (click)="reloadList()"> <app-svg-storage svgName="lupa" svgSize="medium-small" /> </button>
       </div>
 
       @if (comboboxList) {
-         <li *ngIf="!inputControl.value && inputControl.value != '' && inputControl.value != null" class="dropdown-item" (click)="setFilterValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
+         <li *ngIf="innerControl.value != '' && innerControl.value != null" class="dropdown-item" (click)="clearValue()"> <span class="fw-bold">Limpar opção selecionada</span> </li>
          @for (item of comboboxList | textFilter:textoPesquisa; track $index) {
-            <li class="dropdown-item" (click)="setFilterValue(item)">
+            <li class="dropdown-item" (click)="setValue(item)">
                <span *ngIf="item.AdditionalStringProperty1 || item.AdditionalStringProperty1 != ''" class="glb-fs-12 fw-bold d-inline-block w-125">{{ item.AdditionalStringProperty1 }}</span> {{ item.LABEL }}
             </li>
          }
@@ -39,5 +39,5 @@
 </div>
 
 <!-- #region MENSAGEM DE ERRO DE VALIDAÇÃO -->
-<app-field-error-message *ngIf="inputControl && (!inputControl.valid && (inputControl.touched && inputControl.dirty))" [control]="inputControl" />
+<app-field-error-message *ngIf="innerControl && (!innerControl.valid && (innerControl.touched && innerControl.dirty))" [control]="innerControl" />
 <!-- #endregion MENSAGEM DE ERRO DE VALIDAÇÃO -->
