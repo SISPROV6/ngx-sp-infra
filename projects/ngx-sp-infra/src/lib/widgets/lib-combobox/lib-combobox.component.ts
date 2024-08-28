@@ -143,6 +143,7 @@ export class LibComboboxComponent {
   // #region ==========> UTILS <==========
   public setValue(item: RecordCombobox): void {
     this.textoPesquisa = "";
+    this.innerControl.markAsDirty();
     this.outerControl.markAsDirty();
 
     this.selectedText = item.LABEL;
@@ -155,6 +156,7 @@ export class LibComboboxComponent {
 
   public clearValue(): void {
     this.textoPesquisa = "";
+    this.innerControl.markAsDirty();
     this.outerControl.markAsDirty();
 
     this.selectedText = undefined;
