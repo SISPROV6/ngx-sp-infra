@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -127,7 +127,7 @@ export class LibComboboxComponent {
 
 
   // #region ==========> INITIALIZATION <==========
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.setValidator();
@@ -146,6 +146,10 @@ export class LibComboboxComponent {
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
+
+  // O que fazer quando o evento de redimensionamento ocorrer
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void { this.adjustDropdownWidth() }
   // #endregion ==========> INITIALIZATION <==========
 
 
@@ -177,6 +181,8 @@ export class LibComboboxComponent {
   }
 
   private initializeSelectedValue(): void {
+    this.innerControl.setValue(null); // Limpa o campo antes de qualquer coisa
+
     if (!this.comboboxList || (this.outerControl.value == null && this.outerControl.value == '')) return;
 
     const initializedValue = this.comboboxList.find(item => item.ID == this.outerControl.value)

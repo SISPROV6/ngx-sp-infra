@@ -87,6 +87,7 @@ export declare class LibComboboxComponent {
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
+    onResize(event: Event): void;
     setValue(item: RecordCombobox): void;
     clearValue(): void;
     private initializeSelectedValue;
