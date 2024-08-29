@@ -1,0 +1,12 @@
+import icons from '../icons/icons.json';
+export class IconModel {
+    constructor() {
+        this.nome = "";
+        this.categoria = "";
+        this.tags = [];
+    }
+}
+export class IconsList {
+    static get list() { return icons.list; }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWNvbi5tb2RlbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL25neC1zcC1pbmZyYS9zcmMvbGliL21vZGVscy9pY29ucy9pY29uLm1vZGVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBSyxNQUFNLHFCQUFxQixDQUFDO0FBRXhDLE1BQU0sT0FBTyxTQUFTO0lBQXRCO1FBQ1UsU0FBSSxHQUFXLEVBQUUsQ0FBQztRQUNsQixjQUFTLEdBQVcsRUFBRSxDQUFDO1FBRXZCLFNBQUksR0FBYyxFQUFFLENBQUM7SUFDL0IsQ0FBQztDQUFBO0FBRUQsTUFBTSxPQUFnQixTQUFTO0lBQ3JCLE1BQU0sS0FBSyxJQUFJLEtBQWtCLE9BQU8sS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7Q0FDOUQiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgaWNvbnMgZnJvbSAnLi4vaWNvbnMvaWNvbnMuanNvbic7XHJcblxyXG5leHBvcnQgY2xhc3MgSWNvbk1vZGVsIHtcclxuICAgcHVibGljIG5vbWU6IHN0cmluZyA9IFwiXCI7XHJcbiAgIHB1YmxpYyBjYXRlZ29yaWE6IHN0cmluZyA9IFwiXCI7XHJcbiAgIHB1YmxpYyBzdmc/OiBzdHJpbmc7XHJcbiAgIHB1YmxpYyB0YWdzPzogc3RyaW5nW10gPSBbXTtcclxufVxyXG5cclxuZXhwb3J0IGFic3RyYWN0IGNsYXNzIEljb25zTGlzdCB7XHJcbiAgIHB1YmxpYyBzdGF0aWMgZ2V0IGxpc3QoKTogSWNvbk1vZGVsW10geyByZXR1cm4gaWNvbnMubGlzdDsgfVxyXG59Il19

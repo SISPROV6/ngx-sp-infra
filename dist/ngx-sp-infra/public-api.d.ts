@@ -18,6 +18,7 @@ export * from './lib/models/ret-feedback-message';
 export * from './lib/models/ret-report-file';
 export * from './lib/models/combobox/record-combobox';
 export * from './lib/models/combobox/ret-records-combobox';
+export * from './lib/models/icons/icon.model';
 /** Pipes */
 export * from './lib/pipes/cpf-cnpj.pipe';
 export * from './lib/pipes/currency.pipe';
