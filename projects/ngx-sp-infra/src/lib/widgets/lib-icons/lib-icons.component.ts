@@ -44,7 +44,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
       | 'sorriso' | 'lampada' | 'sol' | 'seta-grande-cima' | 'seta-grande-baixo' | 'historico' | 'verificado' | 'logo-contratos'
       | 'reverter-reajuste' | 'transporte-caminhao' | 'meia-lua' | 'retornar-workflow' | 'ger-nota-fiscal' | 'prod-financeiro-icone'
       | 'certificado' | 'relatorio' | 'relatorio-nucleo' | 'relatorio-contrato' | 'relatorio-condicao-pagamento' | 'relatorio-objeto'
-      | 'relatorio-reajuste' | 'relatorio-vencido-vincendo' | 'alarme' | 'gestor' | 'consulta' | 'cadeado' | 'cadeado-outline' | 'cadeado-semiaberto-outline'
+      | 'relatorio-reajuste' | 'relatorio-vencido-vincendo' | 'alarme' | 'gestor-ativo' | 'gestor-inativo' | 'consulta' | 'cadeado' | 'cadeado-outline' | 'cadeado-semiaberto-outline'
       | 'cadeado-aberto-outline' | 'chave' | 'notificacoes' | 'trans';
 
       /** Cor do ícone */
