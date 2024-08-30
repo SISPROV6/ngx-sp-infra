@@ -56,17 +56,61 @@ export class LibIconsComponent implements OnInit, OnChanges {
       | 'reverter-reajuste' | 'consulta' | 'cadeado' | 'cadeado-outline' | 'cadeado-semiaberto-outline' 
       | 'cadeado-aberto-outline' | 'chave' | 'notificacoes' | 'trans';
 
-      /** Cor do ícone */
-    @Input() public iconColor: 'white' | 'blue' | 'gray' | 'green' | 'light-blue' | 'yellow' | 'red' | 'currentColor' | string = 'currentColor';
+      /** Cor do ícone
+       * Paleta de cores:
+       * @argument 'white' - #212529
+       * @argument 'blue' - #213B70
+       * @argument 'gray' - #6C757D
+       * @argument 'lightgray' - #CED4DA
+       * @argument 'green' - #D1E7DD
+       * @argument 'light-blue' - #3767B2
+       * @argument 'yellow' - #664D03
+       * @argument 'red' - #842029
+       * @argument 'currentColor' - currentColor
+       * @argument string - HEX da cor específica
+      */
+    @Input()
+    public get iconColor(): 'white' | 'blue' | 'gray' | 'light-gray' | 'green' | 'light-blue' | 'yellow' | 'red' | 'currentColor' | string { return this.color; }
+    public set iconColor(value: 'white' | 'blue' | 'gray' | 'light-gray' | 'green' | 'light-blue' | 'yellow' | 'red' | 'currentColor' | string) {
+      switch (value) {
+        case "white": this.color = "#212529"; break;
+        case "blue": this.color = "#213B70"; break;
+        case "gray": this.color = "#6C757D"; break;
+        case "light-gray": this.color = "#CED4DA"; break;
+        case "green": this.color = "#D1E7DD"; break;
+        case "light-blue": this.color = "#3767B2"; break;
+        case "yellow": this.color = "#664D03"; break;
+        case "red": this.color = "#842029"; break;
+        case "currentColor": this.color = "currentColor"; break;
+      }
+    }
 
-    /** Cor do preenchimento do ícone (fill) */
+    /** Tamanho do ícone
+     * Tamanhos disponíveis:
+     * @argument 'default' - 24px
+     * @argument 'medium-small' - 20px | Será depreciado em breve!
+     * @argument 'small' - 18px
+     * @argument number - número em pixels | Preferencialmente não utilizar!
+    */
+    @Input()
+    public get iconSize(): 'default' | 'medium-small' | 'small' | number { return this.size; }
+    public set iconSize(value: 'default' | 'medium-small' | 'small' | number) {
+      switch (value) {
+        case "default": this.size = 24; break;
+        case "medium-small": this.size = 20; break;
+        case "small": this.size = 18; break;
+        default: this.size = this.iconSize as number; break;
+      }
+    }
+
+    /** Cor do preenchimento do ícone (fill)
+     * ! SERÁ DEPRECIADO EM BREVE ! */
     @Input() public iconFill: string = 'none';
 
-    /** Tamanho do ícone */
-    @Input() public iconSize: 'default' | 'medium-small' | 'small' | number = 'default';
-
-    /** Largura do stroke do ícone */
+    /** Largura do stroke do ícone
+     * ! SERÁ DEPRECIADO EM BREVE ! */
     @Input() public iconStrokeWidth: 'super-lighter' | 'lighter' | 'light' | 'default' | 'bold' | 'bolder' = 'default';
+
 
     protected size: number;
     protected color: string;
@@ -92,24 +136,17 @@ export class LibIconsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['iconName']) this.checkName();
 
-    switch (this.iconSize) {
-      case "default": this.iconName == 'edit' ? this.size = 20 : this.size = 24; break;
-      case "medium-small": this.iconName == 'edit' ? this.size = 16 : this.size = 20; break;
-      case "small": this.iconName == 'edit' ? this.size = 12 : this.size = 16; break;
-      default: this.size = this.iconSize; break;
-    }
-
     this.color = this.iconColor;
 
     switch (this.iconColor) {
-      case "white": this.color = "#FFFFFF"; break;
-      case "blue": this.color = "#2847A0"; break;
-      case "gray": this.color = "#6C757D"; break;
-      case "lightgray": this.color = "#bfbfbf"; break;
-      case "green": this.color = "#198754"; break;
-      case "light-blue": this.color = "#0dcaf0"; break;
-      case "yellow": this.color = "#ffc107"; break;
-      case "red": this.color = "#dc3545"; break;
+      case "white": this.color = "#212529"; break;
+      case "blue": this.color = "#213B70"; break;
+      case "gray": this.color = "#212529"; break;
+      case "lightgray": this.color = "#CED4DA"; break;
+      case "green": this.color = "#D1E7DD"; break;
+      case "light-blue": this.color = "#3767B2"; break;
+      case "yellow": this.color = "#664D03"; break;
+      case "red": this.color = "#842029"; break;
       case "currentColor": this.color = "currentColor"; break;
     }
 

@@ -31,6 +31,7 @@ import * as i0 from "@angular/core";
  * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
  */
 export declare class LibComboboxComponent {
+    private _disabled?;
     private _ariaExpanded;
     private _subscription;
     private _outerControl;
@@ -53,7 +54,8 @@ export declare class LibComboboxComponent {
     /** (opcional) Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
      * @type {boolean}
      * @default false */
-    disabled?: boolean;
+    get disabled(): boolean;
+    set disabled(value: boolean | undefined);
     /** (opcional) Placeholder do campo principal do combo
      * @alias 'mainPlaceholder'
      * @type {string}
@@ -77,7 +79,6 @@ export declare class LibComboboxComponent {
     onReloadList: EventEmitter<string>;
     private _mainInput;
     private _dropdownMenu;
-    selectedText?: string;
     textoPesquisa: string;
     get ariaExpanded(): boolean;
     set ariaExpanded(value: boolean);

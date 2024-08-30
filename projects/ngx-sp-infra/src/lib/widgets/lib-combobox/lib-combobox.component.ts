@@ -43,6 +43,7 @@ export class LibComboboxComponent {
   // #region ==========> PROPERTIES <==========
 
   // #region PRIVATE
+  private _disabled?: boolean = false;
   private _ariaExpanded: boolean = false;
   private _subscription: Subscription = new Subscription();
 
@@ -83,7 +84,12 @@ export class LibComboboxComponent {
   /** (opcional) Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
    * @type {boolean}
    * @default false */
-  @Input() public disabled?: boolean = false;
+  @Input()
+  public get disabled(): boolean { return this._disabled ?? false; }
+  public set disabled(value: boolean | undefined) {
+    if (value && value === true) this.innerControl.disable();
+    else this.innerControl.enable();
+  }
 
   /** (opcional) Placeholder do campo principal do combo
    * @alias 'mainPlaceholder'
@@ -114,7 +120,6 @@ export class LibComboboxComponent {
   @ViewChild('mainInput') private _mainInput!: ElementRef;
   @ViewChild('dropdownMenu') private _dropdownMenu!: ElementRef;
 
-  public selectedText?: string;
   public textoPesquisa: string = "";
 
   public get ariaExpanded(): boolean { return this._ariaExpanded; }
@@ -139,18 +144,8 @@ export class LibComboboxComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["comboboxList"]?.currentValue) { this.initializeSelectedValue() }
-    
-    if (changes["outerControl"]?.currentValue) { this.initializeSelectedValue() }
-
-    if (changes["disabled"]?.currentValue) {
-      let isDisabled = changes["disabled"]?.currentValue === true ?? false;
-
-      if (isDisabled) this.innerControl.disable();
-      else this.innerControl.enable();
-
-      this.initializeSelectedValue();
-    }
+    if (changes["comboboxList"]?.currentValue) this.initializeSelectedValue();
+    if (changes["outerControl"]?.currentValue) this.initializeSelectedValue();
   }
 
   ngOnDestroy(): void {
@@ -168,8 +163,6 @@ export class LibComboboxComponent {
     this.textoPesquisa = "";
     this.innerControl.markAsDirty();
     this.outerControl.markAsDirty();
-
-    this.selectedText = item.LABEL;
     
     this.outerControl.setValue(item.ID);
     this.innerControl.setValue(item.LABEL);
@@ -181,8 +174,6 @@ export class LibComboboxComponent {
     this.textoPesquisa = "";
     this.innerControl.markAsDirty();
     this.outerControl.markAsDirty();
-
-    this.selectedText = undefined;
 
     this.outerControl.setValue(null);
     this.innerControl.setValue(null);
@@ -196,12 +187,7 @@ export class LibComboboxComponent {
     if (!this.comboboxList || (this.outerControl.value == null && this.outerControl.value == '')) return;
 
     const initializedValue = this.comboboxList.find(item => item.ID == this.outerControl.value)
-    
-    if (initializedValue) {
-      this.innerControl.setValue(initializedValue.LABEL);
-      
-      this.selectedText = initializedValue.LABEL;
-    }
+    if (initializedValue) this.innerControl.setValue(initializedValue.LABEL);
   }
 
   private adjustDropdownWidth(): void {
