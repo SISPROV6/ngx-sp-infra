@@ -73,7 +73,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
     public get iconColor(): 'white' | 'blue' | 'gray' | 'light-gray' | 'green' | 'light-blue' | 'yellow' | 'red' | 'currentColor' | string { return this.color; }
     public set iconColor(value: 'white' | 'blue' | 'gray' | 'light-gray' | 'green' | 'light-blue' | 'yellow' | 'red' | 'currentColor' | string) {
       switch (value) {
-        case "white": this.color = "#212529"; break;
+        case "white": this.color = "#FFFFFF"; break;
         case "blue": this.color = "#213B70"; break;
         case "gray": this.color = "#6C757D"; break;
         case "light-gray": this.color = "#CED4DA"; break;
