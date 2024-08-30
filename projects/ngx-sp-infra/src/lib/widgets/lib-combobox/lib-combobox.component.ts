@@ -206,6 +206,7 @@ export class LibComboboxComponent {
   }
 
   private setValidator(): void {
+    console.log(this.outerControl);
     if (this.outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
   }
 
