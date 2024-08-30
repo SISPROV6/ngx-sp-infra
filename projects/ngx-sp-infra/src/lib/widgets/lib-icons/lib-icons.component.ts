@@ -112,8 +112,8 @@ export class LibIconsComponent implements OnInit, OnChanges {
     @Input() public iconStrokeWidth: 'super-lighter' | 'lighter' | 'light' | 'default' | 'bold' | 'bolder' = 'default';
 
 
-    protected size: number;
-    protected color: string;
+    protected size: number = 24;
+    protected color: string = "currentColor";
     protected strokeWidth: number;
   // #endregion PUBLIC
 
