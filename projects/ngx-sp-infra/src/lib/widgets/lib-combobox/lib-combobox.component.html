@@ -29,7 +29,7 @@
    </ul>
 
    <ng-template #disabledInput>
-      <input  #mainInput  class="form-select text-start rounded-end" type="text" [placeholder]="mainInputPlaceholder" [(ngModel)]="selectedText" readonly disabled>
+      <input  #mainInput  class="form-select text-start rounded-end" type="text" [placeholder]="mainInputPlaceholder" [formControl]="innerControl" readonly>
    </ng-template>
 
    <!-- Este elemento ng-content com o atributo [btnRight] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado direito do combobox de pesquisa.

@@ -140,7 +140,17 @@ export class LibComboboxComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) { this.initializeSelectedValue() }
+    
     if (changes["outerControl"]?.currentValue) { this.initializeSelectedValue() }
+
+    if (changes["disabled"]?.currentValue) {
+      let isDisabled = changes["disabled"]?.currentValue === true ?? false;
+
+      if (isDisabled) this.innerControl.disable();
+      else this.innerControl.enable();
+
+      this.initializeSelectedValue();
+    }
   }
 
   ngOnDestroy(): void {
