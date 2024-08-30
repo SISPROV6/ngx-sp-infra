@@ -115,6 +115,9 @@ export class LibComboboxComponent {
    * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
    * @type {EventEmitter<string>} */
   @Output() public onReloadList: EventEmitter<string> = new EventEmitter<string>();
+
+
+  @Output() public onChange: EventEmitter<string | number | null> = new EventEmitter<string | number | null>();
   
 
   @ViewChild('mainInput') private _mainInput!: ElementRef;
@@ -168,6 +171,9 @@ export class LibComboboxComponent {
     this.innerControl.setValue(item.LABEL);
 
     this.ariaExpanded = false;
+
+
+    this.onChange.emit(item.ID);
   }
 
   public clearValue(): void {
@@ -179,6 +185,8 @@ export class LibComboboxComponent {
     this.innerControl.setValue(null);
 
     this.ariaExpanded = false;
+
+    this.onChange.emit(null);
   }
 
   private initializeSelectedValue(): void {
