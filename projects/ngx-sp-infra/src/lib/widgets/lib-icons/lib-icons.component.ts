@@ -58,14 +58,14 @@ export class LibIconsComponent implements OnInit, OnChanges {
 
       /** Cor do ícone
        * Paleta de cores:
-       * @argument 'white' - #212529
-       * @argument 'blue' - #213B70
+       * @argument 'white' - #FFFFFF
+       * @argument 'blue' - #3767b2
        * @argument 'gray' - #6C757D
-       * @argument 'lightgray' - #CED4DA
-       * @argument 'green' - #D1E7DD
+       * @argument 'light-gray' - #CED4DA
+       * @argument 'green' - #0F5132
        * @argument 'light-blue' - #3767B2
-       * @argument 'yellow' - #664D03
-       * @argument 'red' - #842029
+       * @argument 'yellow' - #FFC107
+       * @argument 'red' - #B23737
        * @argument 'currentColor' - currentColor
        * @argument string - HEX da cor específica
       */
@@ -74,13 +74,13 @@ export class LibIconsComponent implements OnInit, OnChanges {
     public set iconColor(value: 'white' | 'blue' | 'gray' | 'light-gray' | 'green' | 'light-blue' | 'yellow' | 'red' | 'currentColor' | string) {
       switch (value) {
         case "white": this.color = "#FFFFFF"; break;
-        case "blue": this.color = "#213B70"; break;
+        case "blue": this.color = "#3767b2"; break;
         case "gray": this.color = "#6C757D"; break;
         case "light-gray": this.color = "#CED4DA"; break;
-        case "green": this.color = "#D1E7DD"; break;
+        case "green": this.color = "#0F5132"; break;
         case "light-blue": this.color = "#3767B2"; break;
-        case "yellow": this.color = "#664D03"; break;
-        case "red": this.color = "#842029"; break;
+        case "yellow": this.color = "#FFC107"; break;
+        case "red": this.color = "#B23737"; break;
         case "currentColor": this.color = "currentColor"; break;
       }
     }
@@ -113,7 +113,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
 
 
     protected size: number = 24;
-    protected color: string = "white";
+    protected color: string = "currentColor";
     protected strokeWidth: number;
   // #endregion PUBLIC
 
