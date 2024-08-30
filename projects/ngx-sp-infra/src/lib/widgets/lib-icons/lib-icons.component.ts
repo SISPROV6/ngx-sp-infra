@@ -113,7 +113,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
 
 
     protected size: number = 24;
-    protected color: string = "currentColor";
+    protected color: string = "white";
     protected strokeWidth: number;
   // #endregion PUBLIC
 
