@@ -38,8 +38,8 @@ export declare class LibComboboxComponent {
     /** (obrigatório) Control para seleção dos valores, atualizará automaticamente o control do componente pai também
      * @alias 'control'
      * @type {FormControl<any> | AbstractControl<any>} */
-    set outerControl(value: FormControl<any> | AbstractControl<any>);
     get outerControl(): FormControl<any>;
+    set outerControl(value: FormControl<any> | AbstractControl<any>);
     /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
      * @alias 'list'
      * @type {RecordCombobox[]} */
@@ -95,6 +95,9 @@ export declare class LibComboboxComponent {
     clearValue(): void;
     private initializeSelectedValue;
     private adjustDropdownWidth;
+    /** Serve para atualizar o status do control e o desabilitar caso seja feito no componente pai,
+     * sem a necessidade de uma outra propriedade específica para isto. */
+    private subscribeControlChanges;
     private setValidator;
     private setIsInvalid;
     reloadList(): void;

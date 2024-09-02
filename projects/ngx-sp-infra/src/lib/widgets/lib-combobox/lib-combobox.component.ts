@@ -56,6 +56,7 @@ export class LibComboboxComponent {
    * @alias 'control'
    * @type {FormControl<any> | AbstractControl<any>} */
   @Input({ alias: 'control', required: true })
+  public get outerControl(): FormControl<any> { return this._outerControl }
   public set outerControl(value: FormControl<any> | AbstractControl<any>) {
     this._outerControl = value as FormControl
 
@@ -64,8 +65,8 @@ export class LibComboboxComponent {
 
     // Subscrição ao observável valueChanges para reagir a mudanças no valor
     this._subscription = this._outerControl.valueChanges.subscribe(() => { this.initializeSelectedValue() });
+    this._subscription = this._outerControl.statusChanges.subscribe(status => { this.subscribeControlChanges() });
   }
-  public get outerControl(): FormControl<any> { return this._outerControl }
 
   /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
    * @alias 'list'
@@ -151,7 +152,10 @@ export class LibComboboxComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) this.initializeSelectedValue();
-    if (changes["outerControl"]?.currentValue) this.initializeSelectedValue();
+    if (changes["outerControl"]?.currentValue) {
+      this.initializeSelectedValue();
+      this.subscribeControlChanges();
+    }
   }
 
   ngOnDestroy(): void {
@@ -208,6 +212,18 @@ export class LibComboboxComponent {
       this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
     }
   }
+
+  /** Serve para atualizar o status do control e o desabilitar caso seja feito no componente pai,
+   * sem a necessidade de uma outra propriedade específica para isto. */
+  private subscribeControlChanges(): void {
+    this.outerControl.statusChanges.subscribe(status => {
+      if (status === "DISABLED") this.innerControl.disable();
+      else this.innerControl.enable();
+
+      this.setIsInvalid();
+    });
+  }
+
 
   private setValidator(): void {
     if (this.outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
