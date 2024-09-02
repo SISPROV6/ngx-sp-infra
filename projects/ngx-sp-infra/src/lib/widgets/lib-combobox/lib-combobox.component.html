@@ -5,9 +5,8 @@
    Ao usar o atributo [btnLeft], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
    <ng-content select="[btnLeft]"></ng-content>
 
-   <input  #mainInput *ngIf="!disabled; else disabledInput" class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
-            [formControl]="innerControl" data-bs-auto-close="outside" aria-expanded="false" readonly
-            [class.is-invalid]="innerControl && (!innerControl.valid && (innerControl.touched && innerControl.dirty))"
+   <input  #mainInput class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
+            [formControl]="innerControl" data-bs-auto-close="outside" aria-expanded="false" readonly [class.is-invalid]="isInvalid"
             (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
 
    <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll z-index-1020" [class.show]="ariaExpanded">
@@ -28,10 +27,6 @@
       @else { <li class="dropdown-item text-center"> <div class="spinner-border" role="status"><span class="visually-hidden">Carregando dados...</span></div> </li> }
    </ul>
 
-   <ng-template #disabledInput>
-      <input  #mainInput  class="form-select text-start rounded-end" type="text" [placeholder]="mainInputPlaceholder" [formControl]="innerControl" readonly>
-   </ng-template>
-
    <!-- Este elemento ng-content com o atributo [btnRight] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado direito do combobox de pesquisa.
    Ao usar o atributo [btnRight], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
    <ng-content select="[btnRight]"></ng-content>
@@ -39,5 +34,5 @@
 </div>
 
 <!-- #region MENSAGEM DE ERRO DE VALIDAÇÃO -->
-<app-field-error-message *ngIf="innerControl && (!innerControl.valid && (innerControl.touched && innerControl.dirty))" [control]="innerControl" />
+<app-field-error-message *ngIf="isInvalid" [control]="innerControl" />
 <!-- #endregion MENSAGEM DE ERRO DE VALIDAÇÃO -->

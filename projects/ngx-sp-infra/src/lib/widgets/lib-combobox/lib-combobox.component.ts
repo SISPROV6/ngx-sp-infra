@@ -89,6 +89,8 @@ export class LibComboboxComponent {
   public set disabled(value: boolean | undefined) {
     if (value && value === true) this.innerControl.disable();
     else this.innerControl.enable();
+
+    this.setIsInvalid();
   }
 
   /** (opcional) Placeholder do campo principal do combo
@@ -129,6 +131,7 @@ export class LibComboboxComponent {
   public set ariaExpanded(value: boolean) { this._ariaExpanded = value; }
 
   public innerControl: FormControl = new FormControl<string | number | null>(null);
+  public isInvalid: boolean = false;
   // #endregion PUBLIC
 
   // #endregion ==========> PROPERTIES <==========
@@ -171,7 +174,7 @@ export class LibComboboxComponent {
     this.innerControl.setValue(item.LABEL);
 
     this.ariaExpanded = false;
-
+    this.setIsInvalid();
 
     this.onChange.emit(item.ID);
   }
@@ -185,6 +188,7 @@ export class LibComboboxComponent {
     this.innerControl.setValue(null);
 
     this.ariaExpanded = false;
+    this.setIsInvalid();
 
     this.onChange.emit(null);
   }
@@ -206,8 +210,11 @@ export class LibComboboxComponent {
   }
 
   private setValidator(): void {
-    console.log(this.outerControl);
     if (this.outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
+  }
+
+  private setIsInvalid(): void {
+    this.isInvalid = this.innerControl.invalid && (this.innerControl.touched || this.innerControl.dirty);
   }
 
   public reloadList(): void { this.onReloadList.emit(this.textoPesquisa) }

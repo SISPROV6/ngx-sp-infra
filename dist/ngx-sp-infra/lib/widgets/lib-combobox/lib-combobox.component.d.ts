@@ -84,6 +84,7 @@ export declare class LibComboboxComponent {
     get ariaExpanded(): boolean;
     set ariaExpanded(value: boolean);
     innerControl: FormControl;
+    isInvalid: boolean;
     constructor();
     ngOnInit(): void;
     ngAfterViewInit(): void;
@@ -95,6 +96,7 @@ export declare class LibComboboxComponent {
     private initializeSelectedValue;
     private adjustDropdownWidth;
     private setValidator;
+    private setIsInvalid;
     reloadList(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; }, { "onReloadList": "onReloadList"; "onChange": "onChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
