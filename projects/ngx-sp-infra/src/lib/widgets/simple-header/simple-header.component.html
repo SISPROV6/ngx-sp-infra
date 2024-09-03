@@ -18,6 +18,7 @@
         @if (!hideButtons || !hideButtons.includes("customButton3")) { <ng-content select="[customButton3]"></ng-content> }
         @if (!hideButtons || !hideButtons.includes("customButton4")) { <ng-content select="[customButton4]"></ng-content> }
         @if (!hideButtons || !hideButtons.includes("customButton5")) { <ng-content select="[customButton5]"></ng-content> }
+        @if (!hideButtons || !hideButtons.includes("customButtonEnd")) { <ng-content select="[customButtonEnd]"></ng-content> }
 
         @if (mode !== 'list') {
           @if (!hideButtons || !hideButtons.includes("Cancelar")) {
