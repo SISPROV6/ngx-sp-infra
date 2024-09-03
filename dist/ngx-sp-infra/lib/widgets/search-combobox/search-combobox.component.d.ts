@@ -86,6 +86,7 @@ export declare class SearchComboboxComponent implements OnInit, OnChanges, After
     set ariaExpanded(value: boolean);
     get selectedItem(): RecordCombobox;
     set selectedItem(value: RecordCombobox);
+    onResize(event: Event): void;
     private idControl;
     filterForm: FormGroup;
     setFilterValue(item?: RecordCombobox): void;

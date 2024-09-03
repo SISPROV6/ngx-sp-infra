@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
@@ -38,9 +38,23 @@ import { RecordCombobox } from '../../models/combobox/record-combobox';
   templateUrl: './lib-combobox.component.html',
   styleUrl: './lib-combobox.component.scss'
 })
-export class LibComboboxComponent {
+export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, DoCheck {
 
   // #region ==========> PROPERTIES <==========
+
+  // #region PROTECTED
+  protected textoPesquisa: string = "";
+
+  protected get ariaExpanded(): boolean { return this._ariaExpanded; }
+  protected set ariaExpanded(value: boolean) { this._ariaExpanded = value; }
+
+  protected innerControl: FormControl = new FormControl<string | number | null>(null);
+  protected invalidControl: boolean = false;
+
+  protected invalid: boolean = false;
+  protected dirty: boolean = false;
+  protected touched: boolean = false;
+  // #endregion PROTECTED
 
   // #region PRIVATE
   private _disabled?: boolean = false;
@@ -56,16 +70,15 @@ export class LibComboboxComponent {
    * @alias 'control'
    * @type {FormControl<any> | AbstractControl<any>} */
   @Input({ alias: 'control', required: true })
-  public get outerControl(): FormControl<any> { return this._outerControl }
   public set outerControl(value: FormControl<any> | AbstractControl<any>) {
-    this._outerControl = value as FormControl
+    this._outerControl = value as FormControl;
 
     // Cancela a subscrição anterior (se houver) para evitar múltiplas subscrições
     if (this._subscription) this._subscription.unsubscribe();
 
     // Subscrição ao observável valueChanges para reagir a mudanças no valor
     this._subscription = this._outerControl.valueChanges.subscribe(() => { this.initializeSelectedValue() });
-    this._subscription = this._outerControl.statusChanges.subscribe(status => { this.subscribeControlChanges() });
+    this._subscription = this._outerControl.statusChanges.subscribe(() => { this.subscribeControlChanges() });
   }
 
   /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
@@ -113,6 +126,12 @@ export class LibComboboxComponent {
   */
   @Input('theme') public colorTheme?: string = "primary";
 
+  /** (opcional) Define um nome para o controle, utilizado internamente em alguns recursos
+   * @alias 'controlName'
+   * @type {string}
+  */
+  @Input('controlName') public controlName?: string;
+
   /** Evento emitido ao recarregar a lista de registros
    * @example Ao ser emitido, o componente pai pode refazer o GET da lista, por exemplo.
    * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
@@ -125,14 +144,6 @@ export class LibComboboxComponent {
 
   @ViewChild('mainInput') private _mainInput!: ElementRef;
   @ViewChild('dropdownMenu') private _dropdownMenu!: ElementRef;
-
-  public textoPesquisa: string = "";
-
-  public get ariaExpanded(): boolean { return this._ariaExpanded; }
-  public set ariaExpanded(value: boolean) { this._ariaExpanded = value; }
-
-  public innerControl: FormControl = new FormControl<string | number | null>(null);
-  public isInvalid: boolean = false;
   // #endregion PUBLIC
 
   // #endregion ==========> PROPERTIES <==========
@@ -150,11 +161,67 @@ export class LibComboboxComponent {
     this.adjustDropdownWidth();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes["comboboxList"]?.currentValue) this.initializeSelectedValue();
-    if (changes["outerControl"]?.currentValue) {
-      this.initializeSelectedValue();
-      this.subscribeControlChanges();
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes["comboboxList"]?.currentValue) this.initializeSelectedValue();
+  //   if (changes["outerControl"]?.currentValue) {
+  //     this.subscribeControlChanges();
+  //   }
+  // }
+
+  ngDoCheck(): void {
+    const parentGroup = this._outerControl.parent as FormGroup;
+    console.log("controlName:", this.controlName);
+
+    if (!this.controlName) {
+      // Iterando sobre os controles no FormGroup
+      const controlExists = Object.values(parentGroup.controls).some(control => control === this._outerControl);
+
+      if (parentGroup) {
+        if (!controlExists) throw new Error("Erro no <lib-combobox> - O FormControl informado não foi encontrado dentro do FormGroup...");
+        const tempControl = Object.values(parentGroup.controls).find(control => control === this._outerControl);
+
+        this.disabled = tempControl!.disabled;
+        this.invalid = tempControl!.invalid;
+        this.dirty = tempControl!.dirty;
+        this.touched = tempControl!.touched;
+    
+        this.setIsInvalid();
+      }
+      else {
+        this.disabled = this._outerControl.disabled;
+        this.invalid = this._outerControl.invalid;
+        this.dirty = this._outerControl.dirty;
+        this.touched = this._outerControl.touched;
+
+        this.setIsInvalid();
+      }
+    }
+    else {
+      const control = parentGroup.get(this.controlName);
+      console.log("parentGroup:", parentGroup);
+      console.log("controlExists:", control);
+
+      if (parentGroup) {
+        if (control === null) console.error(`Erro no <lib-combobox> - O FormControl de nome "${this.controlName}" informado não foi encontrado dentro do FormGroup.`);
+
+        const tempControl = parentGroup.controls[this.controlName as string];
+        console.log("tempControl:", tempControl);
+
+        this.disabled = tempControl!.disabled;
+        this.invalid = tempControl!.invalid;
+        this.dirty = tempControl!.dirty;
+        this.touched = tempControl!.touched;
+    
+        this.setIsInvalid();
+      }
+      else {
+        this.disabled = this._outerControl.disabled;
+        this.invalid = this._outerControl.invalid;
+        this.dirty = this._outerControl.dirty;
+        this.touched = this._outerControl.touched;
+
+        this.setIsInvalid();
+      }
     }
   }
 
@@ -172,9 +239,9 @@ export class LibComboboxComponent {
   public setValue(item: RecordCombobox): void {
     this.textoPesquisa = "";
     this.innerControl.markAsDirty();
-    this.outerControl.markAsDirty();
+    this._outerControl.markAsDirty();
     
-    this.outerControl.setValue(item.ID);
+    this._outerControl.setValue(item.ID);
     this.innerControl.setValue(item.LABEL);
 
     this.ariaExpanded = false;
@@ -186,9 +253,9 @@ export class LibComboboxComponent {
   public clearValue(): void {
     this.textoPesquisa = "";
     this.innerControl.markAsDirty();
-    this.outerControl.markAsDirty();
+    this._outerControl.markAsDirty();
 
-    this.outerControl.setValue(null);
+    this._outerControl.setValue(null);
     this.innerControl.setValue(null);
 
     this.ariaExpanded = false;
@@ -200,9 +267,9 @@ export class LibComboboxComponent {
   private initializeSelectedValue(): void {
     this.innerControl.setValue(null); // Limpa o campo antes de qualquer coisa
 
-    if (!this.comboboxList || (this.outerControl.value == null && this.outerControl.value == '')) return;
+    if (!this.comboboxList || (this._outerControl.value == null && this._outerControl.value == '')) return;
 
-    const initializedValue = this.comboboxList.find(item => item.ID == this.outerControl.value)
+    const initializedValue = this.comboboxList.find(item => item.ID == this._outerControl.value)
     if (initializedValue) this.innerControl.setValue(initializedValue.LABEL);
   }
 
@@ -216,7 +283,7 @@ export class LibComboboxComponent {
   /** Serve para atualizar o status do control e o desabilitar caso seja feito no componente pai,
    * sem a necessidade de uma outra propriedade específica para isto. */
   private subscribeControlChanges(): void {
-    this.outerControl.statusChanges.subscribe(status => {
+    this._outerControl.statusChanges.subscribe(status => {
       if (status === "DISABLED") this.innerControl.disable();
       else this.innerControl.enable();
 
@@ -226,11 +293,16 @@ export class LibComboboxComponent {
 
 
   private setValidator(): void {
-    if (this.outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
+    if (this._outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
   }
 
   private setIsInvalid(): void {
-    this.isInvalid = this.innerControl.invalid && (this.innerControl.touched || this.innerControl.dirty);
+    console.log("invalid:", this.invalid);
+    console.log("dirty:", this.dirty);
+    console.log("touched:", this.touched);
+
+    this.invalidControl = this.invalid && (this.touched && this.dirty);
+    console.log("invalidControl:", this.invalidControl);
   }
 
   public reloadList(): void { this.onReloadList.emit(this.textoPesquisa) }

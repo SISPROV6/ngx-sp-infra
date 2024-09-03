@@ -21,6 +21,8 @@ export class FieldErrorMessageComponent implements OnInit {
 
 
   public get errorMessage() {
+    console.log("appFieldErrorMessage.control", this.control);
+    
     for (let propertyName in this.control?.errors) {
       if (this.control?.errors.hasOwnProperty(propertyName) &&
         (this.control?.dirty || this.control?.touched)) {

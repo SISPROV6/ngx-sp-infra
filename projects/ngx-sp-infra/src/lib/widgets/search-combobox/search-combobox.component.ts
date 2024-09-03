@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 import { FormUtils } from "../../utils/form-utils";
@@ -135,6 +135,11 @@ export class SearchComboboxComponent implements OnInit, OnChanges, AfterViewInit
     this._selectedItem = value;
     this.onSelectItem.emit(value);
   }
+
+
+  // O que fazer quando o evento de redimensionamento ocorrer
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void { this.adjustDropdownWidth() }
   // #endregion PUBLIC
 
   // #endregion ==========> PROPERTIES <==========

@@ -19,6 +19,7 @@ export * from './lib/models/ret-report-file';
 export * from './lib/models/combobox/record-combobox';
 export * from './lib/models/combobox/ret-records-combobox';
 export * from './lib/models/icons/icon.model';
+export * from './lib/models/forms/custom-form-control';
 /** Pipes */
 export * from './lib/pipes/cpf-cnpj.pipe';
 export * from './lib/pipes/currency.pipe';

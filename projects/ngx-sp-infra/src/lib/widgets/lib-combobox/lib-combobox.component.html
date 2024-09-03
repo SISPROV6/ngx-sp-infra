@@ -6,7 +6,7 @@
    <ng-content select="[btnLeft]"></ng-content>
 
    <input  #mainInput class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
-            [formControl]="innerControl" data-bs-auto-close="outside" aria-expanded="false" readonly [class.is-invalid]="isInvalid"
+            [formControl]="innerControl" data-bs-auto-close="outside" aria-expanded="false" readonly [class.is-invalid]="invalidControl"
             (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
 
    <ul  #dropdownMenu  class="dropdown-menu p-2 glb-max-height-350px overflow-y-scroll z-index-1020" [class.show]="ariaExpanded">
@@ -34,5 +34,5 @@
 </div>
 
 <!-- #region MENSAGEM DE ERRO DE VALIDAÇÃO -->
-<app-field-error-message *ngIf="isInvalid" [control]="innerControl" />
+<app-field-error-message *ngIf="invalidControl" [control]="innerControl" />
 <!-- #endregion MENSAGEM DE ERRO DE VALIDAÇÃO -->
