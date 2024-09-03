@@ -24,6 +24,7 @@ import { RecordCombobox } from '../../models/combobox/record-combobox';
  * - `outerControl` (FormControl | AbstractControl): Control para seleção dos valores, atualizará automaticamente o control do componente pai também
  * - `comboboxList` (RecordCombobox[]): Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
  * - `labelText` (string): Texto do rótulo que será exibido acima do combo. Caso não informado nada será exibido
+ * - `controlName` (string): Define um nome para o controle, utilizado internamente em alguns recursos. Recomendado para evitar alguns bugs de detecção.
  * - `disabled` (boolean): Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
  * - `libRequired` (boolean): Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
  * - `mainInputPlaceholder` (string): Placeholder do campo principal do combo
@@ -126,7 +127,8 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
   */
   @Input('theme') public colorTheme?: string = "primary";
 
-  /** (opcional) Define um nome para o controle, utilizado internamente em alguns recursos
+  /** (Recomendado) Define um nome para o controle, utilizado internamente em alguns recursos.
+   * Evita alguns bugs de detecção.
    * @alias 'controlName'
    * @type {string}
   */
