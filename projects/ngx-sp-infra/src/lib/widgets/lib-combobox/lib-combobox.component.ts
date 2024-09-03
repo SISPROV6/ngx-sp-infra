@@ -71,6 +71,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
    * @alias 'control'
    * @type {FormControl<any> | AbstractControl<any>} */
   @Input({ alias: 'control', required: true })
+  public get outerControl(): FormControl<any> { return this._outerControl }
   public set outerControl(value: FormControl<any> | AbstractControl<any>) {
     this._outerControl = value as FormControl;
 
@@ -141,6 +142,10 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
   @Output() public onReloadList: EventEmitter<string> = new EventEmitter<string>();
 
 
+  /** Evento emitido ao selecionar um registro da lista do combobox
+   * @example Ao ser emitido, o componente pai pode realizar uma validação com o valor selecionado.
+   * @emits EventEmitter<string|number|null> que leva o valor string da pesquisa feita para ser enviada para o GET
+   * @type {EventEmitter<string | number | null>} */
   @Output() public onChange: EventEmitter<string | number | null> = new EventEmitter<string | number | null>();
   
 

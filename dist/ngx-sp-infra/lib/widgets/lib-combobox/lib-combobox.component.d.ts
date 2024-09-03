@@ -47,6 +47,7 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
     /** (obrigatório) Control para seleção dos valores, atualizará automaticamente o control do componente pai também
      * @alias 'control'
      * @type {FormControl<any> | AbstractControl<any>} */
+    get outerControl(): FormControl<any>;
     set outerControl(value: FormControl<any> | AbstractControl<any>);
     /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
      * @alias 'list'
@@ -91,6 +92,10 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
      * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
      * @type {EventEmitter<string>} */
     onReloadList: EventEmitter<string>;
+    /** Evento emitido ao selecionar um registro da lista do combobox
+     * @example Ao ser emitido, o componente pai pode realizar uma validação com o valor selecionado.
+     * @emits EventEmitter<string|number|null> que leva o valor string da pesquisa feita para ser enviada para o GET
+     * @type {EventEmitter<string | number | null>} */
     onChange: EventEmitter<string | number | null>;
     private _mainInput;
     private _dropdownMenu;
