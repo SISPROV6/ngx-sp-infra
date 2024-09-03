@@ -32,7 +32,6 @@ export class FormUtils {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
   
-      console.log("formUtils.control:", control);
       control?.markAsDirty();
       control?.markAsTouched();
       
