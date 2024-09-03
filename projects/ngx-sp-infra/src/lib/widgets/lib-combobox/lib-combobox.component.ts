@@ -170,14 +170,13 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
 
   ngDoCheck(): void {
     const parentGroup = this._outerControl.parent as FormGroup;
-    console.log("controlName:", this.controlName);
 
     if (!this.controlName) {
       // Iterando sobre os controles no FormGroup
       const controlExists = Object.values(parentGroup.controls).some(control => control === this._outerControl);
 
       if (parentGroup) {
-        if (!controlExists) throw new Error("Erro no <lib-combobox> - O FormControl informado não foi encontrado dentro do FormGroup...");
+        if (!controlExists) console.error("Erro no <lib-combobox> - O FormControl informado não foi encontrado dentro do FormGroup...");
         const tempControl = Object.values(parentGroup.controls).find(control => control === this._outerControl);
 
         this.disabled = tempControl!.disabled;
@@ -198,14 +197,11 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
     }
     else {
       const control = parentGroup.get(this.controlName);
-      console.log("parentGroup:", parentGroup);
-      console.log("controlExists:", control);
 
       if (parentGroup) {
         if (control === null) console.error(`Erro no <lib-combobox> - O FormControl de nome "${this.controlName}" informado não foi encontrado dentro do FormGroup.`);
 
         const tempControl = parentGroup.controls[this.controlName as string];
-        console.log("tempControl:", tempControl);
 
         this.disabled = tempControl!.disabled;
         this.invalid = tempControl!.invalid;
@@ -297,12 +293,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
   }
 
   private setIsInvalid(): void {
-    console.log("invalid:", this.invalid);
-    console.log("dirty:", this.dirty);
-    console.log("touched:", this.touched);
-
     this.invalidControl = this.invalid && (this.touched && this.dirty);
-    console.log("invalidControl:", this.invalidControl);
   }
 
   public reloadList(): void { this.onReloadList.emit(this.textoPesquisa) }
