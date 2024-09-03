@@ -51,6 +51,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
 
   protected innerControl: FormControl = new FormControl<string | number | null>(null);
   protected invalidControl: boolean = false;
+  protected isRequired: boolean = false;
 
   protected invalid: boolean = false;
   protected dirty: boolean = false;
@@ -93,6 +94,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
   @Input() public labelText?: string;
 
   /** (opcional) Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
+   * ! SERÁ DEPRECIADO EM BREVE
    * @type {boolean}
    * @default false */
   @Input() public libRequired?: boolean = false;
@@ -296,7 +298,14 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
 
 
   private setValidator(): void {
-    if (this._outerControl.hasValidator(Validators.required)) { this.innerControl.addValidators(Validators.required); }
+    if (this._outerControl.hasValidator(Validators.required)) {
+      this.innerControl.addValidators(Validators.required);
+      this.isRequired = true;
+    }
+    else {
+      this.innerControl.removeValidators(Validators.required);
+      this.isRequired = false;
+    }
   }
 
   private setIsInvalid(): void {

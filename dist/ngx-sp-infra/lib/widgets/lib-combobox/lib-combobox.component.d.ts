@@ -37,6 +37,7 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
     protected set ariaExpanded(value: boolean);
     protected innerControl: FormControl;
     protected invalidControl: boolean;
+    protected isRequired: boolean;
     protected invalid: boolean;
     protected dirty: boolean;
     protected touched: boolean;
@@ -57,6 +58,7 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
      * @type {string} */
     labelText?: string;
     /** (opcional) Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
+     * ! SERÁ DEPRECIADO EM BREVE
      * @type {boolean}
      * @default false */
     libRequired?: boolean;
