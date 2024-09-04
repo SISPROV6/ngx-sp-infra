@@ -99,7 +99,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
         case "default": this.size = 24; break;
         case "medium-small": this.size = 20; break;
         case "small": this.size = 18; break;
-        default: this.size = this.iconSize as number; break;
+        default: this.size = value as number; break;
       }
     }
 
