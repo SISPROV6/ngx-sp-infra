@@ -170,11 +170,7 @@
         { "nome": "verificado", "categoria": "Alertas", "tags": ["verificado", "aprovado", "check", "confirmado"] },
         { "nome": "logo-contratos", "categoria": "Miscelânea", "tags": ["logo", "contratos", "marca", "identidade visual"] },
         { "nome": "reverter-reajuste", "categoria": "Financeiro", "tags": ["reverter", "reajuste", "cancelar", "modificar"] },
-        { "nome": "transporte-caminhao", "categoria": "Objetos", "tags": ["transporte", "caminhão", "logística", "frete"] },
-        { "nome": "meia-lua", "categoria": "Objetos", "tags": ["meia-lua", "noite", "fase lunar", "lua crescente"] },
         { "nome": "retornar-workflow", "categoria": "Ações", "tags": ["retornar", "workflow", "processo", "voltar"] },
-        { "nome": "ger-nota-fiscal", "categoria": "Financeiro", "tags": ["gerar", "nota fiscal", "documento", "fatura"] },
-        { "nome": "prod-financeiro-icone", "categoria": "Financeiro", "tags": ["financeiro", "produto", "ícone", "dinheiro"] },
         { "nome": "certificado", "categoria": "Objetos", "tags": ["certificado", "documento", "aprovação", "autenticidade"] },
         { "nome": "relatorio", "categoria": "Configuração", "tags": ["relatório", "documento", "dados", "análise"] },
         { "nome": "relatorio-nucleo", "categoria": "Configuração", "tags": ["relatório", "núcleo", "documento", "dados"] },
@@ -193,6 +189,10 @@
         { "nome": "cadeado-aberto-outline", "categoria": "segurança", "tags": ["cadeado", "aberto", "segurança", "protegido"] },
         { "nome": "chave", "categoria": "segurança", "tags": ["chave", "segurança", "acesso", "abrir"] },
         { "nome": "notificacoes", "categoria": "Alertas", "tags": ["notificações", "alerta", "sino", "mensagem"] },
-        { "nome": "trans", "categoria": "Interface", "tags": ["direção", "setas", "transferir"] }
+        { "nome": "trans", "categoria": "Interface", "tags": ["direção", "setas", "transferir"] },
+        { "nome": "chat", "categoria": "Interface", "tags": [""] },
+        { "nome": "paleta", "categoria": "Objetos", "tags": [""] },
+        { "nome": "anexo", "categoria": "Interface", "tags": [""] },
+        { "nome": "ferramentas", "categoria": "Configuração", "tags": [""] }
     ]
 }

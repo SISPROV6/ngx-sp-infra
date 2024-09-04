@@ -54,7 +54,8 @@ export class LibIconsComponent implements OnInit, OnChanges {
       | 'contraparte' | 'copiar' | 'logs' | 'ver-assinaturas' | 'configurar-assinaturas' | 'recalcular' | 'estornar' 
       | 'solicitacao' | 'perguntas' | 'centraldeajuda' | 'sorriso' | 'lampada' | 'logo-contratos' | 'historico' 
       | 'reverter-reajuste' | 'consulta' | 'cadeado' | 'cadeado-outline' | 'cadeado-semiaberto-outline' 
-      | 'cadeado-aberto-outline' | 'chave' | 'notificacoes' | 'trans';
+      | 'cadeado-aberto-outline' | 'chave' | 'notificacoes' | 'trans'
+      | 'chat' | 'anexo' | 'paleta';
 
       /** Cor do ícone
        * Paleta de cores:
@@ -167,7 +168,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
   /** Valida se o nome informado do ícone existe na lista, caso contrário estoura uma exceção (Error). */
   private checkName(): void {
     let hasIcon: boolean = this.iconsList?.some(icon => icon.nome === this.iconName) ?? false;
-    if (this.iconsList && !hasIcon) { throw new Error(`O ícone informado "${this.iconName}" não existe, utilize outro!`); }
+    if (this.iconsList && !hasIcon) { console.error(`O ícone informado "${this.iconName}" não existe, utilize outro!`); }
   }
   // #endregion ==========> UTILS <==========
 
