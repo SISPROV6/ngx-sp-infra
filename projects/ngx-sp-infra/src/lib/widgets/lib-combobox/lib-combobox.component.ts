@@ -154,6 +154,8 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
+    this.adjustDropdownWidth();
+
     this.setValidator();
     this.updateSelectedValue();
   }
