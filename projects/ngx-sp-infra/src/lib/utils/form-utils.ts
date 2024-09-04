@@ -32,8 +32,14 @@ export class FormUtils {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
   
+      let currentValue = control?.value;
+
+      control?.reset();
+
       control?.markAsDirty();
       control?.markAsTouched();
+
+      control?.setValue(currentValue);
       
       if (control instanceof UntypedFormGroup || control instanceof UntypedFormArray) {
         this.validateFields(control);

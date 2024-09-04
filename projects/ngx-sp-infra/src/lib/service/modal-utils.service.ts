@@ -1,11 +1,11 @@
-import { Injectable, TemplateRef } from '@angular/core';
-import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Component, Injectable, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 
 @Injectable({
   providedIn: 'any'
 })
 export class ModalUtilsService {
-  constructor( private _bsModalService: BsModalService ) { }
+  constructor( private _bsModalService: BsModalService, private _bsModalref: BsModalRef ) { }
 
   /**
    * Método simples com o objetivo de abrir os modais no centro da tela.
@@ -31,6 +31,15 @@ export class ModalUtilsService {
  public openModalCustom(template: TemplateRef<any>, modalID: number, options: ModalOptions = { id: modalID, class: "modal-dialog-centered", ignoreBackdropClick: false, keyboard: false }): void {
    this._bsModalService.show(template, options);
  }
+
+
+ public openInitialStateModal(component: string | TemplateRef<any>, initialState?: any, classes: string = "modal-dialog-centered"): void {
+  this._bsModalref = this._bsModalService.show(component, {
+    initialState: initialState,
+    class: classes
+  });
+ }
+
 
   /**
    * Método para fechar um modal que estiver aberto na tela

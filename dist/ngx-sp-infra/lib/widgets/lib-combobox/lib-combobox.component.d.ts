@@ -1,4 +1,4 @@
-import { AfterViewInit, DoCheck, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, EventEmitter, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { RecordCombobox } from '../../models/combobox/record-combobox';
 import * as i0 from "@angular/core";
@@ -31,7 +31,7 @@ import * as i0 from "@angular/core";
  * ## Outputs:
  * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
  */
-export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, DoCheck {
+export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
     protected textoPesquisa: string;
     protected get ariaExpanded(): boolean;
     protected set ariaExpanded(value: boolean);
@@ -104,18 +104,15 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
     constructor();
     ngOnInit(): void;
     ngAfterViewInit(): void;
-    ngDoCheck(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     onResize(event: Event): void;
     setValue(item: RecordCombobox): void;
     clearValue(): void;
-    private initializeSelectedValue;
+    private updateSelectedValue;
     private adjustDropdownWidth;
-    /** Serve para atualizar o status do control e o desabilitar caso seja feito no componente pai,
-     * sem a necessidade de uma outra propriedade específica para isto. */
-    private subscribeControlChanges;
     private setValidator;
-    private setIsInvalid;
+    private setControlStatus;
     reloadList(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; "controlName": { "alias": "controlName"; "required": false; }; }, { "onReloadList": "onReloadList"; "onChange": "onChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;

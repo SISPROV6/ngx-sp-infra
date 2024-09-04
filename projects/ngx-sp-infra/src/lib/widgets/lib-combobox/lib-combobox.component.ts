@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AbstractControl, FormControl, FormControlStatus, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
@@ -39,7 +39,7 @@ import { RecordCombobox } from '../../models/combobox/record-combobox';
   templateUrl: './lib-combobox.component.html',
   styleUrl: './lib-combobox.component.scss'
 })
-export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, DoCheck {
+export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // #region ==========> PROPERTIES <==========
 
@@ -80,8 +80,8 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
     if (this._subscription) this._subscription.unsubscribe();
 
     // Subscrição ao observável valueChanges para reagir a mudanças no valor
-    this._subscription = this._outerControl.valueChanges.subscribe(() => { this.initializeSelectedValue() });
-    this._subscription = this._outerControl.statusChanges.subscribe(() => { this.subscribeControlChanges() });
+    this._subscription = this._outerControl.valueChanges.subscribe(value => { this.updateSelectedValue(value) });
+    this._subscription = this._outerControl.statusChanges.subscribe(status => { this.setControlStatus(status) });
   }
 
   /** (obrigatório) Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
@@ -108,7 +108,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
     if (value && value === true) this.innerControl.disable();
     else this.innerControl.enable();
 
-    this.setIsInvalid();
+    //this.setControlStatus();
   }
 
   /** (opcional) Placeholder do campo principal do combo
@@ -163,71 +163,16 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
 
   ngOnInit(): void {
     this.setValidator();
-    this.initializeSelectedValue();
+    this.updateSelectedValue();
   }
 
   ngAfterViewInit(): void {
     this.adjustDropdownWidth();
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes["comboboxList"]?.currentValue) this.initializeSelectedValue();
-  //   if (changes["outerControl"]?.currentValue) {
-  //     this.subscribeControlChanges();
-  //   }
-  // }
-
-  ngDoCheck(): void {
-    const parentGroup = this._outerControl.parent as FormGroup;
-
-    if (!this.controlName) {
-      // Iterando sobre os controles no FormGroup
-      const controlExists = Object.values(parentGroup.controls).some(control => control === this._outerControl);
-
-      if (parentGroup) {
-        if (!controlExists) console.error("Erro no <lib-combobox> - O FormControl informado não foi encontrado dentro do FormGroup...");
-        const tempControl = Object.values(parentGroup.controls).find(control => control === this._outerControl);
-
-        this.disabled = tempControl!.disabled;
-        this.invalid = tempControl!.invalid;
-        this.dirty = tempControl!.dirty;
-        this.touched = tempControl!.touched;
-    
-        this.setIsInvalid();
-      }
-      else {
-        this.disabled = this._outerControl.disabled;
-        this.invalid = this._outerControl.invalid;
-        this.dirty = this._outerControl.dirty;
-        this.touched = this._outerControl.touched;
-
-        this.setIsInvalid();
-      }
-    }
-    else {
-      const control = parentGroup.get(this.controlName);
-
-      if (parentGroup) {
-        if (control === null) console.error(`Erro no <lib-combobox> - O FormControl de nome "${this.controlName}" informado não foi encontrado dentro do FormGroup.`);
-
-        const tempControl = parentGroup.controls[this.controlName as string];
-
-        this.disabled = tempControl!.disabled;
-        this.invalid = tempControl!.invalid;
-        this.dirty = tempControl!.dirty;
-        this.touched = tempControl!.touched;
-    
-        this.setIsInvalid();
-      }
-      else {
-        this.disabled = this._outerControl.disabled;
-        this.invalid = this._outerControl.invalid;
-        this.dirty = this._outerControl.dirty;
-        this.touched = this._outerControl.touched;
-
-        this.setIsInvalid();
-      }
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["comboboxList"]?.currentValue) this.updateSelectedValue();
+    if (changes["outerControl"]?.currentValue) this.updateSelectedValue((changes["outerControl"].currentValue as FormControl).value);
   }
 
   ngOnDestroy(): void {
@@ -250,7 +195,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
     this.innerControl.setValue(item.LABEL);
 
     this.ariaExpanded = false;
-    this.setIsInvalid();
+    this.setControlStatus(this.innerControl.status);
 
     this.onChange.emit(item.ID);
   }
@@ -264,18 +209,21 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
     this.innerControl.setValue(null);
 
     this.ariaExpanded = false;
-    this.setIsInvalid();
+    this.setControlStatus(this.innerControl.status);
 
     this.onChange.emit(null);
   }
 
-  private initializeSelectedValue(): void {
+  private updateSelectedValue(value?: string | number | null): void {
     this.innerControl.setValue(null); // Limpa o campo antes de qualquer coisa
+    const selectedValue: string | number | null = value ?? this._outerControl.value;
 
-    if (!this.comboboxList || (this._outerControl.value == null && this._outerControl.value == '')) return;
+    if (!this.comboboxList || (selectedValue === null && selectedValue === '')) return;
 
-    const initializedValue = this.comboboxList.find(item => item.ID == this._outerControl.value)
+    const initializedValue = this.comboboxList.find(item => item.ID === selectedValue)
     if (initializedValue) this.innerControl.setValue(initializedValue.LABEL);
+
+    // this.setControlStatus(this._outerControl.status);
   }
 
   private adjustDropdownWidth(): void {
@@ -284,18 +232,6 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
       this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
     }
   }
-
-  /** Serve para atualizar o status do control e o desabilitar caso seja feito no componente pai,
-   * sem a necessidade de uma outra propriedade específica para isto. */
-  private subscribeControlChanges(): void {
-    this._outerControl.statusChanges.subscribe(status => {
-      if (status === "DISABLED") this.innerControl.disable();
-      else this.innerControl.enable();
-
-      this.setIsInvalid();
-    });
-  }
-
 
   private setValidator(): void {
     if (this._outerControl.hasValidator(Validators.required)) {
@@ -308,8 +244,29 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy, D
     }
   }
 
-  private setIsInvalid(): void {
-    this.invalidControl = this.invalid && (this.touched && this.dirty);
+  private setControlStatus(formStatus: FormControlStatus): void {
+    switch(formStatus) {
+      case 'VALID':
+        this.invalidControl = false;
+        this.innerControl.enable();
+        break;
+
+      case 'INVALID':
+        this.invalidControl = true;
+        this.innerControl.enable();
+        break;
+
+      case 'PENDING':
+        this.invalidControl = false;
+        this.innerControl.enable();
+        break;
+
+      case 'DISABLED':
+        this.invalidControl = false;
+        this.innerControl.disable();
+        break;
+
+    }
   }
 
   public reloadList(): void { this.onReloadList.emit(this.textoPesquisa) }
