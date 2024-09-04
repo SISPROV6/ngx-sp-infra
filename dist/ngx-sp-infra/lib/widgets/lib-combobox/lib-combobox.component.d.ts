@@ -21,7 +21,6 @@ import * as i0 from "@angular/core";
  * - `outerControl` (FormControl | AbstractControl): Control para seleção dos valores, atualizará automaticamente o control do componente pai também
  * - `comboboxList` (RecordCombobox[]): Lista de registros que serão exibidos no combo, enquanto eles estiverem carregando será exibido um spinner
  * - `labelText` (string): Texto do rótulo que será exibido acima do combo. Caso não informado nada será exibido
- * - `controlName` (string): Define um nome para o controle, utilizado internamente em alguns recursos. Recomendado para evitar alguns bugs de detecção.
  * - `disabled` (boolean): Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
  * - `libRequired` (boolean): Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
  * - `mainInputPlaceholder` (string): Placeholder do campo principal do combo
@@ -83,12 +82,6 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
      * @default "primary"
     */
     colorTheme?: string;
-    /** (Recomendado) Define um nome para o controle, utilizado internamente em alguns recursos.
-     * Evita alguns bugs de detecção.
-     * @alias 'controlName'
-     * @type {string}
-    */
-    controlName?: string;
     /** Evento emitido ao recarregar a lista de registros
      * @example Ao ser emitido, o componente pai pode refazer o GET da lista, por exemplo.
      * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
@@ -115,5 +108,5 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
     private setControlStatus;
     reloadList(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; "controlName": { "alias": "controlName"; "required": false; }; }, { "onReloadList": "onReloadList"; "onChange": "onChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; }, { "onReloadList": "onReloadList"; "onChange": "onChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }
