@@ -40,7 +40,7 @@ export declare class LibIconsComponent implements OnInit, OnChanges {
     constructor();
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    /** Valida se o nome informado do ícone existe na lista, caso contrário estoura uma exceção (Error). */
+    /** Valida se o nome informado do ícone existe na lista, caso contrário mostra um erro no console */
     private checkName;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibIconsComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LibIconsComponent, "lib-icon", never, { "iconName": { "alias": "iconName"; "required": true; }; "iconColor": { "alias": "iconColor"; "required": false; }; "iconSize": { "alias": "iconSize"; "required": false; }; "iconFill": { "alias": "iconFill"; "required": false; }; "iconStrokeWidth": { "alias": "iconStrokeWidth"; "required": false; }; }, {}, never, never, false, never>;

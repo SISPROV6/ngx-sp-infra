@@ -165,7 +165,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
 
   // #region ==========> UTILS <==========
 
-  /** Valida se o nome informado do ícone existe na lista, caso contrário estoura uma exceção (Error). */
+  /** Valida se o nome informado do ícone existe na lista, caso contrário mostra um erro no console */
   private checkName(): void {
     let hasIcon: boolean = this.iconsList?.some(icon => icon.nome === this.iconName) ?? false;
     if (this.iconsList && !hasIcon) { console.error(`O ícone informado "${this.iconName}" não existe, utilize outro!`); }
