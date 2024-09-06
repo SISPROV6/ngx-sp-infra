@@ -45,16 +45,26 @@ function commit(branch) {
 
 const readline = require('readline');
 
-// Interface de entrada do usuário
+// Interfaces de entrada do usuário
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-// Pergunta ao usuário em que branch será feito o commit
-rl.question("\n\nInforme a branch para commit (se não informada irá para 'main'): ", (answer) => {
-  const branch = answer.trim() || "main"; // Se não for informado, usar 'main'
-  commit(branch);
-  
-  rl.close();
+// Pergunta ao usuário se ele deseja fazer commit no repositório GIT (https://github.com/SISPROV6/ngx-sp-infra)...
+rl.question("\n\nDeseja fazer commit no repositório GIT (https://github.com/SISPROV6/ngx-sp-infra)? (S/N): ", (useGit) => {
+
+  // ...se SIM...pergunta ao usuário em que branch será feito o commit
+  if (useGit.trim().toUpperCase() === "S") {
+    rl.question("\n\nInforme a branch para commit (se não informada irá para 'main'): ", (branchName) => {
+      const branch = branchName.trim() || "main"; // Se não for informada explicitamente, usar 'main'
+      commit(branch);
+
+      rl.close();
+    });
+  }
+  else {
+    console.log("Operação de commit cancelada.\n");
+    rl.close();
+  }
 });

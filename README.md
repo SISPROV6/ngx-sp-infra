@@ -49,36 +49,40 @@ A publicação do pacote no NPM pode ser feita de forma manual ou automatizada.
 
 #### Manual
 Para a publicação manual (preferencialmente usando SVN ao invés de Git), siga estas etapas:
-1. Editar a versão: Atualize o arquivo projects/ngx-sp-infra/package.json conforme o versionamento semântico.
-2. Executar o comando de build: No terminal, rode um dos seguintes comandos:
-  - Para uma versão oficial:
-    - ```npm run build:patch``` _- incrementa uma versão PATCH (0.0.1) e faz o build_
-    - ```npm run build:minor``` _- incrementa uma versão MINOR (0.1.0) e faz o build_
-    - ```npm run build:major``` _- incrementa uma versão MAJOR (1.0.0) e faz o build_
+1. Executar o comando de build: No terminal, rode um dos seguintes comandos:
+  - ```npm run build:patch``` _- incrementa uma versão PATCH (0.0.1) e faz o build_
+  - ```npm run build:minor``` _- incrementa uma versão MINOR (0.1.0) e faz o build_
+  - ```npm run build:major``` _- incrementa uma versão MAJOR (1.0.0) e faz o build_
 
-  - Para uma versão de teste (com sufixo "-test"):
-    - ```npm run build:patch:test``` _- incrementa uma versão PATCH (0.0.1-test) e faz o build_
-    - ```npm run build:minor:test``` _- incrementa uma versão MINOR (0.1.0-test) e faz o build_
-    - ```npm run build:major:test``` _- incrementa uma versão MAJOR (1.0.0-test) e faz o build_
+2. O sistema deve perguntar ao usuário se ele deseja adicionar um sufixo à versão:
+  - Para uma versão de teste, digite "test" ou "-test" e aperte ENTER
+  - Para uma versão oficial, não é necessário digitar nada, apenas aperte ENTER
 
-3. Publicar no NPM:
+3. Logo depois, o sistema deve perguntar ao usuário se ele deseja realizar o commit da tag de versão, digite "N"
+
+4. Independete das respostas anteriores, será feito um build da aplicação e por fim, o sistema deve perguntar ao usuário se ele deseja fazer um commit no repositório do GitHub, digite "N"
+
+5. Publicar no NPM:
   - `cd dist/ngx-sp-infra`
   - `npm adduser` OU `npm login` _- depende se você já possui conta no NPM ou não_
   - `npm publish --access public --tag latest`
 
 #### Automatizada
 Para publicação automatizada (apenas quando utilizar git) devem ser seguidas as etapas abaixo:
-1. Atualizar a branch: Certifique-se de que está na branch desejada e execute: `git pull origin <branch>`
-2. Executar o comando de build e commit: No terminal, rode um dos comandos abaixo:
-  - Para uma versão de teste:
-    - ```npm run build:patch:test:commit``` _- incrementa uma versão PATCH (0.0.1-test), faz o build e realiza um commit-push automático com a tag de versão e as alterações_
-    - ```npm run build:minor:test:commit``` _- incrementa uma versão MINOR (0.1.0-test), faz o build e realiza um commit-push automático com a tag de versão e as alterações_
-    - ```npm run build:major:test:commit``` _- incrementa uma versão MAJOR (1.0.0-test), faz o build e realiza um commit-push automático com a tag de versão e as alterações_
+1. Executar o comando de build: No terminal, rode um dos seguintes comandos:
+  - ```npm run build:patch``` _- incrementa uma versão PATCH (0.0.1) e faz o build_
+  - ```npm run build:minor``` _- incrementa uma versão MINOR (0.1.0) e faz o build_
+  - ```npm run build:major``` _- incrementa uma versão MAJOR (1.0.0) e faz o build_
 
-  - Para uma versão oficial:
-    - ```npm run build:patch:commit <branch>``` _- incrementa uma versão PATCH (0.0.1), faz o build e realiza um commit-push automático com a tag de versão e as alterações_
-    - ```npm run build:minor:commit <branch>``` _- incrementa uma versão MINOR (0.1.0), faz o build e realiza um commit-push automático com a tag de versão e as alterações_
-    - ```npm run build:major:commit <branch>``` _- incrementa uma versão MAJOR (1.0.0), faz o build e realiza um commit-push automático com a tag de versão e as alterações_
+2. O sistema deve perguntar ao usuário se ele deseja adicionar um sufixo à versão:
+  - Para uma versão de teste, digite "test" ou "-test" e aperte ENTER
+  - Para uma versão oficial, não é necessário digitar nada, apenas aperte ENTER
+
+3. Logo depois, o sistema deve perguntar ao usuário se ele deseja realizar o commit da tag de versão, digite "S" e pressione ENTER
+
+4. Independete das respostas anteriores, será feito um build da aplicação e o sistema deve perguntar ao usuário se ele deseja fazer um commit no repositório do GitHub, digite "S" e pressione ENTER
+
+5. Por fim o sistema perguntará ao usuário em que branch ele fará o commit, informe a branch correta (geralmente a atual) e pressione ENTER
 
 > [!IMPORTANT]
 > O deploy automático só será feito após commit nas branches `main` e `test`. Outras branches não realizarão o deploy para o NPM.

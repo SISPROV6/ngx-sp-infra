@@ -42,7 +42,7 @@ function commitTag() {
    try {
     removeExistingTag(newVersion);
     createAndPushTag(newVersion);
-    console.log("\n\nTag de versão commitada e enviada com sucesso!");
+    console.log("\nTag de versão commitada e enviada com sucesso!");
    }
    catch (error) { console.log("\n\nErro no processo de commit da tag:", error.message); }
 }
