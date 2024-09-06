@@ -16,16 +16,8 @@ function updateVersion(version, suffix) {
     packageJson = JSON.parse(fs.readFileSync('../../package.json', 'utf8'));    // Atualiza a variável do arquivo
   }
 
-  // Adiciona o sufixo à versão
-  let newVersion;
-
-  if (suffix && suffix != "''") {
-    if (suffix.includes('-')) newVersion = `${packageJson.version}${suffix}`;
-    else newVersion = `${packageJson.version}-${suffix}`;
-  }
-  else newVersion = `${packageJson.version}`;
-
-
+  // Adiciona (ou não) o sufixo à versão
+  let newVersion = suffix ? `${packageJson.version}${suffix.startsWith('-') ? suffix : `-${suffix}`}` : packageJson.version;
   packageJson.version = newVersion;
 
   // Escreve a nova versão no package.json
@@ -33,7 +25,17 @@ function updateVersion(version, suffix) {
 }
 
 
-// Sufixo a ser adicionado, se não informado não terá nada
+const readline = require('readline');
 const version = process.argv[2];
-const suffix = process.argv[3] || '';
-updateVersion(version, suffix);
+
+// Inicializa uma interface para entrada do usuário
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Pergunta ao usuário se ele deseja adicionar um sufixo à versão
+rl.question("\n\nCaso deseje, digite aqui um sufixo para a versão: ", (answer) => {
+  updateVersion(version, answer ?? "");
+  rl.close();
+});

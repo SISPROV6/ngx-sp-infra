@@ -1,12 +1,11 @@
 const fs = require('fs');
 const execSync = require('child_process').execSync;
-const readline = require('readline');
 
 /** Lê e retorna o conteúdo do package.json como objeto.
  * @returns {object} Objeto JSON com os dados do package.json. */
 function readPackageJson() {
   const packagePath = 'projects/ngx-sp-infra/package.json';
-
+  
   try {
     const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
     console.log(`\n\nVersão atual do package.json: ${packageJson.version}`);
@@ -23,12 +22,12 @@ function readPackageJson() {
  * @param {string} branch - Nome da branch onde será feito o commit. */
 function commit(branch) {
   const packageJson = readPackageJson();
-
+  
   try {
     // Checkout na branch
     console.log(`\n\nFazendo checkout para a branch ${branch}...`);
     execSync(`git checkout ${branch}`, { stdio: 'inherit' });
-
+    
     // Adiciona as alterações e faz commit
     console.log(`\n\nAdicionando alterações e realizando commit...`);
     execSync(`git add .`, { stdio: 'inherit' });
@@ -37,11 +36,14 @@ function commit(branch) {
     // Push das alterações
     console.log(`Enviando commit para a branch ${branch}...`);
     execSync(`git push origin ${branch}`, { stdio: 'inherit' });
-
+    
     console.log("\nCommit automático realizado com sucesso via script. Acompanhe o processo de publicação pelo GitHub Actions!\n");
   }
-  catch (error) { console.error(`Erro durante o commit: ${error.message}`); }
+  catch (error) { console.log(`Erro durante o commit: ${error.message}`); }
 }
+
+
+const readline = require('readline');
 
 // Interface de entrada do usuário
 const rl = readline.createInterface({
@@ -53,6 +55,6 @@ const rl = readline.createInterface({
 rl.question("\n\nInforme a branch para commit (se não informada irá para 'main'): ", (answer) => {
   const branch = answer.trim() || "main"; // Se não for informado, usar 'main'
   commit(branch);
-
+  
   rl.close();
 });
