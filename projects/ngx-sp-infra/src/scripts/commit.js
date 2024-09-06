@@ -9,11 +9,11 @@ function readPackageJson() {
 
   try {
     const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
-    console.log(`Versão atual do package.json: ${packageJson.version}`);
+    console.log(`\n\nVersão atual do package.json: ${packageJson.version}`);
     return packageJson;
   }
   catch (error) {
-    console.error(`Erro ao ler o arquivo package.json: ${error.message}`);
+    console.error(`\n\nErro ao ler o arquivo package.json: ${error.message}`);
     process.exit(1); // Encerra o script em caso de erro
   }
 }
@@ -26,18 +26,11 @@ function commit(branch) {
 
   try {
     // Checkout na branch
-    console.log(`Fazendo checkout para a branch ${branch}...`);
+    console.log(`\n\nFazendo checkout para a branch ${branch}...`);
     execSync(`git checkout ${branch}`, { stdio: 'inherit' });
 
-    // Verifica se há alterações no repositório   [DEVE REALIZAR COMMIT MESMO QUE NÃO HAJA ALTERAÇÕES]
-    // const status = execSync('git status --porcelain').toString();
-    // if (!status) {
-    //   console.log("Nenhuma alteração detectada, abortando commit.");
-    //   return;
-    // }
-
     // Adiciona as alterações e faz commit
-    console.log(`Adicionando alterações e realizando commit...`);
+    console.log(`\n\nAdicionando alterações e realizando commit...`);
     execSync(`git add .`, { stdio: 'inherit' });
     execSync(`git commit --allow-empty -m "v${packageJson.version} | Commit automático" -m "Commit automático realizado via script pós build"`, { stdio: 'inherit' });
     
@@ -57,7 +50,7 @@ const rl = readline.createInterface({
 });
 
 // Pergunta ao usuário em que branch será feito o commit
-rl.question("Informe a branch para commit (se não informada irá para 'main'): ", (answer) => {
+rl.question("\n\nInforme a branch para commit (se não informada irá para 'main'): ", (answer) => {
   const branch = answer.trim() || "main"; // Se não for informado, usar 'main'
   commit(branch);
 
