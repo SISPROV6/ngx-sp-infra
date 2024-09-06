@@ -11,7 +11,7 @@ function removeExistingTag(version) {
     console.log(`\n\nTag v${version} removida com sucesso.`);
   }
   catch (error) {
-    if (error.message.includes('Command failed')) console.log(`\n\nTag v${version} não existe, prosseguindo com a criação da nova tag.`);
+    if (error.message.includes('Command failed')) console.warning(`\n\nTag v${version} não existe, prosseguindo com a criação da nova tag.`);
     else throw new Error(`\n\nErro ao tentar remover a tag: ${error.message}`);
   }
 }
