@@ -195,6 +195,7 @@
       { "nome": "chat", "categoria": "Interface", "tags": [ "" ] },
       { "nome": "paleta", "categoria": "Objetos", "tags": [ "" ] },
       { "nome": "anexo", "categoria": "Interface", "tags": [ "" ] },
-      { "nome": "ferramentas", "categoria": "Configuração", "tags": [ "" ] }
+      { "nome": "ferramentas", "categoria": "Configuração", "tags": [ "" ] },
+      { "nome": "obrigatorio", "categoria": "Interface", "tags": [ "" ] }
    ]   
 }

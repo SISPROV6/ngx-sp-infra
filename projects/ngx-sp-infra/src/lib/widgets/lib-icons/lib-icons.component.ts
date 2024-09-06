@@ -83,6 +83,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
         case "yellow": this.color = "#FFC107"; break;
         case "red": this.color = "#B23737"; break;
         case "currentColor": this.color = "currentColor"; break;
+        default: this.color = value; break;
       }
     }
 
