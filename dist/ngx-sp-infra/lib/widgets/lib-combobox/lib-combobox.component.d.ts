@@ -26,6 +26,7 @@ import * as i0 from "@angular/core";
  * - `mainInputPlaceholder` (string): Placeholder do campo principal do combo
  * - `searchInputPlaceholder` (string): Placeholder do campo de pesquisa dentro do combo
  * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Define o tema de cor do componente, como "primary", "success", ou "danger"
+ * - `returnRecord` (boolean): Define se o tipo de retorno ao selecionar uma opção será o Record inteiro ou apenas o ID
  *
  * ## Outputs:
  * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
@@ -82,6 +83,11 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
      * @default "primary"
     */
     colorTheme?: string;
+    /** (opcional) Define se o tipo de retorno ao selecionar uma opção será o Record inteiro ou apenas o ID.
+     * @type {boolean}
+     * @default false
+    */
+    returnRecord?: boolean;
     /** Evento emitido ao recarregar a lista de registros
      * @example Ao ser emitido, o componente pai pode refazer o GET da lista, por exemplo.
      * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
@@ -91,7 +97,7 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
      * @example Ao ser emitido, o componente pai pode realizar uma validação com o valor selecionado.
      * @emits EventEmitter<string|number|null> que leva o valor string da pesquisa feita para ser enviada para o GET
      * @type {EventEmitter<string | number | null>} */
-    onChange: EventEmitter<string | number | null>;
+    onChange: EventEmitter<RecordCombobox | string | number | null>;
     private _mainInput;
     private _dropdownMenu;
     constructor();
@@ -108,5 +114,5 @@ export declare class LibComboboxComponent implements OnInit, AfterViewInit, OnDe
     private setControlStatus;
     reloadList(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LibComboboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; }, { "onReloadList": "onReloadList"; "onChange": "onChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<LibComboboxComponent, "lib-combobox", never, { "outerControl": { "alias": "control"; "required": true; }; "comboboxList": { "alias": "list"; "required": true; }; "labelText": { "alias": "labelText"; "required": false; }; "libRequired": { "alias": "libRequired"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "mainInputPlaceholder": { "alias": "mainPlaceholder"; "required": false; }; "searchInputPlaceholder": { "alias": "searchPlaceholder"; "required": false; }; "colorTheme": { "alias": "theme"; "required": false; }; "returnRecord": { "alias": "returnRecord"; "required": false; }; }, { "onReloadList": "onReloadList"; "onChange": "onChange"; }, never, ["[btnLeft]", "[btnRight]"], false, never>;
 }

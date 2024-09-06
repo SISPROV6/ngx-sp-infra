@@ -29,6 +29,7 @@ import { RecordCombobox } from '../../models/combobox/record-combobox';
  * - `mainInputPlaceholder` (string): Placeholder do campo principal do combo
  * - `searchInputPlaceholder` (string): Placeholder do campo de pesquisa dentro do combo
  * - `colorTheme` ("primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"): Define o tema de cor do componente, como "primary", "success", ou "danger"
+ * - `returnRecord` (boolean): Define se o tipo de retorno ao selecionar uma opção será o Record inteiro ou apenas o ID
  * 
  * ## Outputs:
  * - `onReloadList` (EventEmitter<string>): Evento emitido quando a lista precisa ser recarregada.
@@ -129,6 +130,12 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   */
   @Input('theme') public colorTheme?: string = "primary";
 
+  /** (opcional) Define se o tipo de retorno ao selecionar uma opção será o Record inteiro ou apenas o ID.
+   * @type {boolean}
+   * @default false
+  */
+  @Input() public returnRecord?: boolean = false;
+
   /** Evento emitido ao recarregar a lista de registros
    * @example Ao ser emitido, o componente pai pode refazer o GET da lista, por exemplo.
    * @emits EventEmitter<string> que leva o valor string da pesquisa feita para ser enviada para o GET
@@ -140,7 +147,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
    * @example Ao ser emitido, o componente pai pode realizar uma validação com o valor selecionado.
    * @emits EventEmitter<string|number|null> que leva o valor string da pesquisa feita para ser enviada para o GET
    * @type {EventEmitter<string | number | null>} */
-  @Output() public onChange: EventEmitter<string | number | null> = new EventEmitter<string | number | null>();
+  @Output() public onChange: EventEmitter<RecordCombobox | string | number | null> = new EventEmitter<RecordCombobox | string | number | null>();
   
 
   @ViewChild('mainInput') private _mainInput!: ElementRef;
@@ -191,7 +198,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ariaExpanded = false;
     this.setControlStatus(this.innerControl.status);
 
-    this.onChange.emit(item.ID);
+    this.onChange.emit(this.returnRecord ? item : item.ID);
   }
 
   public clearValue(): void {

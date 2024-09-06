@@ -57,7 +57,7 @@ const rl = readline.createInterface({
 // Pergunta ao usuário se ele deseja prosseguir com o commit da tag
 rl.question("\n\nVocê quer commitar a tag de versão? (S/N): ", (answer) => {
   if (answer.trim().toUpperCase() === "S") commitTag();
-  else console.log("\nProcesso abortado pelo usuário.\n");
+  else console.log("\nTag não commitada por escolha do usuário. Prosseguindo com preocesso...\n");
 
   rl.close();
 });
