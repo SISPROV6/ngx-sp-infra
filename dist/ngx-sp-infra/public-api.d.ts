@@ -28,6 +28,8 @@ export * from './lib/pipes/text-filter.pipe';
 /** Directives */
 export * from './lib/directives/required.directive';
 export * from './lib/directives/copy-clipboard.directive';
+export * from './lib/widgets/field-contador-message/field-contador-message.component';
+export * from './lib/directives/loading-btn.directive';
 /** Utils */
 export * from './lib/utils/check-url-and-method.service';
 export * from './lib/utils/form-utils';
@@ -61,3 +63,4 @@ export * from './lib/widgets/simple-header/simple-header.component';
 export * from './lib/widgets/lib-icons/lib-icons.component';
 export * from './lib/widgets/content-container/content-container.component';
 export * from './lib/widgets/table/table.component';
+export * from './lib/widgets/spinner/spinner.component';

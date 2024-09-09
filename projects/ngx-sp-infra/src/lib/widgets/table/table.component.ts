@@ -3,10 +3,10 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 /**
  * Componente de Tabela Customizável
  *
- * O `TableComponent` é um componente Angular projetado para exibir uma tabela customizável 
- * com suporte a paginação. Ele permite a configuração de cabeçalhos de colunas, posicionamento 
- * da paginação e opções de itens por página. O componente é flexível, utilizando classes Bootstrap 
- * para ajustar o layout das colunas e emitindo eventos para que o componente pai possa reagir a 
+ * O `TableComponent` é um componente Angular projetado para exibir uma tabela customizável
+ * com suporte a paginação. Ele permite a configuração de cabeçalhos de colunas, posicionamento
+ * da paginação e opções de itens por página. O componente é flexível, utilizando classes Bootstrap
+ * para ajustar o layout das colunas e emitindo eventos para que o componente pai possa reagir a
  * mudanças na página ou no número de itens exibidos.
  *
  * @selector lib-table
@@ -16,7 +16,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 @Component({
   selector: 'lib-table',
   templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+  styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnChanges {
 

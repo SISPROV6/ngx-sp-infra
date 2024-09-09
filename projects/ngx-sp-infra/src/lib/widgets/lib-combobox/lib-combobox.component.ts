@@ -197,9 +197,6 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.ariaExpanded = false;
     this.setControlStatus(this.innerControl.status);
-
-    console.log("returnRecord:", this.returnRecord);
-    console.log("return ", this.returnRecord ? item : item.ID);
     
     this.onChange.emit(this.returnRecord ? item as RecordCombobox : item.ID);
   }

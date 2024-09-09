@@ -3,15 +3,15 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitte
 @Component({
   selector: 'lib-container',
   templateUrl: './content-container.component.html',
-  styleUrl: './content-container.component.scss'
+  styleUrls: ['./content-container.component.scss']
 })
 export class ContentContainerComponent implements OnInit, OnChanges {
   // #region ==========> PROPERTIES <==========
-  
+
   // #region PRIVATE
   private _currentTab: string;
   // #endregion PRIVATE
-  
+
   // #region PUBLIC
   @Input('tabs') public navTabsList?: string[];
   @Input() public containerTitle?: string;
@@ -40,7 +40,7 @@ export class ContentContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
   }
   // #endregion ==========> INITIALIZATION <==========
 

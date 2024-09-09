@@ -41,12 +41,17 @@ import { TableComponent } from './widgets/table/table.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.component';
+import { FieldContadorMessageComponent } from './widgets/field-contador-message/field-contador-message.component';
+
+import { LibSpinnerComponent } from './widgets/spinner/spinner.component';
+import { LoadingBtnDirective } from './directives/loading-btn.directive';
 
 @NgModule({
   declarations: [
     LoadingComponent,
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
+    FieldContadorMessageComponent,
     LoadingButtonComponent,
     AlertComponent,
     ConfirmComponent,
@@ -65,7 +70,7 @@ import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.compon
     SearchTreePipe,
     ClickOutsideDirective,
     OrderingComponent,
-    
+
     SearchComboboxComponent,
     LibComboboxComponent, // Novo combobox, substituirá o Search futuramente
 
@@ -77,6 +82,9 @@ import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.compon
 
     CopyClipboardDirective,
     TableComponent,
+
+    LibSpinnerComponent,
+    LoadingBtnDirective,
   ],
   imports: [
     CommonModule,
@@ -92,6 +100,7 @@ import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.compon
     LoadingComponent,
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
+    FieldContadorMessageComponent,
     LoadingButtonComponent,
     AlertComponent,
     ConfirmComponent,
@@ -119,6 +128,9 @@ import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.compon
 
     CopyClipboardDirective,
     TableComponent,
+
+    LibSpinnerComponent,
+    LoadingBtnDirective,
   ],
   providers: [],
 })
