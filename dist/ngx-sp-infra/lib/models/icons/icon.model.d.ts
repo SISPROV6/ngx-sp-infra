@@ -1,9 +1,12 @@
-export declare class IconModel {
+export interface IconModel {
     nome: string;
     categoria: string;
     svg?: string;
     tags?: string[];
 }
-export declare abstract class IconsList {
-    static get list(): IconModel[];
+export declare class IconsList {
+    constructor(size: string | number);
+    updateList(size: number): void;
+    list: IconModel[];
+    getIcon(name: string): IconModel | undefined;
 }
