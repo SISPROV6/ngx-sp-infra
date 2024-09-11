@@ -172,3 +172,4 @@ export declare class ComboboxComponent implements OnInit, OnChanges, AfterViewIn
     static ɵfac: i0.ɵɵFactoryDeclaration<ComboboxComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ComboboxComponent, "app-combobox", never, { "_value": { "alias": "_value"; "required": false; }; "options": { "alias": "options"; "required": false; }; "config": { "alias": "config"; "required": false; }; "multiple": { "alias": "multiple"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, { "change": "change"; "searchChange": "searchChange"; "open": "open"; "close": "close"; }, never, never, false, never>;
 }
+//# sourceMappingURL=combobox.component.d.ts.map

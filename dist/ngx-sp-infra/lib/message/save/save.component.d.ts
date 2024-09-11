@@ -19,3 +19,4 @@ export declare class SaveComponent implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<SaveComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SaveComponent, "app-save", never, { "title": { "alias": "title"; "required": false; }; "message": { "alias": "message"; "required": false; }; "cancelText": { "alias": "cancelText"; "required": false; }; "okText": { "alias": "okText"; "required": false; }; "okButton": { "alias": "okButton"; "required": false; }; "fields": { "alias": "fields"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=save.component.d.ts.map

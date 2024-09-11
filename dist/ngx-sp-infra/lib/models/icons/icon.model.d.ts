@@ -7,3 +7,4 @@ export declare class IconModel {
 export declare abstract class IconsList {
     static get list(): IconModel[];
 }
+//# sourceMappingURL=icon.model.d.ts.map

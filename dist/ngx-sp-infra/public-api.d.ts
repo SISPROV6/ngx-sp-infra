@@ -47,6 +47,7 @@ export * from './lib/widgets/click-outside/clickoutside.directive';
 export * from './lib/widgets/combobox/combobox.component';
 export * from './lib/widgets/field-control-error/field-control-error.component';
 export * from './lib/widgets/field-error-message/field-error-message.component';
+export * from './lib/widgets/nav-produtos/nav-produtos.component';
 export * from './lib/widgets/loading/loading.component';
 export * from './lib/widgets/loading-button/loading-button.component';
 export * from './lib/widgets/ordering/ordering.component';
@@ -61,3 +62,4 @@ export * from './lib/widgets/simple-header/simple-header.component';
 export * from './lib/widgets/lib-icons/lib-icons.component';
 export * from './lib/widgets/content-container/content-container.component';
 export * from './lib/widgets/table/table.component';
+//# sourceMappingURL=public-api.d.ts.map

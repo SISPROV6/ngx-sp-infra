@@ -29,3 +29,4 @@ export declare class MessageService {
     static ɵfac: i0.ɵɵFactoryDeclaration<MessageService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<MessageService>;
 }
+//# sourceMappingURL=message.service.d.ts.map

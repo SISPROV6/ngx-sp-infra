@@ -60,3 +60,4 @@ export declare class TableComponent implements OnInit, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<TableComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<TableComponent, "lib-table", never, { "usePagination": { "alias": "usePagination"; "required": false; }; "recordsList": { "alias": "list"; "required": true; }; "countOptions": { "alias": "counts"; "required": false; }; "paginationPlacement": { "alias": "placement"; "required": false; }; "headersList": { "alias": "headers"; "required": true; }; "emptyListMessage": { "alias": "emptyListMessage"; "required": false; }; }, { "itemsPerPageChange": "itemsPerPageChange"; "pageChange": "pageChange"; }, never, ["[innerRows]"], false, never>;
 }
+//# sourceMappingURL=table.component.d.ts.map

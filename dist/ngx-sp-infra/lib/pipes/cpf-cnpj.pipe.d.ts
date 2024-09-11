@@ -5,3 +5,4 @@ export declare class CpfCnpjPipe implements PipeTransform {
     static ɵfac: i0.ɵɵFactoryDeclaration<CpfCnpjPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<CpfCnpjPipe, "cpfCnpj", false>;
 }
+//# sourceMappingURL=cpf-cnpj.pipe.d.ts.map

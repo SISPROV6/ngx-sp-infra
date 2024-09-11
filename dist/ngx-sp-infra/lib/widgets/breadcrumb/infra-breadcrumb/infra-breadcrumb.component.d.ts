@@ -27,3 +27,4 @@ export declare class InfraBreadcrumbComponent {
     static ɵfac: i0.ɵɵFactoryDeclaration<InfraBreadcrumbComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<InfraBreadcrumbComponent, "infra-breadcrumb", never, {}, {}, never, ["*"], false, never>;
 }
+//# sourceMappingURL=infra-breadcrumb.component.d.ts.map

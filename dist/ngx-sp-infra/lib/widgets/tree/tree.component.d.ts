@@ -18,3 +18,4 @@ export declare class TreeComponent implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<TreeComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<TreeComponent, "app-tree", never, { "items": { "alias": "items"; "required": false; }; "checkbox": { "alias": "checkbox"; "required": false; }; "filter": { "alias": "filter"; "required": false; }; }, { "onSelect": "onSelect"; "onEvent": "onEvent"; }, never, never, false, never>;
 }
+//# sourceMappingURL=tree.component.d.ts.map

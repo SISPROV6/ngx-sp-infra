@@ -12,3 +12,4 @@ export declare class InfraBreadcrumbItemComponent implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<InfraBreadcrumbItemComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<InfraBreadcrumbItemComponent, "li[infra-breadcrumb-item]", never, {}, {}, never, ["*"], false, never>;
 }
+//# sourceMappingURL=infra-breadcrumb-item.component.d.ts.map

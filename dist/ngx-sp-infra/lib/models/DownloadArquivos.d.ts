@@ -9,3 +9,4 @@ export interface DownloadArq {
     ErrorMessage: string;
     DownloadArquivos: DownloadArquivos;
 }
+//# sourceMappingURL=DownloadArquivos.d.ts.map

@@ -45,3 +45,4 @@ export declare class LibIconsComponent implements OnInit, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<LibIconsComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LibIconsComponent, "lib-icon", never, { "iconName": { "alias": "iconName"; "required": true; }; "iconColor": { "alias": "iconColor"; "required": false; }; "iconSize": { "alias": "iconSize"; "required": false; }; "iconFill": { "alias": "iconFill"; "required": false; }; "iconStrokeWidth": { "alias": "iconStrokeWidth"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=lib-icons.component.d.ts.map

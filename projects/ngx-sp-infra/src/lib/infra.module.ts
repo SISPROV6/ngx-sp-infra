@@ -41,6 +41,7 @@ import { TableComponent } from './widgets/table/table.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.component';
+import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.compon
     SearchTreePipe,
     ClickOutsideDirective,
     OrderingComponent,
-    
+    NavProdutosComponent,
+
     SearchComboboxComponent,
     LibComboboxComponent, // Novo combobox, substituirá o Search futuramente
 
@@ -107,6 +109,7 @@ import { LibComboboxComponent } from './widgets/lib-combobox/lib-combobox.compon
     CpfCnpjPipe,
     ClickOutsideDirective,
     OrderingComponent,
+    NavProdutosComponent,
 
     SearchComboboxComponent,
     LibComboboxComponent,

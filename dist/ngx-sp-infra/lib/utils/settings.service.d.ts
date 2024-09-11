@@ -7,3 +7,4 @@ export declare class SettingsService {
     static ɵfac: i0.ɵɵFactoryDeclaration<SettingsService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<SettingsService>;
 }
+//# sourceMappingURL=settings.service.d.ts.map

@@ -1,6 +1,6 @@
 {
   "name": "ngx-sp-infra",
-  "version": "1.11.8",
+  "version": "0.0.0-watch+1725999135275",
   "description": "Biblioteca de utilitários da Infra.",
   "author": "P&D",
   "keywords": [
@@ -40,5 +40,8 @@
       "default": "./fesm2022/ngx-sp-infra.mjs"
     }
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy in full compilation mode. This is not allowed.\\nPlease delete and rebuild the package with Ivy partial compilation mode, before attempting to publish.\\n')\" && exit 1"
+  }
 }

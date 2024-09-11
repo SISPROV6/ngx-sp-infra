@@ -5,3 +5,4 @@ export declare class CurrencyPipe implements PipeTransform {
     static ɵfac: i0.ɵɵFactoryDeclaration<CurrencyPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<CurrencyPipe, "currencyBRL", false>;
 }
+//# sourceMappingURL=currency.pipe.d.ts.map

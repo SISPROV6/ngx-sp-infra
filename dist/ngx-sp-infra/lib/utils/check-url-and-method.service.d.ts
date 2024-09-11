@@ -33,3 +33,4 @@ export declare class CheckUrlAndMethodService {
     static ɵfac: i0.ɵɵFactoryDeclaration<CheckUrlAndMethodService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<CheckUrlAndMethodService>;
 }
+//# sourceMappingURL=check-url-and-method.service.d.ts.map

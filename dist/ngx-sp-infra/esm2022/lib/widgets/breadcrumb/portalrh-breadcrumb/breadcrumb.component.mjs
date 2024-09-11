@@ -7,15 +7,28 @@ export class BreadcrumbComponent {
     }
     ngOnInit() {
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BreadcrumbComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: BreadcrumbComponent, selector: "app-breadcrumb", inputs: { menu: "menu", opcao: "opcao" }, ngImport: i0, template: "<!-- Breadcrumb -->\r\n<ol class=\"breadcrumb\">\r\n    <li class=\"breadcrumb-item active\">{{ menu }}</li>\r\n    <li class=\"breadcrumb-item\">{{ opcao }}</li>\r\n</ol>\r\n", styles: [""] }); }
+    static { this.ɵfac = function BreadcrumbComponent_Factory(t) { return new (t || BreadcrumbComponent)(); }; }
+    static { this.ɵcmp = /*@__PURE__*/ i0.ɵɵdefineComponent({ type: BreadcrumbComponent, selectors: [["app-breadcrumb"]], inputs: { menu: "menu", opcao: "opcao" }, decls: 5, vars: 2, consts: [[1, "breadcrumb"], [1, "breadcrumb-item", "active"], [1, "breadcrumb-item"]], template: function BreadcrumbComponent_Template(rf, ctx) { if (rf & 1) {
+            i0.ɵɵelementStart(0, "ol", 0)(1, "li", 1);
+            i0.ɵɵtext(2);
+            i0.ɵɵelementEnd();
+            i0.ɵɵelementStart(3, "li", 2);
+            i0.ɵɵtext(4);
+            i0.ɵɵelementEnd()();
+        } if (rf & 2) {
+            i0.ɵɵadvance(2);
+            i0.ɵɵtextInterpolate(ctx.menu);
+            i0.ɵɵadvance(2);
+            i0.ɵɵtextInterpolate(ctx.opcao);
+        } } }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BreadcrumbComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'app-breadcrumb', template: "<!-- Breadcrumb -->\r\n<ol class=\"breadcrumb\">\r\n    <li class=\"breadcrumb-item active\">{{ menu }}</li>\r\n    <li class=\"breadcrumb-item\">{{ opcao }}</li>\r\n</ol>\r\n" }]
-        }], ctorParameters: () => [], propDecorators: { menu: [{
-                type: Input
-            }], opcao: [{
-                type: Input
-            }] } });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnJlYWRjcnVtYi5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi93aWRnZXRzL2JyZWFkY3J1bWIvcG9ydGFscmgtYnJlYWRjcnVtYi9icmVhZGNydW1iLmNvbXBvbmVudC50cyIsIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL25neC1zcC1pbmZyYS9zcmMvbGliL3dpZGdldHMvYnJlYWRjcnVtYi9wb3J0YWxyaC1icmVhZGNydW1iL2JyZWFkY3J1bWIuY29tcG9uZW50Lmh0bWwiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFNBQVMsRUFBVSxLQUFLLEVBQUUsTUFBTSxlQUFlLENBQUM7O0FBT3pELE1BQU0sT0FBTyxtQkFBbUI7SUFLOUI7UUFIUyxTQUFJLEdBQVcsRUFBRSxDQUFDO1FBQ2xCLFVBQUssR0FBVyxFQUFFLENBQUM7SUFFWixDQUFDO0lBRWpCLFFBQVE7SUFDUixDQUFDOytHQVJVLG1CQUFtQjttR0FBbkIsbUJBQW1CLGdHQ1BoQyxpTEFLQTs7NEZERWEsbUJBQW1CO2tCQUwvQixTQUFTOytCQUNFLGdCQUFnQjt3REFNakIsSUFBSTtzQkFBWixLQUFLO2dCQUNHLEtBQUs7c0JBQWIsS0FBSyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0LCBJbnB1dCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xyXG5cclxuQENvbXBvbmVudCh7XHJcbiAgc2VsZWN0b3I6ICdhcHAtYnJlYWRjcnVtYicsXHJcbiAgdGVtcGxhdGVVcmw6ICcuL2JyZWFkY3J1bWIuY29tcG9uZW50Lmh0bWwnLFxyXG4gIHN0eWxlVXJsczogWycuL2JyZWFkY3J1bWIuY29tcG9uZW50LmNzcyddXHJcbn0pXHJcbmV4cG9ydCBjbGFzcyBCcmVhZGNydW1iQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcclxuICBcclxuICBASW5wdXQoKSBtZW51OiBzdHJpbmcgPSAnJztcclxuICBASW5wdXQoKSBvcGNhbzogc3RyaW5nID0gJyc7XHJcblxyXG4gIGNvbnN0cnVjdG9yKCkgeyB9XHJcblxyXG4gIG5nT25Jbml0KCk6IHZvaWQge1xyXG4gIH1cclxuXHJcbn1cclxuIiwiPCEtLSBCcmVhZGNydW1iIC0tPlxyXG48b2wgY2xhc3M9XCJicmVhZGNydW1iXCI+XHJcbiAgICA8bGkgY2xhc3M9XCJicmVhZGNydW1iLWl0ZW0gYWN0aXZlXCI+e3sgbWVudSB9fTwvbGk+XHJcbiAgICA8bGkgY2xhc3M9XCJicmVhZGNydW1iLWl0ZW1cIj57eyBvcGNhbyB9fTwvbGk+XHJcbjwvb2w+XHJcbiJdfQ==
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(BreadcrumbComponent, [{
+        type: Component,
+        args: [{ selector: 'app-breadcrumb', template: "<!-- Breadcrumb -->\n<ol class=\"breadcrumb\">\n    <li class=\"breadcrumb-item active\">{{ menu }}</li>\n    <li class=\"breadcrumb-item\">{{ opcao }}</li>\n</ol>\n" }]
+    }], () => [], { menu: [{
+            type: Input
+        }], opcao: [{
+            type: Input
+        }] }); })();
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassDebugInfo(BreadcrumbComponent, { className: "BreadcrumbComponent", filePath: "lib\\widgets\\breadcrumb\\portalrh-breadcrumb\\breadcrumb.component.ts", lineNumber: 8 }); })();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnJlYWRjcnVtYi5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi93aWRnZXRzL2JyZWFkY3J1bWIvcG9ydGFscmgtYnJlYWRjcnVtYi9icmVhZGNydW1iLmNvbXBvbmVudC50cyIsIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL25neC1zcC1pbmZyYS9zcmMvbGliL3dpZGdldHMvYnJlYWRjcnVtYi9wb3J0YWxyaC1icmVhZGNydW1iL2JyZWFkY3J1bWIuY29tcG9uZW50Lmh0bWwiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFNBQVMsRUFBVSxLQUFLLEVBQUUsTUFBTSxlQUFlLENBQUM7O0FBT3pELE1BQU0sT0FBTyxtQkFBbUI7SUFLOUI7UUFIUyxTQUFJLEdBQVcsRUFBRSxDQUFDO1FBQ2xCLFVBQUssR0FBVyxFQUFFLENBQUM7SUFFWixDQUFDO0lBRWpCLFFBQVE7SUFDUixDQUFDO29GQVJVLG1CQUFtQjtvRUFBbkIsbUJBQW1CO1lDTDVCLEFBREosNkJBQXVCLFlBQ2dCO1lBQUEsWUFBVTtZQUFBLGlCQUFLO1lBQ2xELDZCQUE0QjtZQUFBLFlBQVc7WUFDM0MsQUFEMkMsaUJBQUssRUFDM0M7O1lBRmtDLGVBQVU7WUFBViw4QkFBVTtZQUNqQixlQUFXO1lBQVgsK0JBQVc7OztpRkRJOUIsbUJBQW1CO2NBTC9CLFNBQVM7MkJBQ0UsZ0JBQWdCO29CQU1qQixJQUFJO2tCQUFaLEtBQUs7WUFDRyxLQUFLO2tCQUFiLEtBQUs7O2tGQUhLLG1CQUFtQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0LCBJbnB1dCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdhcHAtYnJlYWRjcnVtYicsXG4gIHRlbXBsYXRlVXJsOiAnLi9icmVhZGNydW1iLmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vYnJlYWRjcnVtYi5jb21wb25lbnQuY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgQnJlYWRjcnVtYkNvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG4gIFxuICBASW5wdXQoKSBtZW51OiBzdHJpbmcgPSAnJztcbiAgQElucHV0KCkgb3BjYW86IHN0cmluZyA9ICcnO1xuXG4gIGNvbnN0cnVjdG9yKCkgeyB9XG5cbiAgbmdPbkluaXQoKTogdm9pZCB7XG4gIH1cblxufVxuIiwiPCEtLSBCcmVhZGNydW1iIC0tPlxuPG9sIGNsYXNzPVwiYnJlYWRjcnVtYlwiPlxuICAgIDxsaSBjbGFzcz1cImJyZWFkY3J1bWItaXRlbSBhY3RpdmVcIj57eyBtZW51IH19PC9saT5cbiAgICA8bGkgY2xhc3M9XCJicmVhZGNydW1iLWl0ZW1cIj57eyBvcGNhbyB9fTwvbGk+XG48L29sPlxuIl19

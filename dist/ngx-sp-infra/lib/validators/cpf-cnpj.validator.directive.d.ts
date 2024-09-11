@@ -5,3 +5,4 @@ export declare class CpfCnpjValidatorDirective extends CpfCnpjValidator implemen
     static ɵfac: i0.ɵɵFactoryDeclaration<CpfCnpjValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<CpfCnpjValidatorDirective, "[appCpfCnpjValidate][ngModel]", never, {}, {}, never, never, false, never>;
 }
+//# sourceMappingURL=cpf-cnpj.validator.directive.d.ts.map

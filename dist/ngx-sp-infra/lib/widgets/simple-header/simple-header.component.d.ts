@@ -76,3 +76,4 @@ export declare class SimpleHeaderComponent implements OnInit, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<SimpleHeaderComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SimpleHeaderComponent, "lib-header", never, { "breadcrumbList": { "alias": "breadcrumbList"; "required": true; }; "pageTitle": { "alias": "pageTitle"; "required": false; }; "mode": { "alias": "mode"; "required": false; }; "hideButtons": { "alias": "hideButtons"; "required": false; }; "formGroup": { "alias": "formGroup"; "required": false; }; "showSpinner": { "alias": "showSpinner"; "required": false; }; }, { "onReturn": "onReturn"; "onCreate": "onCreate"; "onUpdate": "onUpdate"; }, never, ["[customButton1]", "[customButton2]", "[customButton3]", "[customButton4]", "[customButton5]", "[customButtonEnd]"], false, never>;
 }
+//# sourceMappingURL=simple-header.component.d.ts.map

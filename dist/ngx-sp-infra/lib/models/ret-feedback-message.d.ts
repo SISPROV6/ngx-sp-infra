@@ -5,3 +5,4 @@ export declare class RetFeedbackMessage implements IError {
     ErrorMessage: string;
     FeedbackMessage: string;
 }
+//# sourceMappingURL=ret-feedback-message.d.ts.map

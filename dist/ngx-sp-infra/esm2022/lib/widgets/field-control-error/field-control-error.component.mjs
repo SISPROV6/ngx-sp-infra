@@ -1,6 +1,15 @@
 import { Component, Input } from '@angular/core';
 import * as i0 from "@angular/core";
 import * as i1 from "@angular/common";
+function FieldControlErrorComponent_div_0_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 1);
+    i0.ɵɵtext(1);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r0 = i0.ɵɵnextContext();
+    i0.ɵɵadvance();
+    i0.ɵɵtextInterpolate1(" ", ctx_r0.errorMessage, "\n");
+} }
 export class FieldControlErrorComponent {
     constructor(renderer, elementRef) {
         this.renderer = renderer;
@@ -9,15 +18,20 @@ export class FieldControlErrorComponent {
     ngOnInit() {
         this.renderer.setStyle(this.elementRef.nativeElement, 'width', '100%');
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: FieldControlErrorComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: FieldControlErrorComponent, selector: "app-field-control-error", inputs: { showError: "showError", errorMessage: "errorMessage" }, ngImport: i0, template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"showError\">\r\n    {{ errorMessage }}\r\n</div>", styles: [""], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] }); }
+    static { this.ɵfac = function FieldControlErrorComponent_Factory(t) { return new (t || FieldControlErrorComponent)(i0.ɵɵdirectiveInject(i0.Renderer2), i0.ɵɵdirectiveInject(i0.ElementRef)); }; }
+    static { this.ɵcmp = /*@__PURE__*/ i0.ɵɵdefineComponent({ type: FieldControlErrorComponent, selectors: [["app-field-control-error"]], inputs: { showError: "showError", errorMessage: "errorMessage" }, decls: 1, vars: 1, consts: [["class", "invalid-feedback d-block", "role", "alert", 4, "ngIf"], ["role", "alert", 1, "invalid-feedback", "d-block"]], template: function FieldControlErrorComponent_Template(rf, ctx) { if (rf & 1) {
+            i0.ɵɵtemplate(0, FieldControlErrorComponent_div_0_Template, 2, 1, "div", 0);
+        } if (rf & 2) {
+            i0.ɵɵproperty("ngIf", ctx.showError);
+        } }, dependencies: [i1.NgIf] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: FieldControlErrorComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'app-field-control-error', template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\r\n    *ngIf=\"showError\">\r\n    {{ errorMessage }}\r\n</div>" }]
-        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ElementRef }], propDecorators: { showError: [{
-                type: Input
-            }], errorMessage: [{
-                type: Input
-            }] } });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi93aWRnZXRzL2ZpZWxkLWNvbnRyb2wtZXJyb3IvZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQudHMiLCIuLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi93aWRnZXRzL2ZpZWxkLWNvbnRyb2wtZXJyb3IvZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuaHRtbCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBaUMsTUFBTSxlQUFlLENBQUM7OztBQU9oRixNQUFNLE9BQU8sMEJBQTBCO0lBSXJDLFlBQW9CLFFBQW1CLEVBQVUsVUFBc0I7UUFBbkQsYUFBUSxHQUFSLFFBQVEsQ0FBVztRQUFVLGVBQVUsR0FBVixVQUFVLENBQVk7SUFBSSxDQUFDO0lBRTVFLFFBQVE7UUFDTixJQUFJLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLGFBQWEsRUFBRSxPQUFPLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFDekUsQ0FBQzsrR0FSVSwwQkFBMEI7bUdBQTFCLDBCQUEwQixpSUNQdkMsd0hBR007OzRGRElPLDBCQUEwQjtrQkFMdEMsU0FBUzsrQkFDRSx5QkFBeUI7dUdBSzFCLFNBQVM7c0JBQWpCLEtBQUs7Z0JBQ0csWUFBWTtzQkFBcEIsS0FBSyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgSW5wdXQsIE9uSW5pdCwgRWxlbWVudFJlZiwgUmVuZGVyZXIyIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcblxyXG5AQ29tcG9uZW50KHtcclxuICBzZWxlY3RvcjogJ2FwcC1maWVsZC1jb250cm9sLWVycm9yJyxcclxuICB0ZW1wbGF0ZVVybDogJy4vZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuaHRtbCcsXHJcbiAgc3R5bGVVcmxzOiBbJy4vZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuY3NzJ11cclxufSlcclxuZXhwb3J0IGNsYXNzIEZpZWxkQ29udHJvbEVycm9yQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcclxuICBASW5wdXQoKSBzaG93RXJyb3I6IGJvb2xlYW47XHJcbiAgQElucHV0KCkgZXJyb3JNZXNzYWdlOiBzdHJpbmc7XHJcblxyXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgcmVuZGVyZXI6IFJlbmRlcmVyMiwgcHJpdmF0ZSBlbGVtZW50UmVmOiBFbGVtZW50UmVmKSB7IH1cclxuXHJcbiAgbmdPbkluaXQoKTogdm9pZCB7XHJcbiAgICB0aGlzLnJlbmRlcmVyLnNldFN0eWxlKHRoaXMuZWxlbWVudFJlZi5uYXRpdmVFbGVtZW50LCAnd2lkdGgnLCAnMTAwJScpO1xyXG4gIH1cclxuXHJcbn1cclxuIiwiPGRpdiBjbGFzcz1cImludmFsaWQtZmVlZGJhY2sgZC1ibG9ja1wiIHJvbGU9XCJhbGVydFwiXHJcbiAgICAqbmdJZj1cInNob3dFcnJvclwiPlxyXG4gICAge3sgZXJyb3JNZXNzYWdlIH19XHJcbjwvZGl2PiJdfQ==
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(FieldControlErrorComponent, [{
+        type: Component,
+        args: [{ selector: 'app-field-control-error', template: "<div class=\"invalid-feedback d-block\" role=\"alert\"\n    *ngIf=\"showError\">\n    {{ errorMessage }}\n</div>" }]
+    }], () => [{ type: i0.Renderer2 }, { type: i0.ElementRef }], { showError: [{
+            type: Input
+        }], errorMessage: [{
+            type: Input
+        }] }); })();
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassDebugInfo(FieldControlErrorComponent, { className: "FieldControlErrorComponent", filePath: "lib\\widgets\\field-control-error\\field-control-error.component.ts", lineNumber: 8 }); })();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi93aWRnZXRzL2ZpZWxkLWNvbnRyb2wtZXJyb3IvZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQudHMiLCIuLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi93aWRnZXRzL2ZpZWxkLWNvbnRyb2wtZXJyb3IvZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuaHRtbCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBaUMsTUFBTSxlQUFlLENBQUM7Ozs7SUNBaEYsOEJBQ3NCO0lBQ2xCLFlBQ0o7SUFBQSxpQkFBTTs7O0lBREYsY0FDSjtJQURJLHFEQUNKOztBRElBLE1BQU0sT0FBTywwQkFBMEI7SUFJckMsWUFBb0IsUUFBbUIsRUFBVSxVQUFzQjtRQUFuRCxhQUFRLEdBQVIsUUFBUSxDQUFXO1FBQVUsZUFBVSxHQUFWLFVBQVUsQ0FBWTtJQUFJLENBQUM7SUFFNUUsUUFBUTtRQUNOLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsYUFBYSxFQUFFLE9BQU8sRUFBRSxNQUFNLENBQUMsQ0FBQztJQUN6RSxDQUFDOzJGQVJVLDBCQUEwQjtvRUFBMUIsMEJBQTBCO1lDUHZDLDJFQUNzQjs7WUFBakIsb0NBQWU7OztpRkRNUCwwQkFBMEI7Y0FMdEMsU0FBUzsyQkFDRSx5QkFBeUI7bUVBSzFCLFNBQVM7a0JBQWpCLEtBQUs7WUFDRyxZQUFZO2tCQUFwQixLQUFLOztrRkFGSywwQkFBMEIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIElucHV0LCBPbkluaXQsIEVsZW1lbnRSZWYsIFJlbmRlcmVyMiB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdhcHAtZmllbGQtY29udHJvbC1lcnJvcicsXG4gIHRlbXBsYXRlVXJsOiAnLi9maWVsZC1jb250cm9sLWVycm9yLmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vZmllbGQtY29udHJvbC1lcnJvci5jb21wb25lbnQuY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgRmllbGRDb250cm9sRXJyb3JDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICBASW5wdXQoKSBzaG93RXJyb3I6IGJvb2xlYW47XG4gIEBJbnB1dCgpIGVycm9yTWVzc2FnZTogc3RyaW5nO1xuXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgcmVuZGVyZXI6IFJlbmRlcmVyMiwgcHJpdmF0ZSBlbGVtZW50UmVmOiBFbGVtZW50UmVmKSB7IH1cblxuICBuZ09uSW5pdCgpOiB2b2lkIHtcbiAgICB0aGlzLnJlbmRlcmVyLnNldFN0eWxlKHRoaXMuZWxlbWVudFJlZi5uYXRpdmVFbGVtZW50LCAnd2lkdGgnLCAnMTAwJScpO1xuICB9XG5cbn1cbiIsIjxkaXYgY2xhc3M9XCJpbnZhbGlkLWZlZWRiYWNrIGQtYmxvY2tcIiByb2xlPVwiYWxlcnRcIlxuICAgICpuZ0lmPVwic2hvd0Vycm9yXCI+XG4gICAge3sgZXJyb3JNZXNzYWdlIH19XG48L2Rpdj4iXX0=

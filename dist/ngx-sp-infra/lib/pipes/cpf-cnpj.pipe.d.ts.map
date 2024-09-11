@@ -1,0 +1,1 @@
+{"version":3,"file":"cpf-cnpj.pipe.d.ts","sourceRoot":"","sources":["../../../../projects/ngx-sp-infra/src/lib/pipes/cpf-cnpj.pipe.ts"],"names":[],"mappings":"AAAA,OAAO,EAAQ,aAAa,EAAE,MAAM,eAAe,CAAC;;AAEpD,qBAGa,WAAY,YAAW,aAAa;IAExC,SAAS,CAAC,KAAK,EAAE,MAAM,GAAG,MAAM;yCAF5B,WAAW;uCAAX,WAAW;CAYvB"}

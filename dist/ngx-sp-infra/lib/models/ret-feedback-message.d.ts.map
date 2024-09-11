@@ -1,0 +1,1 @@
+{"version":3,"file":"ret-feedback-message.d.ts","sourceRoot":"","sources":["../../../../projects/ngx-sp-infra/src/lib/models/ret-feedback-message.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAElC,+EAA+E;AAC/E,qBAAa,kBAAmB,YAAW,MAAM;IAC/C,KAAK,EAAE,OAAO,CAAC;IACf,YAAY,EAAE,MAAM,CAAC;IACrB,eAAe,EAAE,MAAM,CAAM;CAC9B"}

@@ -5,3 +5,4 @@ export declare class RetReportFile implements IError {
     ErrorMessage: string;
     ReportFile: ReportFile;
 }
+//# sourceMappingURL=ret-report-file.d.ts.map

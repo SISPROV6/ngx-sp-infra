@@ -14,3 +14,4 @@ export declare class SvgStorageComponent implements OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<SvgStorageComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SvgStorageComponent, "app-svg-storage", never, { "svgName": { "alias": "svgName"; "required": true; }; "svgColor": { "alias": "svgColor"; "required": false; }; "svgFill": { "alias": "svgFill"; "required": false; }; "svgSize": { "alias": "svgSize"; "required": false; }; "svgStrokeWidth": { "alias": "svgStrokeWidth"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=svg-storage.component.d.ts.map

@@ -28,3 +28,4 @@ export declare class EmailAnexoRecord {
     /** Tipo do conteúdo do arquivo */
     ContentType: string;
 }
+//# sourceMappingURL=email-model.d.ts.map

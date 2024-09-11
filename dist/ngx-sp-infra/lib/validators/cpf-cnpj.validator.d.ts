@@ -16,3 +16,4 @@ export declare class CpfCnpjValidator implements Validator {
     */
     validate(c: AbstractControl): ValidationErrors | null;
 }
+//# sourceMappingURL=cpf-cnpj.validator.d.ts.map

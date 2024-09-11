@@ -20,3 +20,4 @@ export declare class ConfirmComponent implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<ConfirmComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ConfirmComponent, "app-confirm", never, { "title": { "alias": "title"; "required": false; }; "message": { "alias": "message"; "required": false; }; "cancelText": { "alias": "cancelText"; "required": false; }; "okText": { "alias": "okText"; "required": false; }; "okButton": { "alias": "okButton"; "required": false; }; "parametroOkButton": { "alias": "parametroOkButton"; "required": false; }; }, { "clickButton": "clickButton"; }, never, never, false, never>;
 }
+//# sourceMappingURL=confirm.component.d.ts.map

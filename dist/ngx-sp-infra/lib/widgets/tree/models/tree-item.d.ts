@@ -9,3 +9,4 @@ export declare class TreeItem {
     aplicClass: boolean;
     level: number;
 }
+//# sourceMappingURL=tree-item.d.ts.map

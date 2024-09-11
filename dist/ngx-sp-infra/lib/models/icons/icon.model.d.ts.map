@@ -1,0 +1,1 @@
+{"version":3,"file":"icon.model.d.ts","sourceRoot":"","sources":["../../../../../projects/ngx-sp-infra/src/lib/models/icons/icon.model.ts"],"names":[],"mappings":"AAEA,qBAAa,SAAS;IACZ,IAAI,EAAE,MAAM,CAAM;IAClB,SAAS,EAAE,MAAM,CAAM;IACvB,GAAG,CAAC,EAAE,MAAM,CAAC;IACb,IAAI,CAAC,EAAE,MAAM,EAAE,CAAM;CAC9B;AAED,8BAAsB,SAAS;IAC5B,WAAkB,IAAI,IAAI,SAAS,EAAE,CAAuB;CAC9D"}

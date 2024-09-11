@@ -16,3 +16,4 @@ export declare class OrderingComponent implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<OrderingComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<OrderingComponent, "app-ordering", never, { "isColumnClicked": { "alias": "isColumnClicked"; "required": false; }; "sortDirection": { "alias": "sortDirection"; "required": false; }; "sortAttributes": { "alias": "sortAttributes"; "required": false; }; }, { "sortDirectionChange": "sortDirectionChange"; "sortChange": "sortChange"; }, never, never, false, never>;
 }
+//# sourceMappingURL=ordering.component.d.ts.map

@@ -31,3 +31,4 @@ export declare class ConfirmModalComponent {
     static ɵfac: i0.ɵɵFactoryDeclaration<ConfirmModalComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ConfirmModalComponent, "app-confirm-modal", never, { "modalSubject": { "alias": "modalSubject"; "required": false; }; "modalType": { "alias": "modalType"; "required": false; }; "genreAndPluralitySubject": { "alias": "genreAndPluralitySubject"; "required": false; }; "customMessage": { "alias": "customMessage"; "required": false; }; "customTitle": { "alias": "customTitle"; "required": false; }; "customButton": { "alias": "customButton"; "required": false; }; "customButtonLoading": { "alias": "customButtonLoading"; "required": false; }; "importantMessage": { "alias": "importantMessage"; "required": false; }; }, { "_closingModal": "_closingModal"; }, never, never, false, never>;
 }
+//# sourceMappingURL=confirm-modal.component.d.ts.map

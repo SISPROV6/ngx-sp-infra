@@ -4,3 +4,4 @@ export declare class LoadingComponent {
     static ɵfac: i0.ɵɵFactoryDeclaration<LoadingComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LoadingComponent, "app-loading", never, {}, {}, never, never, false, never>;
 }
+//# sourceMappingURL=loading.component.d.ts.map

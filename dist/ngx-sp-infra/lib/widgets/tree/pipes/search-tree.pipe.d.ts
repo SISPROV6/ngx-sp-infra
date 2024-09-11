@@ -6,3 +6,4 @@ export declare class SearchTreePipe implements PipeTransform {
     static ɵfac: i0.ɵɵFactoryDeclaration<SearchTreePipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<SearchTreePipe, "TreeFilter", false>;
 }
+//# sourceMappingURL=search-tree.pipe.d.ts.map

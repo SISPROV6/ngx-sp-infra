@@ -7,3 +7,4 @@ export declare class IpServiceService {
     static ɵfac: i0.ɵɵFactoryDeclaration<IpServiceService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<IpServiceService>;
 }
+//# sourceMappingURL=ip-service.service.d.ts.map

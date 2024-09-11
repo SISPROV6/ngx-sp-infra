@@ -56,3 +56,4 @@ export declare class Utils {
     static b64EncodeUnicode(str: string): string;
     static getIsMobile(): boolean;
 }
+//# sourceMappingURL=utils.d.ts.map

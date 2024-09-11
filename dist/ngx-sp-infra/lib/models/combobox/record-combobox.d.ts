@@ -13,3 +13,4 @@ export interface IRecordsCombobox {
     ID: string | number;
     LABEL: string;
 }
+//# sourceMappingURL=record-combobox.d.ts.map

@@ -58,3 +58,4 @@ export declare class RequiredDirective implements OnInit, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<RequiredDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredDirective, "label[libRequired], span[libRequired], p[libRequired]", never, { "showMarker": { "alias": "libRequired"; "required": false; }; "spanID": { "alias": "sisID"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=required.directive.d.ts.map

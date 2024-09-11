@@ -5,3 +5,4 @@ export declare class LimitToPipe implements PipeTransform {
     static ɵfac: i0.ɵɵFactoryDeclaration<LimitToPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<LimitToPipe, "limitTo", false>;
 }
+//# sourceMappingURL=limit-to.pipe.d.ts.map

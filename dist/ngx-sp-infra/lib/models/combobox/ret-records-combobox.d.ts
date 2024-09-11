@@ -9,3 +9,4 @@ export declare class RetRecordCombobox {
     ErrorMessage: string;
     Record: RecordCombobox;
 }
+//# sourceMappingURL=ret-records-combobox.d.ts.map

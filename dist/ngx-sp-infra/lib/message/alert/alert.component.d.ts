@@ -12,3 +12,4 @@ export declare class AlertComponent implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<AlertComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<AlertComponent, "app-alert", never, { "message": { "alias": "message"; "required": false; }; "type": { "alias": "type"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=alert.component.d.ts.map

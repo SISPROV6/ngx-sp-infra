@@ -1,0 +1,55 @@
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.menu-item a {
+  text-align: center;
+  position: relative; /* Necessário para o posicionamento do triângulo */
+  display: inline-block;
+  padding-bottom: 5px;
+  color: #c7c7c7; /* Cinza claro no conteúdo do <a> quando sem active ou hover */
+  text-decoration: none;
+  border-bottom: 2px solid #c7c7c7; /* Linha cinza abaixo do conteúdo */
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+
+  width: calc(100% + 15px);
+}
+
+.menu-item a:hover {
+  color: #3e5154; /* Altera a cor do <a> no hover */
+  border-bottom: 2px solid #2847A0; /* Linha cinza abaixo do conteúdo no hover*/
+}
+
+.menu-item.active a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 5px);
+  height: 2px;
+  background-color: #2847A0;
+}
+
+.menu-item.active a {
+  color: #3e5154;
+}
+
+.menu-item.active a::before {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Ajuste para alinhar o triângulo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #2847A0; /* Cor do triângulo */
+  opacity: 1;
+  transition: all 0.2s ease-in-out; /* Velocidade da transição */
+}

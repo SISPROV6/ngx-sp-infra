@@ -3,3 +3,4 @@ export interface IPagination {
     ElemsPerPage: number;
     TotalPages: number;
 }
+//# sourceMappingURL=ipagination.d.ts.map

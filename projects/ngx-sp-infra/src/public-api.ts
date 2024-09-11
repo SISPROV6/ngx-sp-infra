@@ -59,6 +59,7 @@ export * from './lib/widgets/click-outside/clickoutside.directive';
 export * from './lib/widgets/combobox/combobox.component';
 export * from './lib/widgets/field-control-error/field-control-error.component';
 export * from './lib/widgets/field-error-message/field-error-message.component';
+export * from './lib/widgets/nav-produtos/nav-produtos.component';
 export * from './lib/widgets/loading/loading.component';
 export * from './lib/widgets/loading-button/loading-button.component';
 export * from './lib/widgets/ordering/ordering.component';

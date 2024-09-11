@@ -6,3 +6,4 @@ export declare class TextFilterPipe implements PipeTransform {
     static ɵfac: i0.ɵɵFactoryDeclaration<TextFilterPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<TextFilterPipe, "textFilter", false>;
 }
+//# sourceMappingURL=text-filter.pipe.d.ts.map
