@@ -1,5 +1,6 @@
 node_modules/
 .angular/
+dist/
 
 projects/ngx-sp-infra/node_modules/
 projects/ngx-sp-infra/.angular/
