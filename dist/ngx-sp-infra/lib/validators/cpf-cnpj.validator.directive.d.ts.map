@@ -1,1 +1,0 @@
-{"version":3,"file":"cpf-cnpj.validator.directive.d.ts","sourceRoot":"","sources":["../../../../projects/ngx-sp-infra/src/lib/validators/cpf-cnpj.validator.directive.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,SAAS,EAAiB,MAAM,gBAAgB,CAAC;AAC1D,OAAO,EAAE,gBAAgB,EAAE,MAAM,sBAAsB,CAAC;;AAGxD,qBAQa,yBAA0B,SAAQ,gBAAiB,YAAW,SAAS;yCAAvE,yBAAyB;2CAAzB,yBAAyB;CAAkD"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"ret-report-file.d.ts","sourceRoot":"","sources":["../../../../projects/ngx-sp-infra/src/lib/models/ret-report-file.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAClC,OAAO,EAAE,UAAU,EAAE,MAAM,eAAe,CAAC;AAE3C,qBAAa,aAAc,YAAW,MAAM;IACxC,KAAK,EAAE,OAAO,CAAC;IACf,YAAY,EAAE,MAAM,CAAC;IACrB,UAAU,EAAE,UAAU,CAAC;CAC1B"}

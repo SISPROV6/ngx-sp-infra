@@ -1,1 +1,0 @@
-{"version":3,"file":"ret-tree.d.ts","sourceRoot":"","sources":["../../../../../../projects/ngx-sp-infra/src/lib/widgets/tree/models/ret-tree.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,wBAAwB,CAAC;AAChD,OAAO,EAAE,QAAQ,EAAE,MAAM,aAAa,CAAC;AAEvC,qBAAa,OAAQ,YAAW,MAAM;IAChC,KAAK,EAAE,OAAO,CAAC;IACf,YAAY,EAAE,MAAM,CAAC;IACrB,YAAY,EAAE,QAAQ,EAAE,CAAC;CAC9B"}

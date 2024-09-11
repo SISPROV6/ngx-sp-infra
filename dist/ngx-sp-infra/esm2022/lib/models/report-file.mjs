@@ -1,7 +1,0 @@
-export class ReportFile {
-    constructor() {
-        this.ReportName = '';
-        this.ReportBase64 = '';
-    }
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwb3J0LWZpbGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3AtaW5mcmEvc3JjL2xpYi9tb2RlbHMvcmVwb3J0LWZpbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxPQUFPLFVBQVU7SUFBdkI7UUFDSSxlQUFVLEdBQVcsRUFBRSxDQUFDO1FBQ3hCLGlCQUFZLEdBQVcsRUFBRSxDQUFDO0lBQzlCLENBQUM7Q0FBQSIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjbGFzcyBSZXBvcnRGaWxlIHtcbiAgICBSZXBvcnROYW1lOiBzdHJpbmcgPSAnJztcbiAgICBSZXBvcnRCYXNlNjQ6IHN0cmluZyA9ICcnO1xufVxuIl19
