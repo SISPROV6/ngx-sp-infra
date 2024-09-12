@@ -23,7 +23,7 @@ export class TableComponent implements OnInit, OnChanges {
   // #region ==========> PROPRIEDADES <==========
 
   // #region PRIVATE
-  // [...]
+  private _paginationID: string = "libTablePagination";
   // #endregion PRIVATE
 
   // #region PUBLIC
@@ -61,6 +61,10 @@ export class TableComponent implements OnInit, OnChanges {
   /** Evento emitido quando a página é alterada. */
   @Output() public pageChange: EventEmitter<number> = new EventEmitter<number>();
 
+  /** Evento emitido quando o ID da paginação é criado no início. */
+  @Output() public paginationIDChange: EventEmitter<string> = new EventEmitter<string>();
+
+
   /** Contador de registros (pode ser usado para futuras implementações de lógica interna). */
   public counter: number = 0;
 
@@ -70,13 +74,21 @@ export class TableComponent implements OnInit, OnChanges {
   /** Número de itens a serem exibidos por página. */
 	public itemsPerPage: number;
 
+
+  public get paginationID(): string { return this._paginationID; }
+  public set paginationID(value: string) {
+    this._paginationID = value;
+    this.paginationIDChange.emit(value);
+  }
   // #endregion PUBLIC
 
   // #endregion ==========> PROPRIEDADES <==========
 
 
   // #region ==========> INICIALIZAÇÃO <==========
-  constructor() { }
+  constructor() {
+    this.paginationID = (Math.random() * 10000).toString();
+  }
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {

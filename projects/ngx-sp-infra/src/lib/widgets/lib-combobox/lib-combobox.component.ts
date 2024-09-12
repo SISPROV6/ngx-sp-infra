@@ -47,7 +47,10 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   protected textoPesquisa: string = "";
 
   protected get ariaExpanded(): boolean { return this._ariaExpanded; }
-  protected set ariaExpanded(value: boolean) { this._ariaExpanded = value; }
+  protected set ariaExpanded(value: boolean) {
+    this._ariaExpanded = value;
+    this.adjustDropdownWidth();
+  }
 
   protected innerControl: FormControl = new FormControl<string | number | null>(null);
   protected invalidControl: boolean = false;
@@ -230,6 +233,8 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   private adjustDropdownWidth(): void {
     if (this._mainInput && this._dropdownMenu) {
       const inputWidth = this._mainInput.nativeElement.offsetWidth;
+      console.log("width do input principal: ", inputWidth);
+      
       this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
     }
   }
