@@ -45,8 +45,6 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
       run: |
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
         cd dist/ngx-sp-infra
         
         # Condicional para definir a tag de publicação
@@ -55,3 +53,4 @@ jobs:
         elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
           npm publish --access public --tag test
         fi
+
