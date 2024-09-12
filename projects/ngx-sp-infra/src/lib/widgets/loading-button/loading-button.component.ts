@@ -2,8 +2,12 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-loading-button',
-  templateUrl: './loading-button.component.html',
-  styleUrls: ['./loading-button.component.scss']
+  template: `
+    <img class="button-spinner" src="assets/imgs/spinner.gif" *ngIf="isLoading">
+  `,
+  styles: `
+    .button-spinner{ width: 24px; }
+  `
 })
 export class LoadingButtonComponent {
   @Input() isLoading: boolean;
