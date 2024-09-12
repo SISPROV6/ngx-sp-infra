@@ -24,24 +24,24 @@ jobs:
     - name: Check if projects/ngx-sp-infra/package.json is modified
       id: changes
       run: |
-        if git diff --name-only HEAD^ HEAD | grep -q "projects/ngx-sp-infra/package.json"; then
+        if git diff --name-only origin/${{ github.ref }}^..origin/${{ github.ref }} -- "projects/ngx-sp-infra/package.json"; then
           echo "projects/ngx-sp-infra/package.json foi modificado."
-          echo "::set-output name=should_publish::true"
+          echo "should_publish=true" >> $GITHUB_ENV
         else
           echo "projects/ngx-sp-infra/package.json não foi modificado."
-          echo "::set-output name=should_publish::false"
+          echo "should_publish=false" >> $GITHUB_ENV
         fi
 
     - name: Install dependencies
-      if: steps.changes.outputs.should_publish == 'true'
+      if: env.should_publish == 'true'
       run: npm install
 
     - name: Build the library and add tags
-      if: steps.changes.outputs.should_publish == 'true'
+      if: env.should_publish == 'true'
       run: npm run build
 
     - name: Publish to NPM
-      if: steps.changes.outputs.should_publish == 'true'
+      if: env.should_publish == 'true'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
       run: |
