@@ -3,8 +3,8 @@ name: Deploy no NPM
 on:
   push:
     branches:
-      - main # Branch principal para publicação de versões estáveis
-      - test # Branch para publicação de versões de teste
+      - main
+      - test
 
 jobs:
   publish:
@@ -14,6 +14,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # Garante que todo o histórico de commits seja trazido
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -43,14 +45,12 @@ jobs:
     - name: Publish to NPM
       if: env.should_publish == 'true'
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Usando o token armazenado nos secrets
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         cd dist/ngx-sp-infra
         
-        # Condicional para definir a tag de publicação
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           npm publish --access public --tag latest
         elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
           npm publish --access public --tag test
         fi
-
