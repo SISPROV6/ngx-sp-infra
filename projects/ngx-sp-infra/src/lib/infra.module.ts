@@ -45,6 +45,7 @@ import { FieldContadorMessageComponent } from './widgets/field-contador-message/
 
 import { LibSpinnerComponent } from './widgets/spinner/spinner.component';
 import { LoadingBtnDirective } from './directives/loading-btn.directive';
+import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { LoadingBtnDirective } from './directives/loading-btn.directive';
     BreadcrumbComponent,
     ComboboxComponent,
     SvgStorageComponent,
+    NavProdutosComponent,
     TreeComponent,
     ToUrlPipe,
     CpfCnpjPipe,
@@ -108,6 +110,7 @@ import { LoadingBtnDirective } from './directives/loading-btn.directive';
     SaveComponent,
     InfraBreadcrumbComponent,
     InfraBreadcrumbItemComponent,
+    NavProdutosComponent,
     BreadcrumbComponent,
     ComboboxComponent,
     SvgStorageComponent,
