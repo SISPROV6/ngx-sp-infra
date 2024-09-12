@@ -79,3 +79,4 @@ export * from './lib/widgets/content-container/content-container.component';
 
 export * from './lib/widgets/table/table.component';
 export * from './lib/widgets/spinner/spinner.component';
+export * from './lib/widgets/nav-produtos/nav-produtos.component';
