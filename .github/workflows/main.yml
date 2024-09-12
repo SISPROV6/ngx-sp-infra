@@ -26,7 +26,7 @@ jobs:
     - name: Check if projects/ngx-sp-infra/package.json is modified
       id: changes
       run: |
-        if git diff --name-only origin/${{ github.ref }}^..origin/${{ github.ref }} -- "projects/ngx-sp-infra/package.json"; then
+        if git diff --name-only HEAD~1 HEAD | grep -q "projects/ngx-sp-infra/package.json"; then
           echo "projects/ngx-sp-infra/package.json foi modificado."
           echo "should_publish=true" >> $GITHUB_ENV
         else
