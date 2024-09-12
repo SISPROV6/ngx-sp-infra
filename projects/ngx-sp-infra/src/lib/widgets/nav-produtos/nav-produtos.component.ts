@@ -12,6 +12,7 @@ import { NavigationEnd, Router } from '@angular/router';
         [class.active]="activeItem == item.caminho"
         >
         <a [routerLink]="item.caminho" target="_blank">{{ item.label }}</a>
+
         <!-- <a [href]="item.caminho" target="_blank">{{ item.label }}</a> -->
       </li>
     </ul>
