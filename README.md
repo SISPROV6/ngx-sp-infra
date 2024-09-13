@@ -52,14 +52,14 @@ Antes de publicar a biblioteca para o NPM é muito importante realizar testes ro
 2. No projeto que será usado para teste modifique o arquivo angular.json e adicione a propriedade "preserveSymlinks" dentro de `build > options` como no exemplo abaixo:
   ```json
     {
-      // ...
+      // ...restante do conteúdo
       "build": {
       "builder": "@angular-devkit/build-angular:browser",
       "options": {
         "preserveSymlinks": true,
-        // ...
+        // ...restante do conteúdo
       },
-      // ...
+      // ...restante do conteúdo
     },
     }
   ```
@@ -68,8 +68,11 @@ Antes de publicar a biblioteca para o NPM é muito importante realizar testes ro
 npm uninstall ngx-sp-infra --force
 ```
 ```bash
-  npm i "file:C:/SisproCloud/INFRA/Fontes/Sp_106_Imports/NgxSpInfra/dist ngx-sp-infra"
+npm i "file:C:/SisproCloud/INFRA/Fontes/Sp_106_Imports/NgxSpInfra/dist/ngx-sp-infra"
 ```
+
+> [!TIP]
+> Se for necessário, utilize o `--force` ...principalmente no uninstall
 
 E pronto! Agora graças ao `ng build --watch` sempre que uma alteração for salva no projeto NgxSpInfra os arquivos na dist irão se atualizar também e a instalação no projeto de teste observavará exatamente estes arquivos.
 
