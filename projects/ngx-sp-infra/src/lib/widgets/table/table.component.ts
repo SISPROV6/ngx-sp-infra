@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 /**
  * Componente de Tabela Customizável
@@ -18,7 +18,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   // #region ==========> PROPRIEDADES <==========
 
@@ -83,15 +83,16 @@ export class TableComponent implements OnInit, OnChanges {
 
 
   // #region ==========> INICIALIZAÇÃO <==========
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {
     if (this.recordsList) { this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length }
     else { this.itemsPerPage = this.countOptions[0] ?? 10 }
+  }
 
-    console.log("paginationID: ", this.paginationID);
-    console.log("this.paginationID ? this.paginationID : null: ", this.paginationID ? this.paginationID : null);
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();  // Forçar uma nova detecção após a renderização
   }
 
   /** Monitora as mudanças nas entradas do componente e realiza ajustes, como resetar a paginação ou validar o layout das colunas.
@@ -104,10 +105,6 @@ export class TableComponent implements OnInit, OnChanges {
       if (maxColumns >= 13) {
         throw new Error("A soma de largura (classe com prefixo 'col-') de todas as colunas não pode ser maior que 12.");
       }
-    }
-
-    if (changes["paginationID"]) {
-      console.log('Pagination ID changed:', this.paginationID);
     }
   }
   // #endregion ==========> INICIALIZAÇÃO <==========

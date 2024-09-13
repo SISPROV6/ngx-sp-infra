@@ -233,8 +233,6 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   private adjustDropdownWidth(): void {
     if (this._mainInput && this._dropdownMenu) {
       const inputWidth = this._mainInput.nativeElement.offsetWidth;
-      console.log("width do input principal: ", inputWidth);
-      
       this._dropdownMenu.nativeElement.style.width = `${inputWidth}px`;
     }
   }
