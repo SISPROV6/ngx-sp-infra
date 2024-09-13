@@ -64,12 +64,12 @@ Antes de publicar a biblioteca para o NPM é muito importante realizar testes ro
     }
   ```
 3. Por fim, execute os dois comandos abaixo:
-  ```bash
-    npm uninstall ngx-sp-infra --force
-  ```
-  ```bash
-    npm i "file:C:/SisproCloud/INFRA/Fontes/Sp_106_Imports/NgxSpInfra/dist ngx-sp-infra"
-  ```
+```bash
+npm uninstall ngx-sp-infra --force
+```
+```bash
+  npm i "file:C:/SisproCloud/INFRA/Fontes/Sp_106_Imports/NgxSpInfra/dist ngx-sp-infra"
+```
 
 E pronto! Agora graças ao `ng build --watch` sempre que uma alteração for salva no projeto NgxSpInfra os arquivos na dist irão se atualizar também e a instalação no projeto de teste observavará exatamente estes arquivos.
 
