@@ -23,7 +23,7 @@ export class TableComponent implements OnInit, OnChanges {
   // #region ==========> PROPRIEDADES <==========
 
   // #region PRIVATE
-  private _paginationID: string = "libTablePagination";
+  private _paginationID: string;
   // #endregion PRIVATE
 
   // #region PUBLIC
@@ -61,9 +61,6 @@ export class TableComponent implements OnInit, OnChanges {
   /** Evento emitido quando a página é alterada. */
   @Output() public pageChange: EventEmitter<number> = new EventEmitter<number>();
 
-  /** Evento emitido quando o ID da paginação é criado no início. */
-  @Output() public paginationIDChange: EventEmitter<string> = new EventEmitter<string>();
-
 
   /** Contador de registros (pode ser usado para futuras implementações de lógica interna). */
   public counter: number = 0;
@@ -75,10 +72,10 @@ export class TableComponent implements OnInit, OnChanges {
 	public itemsPerPage: number;
 
 
+  @Input()
   public get paginationID(): string { return this._paginationID; }
   public set paginationID(value: string) {
-    this._paginationID = value;
-    this.paginationIDChange.emit(value);
+    this._paginationID = value || 'libTablePagination';
   }
   // #endregion PUBLIC
 
@@ -86,14 +83,15 @@ export class TableComponent implements OnInit, OnChanges {
 
 
   // #region ==========> INICIALIZAÇÃO <==========
-  constructor() {
-    this.paginationID = (Math.random() * 10000).toString();
-  }
+  constructor() { }
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {
     if (this.recordsList) { this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length }
     else { this.itemsPerPage = this.countOptions[0] ?? 10 }
+
+    console.log("paginationID: ", this.paginationID);
+    console.log("this.paginationID ? this.paginationID : null: ", this.paginationID ? this.paginationID : null);
   }
 
   /** Monitora as mudanças nas entradas do componente e realiza ajustes, como resetar a paginação ou validar o layout das colunas.
@@ -106,6 +104,10 @@ export class TableComponent implements OnInit, OnChanges {
       if (maxColumns >= 13) {
         throw new Error("A soma de largura (classe com prefixo 'col-') de todas as colunas não pode ser maior que 12.");
       }
+    }
+
+    if (changes["paginationID"]) {
+      console.log('Pagination ID changed:', this.paginationID);
     }
   }
   // #endregion ==========> INICIALIZAÇÃO <==========
