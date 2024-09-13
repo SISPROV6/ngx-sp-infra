@@ -7,6 +7,7 @@
 
 - [Introdução](#introdução)
 - [Uso](#uso)
+- [Testes](#testes)
 - [Publicação](#publicação)
   - [Manual](#manual)
   - [Automatizada](#automatizada)
@@ -46,6 +47,7 @@ export class UsuariosModule { }
 
 ## Testes
 Antes de publicar a biblioteca para o NPM é muito importante realizar testes robustos do funcionamento da nova feature ou correção que foi realizada. Para realizar testes locais segue-se o seguinte passo-a-passo:
+
 1. Com o projeto NgxSpInfra aberto em uma IDE execute o comando `ng build --watch`
 2. No projeto que será usado para teste modifique o arquivo angular.json e adicione a propriedade "preserveSymlinks" dentro de `build > options` como no exemplo abaixo:
   ```json
@@ -122,13 +124,8 @@ A automatização da publicação é realizada utilizando GitHub Actions.
 Se você deseja contribuir para a biblioteca, siga estas etapas:
 
 1. Faça um clone do repositório.
-2. Crie uma branch para sua feature ou correção.
-3. Faça suas alterações e teste-as localmente (verifique o tópico de Testes).
+2. Crie uma branch para sua feature ou correção com base na main.
+3. Faça suas alterações e teste-as localmente (verifique o tópico de [Testes](#testes)).
 4. Faça um `git commit` e `git push` na sua branch.
-5. Realize os seguintes comandos na ordem:
-  `git stash`
-  `git checkout test`
-  `git pull origin main`
-  `git stash pop` para levar suas alterações para essa branch.
-
-6. Siga as instruções para Publicação acima
+5. Abra um PR (Pull Request) para a branch test (ou main caso seja uma correção)
+6. Caso ela seja aprovada e o merge feito, siga as etapas no tópido de [Publicação](#publicação)
