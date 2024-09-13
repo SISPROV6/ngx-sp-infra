@@ -71,9 +71,14 @@ export class LibIconsComponent implements OnInit, OnChanges {
       }
     }
 
+    @Input()
+    public get iconFill(): boolean { return this.fill; }
+    public set iconFill(value: boolean) { this.fill = value; }
+
 
     protected safeSVG: SafeHtml;
     protected size: number = 24;
+    protected fill: boolean = false;
     protected color: string = "currentColor";
   // #endregion PUBLIC
 
@@ -82,11 +87,11 @@ export class LibIconsComponent implements OnInit, OnChanges {
 
   // #region ==========> INITIALIZATION <==========
   constructor(private _sanitizer: DomSanitizer) {
-    this.iconsList = new IconsList(this.size);
+    this.iconsList = new IconsList(this.size, this.fill);
   }
 
   ngOnInit(): void {
-    this.iconsList = new IconsList(this.size);
+    this.iconsList = new IconsList(this.size, this.fill);
     this.checkName();
   }
 
@@ -106,7 +111,7 @@ export class LibIconsComponent implements OnInit, OnChanges {
         default: this.color = this.iconColor; break;
       }
   
-      this.iconsList = new IconsList(this.size);
+      this.iconsList = new IconsList(this.size, this.fill);
       this.getSVG();
     }
   }

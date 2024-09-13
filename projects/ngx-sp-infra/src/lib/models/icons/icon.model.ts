@@ -14,7 +14,7 @@ export interface IconModel {
 
 
 export class IconsList {
-   constructor(size: string | number) {
+   constructor(size: string | number, fill?: boolean) {
       let formattedSize: number = 0;
 
       switch (size) {
@@ -24,11 +24,11 @@ export class IconsList {
          default: formattedSize = size as number; break;
       }
 
-      this.updateList(formattedSize);
+      this.updateList(formattedSize, fill);
    }
 
 
-   public updateList(size: number): void {
+   public updateList(size: number, fill?: boolean): void {
       // #region LISTA COMPLETA DE ÍCONES - ÍCONES NOVOS DEVEM SER ADICIONADOS AQUI
       this.list = [
          { nome:"folha", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +164,7 @@ export class IconsList {
          { nome:"sino", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
    <path d="M19.8184 16.1492C19.3559 15.3219 18.6682 12.9809 18.6682 9.92338C18.6682 8.08718 17.9657 6.3262 16.7153 5.02781C15.4648 3.72943 13.7688 3 12.0004 3C10.232 3 8.53602 3.72943 7.28556 5.02781C6.0351 6.3262 5.3326 8.08718 5.3326 9.92338C5.3326 12.9818 4.64415 15.3219 4.18157 16.1492C4.06344 16.3596 4.00081 16.5985 4.00001 16.842C3.9992 17.0855 4.06025 17.3249 4.17698 17.5361C4.29371 17.7472 4.46201 17.9227 4.6649 18.0448C4.86779 18.1669 5.0981 18.2313 5.3326 18.2314H8.73402C8.88786 19.013 9.29697 19.7155 9.89216 20.22C10.4874 20.7245 11.2321 21 12.0004 21C12.7687 21 13.5135 20.7245 14.1087 20.22C14.7039 19.7155 15.113 19.013 15.2668 18.2314H18.6682C18.9027 18.2311 19.1329 18.1666 19.3356 18.0445C19.5384 17.9223 19.7066 17.7468 19.8232 17.5357C19.9399 17.3245 20.0008 17.0852 20 16.8418C19.9992 16.5984 19.9365 16.3595 19.8184 16.1492ZM12.0004 19.6161C11.5869 19.616 11.1835 19.4827 10.8459 19.2348C10.5083 18.9868 10.2529 18.6363 10.1151 18.2314H13.8857C13.7479 18.6363 13.4926 18.9868 13.155 19.2348C12.8173 19.4827 12.414 19.616 12.0004 19.6161ZM5.3326 16.8468C5.97438 15.7009 6.66616 13.0458 6.66616 9.92338C6.66616 8.45442 7.22816 7.04563 8.22853 6.00692C9.2289 4.96822 10.5857 4.38468 12.0004 4.38468C13.4151 4.38468 14.7719 4.96822 15.7723 6.00692C16.7727 7.04563 17.3347 8.45442 17.3347 9.92338C17.3347 13.0432 18.0248 15.6983 18.6682 16.8468H5.3326Z" fill="currentColor"/>
    </svg>` },
-         { nome:"estrela", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         { nome:"estrela", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill ? "currentColor" : "none"}" xmlns="http://www.w3.org/2000/svg">
    <path d="M12 2.48999L15.09 8.74999L22 9.75999L17 14.63L18.18 21.51L12 18.26L5.82 21.51L7 14.63L2 9.75999L8.91 8.74999L12 2.48999Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
    </svg>` },
          { nome:"lupa", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -608,7 +608,7 @@ export class IconsList {
          { nome:"p-sino", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
    <path d="M14.8638 11.9967C14.5169 11.3991 14.0012 9.70844 14.0012 7.50022C14.0012 6.17408 13.4743 4.90225 12.5365 3.96453C11.5986 3.02681 10.3266 2.5 9.00031 2.5C7.674 2.5 6.40201 3.02681 5.46417 3.96453C4.52632 4.90225 3.99945 6.17408 3.99945 7.50022C3.99945 9.70906 3.48311 11.3991 3.13617 11.9967C3.04758 12.1486 3.00061 12.3212 3.00001 12.497C2.9994 12.6728 3.04518 12.8457 3.13274 12.9983C3.22029 13.1508 3.34651 13.2775 3.49868 13.3657C3.65084 13.4539 3.82358 13.5003 3.99945 13.5005H6.55051C6.66589 14.065 6.97273 14.5723 7.41912 14.9366C7.86552 15.301 8.42407 15.5 9.00031 15.5C9.57655 15.5 10.1351 15.301 10.5815 14.9366C11.0279 14.5723 11.3347 14.065 11.4501 13.5005H14.0012C14.177 13.5002 14.3496 13.4537 14.5017 13.3654C14.6538 13.2772 14.7799 13.1505 14.8674 12.998C14.9549 12.8455 15.0006 12.6726 15 12.4968C14.9994 12.321 14.9524 12.1485 14.8638 11.9967ZM9.00031 14.5005C8.69015 14.5004 8.38763 14.4042 8.13441 14.2251C7.88119 14.046 7.68971 13.7929 7.58632 13.5005H10.4143C10.3109 13.7929 10.1194 14.046 9.86621 14.2251C9.61299 14.4042 9.31048 14.5004 9.00031 14.5005ZM3.99945 12.5004C4.48078 11.6729 4.99962 9.75531 4.99962 7.50022C4.99962 6.4393 5.42112 5.42184 6.1714 4.67167C6.92167 3.92149 7.93926 3.50004 9.00031 3.50004C10.0614 3.50004 11.079 3.92149 11.8292 4.67167C12.5795 5.42184 13.001 6.4393 13.001 7.50022C13.001 9.75344 13.5186 11.671 14.0012 12.5004H3.99945Z" fill="currentColor"/>
    </svg>` },
-         { nome:"p-estrela", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+         { nome:"p-estrela", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="${fill ? "currentColor" : "none"}" xmlns="http://www.w3.org/2000/svg">
    <path d="M9 2.5L11.0085 6.77865L15.5 7.46898L12.25 10.7976L13.017 15.5L9 13.2787L4.983 15.5L5.75 10.7976L2.5 7.46898L6.9915 6.77865L9 2.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
    </svg>` },
          { nome:"p-lupa", categoria: "", tags: [], svg: `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
