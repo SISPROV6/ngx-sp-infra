@@ -7,6 +7,7 @@
 
 - [Introdução](#introdução)
 - [Uso](#uso)
+- [Testes](#testes)
 - [Publicação](#publicação)
   - [Manual](#manual)
   - [Automatizada](#automatizada)
@@ -43,6 +44,37 @@ export class UsuariosModule { }
 > [!IMPORTANT]
 > Nunca importe ambos os módulos ProjectModule e InfraModule juntos!
 > O InfraModule já está incluído dentro do ProjectModule, portanto, em projetos de Produtos, use apenas o ProjectModule.
+
+## Testes
+Antes de publicar a biblioteca para o NPM é muito importante realizar testes robustos do funcionamento da nova feature ou correção que foi realizada. Para realizar testes locais segue-se o seguinte passo-a-passo:
+
+1. Com o projeto NgxSpInfra aberto em uma IDE execute o comando `ng build --watch`
+2. No projeto que será usado para teste modifique o arquivo angular.json e adicione a propriedade "preserveSymlinks" dentro de `build > options` como no exemplo abaixo:
+  ```json
+    {
+      // ...restante do conteúdo
+      "build": {
+      "builder": "@angular-devkit/build-angular:browser",
+      "options": {
+        "preserveSymlinks": true,
+        // ...restante do conteúdo
+      },
+      // ...restante do conteúdo
+    },
+    }
+  ```
+3. Por fim, execute os dois comandos abaixo:
+```bash
+npm uninstall ngx-sp-infra --force
+```
+```bash
+npm i "file:C:/SisproCloud/INFRA/Fontes/Sp_106_Imports/NgxSpInfra/dist/ngx-sp-infra"
+```
+
+> [!TIP]
+> Se for necessário, utilize o `--force` ...principalmente no uninstall
+
+E pronto! Agora graças ao `ng build --watch` sempre que uma alteração for salva no projeto NgxSpInfra os arquivos na dist irão se atualizar também e a instalação no projeto de teste observavará exatamente estes arquivos.
 
 ## Publicação
 A publicação do pacote no NPM pode ser feita de forma manual ou automatizada.
@@ -99,7 +131,8 @@ A automatização da publicação é realizada utilizando GitHub Actions.
 Se você deseja contribuir para a biblioteca, siga estas etapas:
 
 1. Faça um clone do repositório.
-2. Crie uma branch para sua feature ou correção.
-3. Faça suas alterações e teste-as.
-4. Realize um `git stash`, faça checkout para a branch `test` e `git stash pop` para levar suas alterações para essa branch.
-5. Siga as instruções para publicação acima
+2. Crie uma branch para sua feature ou correção com base na main.
+3. Faça suas alterações e teste-as localmente (verifique o tópico de [Testes](#testes)).
+4. Faça um `git commit` e `git push` na sua branch.
+5. Abra um PR (Pull Request) para a branch test (ou main caso seja uma correção)
+6. Caso ela seja aprovada e o merge feito, siga as etapas no tópido de [Publicação](#publicação)
