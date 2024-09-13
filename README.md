@@ -64,10 +64,10 @@ Antes de publicar a biblioteca para o NPM é muito importante realizar testes ro
     }
   ```
 3. Por fim, execute os dois comandos abaixo:
-  - ```bash
+  ```bash
     npm uninstall ngx-sp-infra --force
   ```
-  - ```bash
+  ```bash
     npm i "file:C:/SisproCloud/INFRA/Fontes/Sp_106_Imports/NgxSpInfra/dist ngx-sp-infra"
   ```
 
