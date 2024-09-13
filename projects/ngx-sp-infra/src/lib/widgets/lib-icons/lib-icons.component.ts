@@ -91,8 +91,6 @@ export class LibIconsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes: ", changes);
-    
     if (changes['iconName']) this.checkName();
     else {
       switch (this.iconColor) {
@@ -111,8 +109,6 @@ export class LibIconsComponent implements OnInit, OnChanges {
       this.iconsList = new IconsList(this.size);
       this.getSVG();
     }
-
-    console.log("color: ", this.color);
   }
   // #endregion ==========> INITIALIZATION <==========
 
