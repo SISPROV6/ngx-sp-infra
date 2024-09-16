@@ -43,11 +43,11 @@ export * from './lib/directives/loading-btn.directive';
 export * from './lib/utils/check-url-and-method.service';
 export * from './lib/utils/form-utils';
 export * from './lib/utils/settings.service';
-export * from './lib/utils/ip-service.service';
 export * from './lib/utils/utils';
 
 /** Services */
 export * from './lib/service/modal-utils.service';
+export * from './lib/service/ip-service.service';
 
 /** Validators */
 export * from './lib/validators/cpf-cnpj.validator.directive';
