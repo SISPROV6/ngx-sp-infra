@@ -28,4 +28,25 @@ export class IpServiceService {
 
   }
 
+  getDataBrowserUser(): { browser: string; versionBrowser: string; so: string }
+  {
+    const navigatorInfo = navigator as any;
+
+    let browser: string = '';
+    let versionBrowser: string = '';
+    let so: string = '';
+
+    if (navigatorInfo.userAgentData) {
+      const uaData = navigatorInfo.userAgentData;
+
+      browser = uaData.brands[2].brand;
+      versionBrowser = uaData.brands[2].version;
+      so = uaData.platform;
+    }
+
+    return { browser, versionBrowser, so };
+  }
+
+
+
 }
