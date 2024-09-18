@@ -1,9 +1,10 @@
-/*
+/**
  * Public API Surface of infra
- */
+*/
 
 /** Modules */
 export * from './lib/infra.module';
+
 
 /** Message */
 export * from './lib/message/alert/alert.component';
@@ -12,6 +13,7 @@ export * from './lib/message/confirm-modal/confirm-modal.component';
 export * from './lib/message/save/save.component';
 export * from './lib/message/message.service';
 export * from './lib/message/message-enum';
+
 
 /** Models */
 export * from './lib/models/DownloadArquivos';
@@ -27,17 +29,27 @@ export * from './lib/models/combobox/ret-records-combobox';
 export * from './lib/models/icons/icon.model';
 export * from './lib/models/forms/custom-form-control';
 
+
 /** Pipes */
 export * from './lib/pipes/cpf-cnpj.pipe';
 export * from './lib/pipes/currency.pipe';
 export * from './lib/pipes/to-url.pipe';
 export * from './lib/pipes/text-filter.pipe';
+export * from './lib/pipes/decimal-comma.pipe';
+export * from './lib/pipes/filter-multiple-choice.pipe';
+export * from './lib/pipes/order-sort.pipe';
+export * from './lib/pipes/phone-format.pipe';
+export * from './lib/pipes/title-case-pipe.pipe';
+
 
 /** Directives */
 export * from './lib/directives/required.directive';
 export * from './lib/directives/copy-clipboard.directive';
 export * from './lib/widgets/field-contador-message/field-contador-message.component';
 export * from './lib/directives/loading-btn.directive';
+export * from './lib/directives/disable-control.directive';
+export * from './lib/directives/highlight.directive';
+
 
 /** Utils */
 export * from './lib/utils/check-url-and-method.service';
@@ -45,13 +57,16 @@ export * from './lib/utils/form-utils';
 export * from './lib/utils/settings.service';
 export * from './lib/utils/utils';
 
+
 /** Services */
 export * from './lib/service/modal-utils.service';
 export * from './lib/service/ip-service.service';
 
+
 /** Validators */
 export * from './lib/validators/cpf-cnpj.validator.directive';
 export * from './lib/validators/cpf-cnpj.validator';
+
 
 /** Widgets */
 export * from './lib/widgets/breadcrumb/infra-breadcrumb/infra-breadcrumb.component';
@@ -69,14 +84,23 @@ export * from './lib/widgets/tree/tree.component';
 export * from './lib/widgets/tree/models/ret-tree';
 export * from './lib/widgets/tree/models/tree-item';
 export * from './lib/widgets/tree/pipes/search-tree.pipe';
-
 export * from './lib/widgets/search-combobox/search-combobox.component';
 export * from './lib/widgets/lib-combobox/lib-combobox.component';
-
 export * from './lib/widgets/simple-header/simple-header.component';
 export * from './lib/widgets/lib-icons/lib-icons.component';
 export * from './lib/widgets/content-container/content-container.component';
-
 export * from './lib/widgets/table/table.component';
 export * from './lib/widgets/spinner/spinner.component';
 export * from './lib/widgets/nav-produtos/nav-produtos.component';
+
+// #region Widgets portados
+export * from './lib/widgets/combobox-multiple-choice/combobox-multiple-choice.component';
+export * from './lib/widgets/custom-acordion/custom-acordion.component';
+export * from './lib/widgets/dropdown-options/dropdown-options.component';
+export * from './lib/widgets/dynamic-input/dynamic-input.component';
+export * from './lib/widgets/generic-modal/generic-modal.component';
+export * from './lib/widgets/pagination/pagination.component';
+export * from './lib/widgets/search-filters/search-filters.component';
+export * from './lib/widgets/side-tabs/side-tabs.component';
+export * from './lib/widgets/simple-search/simple-search.component';
+// #endregion Widgets portados

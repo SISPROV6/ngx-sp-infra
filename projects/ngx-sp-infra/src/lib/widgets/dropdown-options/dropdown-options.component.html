@@ -1,0 +1,10 @@
+@if (options().length > 0) {
+<optgroup class="ms-2" [attr.label]="label()">
+  @for (option of filteredOptions; track $index) {
+  <option [attr.title]="option.AdditionalStringProperty1" class="dropdown-item glb-fs-14" style="cursor: pointer;"
+    [value]="option.ID" (click)="handleOptionClick(option)">
+    {{ option.LABEL }}
+  </option>
+  }
+</optgroup>
+}

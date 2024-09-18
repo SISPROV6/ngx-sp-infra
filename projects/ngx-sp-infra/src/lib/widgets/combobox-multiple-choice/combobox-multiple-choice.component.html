@@ -1,0 +1,61 @@
+<div class="w-100 d-flex">
+  <div class="dropdown flex-fill glb-max-height-350px" [class]="selectedOptions.length > 0 ? 'filtro' : 'w-100'">
+
+    <button class="form-select text-start border glb-cursor-pointer-none" type="button" [disabled]="disabled"
+      data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"
+      [class.glb-text-gray]="selectedLabels.length === 0" [class]="selectedOptions.length > 0 && !disabled ? 'border-radius-filter' : ''">
+      {{ selectedLabels.length > 0 ? selectedLabels : placeholder }}
+    </button>
+
+    <ul class="dropdown-menu p-2 w-100 glb-max-height-350px overflow-y-scroll">
+      <div class="input-group mb-2">
+        <span class="input-group-text">
+          <lib-icon iconName="lupa" iconSize="medium-small"/>
+        </span>
+        <input #searchInput type="text" id="searchInput"
+          class="form-control" placeholder="Pesquisar..."
+          (input)="search = searchInput.value">
+      </div>
+
+      <!-- #region LISTA DOS SELECIONADOS -->
+      <ul *ngIf="selectedOptions && selectedOptions.length > 0"
+        class="w-100 px-1 my-2 column-gap-1 row-gap-1 d-flex flex-wrap align-items-center justify-content-start">
+        <li class="badge rounded-pill text-bg-primary"
+          *ngFor="let selectedOption of selectedOptions">
+            <span class="fw-normal me-1">{{ selectedOption.LABEL }}</span>
+            <lib-icon iconName="fechar" iconSize="small" tooltip="Excluir"
+              (click)="selectedOption.IS_SELECTED = false; EMIT_CHANGE.emit(selectedOption.ID)"/>
+        </li>
+      </ul>
+      <!-- #endregion LISTA DOS SELECIONADOS -->
+
+      <!-- #region LISTA DOS NÃO SELECIONADOS -->
+      <ng-container *ngIf="options; else loadingList">
+        <ng-container *ngIf="options.length > 0; else emptyListAnexo">
+          <li class="dropdown-item" [class.active]="option.IS_SELECTED"
+            *ngFor="let option of options | filterMultipleChoice:search"
+            (click)="option.IS_SELECTED = !option.IS_SELECTED; EMIT_CHANGE.emit(option.ID)">
+            {{ option.LABEL }}
+          </li>
+        </ng-container>
+
+        <!-- #region LISTA VAZIA -->
+        <ng-template #emptyListAnexo> <span class="fst-italic">Não foram encontrados registros com esta
+            pesquisa...</span> </ng-template>
+        <!-- #endregion LISTA VAZIA -->
+      </ng-container>
+
+      <ng-template #loadingList>
+        <li class="dropdown-item text-center">
+          <div class="spinner-border" role="status"> <span class="visually-hidden">Carregando dados...</span>
+          </div>
+        </li>
+      </ng-template>
+      <!-- #endregion LISTA DOS NÃO SELECIONADOS -->
+    </ul>
+  </div>
+  <div *ngIf="selectedOptions.length > 0 && !disabled">
+    <button class="btn btn-outline-primary border-radius-limpar" type="button"
+      (click)="resetFilter()"> Limpar </button>
+  </div>
+</div>

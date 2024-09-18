@@ -1,4 +1,3 @@
-import { ModalUtilsService } from './service/modal-utils.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +45,22 @@ import { FieldContadorMessageComponent } from './widgets/field-contador-message/
 import { LibSpinnerComponent } from './widgets/spinner/spinner.component';
 import { LoadingBtnDirective } from './directives/loading-btn.directive';
 import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.component';
+import { ComboboxMultipleChoiceComponent } from './widgets/combobox-multiple-choice/combobox-multiple-choice.component';
+import { CustomAcordionComponent } from './widgets/custom-acordion/custom-acordion.component';
+import { DropdownOptionsComponent } from './widgets/dropdown-options/dropdown-options.component';
+import { DynamicInputComponent } from './widgets/dynamic-input/dynamic-input.component';
+import { GenericModalComponent } from './widgets/generic-modal/generic-modal.component';
+import { PaginationComponent } from './widgets/pagination/pagination.component';
+import { SearchFiltersComponent } from './widgets/search-filters/search-filters.component';
+import { SideTabsComponent } from './widgets/side-tabs/side-tabs.component';
+import { SimpleSearchComponent } from './widgets/simple-search/simple-search.component';
+import { DisableControlDirective } from './directives/disable-control.directive';
+import { HighlightDirective } from './directives/highlight.directive';
+import { DecimalCommaPipe } from './pipes/decimal-comma.pipe';
+import { FilterMultipleChoicePipe } from './pipes/filter-multiple-choice.pipe';
+import { OrderSortPipe } from './pipes/order-sort.pipe';
+import { PhoneFormatPipe } from './pipes/phone-format.pipe';
+import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -72,21 +87,38 @@ import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.compon
     SearchTreePipe,
     ClickOutsideDirective,
     OrderingComponent,
-
     SearchComboboxComponent,
     LibComboboxComponent, // Novo combobox, substituirá o Search futuramente
-
     RequiredDirective,
     SimpleHeaderComponent,
     LibIconsComponent,
     TextFilterPipe,
     ContentContainerComponent,
-
     CopyClipboardDirective,
     TableComponent,
-
     LibSpinnerComponent,
     LoadingBtnDirective,
+
+    // #region Componentes portados (ainda serão organizados)
+    ComboboxMultipleChoiceComponent,
+    CustomAcordionComponent,
+    DropdownOptionsComponent,
+    DynamicInputComponent,
+    GenericModalComponent,
+    PaginationComponent,
+    SearchFiltersComponent,
+    SideTabsComponent,
+    SimpleSearchComponent,
+
+    DisableControlDirective,
+    HighlightDirective,
+
+    DecimalCommaPipe,
+    FilterMultipleChoicePipe,
+    OrderSortPipe,
+    PhoneFormatPipe,
+    TitleCasePipe,
+    // #endregion Componentes portados (ainda serão organizados)
   ],
   imports: [
     CommonModule,
@@ -119,21 +151,38 @@ import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.compon
     CpfCnpjPipe,
     ClickOutsideDirective,
     OrderingComponent,
-
     SearchComboboxComponent,
     LibComboboxComponent,
-
     RequiredDirective,
     SimpleHeaderComponent,
     LibIconsComponent,
     TextFilterPipe,
     ContentContainerComponent,
-
     CopyClipboardDirective,
     TableComponent,
-
     LibSpinnerComponent,
     LoadingBtnDirective,
+
+    // #region Componentes portados (ainda serão organizados)
+    ComboboxMultipleChoiceComponent,
+    CustomAcordionComponent,
+    DropdownOptionsComponent,
+    DynamicInputComponent,
+    GenericModalComponent,
+    PaginationComponent,
+    SearchFiltersComponent,
+    SideTabsComponent,
+    SimpleSearchComponent,
+
+    DisableControlDirective,
+    HighlightDirective,
+
+    DecimalCommaPipe,
+    FilterMultipleChoicePipe,
+    OrderSortPipe,
+    PhoneFormatPipe,
+    TitleCasePipe,
+    // #endregion Componentes portados (ainda serão organizados)
   ],
   providers: [],
 })
