@@ -1,3 +1,4 @@
+import { HeaderComponent } from './templates/header/header.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +32,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { SearchComboboxComponent } from './widgets/search-combobox/search-combobox.component';
 import { RequiredDirective } from './directives/required.directive';
-import { SimpleHeaderComponent } from './widgets/simple-header/simple-header.component';
+import { SimpleHeaderComponent } from './templates/simple-header/simple-header.component';
 import { LibIconsComponent } from './widgets/lib-icons/lib-icons.component';
 import { TextFilterPipe } from './pipes/text-filter.pipe';
 import { ContentContainerComponent } from './widgets/content-container/content-container.component';
@@ -61,6 +62,8 @@ import { FilterMultipleChoicePipe } from './pipes/filter-multiple-choice.pipe';
 import { OrderSortPipe } from './pipes/order-sort.pipe';
 import { PhoneFormatPipe } from './pipes/phone-format.pipe';
 import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
+import { FooterComponent } from './templates/footer/footer.component';
+import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +93,7 @@ import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
     SearchComboboxComponent,
     LibComboboxComponent, // Novo combobox, substituirá o Search futuramente
     RequiredDirective,
-    SimpleHeaderComponent,
+    LibHeaderComponent,
     LibIconsComponent,
     TextFilterPipe,
     ContentContainerComponent,
@@ -118,6 +121,10 @@ import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
     OrderSortPipe,
     PhoneFormatPipe,
     TitleCasePipe,
+
+    FooterComponent,
+    HeaderComponent,
+    SimpleHeaderComponent,
     // #endregion Componentes portados (ainda serão organizados)
   ],
   imports: [
@@ -154,7 +161,7 @@ import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
     SearchComboboxComponent,
     LibComboboxComponent,
     RequiredDirective,
-    SimpleHeaderComponent,
+    LibHeaderComponent,
     LibIconsComponent,
     TextFilterPipe,
     ContentContainerComponent,
@@ -182,6 +189,10 @@ import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
     OrderSortPipe,
     PhoneFormatPipe,
     TitleCasePipe,
+
+    FooterComponent,
+    HeaderComponent,
+    SimpleHeaderComponent,
     // #endregion Componentes portados (ainda serão organizados)
   ],
   providers: [],

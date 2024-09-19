@@ -68,6 +68,12 @@ export * from './lib/validators/cpf-cnpj.validator.directive';
 export * from './lib/validators/cpf-cnpj.validator';
 
 
+/** Templates */
+export * from './lib/templates/footer/footer.component';
+export * from './lib/templates/header/header.component';
+//export * from './lib/templates/simple-header/simple-header.component';
+
+
 /** Widgets */
 export * from './lib/widgets/breadcrumb/infra-breadcrumb/infra-breadcrumb.component';
 export * from './lib/widgets/breadcrumb/infra-breadcrumb-item/infra-breadcrumb-item.component';
@@ -86,7 +92,7 @@ export * from './lib/widgets/tree/models/tree-item';
 export * from './lib/widgets/tree/pipes/search-tree.pipe';
 export * from './lib/widgets/search-combobox/search-combobox.component';
 export * from './lib/widgets/lib-combobox/lib-combobox.component';
-export * from './lib/widgets/simple-header/simple-header.component';
+export * from './lib/widgets/lib-header/lib-header.component';
 export * from './lib/widgets/lib-icons/lib-icons.component';
 export * from './lib/widgets/content-container/content-container.component';
 export * from './lib/widgets/table/table.component';

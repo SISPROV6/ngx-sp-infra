@@ -43,10 +43,10 @@ import { FormGroup } from '@angular/forms';
  */
 @Component({
   selector: 'lib-header',
-  templateUrl: './simple-header.component.html',
-  styleUrls: ['./simple-header.component.scss']
+  templateUrl: './lib-header.component.html',
+  styleUrls: ['./lib-header.component.scss']
 })
-export class SimpleHeaderComponent implements OnInit, OnChanges {
+export class LibHeaderComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void { }
