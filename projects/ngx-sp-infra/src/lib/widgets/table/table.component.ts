@@ -55,6 +55,19 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   /** Mensagem customizada para lista vazia */
   @Input('emptyListMessage') public emptyListMessage?: string;
 
+  /** Informa se o counter de registros deve aparecer ou não.
+   * @default true
+  */
+  @Input('showCounter') public showCounter: boolean = true;
+
+  /** Informa um ID para a paginação da tabela específica. Deve ser utilizada em caso de múltiplas tabelas na mesma tela. */
+  @Input()
+  public get paginationID(): string { return this._paginationID; }
+  public set paginationID(value: string) {
+    this._paginationID = value || 'libTablePagination';
+  }
+
+
   /** Evento emitido quando o número de itens por página é alterado. */
   @Output() public itemsPerPageChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -70,13 +83,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** Número de itens a serem exibidos por página. */
 	public itemsPerPage: number;
-
-
-  @Input()
-  public get paginationID(): string { return this._paginationID; }
-  public set paginationID(value: string) {
-    this._paginationID = value || 'libTablePagination';
-  }
   // #endregion PUBLIC
 
   // #endregion ==========> PROPRIEDADES <==========
