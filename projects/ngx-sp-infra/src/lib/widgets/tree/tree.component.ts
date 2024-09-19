@@ -13,10 +13,26 @@ export class TreeComponent implements OnInit {
 
   // #region ==========> PROPERTIES <==========
 
+  // #region PRIVATE
+  private _openAll: boolean = false;
+  // #endregino PRIVATE
+
   // #region PUBLIC
-  @Input() public items: TreeItem[] | any = [];
+  @Input() public items: TreeItem[] | any[] = [];
   @Input() public checkbox: boolean = false;
   @Input() public filter: boolean = false;
+
+  /** Responsável por abrir ou fechar todas as opções sendo exibidas na lista
+   * @default false */
+  @Input()
+  public get openAll(): boolean { return this._openAll; }
+  public set openAll(value: boolean) {
+    this._openAll = value;
+
+    this.items.forEach(elem => {
+      elem.expanded = value;
+    });
+  }
 
   @Output() public onSelect: EventEmitter<boolean> = new EventEmitter();
   @Output() public onEvent: EventEmitter<boolean> = new EventEmitter();
