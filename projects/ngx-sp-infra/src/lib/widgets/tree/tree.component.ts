@@ -15,12 +15,16 @@ export class TreeComponent implements OnInit {
 
   // #region PRIVATE
   private _openAll: boolean = false;
+  private _items: TreeItem[] | any[] = [];
   // #endregino PRIVATE
 
   // #region PUBLIC
-  @Input() public items: TreeItem[] | any[] = [];
-  @Input() public checkbox: boolean = false;
-  @Input() public filter: boolean = false;
+  @Input()
+  public get items(): TreeItem[] | any[] { return this._items; }
+  public set items(value: TreeItem[] | any[]) {
+    this._items = value;
+    console.log("(TESTE) Lista atualizada: ", value);
+  }
 
   /** Responsável por abrir ou fechar todas as opções sendo exibidas na lista
    * @default false */
@@ -34,11 +38,15 @@ export class TreeComponent implements OnInit {
     });
   }
 
+  @Input() public checkbox: boolean = false;
+  @Input() public filter: boolean = false;
+
+
   @Output() public onSelect: EventEmitter<boolean> = new EventEmitter();
   @Output() public onEvent: EventEmitter<boolean> = new EventEmitter();
 
-  public checked = (item: TreeItem) => item.is_selected == true;
 
+  public checked = (item: TreeItem) => item.is_selected == true;
   public search: string = "";
   // #endregion PUBLIC
 
