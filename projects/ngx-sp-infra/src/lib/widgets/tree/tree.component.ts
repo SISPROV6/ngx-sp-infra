@@ -21,10 +21,7 @@ export class TreeComponent implements OnInit {
   // #region PUBLIC
   @Input()
   public get items(): TreeItem[] | any[] { return this._items; }
-  public set items(value: TreeItem[] | any[]) {
-    this._items = value;
-    console.log("(TESTE) Lista atualizada: ", value);
-  }
+  public set items(value: TreeItem[] | any[]) { this._items = value; }
 
   /** Responsável por abrir ou fechar todas as opções sendo exibidas na lista
    * @default false */
@@ -35,6 +32,7 @@ export class TreeComponent implements OnInit {
 
     this.items.forEach(elem => {
       elem.expanded = value;
+      elem.aplicClass = value;
     });
   }
 
