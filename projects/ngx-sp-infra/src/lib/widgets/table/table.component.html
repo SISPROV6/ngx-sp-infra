@@ -1,7 +1,7 @@
 @if (recordsList) {
    <div class="table-list w-100 position-relative">
       <!-- Exibe o número de itens mostrados e o total de registros -->
-      <span class="ms-1"> Exibindo {{ itemsPerPage <= recordsList.length ? itemsPerPage : recordsList.length }} de {{ recordsList.length }} registros </span>
+      <span *ngIf="showCounter" class="ms-1"> Exibindo {{ itemsPerPage <= recordsList.length ? itemsPerPage : recordsList.length }} de {{ recordsList.length }} registros </span>
       
       <!-- Container da tabela -->
       <div class="table-list overflow-hidden border-bottom-0 rounded-bottom rounded">
