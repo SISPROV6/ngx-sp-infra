@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'lib-field-contador-message',

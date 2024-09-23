@@ -46,6 +46,7 @@ import { FieldContadorMessageComponent } from './widgets/field-contador-message/
 import { LibSpinnerComponent } from './widgets/spinner/spinner.component';
 import { LoadingBtnDirective } from './directives/loading-btn.directive';
 import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.component';
+import { InputTrimComponent } from './widgets/input-trim/input-trim.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.compon
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
     FieldContadorMessageComponent,
+    InputTrimComponent,
     LoadingButtonComponent,
     AlertComponent,
     ConfirmComponent,
@@ -103,6 +105,7 @@ import { NavProdutosComponent } from './widgets/nav-produtos/nav-produtos.compon
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
     FieldContadorMessageComponent,
+    InputTrimComponent,
     LoadingButtonComponent,
     AlertComponent,
     ConfirmComponent,
