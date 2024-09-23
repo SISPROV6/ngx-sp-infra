@@ -11,7 +11,7 @@
       'tab': navTabsList && navTabsList.length > 0,
       'rounded': currentContent !== 1 && (navTabsList && navTabsList.length > 0)
    }" >
-   <h5 *ngIf="containerTitle && (navTabsList && navTabsList.length > 0)"
+   <h5 *ngIf="containerTitle && (!navTabsList || navTabsList.length == 0)"
       class="fw-bold border-bottom mb-3 pb-3"> {{ containerTitle }} </h5>
 
    @switch (currentContent) {

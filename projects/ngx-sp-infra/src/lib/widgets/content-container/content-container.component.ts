@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'lib-container',
   templateUrl: './content-container.component.html',
   styleUrls: ['./content-container.component.scss']
 })
-export class ContentContainerComponent implements OnInit {
+export class ContentContainerComponent implements OnInit, OnChanges {
   // #region ==========> PROPERTIES <==========
 
   // #region PRIVATE
@@ -35,6 +35,13 @@ export class ContentContainerComponent implements OnInit {
   ngOnInit(): void {
     if (this.navTabsList && this.navTabsList.length > 0) { this.currentTab = this.navTabsList[0]; }
     this.currentContent = 1;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["navTabsList"]) {
+      if (this.navTabsList && this.navTabsList.length > 0) { this.currentTab = this.navTabsList[0]; }
+      this.currentContent = 1;
+    }
   }
   // #endregion ==========> INITIALIZATION <==========
 
