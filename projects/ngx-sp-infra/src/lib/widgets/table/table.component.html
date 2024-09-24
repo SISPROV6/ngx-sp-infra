@@ -12,6 +12,9 @@
                   <th *ngFor="let header of headersList" scope="col"
                      class="align-middle text-dark-grey {{ header.col > 0 ? 'col-'+header.col : 'col' }} {{ header.customClasses }}">
                      {{ header.name }}
+
+                     <app-ordering *ngIf="header.orderColumn" [(sortDirection)]="sortDirection[header.orderColumn]"
+                        (sortChange)="onSortChange({ direction: $event.direction, column: header.orderColumn })"></app-ordering>
                   </th>
                </tr>
             </thead>

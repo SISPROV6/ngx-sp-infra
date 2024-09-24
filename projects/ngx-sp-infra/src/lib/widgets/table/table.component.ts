@@ -24,6 +24,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   // #region PRIVATE
   private _paginationID: string;
+  private _recordsList: any[] | undefined;
   // #endregion PRIVATE
 
   // #region PUBLIC
@@ -32,33 +33,46 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
    * @default true */
   @Input() public usePagination: boolean = true;
 
+  
   /** Lista de registros a serem exibidos na tabela.
    * @required */
-  @Input({ alias: 'list', required: true }) public recordsList: any[] | undefined;
+  @Input({ alias: 'list', required: true })
+  public get recordsList(): any[] | undefined { return this._recordsList; }
+  public set recordsList(value: any[] | undefined) {
+    this._recordsList = value;
+    console.log("Lista: ", this._recordsList);
+  }
+
 
   /** Opções de contagem de itens por página disponíveis para o usuário.
    * @required */
   @Input('counts') public countOptions: number[];
 
+
   /** Posicionamento dos controles de paginação.
    * @default 'end' */
   @Input('placement') public paginationPlacement: 'start' | 'center' | 'end' | 'between' = 'end';
+
 
   /** Lista de cabeçalhos para as colunas da tabela, incluindo o nome, a largura da coluna e classes customizadas.
    * @required */
   @Input({ alias: 'headers', required: true }) public headersList: {
     name: string,
     col: number,
-    customClasses?: string
+    customClasses?: string,
+    orderColumn?: string
   }[];
+
 
   /** Mensagem customizada para lista vazia */
   @Input('emptyListMessage') public emptyListMessage?: string;
+
 
   /** Informa se o counter de registros deve aparecer ou não.
    * @default true
   */
   @Input('showCounter') public showCounter: boolean = true;
+
 
   /** Informa um ID para a paginação da tabela específica. Deve ser utilizada em caso de múltiplas tabelas na mesma tela. */
   @Input()
@@ -134,6 +148,80 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
       this.page = 1;
     }
   }
+
+
+
+	//#region Ordering, Sorting ou apenas Ordenação
+
+	/** Método que faz a ordenação dos contratos na tela de listagem, em cada uma das células do cabeçalho da tabela, onde cada um  
+	 *  dos elementos <th> representa uma coluna, de acordo com a lista de contratos que retorna do backend. */
+	// Objeto para armazenar a direção de ordenação de cada coluna
+	public sortDirection: { [key: string]: string } = {};
+
+	// Coluna atualmente selecionada para ordenação
+	public currentSortColumn: string = '';
+
+	// Função chamada quando ocorre uma mudança na ordenação
+	onSortChange(event: { direction: string, column: string }) {
+		const { direction, column } = event;
+
+		// Verifica se a coluna atualmente selecionada é a mesma da nova seleção
+		if (this.currentSortColumn === column) {
+			// Alterna entre 'asc' e 'desc' para a direção de ordenação da coluna
+			this.sortDirection[column] = this.sortDirection[column] === 'asc' ? 'asc' : 'desc';
+		} else {
+			// Define a nova coluna e a direção de ordenação como 'asc'
+			this.currentSortColumn = column;
+			this.sortDirection = { [column]: 'asc' };
+		}
+
+		// Realiza a ordenação dos dados da tabela
+		this.sortData();
+	}
+
+	// Função de ordenação dos dados da tabela
+	private sortData() {
+
+		if (this.recordsList) {
+			const gruposList = this.recordsList;
+
+			gruposList.sort((a, b) => {
+				const attribute = this.currentSortColumn;
+				const direction = this.sortDirection[attribute];
+
+				return this.compareProperties(a, b, attribute, direction);
+			});
+
+		}
+
+	}
+
+	// Compara os valores das propriedades entre dois objetos
+	private compareProperties(a: any, b: any, attribute: string, direction: string): number {
+		const propertyA = this.getProperty(a, attribute).toUpperCase();
+		const propertyB = this.getProperty(b, attribute).toUpperCase();
+
+		if (propertyA < propertyB) {
+			return direction === 'asc' ? -1 : 1;
+		}
+
+		if (propertyA > propertyB) {
+			return direction === 'asc' ? 1 : -1;
+		}
+
+		return 0;
+	}
+
+	// Obtém o valor de uma propriedade específica de um objeto
+	private getProperty(obj: any, path: string | string[]): string {
+		
+		if (typeof path === 'string') {
+			path = path.split('.');
+		}
+
+		return path.reduce((value, property) => value ? value[property] : '', obj);
+	}
+	//#endregion Ordering, Sorting ou apenas Ordenação
 
   // #endregion ==========> UTILITÁRIOS <==========
 
