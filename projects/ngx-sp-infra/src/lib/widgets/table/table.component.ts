@@ -25,6 +25,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   // #region PRIVATE
   private _paginationID: string;
   private _recordsList: any[] | undefined;
+
+  private _currentPage: number = 1;
+  private _currentItemsPerPage: number = 0;
   // #endregion PRIVATE
 
   // #region PUBLIC
@@ -38,10 +41,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
    * @required */
   @Input({ alias: 'list', required: true })
   public get recordsList(): any[] | undefined { return this._recordsList; }
-  public set recordsList(value: any[] | undefined) {
-    this._recordsList = value;
-    console.log("Lista: ", this._recordsList);
-  }
+  public set recordsList(value: any[] | undefined) { this._recordsList = value; }
 
 
   /** Opções de contagem de itens por página disponíveis para o usuário.
@@ -88,15 +88,26 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   /** Evento emitido quando a página é alterada. */
   @Output() public pageChange: EventEmitter<number> = new EventEmitter<number>();
 
-
-  /** Contador de registros (pode ser usado para futuras implementações de lógica interna). */
-  public counter: number = 0;
-
   /** Página atual da tabela. */
-	public page: number = 1;
+	public get page(): number { return this._currentPage; }
+	public set page(value: number) { this._currentPage = value; }
 
   /** Número de itens a serem exibidos por página. */
-	public itemsPerPage: number;
+  public get itemsPerPage(): number { return this._currentItemsPerPage; }
+	public set itemsPerPage(value: number) { this._currentItemsPerPage = value; }
+
+
+  public get firstItemOfPage(): number {
+    return (this.page - 1) * this.itemsPerPage + 1;
+  }
+  public get lastItemOfPage(): number {
+    return Math.min(this.page * this.itemsPerPage, this.recordsList?.length ?? 0);
+  }
+
+  // Exemplo de string com a contagem:
+  public get itemsDisplayText(): string {
+    return `Exibindo ${ this.countOptions ? this.firstItemOfPage+"-"+this.lastItemOfPage + " de" : "" } ${this.recordsList?.length ?? 0} registros`;
+  }
   // #endregion PUBLIC
 
   // #endregion ==========> PROPRIEDADES <==========
