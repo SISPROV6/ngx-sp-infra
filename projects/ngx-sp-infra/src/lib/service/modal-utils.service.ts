@@ -33,11 +33,17 @@ export class ModalUtilsService {
  }
 
 
- public openInitialStateModal(component: string | TemplateRef<any>, initialState?: any, classes: string = "modal-dialog-centered"): void {
-  this._bsModalref = this._bsModalService.show(component, {
-    initialState: initialState,
-    class: classes
-  });
+ public openInitialStateModal(component: any | TemplateRef<any>, id?: any, initialState?: any, classes: string = "modal-dialog-centered"): void | BsModalRef {
+  if (component) {
+    this._bsModalref = this._bsModalService.show(component, {
+      id: id,
+      initialState: initialState,
+      class: classes
+    });
+    return this._bsModalref;
+  }
+
+  return;
  }
 
 

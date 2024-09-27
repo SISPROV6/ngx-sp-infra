@@ -1,7 +1,7 @@
 @if (recordsList) {
    <div class="table-list w-100 position-relative">
       <!-- Exibe o número de itens mostrados e o total de registros -->
-      <span class="ms-1"> Exibindo {{ itemsPerPage <= recordsList.length ? itemsPerPage : recordsList.length }} de {{ recordsList.length }} registros </span>
+      <span *ngIf="showCounter" class="ms-1"> {{ itemsDisplayText }} </span>
       
       <!-- Container da tabela -->
       <div class="table-list overflow-hidden border-bottom-0 rounded-bottom rounded">
@@ -12,6 +12,9 @@
                   <th *ngFor="let header of headersList" scope="col"
                      class="align-middle text-dark-grey {{ header.col > 0 ? 'col-'+header.col : 'col' }} {{ header.customClasses }}">
                      {{ header.name }}
+
+                     <app-ordering *ngIf="header.orderColumn" [(sortDirection)]="sortDirection[header.orderColumn]"
+                        (sortChange)="onSortChange({ direction: $event.direction, column: header.orderColumn })"></app-ordering>
                   </th>
                </tr>
             </thead>
@@ -24,8 +27,8 @@
                @else {
                   <!-- Mensagem de ausência de registros -->
                   <tr>
-                     <td colspan="12" class="align-middle">
-                        <span class="fw-light fst-italic text-center"> {{ emptyListMessage ? emptyListMessage : "Consulta não retornou registros..." }} </span>
+                     <td colspan="12" class="align-middle text-center p-4 text-dark-grey">
+                        <span> {{ emptyListMessage ? emptyListMessage : "Não há dados para serem listados." }} </span>
                      </td>
                   </tr>
                }

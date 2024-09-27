@@ -98,6 +98,7 @@ export * from './lib/widgets/content-container/content-container.component';
 export * from './lib/widgets/table/table.component';
 export * from './lib/widgets/spinner/spinner.component';
 export * from './lib/widgets/nav-produtos/nav-produtos.component';
+export * from './lib/widgets/input-trim/input-trim.component';
 
 // #region Widgets portados
 export * from './lib/widgets/combobox-multiple-choice/combobox-multiple-choice.component';
@@ -109,4 +110,5 @@ export * from './lib/widgets/pagination/pagination.component';
 export * from './lib/widgets/search-filters/search-filters.component';
 export * from './lib/widgets/side-tabs/side-tabs.component';
 export * from './lib/widgets/simple-search/simple-search.component';
+export * from './lib/templates/simple-header/simple-header.component';
 // #endregion Widgets portados

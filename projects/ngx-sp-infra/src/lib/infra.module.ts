@@ -64,6 +64,9 @@ import { PhoneFormatPipe } from './pipes/phone-format.pipe';
 import { TitleCasePipe } from './pipes/title-case-pipe.pipe';
 import { FooterComponent } from './templates/footer/footer.component';
 import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
+import { InputTrimComponent } from './widgets/input-trim/input-trim.component';
+import { NgxCurrencyDirective } from 'ngx-currency';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,7 @@ import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
     FieldContadorMessageComponent,
+    InputTrimComponent,
     LoadingButtonComponent,
     AlertComponent,
     ConfirmComponent,
@@ -101,6 +105,7 @@ import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
     TableComponent,
     LibSpinnerComponent,
     LoadingBtnDirective,
+    InputTrimComponent,
 
     // #region Componentes portados (ainda serão organizados)
     ComboboxMultipleChoiceComponent,
@@ -133,6 +138,9 @@ import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
     AccordionModule.forRoot(),
     TooltipModule.forRoot(),
     FormsModule,
+		NgxCurrencyDirective,
+    NgxMaskDirective, 
+		NgxMaskPipe,
     NgxPaginationModule,
     ReactiveFormsModule,
     RouterModule
@@ -142,6 +150,7 @@ import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
     FieldContadorMessageComponent,
+    InputTrimComponent,
     LoadingButtonComponent,
     AlertComponent,
     ConfirmComponent,
