@@ -1,22 +1,19 @@
-@use './global-variables' as var;
-@use './sispro-variables.scss' as sisvar;
+@use "variables" as vars;
+
 
 // #region CONTAINERS
 div.main-content {
   background-color: #fff;
 }
-
 // #endregion CONTAINERS
 
 // #region ÍCONES DE STATUS
-
 // * Serão usados nas bolinhas de status dentro das tables (Status ativo e inativo são exemplos)
 .glb-status-circle {
   width: 16px;
   height: 16px;
   border-radius: 50%;
 }
-
 // #endregion ÍCONES DE STATUS
 
 
@@ -227,7 +224,7 @@ div.main-content {
 
 // #region TABLE RECORDS
 table {
-  border-color: sisvar.$border-container;
+  border-color: vars.$border-container;
 
   // #region THEAD 
   thead {
@@ -279,26 +276,26 @@ table.table>tbody {
 }
 
 .glb-main-container {
-  color: var.$basic-text-color;
+  color: vars.$basic-text-color;
   background-color: #fff;
   border-radius: 8px;
-  border: 1px solid sisvar.$border-container;
+  border: 1px solid vars.$border-container;
 }
 
 .glb-main-container-modal {
-  color: var.$basic-text-color;
+  color: vars.$basic-text-color;
   background-color: #fff;
   border-radius: 8px;
-  // border: 1px solid sisvar.$border-container;
+  // border: 1px solid vars.$border-container;
 }
 
 
 
 .glb-main-container-tab {
-  color: var.$basic-text-color;
+  color: vars.$basic-text-color;
   background-color: #fff;
   border-radius: 0 8px 8px 8px;
-  border: 1px solid sisvar.$border-container;
+  border: 1px solid vars.$border-container;
 }
 
 
@@ -318,15 +315,15 @@ table.table>tbody {
   }
 
   div.card-body.card-active {
-    border-top: 12px solid sisvar.$primary-light-bg;
-    color: sisvar.$primary-light-bg;
+    border-top: 12px solid vars.$primary-light-bg;
+    color: vars.$primary-light-bg;
     height: 100%;
     cursor: pointer;
   }
 
   div.card-body.card-disabled {
-    border-top: 12px solid sisvar.$disabled-text-color;
-    color: sisvar.$disabled-text-color;
+    border-top: 12px solid vars.$disabled-text-color;
+    color: vars.$disabled-text-color;
     height: 100%;
     cursor: not-allowed !important;
   }
@@ -345,17 +342,17 @@ table.table>tbody {
 }
 
 .glb-card:hover {
-  border-color: sisvar.$primary-light-bg;
+  border-color: vars.$primary-light-bg;
 
   div.card-body {
-    color: sisvar.$primary-light-bg;
+    color: vars.$primary-light-bg;
   }
 }
 
 
 .glb-vinculo-card {
   background-color: #e7f1ff !important;
-  border-color: sisvar.$outline-normal !important;
+  border-color: vars.$outline-normal !important;
 }
 
 // #endregion CARDS 
@@ -371,13 +368,13 @@ table.table>tbody {
 // #region WIZARD STEPS 
 li.box-tab:not(.current) {
   .glb-wizard-steps:hover {
-    color: var(--sp-default) !important;
+    color: vars(--sp-default) !important;
   }
 }
 
 li.glb-box-tab:not(.current) {
   .glb-wizard-steps:hover {
-    color: var(--sp-default) !important;
+    color: vars(--sp-default) !important;
   }
 }
 
@@ -387,7 +384,7 @@ li.glb-box-tab:not(.current) {
 
   ul {
     height: 100%;
-    background-color: var(--sp-white);
+    background-color: vars(--sp-white);
     border: 1px solid #b5b9bd;
     border-radius: 4px;
 
@@ -417,10 +414,10 @@ li.glb-box-tab:not(.current) {
     }
 
     .current.glb-box-tab {
-      background-color: var(--sp-default);
+      background-color: vars(--sp-default);
 
       a {
-        color: var(--sp-white);
+        color: vars(--sp-white);
       }
     }
   }
@@ -498,9 +495,9 @@ fieldset {
 .glb-empty-list {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid sisvar.$border-container;
-  border-left: 1px solid sisvar.$border-container;
-  border-right: 1px solid sisvar.$border-container;
+  border-bottom: 1px solid vars.$border-container;
+  border-left: 1px solid vars.$border-container;
+  border-right: 1px solid vars.$border-container;
   height: 50px;
   padding-left: 12px;
   color: #949BA2;
@@ -714,9 +711,9 @@ fieldset {
   .nav-link.active {
     border-radius: 8px 8px 0px 0px;
     color: #3767b2;
-    border-top: 1px solid sisvar.$border-container;
-    border-left: 1px solid sisvar.$border-container;
-    border-right: 1px solid sisvar.$border-container;
+    border-top: 1px solid vars.$border-container;
+    border-left: 1px solid vars.$border-container;
+    border-right: 1px solid vars.$border-container;
   }
 
   .nav-link {
@@ -726,7 +723,7 @@ fieldset {
     border-bottom: none;
     font-size: .875rem;
     height: 32px;
-    color: var.$basic-text-color;
+    color: vars.$basic-text-color;
     padding: 4px 12px;
   }
 
@@ -739,7 +736,7 @@ fieldset {
 
 // #region TABLES 
 table.glb-table-neutral-border {
-  border-color: var(--sp-background-neutral);
+  border-color: vars(--sp-background-neutral);
 
   thead {
     border-color: inherit;
@@ -769,36 +766,36 @@ table.glb-table-neutral-border {
 }
 
 .glb-selectable-card.active {
-  background-color: var(--sp-default) !important;
+  background-color: vars(--sp-default) !important;
   color: #fff !important;
-  border-color: var(--sp-default) !important;
+  border-color: vars(--sp-default) !important;
 }
 
 .glb-selectable-card:hover {
-  background-color: var(--sp-default) !important;
+  background-color: vars(--sp-default) !important;
   color: #fff !important;
-  border-color: var(--sp-default) !important;
+  border-color: vars(--sp-default) !important;
 }
 
 .glb-selectable-card-outline.active {
-  color: var(--sp-default) !important;
-  border-color: var(--sp-default) !important;
+  color: vars(--sp-default) !important;
+  border-color: vars(--sp-default) !important;
 }
 
 .glb-selectable-card-outline:hover {
-  color: var(--sp-default) !important;
-  border-color: var(--sp-default) !important;
+  color: vars(--sp-default) !important;
+  border-color: vars(--sp-default) !important;
 }
 
 div.disabled {
-  background-color: var(--bs-secondary-bg);
+  background-color: vars(--bs-secondary-bg);
 }
 
 // #endregion UTILS 
 
 // #region PAGINATION 
 .sp-pagination ::ng-deep .ngx-pagination .current {
-  background: sisvar.$outline-active;
+  background: vars.$outline-active;
   border-radius: 0.375rem;
 }
 
@@ -879,52 +876,52 @@ div.disabled {
 // #region NOVAS CORES - BACKGROUND 
 .glb-bg-primary {
   transition: all .2s !important;
-  background-color: var(--sp-default) !important;
+  background-color: vars(--sp-default) !important;
 }
 
 .glb-bg-primary-dark {
   transition: all .2s !important;
-  background-color: var(--sp-default) !important;
+  background-color: vars(--sp-default) !important;
 }
 
 .glb-bg-secondary {
   transition: all .2s !important;
-  background-color: var(--sp-secondary) !important;
+  background-color: vars(--sp-secondary) !important;
 }
 
 .glb-bg-success {
   transition: all .2s !important;
-  background-color: var(--sp-success) !important;
+  background-color: vars(--sp-success) !important;
 }
 
 .glb-bg-danger {
   transition: all .2s !important;
-  background-color: var(--sp-danger) !important;
+  background-color: vars(--sp-danger) !important;
 }
 
 .glb-bg-warning {
   transition: all .2s !important;
-  background-color: var(--sp-warning) !important;
+  background-color: vars(--sp-warning) !important;
 }
 
 .glb-bg-dark {
   transition: all .2s !important;
-  background-color: var(--sp-dark-text) !important;
+  background-color: vars(--sp-dark-text) !important;
 }
 
 .glb-bg-dark-disabled {
   transition: all .2s !important;
-  background-color: var(--sp-dark-text-disabled) !important;
+  background-color: vars(--sp-dark-text-disabled) !important;
 }
 
 .glb-bg-neutral {
   transition: all .2s !important;
-  background-color: var(--sp-background-neutral);
+  background-color: vars(--sp-background-neutral);
 }
 
 .glb-bg-light-gray {
   transition: all .2s !important;
-  background-color: var(--sp-input-outline);
+  background-color: vars(--sp-input-outline);
 }
 
 // #endregion NOVAS CORES - BACKGROUND 
@@ -959,35 +956,35 @@ div.disabled {
 }
 
 .glb-bg-primary-onhover:hover {
-  background-color: var(--sp-default) !important;
+  background-color: vars(--sp-default) !important;
 }
 
 .glb-bg-secondary-onhover:hover {
-  background-color: var(--sp-secondary) !important;
+  background-color: vars(--sp-secondary) !important;
 }
 
 .glb-bg-success-onhover:hover {
-  background-color: var(--sp-success) !important;
+  background-color: vars(--sp-success) !important;
 }
 
 .glb-bg-danger-onhover:hover {
-  background-color: var(--sp-danger) !important;
+  background-color: vars(--sp-danger) !important;
 }
 
 .glb-bg-warning-onhover:hover {
-  background-color: var(--sp-warning) !important;
+  background-color: vars(--sp-warning) !important;
 }
 
 .glb-bg-dark-onhover:hover {
-  background-color: var(--sp-dark-text) !important;
+  background-color: vars(--sp-dark-text) !important;
 }
 
 .glb-bg-dark-disabled-onhover:hover {
-  background-color: var(--sp-dark-text-disabled) !important;
+  background-color: vars(--sp-dark-text-disabled) !important;
 }
 
 .glb-bg-neutral-onhover:hover {
-  background-color: var(--sp-background-neutral);
+  background-color: vars(--sp-background-neutral);
 }
 
 // #endregion NOVAS CORES - BACKGROUND HOVER 
@@ -995,35 +992,35 @@ div.disabled {
 
 // #region NOVOS TEXTOS 
 .glb-text-primary {
-  color: var(--sp-default) !important;
+  color: vars(--sp-default) !important;
 }
 
 .glb-text-secondary {
-  color: var(--sp-secondary) !important;
+  color: vars(--sp-secondary) !important;
 }
 
 .glb-text-success {
-  color: var(--sp-success) !important;
+  color: vars(--sp-success) !important;
 }
 
 .glb-text-danger {
-  color: var(--sp-danger) !important;
+  color: vars(--sp-danger) !important;
 }
 
 .glb-text-warning {
-  color: var(--sp-warning) !important;
+  color: vars(--sp-warning) !important;
 }
 
 .glb-text-dark {
-  color: var(--sp-dark-text) !important;
+  color: vars(--sp-dark-text) !important;
 }
 
 .glb-text-dark-disabled {
-  color: var(--sp-dark-text-disabled);
+  color: vars(--sp-dark-text-disabled);
 }
 
 .glb-text-light {
-  color: var(--sp-background-neutral) !important;
+  color: vars(--sp-background-neutral) !important;
 }
 
 .glb-text-gray {
@@ -1081,35 +1078,35 @@ div.disabled {
 }
 
 .glb-text-primary-onhover:hover {
-  color: var(--sp-default) !important;
+  color: vars(--sp-default) !important;
 }
 
 .glb-text-secondary-onhover:hover {
-  color: var(--sp-secondary) !important;
+  color: vars(--sp-secondary) !important;
 }
 
 .glb-text-success-onhover:hover {
-  color: var(--sp-success) !important;
+  color: vars(--sp-success) !important;
 }
 
 .glb-text-danger-onhover:hover {
-  color: var(--sp-danger) !important;
+  color: vars(--sp-danger) !important;
 }
 
 .glb-text-warning-onhover:hover {
-  color: var(--sp-warning) !important;
+  color: vars(--sp-warning) !important;
 }
 
 .glb-text-dark-onhover:hover {
-  color: var(--sp-dark-text) !important;
+  color: vars(--sp-dark-text) !important;
 }
 
 .glb-text-light-onhover:hover {
-  color: var(--sp-light) !important;
+  color: vars(--sp-light) !important;
 }
 
 .glb-text-dark-disabled-onhover:hover {
-  color: var(--sp-dark-text-disabled);
+  color: vars(--sp-dark-text-disabled);
 }
 
 // #endregion NOVOS TEXTOS - HOVER 
@@ -1117,100 +1114,100 @@ div.disabled {
 
 // #region NOVOS BOTÕES 
 .glb-btn-primary {
-  background-color: var(--sp-default) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-default) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-secondary {
-  background-color: var(--sp-secondary) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-secondary) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-success {
-  background-color: var(--sp-success) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-success) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-danger {
-  background-color: var(--sp-danger) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-danger) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-warning {
-  background-color: var(--sp-warning) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-warning) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-dark-disabled {
-  background-color: var(--sp-dark-text-disabled) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-dark-text-disabled) !important;
+  color: vars(--sp-white) !important;
 }
 
 
 .glb-btn-outline-primary {
-  border-color: var(--sp-default) !important;
-  color: var(--sp-default) !important;
+  border-color: vars(--sp-default) !important;
+  color: vars(--sp-default) !important;
   transition: all .2s !important;
 }
 
 .glb-btn-outline-primary:hover {
-  background-color: var(--sp-default) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-default) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-outline-secondary {
-  border-color: var(--sp-secondary) !important;
-  color: var(--sp-secondary) !important;
+  border-color: vars(--sp-secondary) !important;
+  color: vars(--sp-secondary) !important;
   transition: all .2s !important;
 }
 
 .glb-btn-outline-secondary:hover {
-  background-color: var(--sp-secondary) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-secondary) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-outline-success {
-  border-color: var(--sp-success) !important;
-  color: var(--sp-success) !important;
+  border-color: vars(--sp-success) !important;
+  color: vars(--sp-success) !important;
   transition: all .2s !important;
 }
 
 .glb-btn-outline-success:hover {
-  background-color: var(--sp-success) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-success) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-outline-danger {
-  border-color: var(--sp-danger) !important;
-  color: var(--sp-danger) !important;
+  border-color: vars(--sp-danger) !important;
+  color: vars(--sp-danger) !important;
   transition: all .2s !important;
 }
 
 .glb-btn-outline-danger:hover {
-  background-color: var(--sp-danger) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-danger) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-outline-warning {
-  border-color: var(--sp-warning) !important;
-  color: var(--sp-warning) !important;
+  border-color: vars(--sp-warning) !important;
+  color: vars(--sp-warning) !important;
   transition: all .2s !important;
 }
 
 .glb-btn-outline-warning:hover {
-  background-color: var(--sp-warning) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-warning) !important;
+  color: vars(--sp-white) !important;
 }
 
 .glb-btn-outline-dark-disabled {
-  border-color: var(--sp-dark-text-disabled) !important;
-  color: var(--sp-dark-text-disabled) !important;
+  border-color: vars(--sp-dark-text-disabled) !important;
+  color: vars(--sp-dark-text-disabled) !important;
   transition: all .2s !important;
 }
 
 .glb-btn-outline-dark-disabled:hover {
-  background-color: var(--sp-dark-text-disabled) !important;
-  color: var(--sp-white) !important;
+  background-color: vars(--sp-dark-text-disabled) !important;
+  color: vars(--sp-white) !important;
 }
 
 // #endregion NOVOS BOTÕES 
@@ -1218,35 +1215,35 @@ div.disabled {
 
 // #region NOVAS CORES - BORDERS 
 .glb-border-primary {
-  border-color: var(--sp-default) !important;
+  border-color: vars(--sp-default) !important;
 }
 
 .glb-border-secondary {
-  border-color: var(--sp-secondary) !important;
+  border-color: vars(--sp-secondary) !important;
 }
 
 .glb-border-success {
-  border-color: var(--sp-success) !important;
+  border-color: vars(--sp-success) !important;
 }
 
 .glb-border-danger {
-  border-color: var(--sp-danger) !important;
+  border-color: vars(--sp-danger) !important;
 }
 
 .glb-border-warning {
-  border-color: var(--sp-warning) !important;
+  border-color: vars(--sp-warning) !important;
 }
 
 .glb-border-dark {
-  border-color: var(--sp-dark-text) !important;
+  border-color: vars(--sp-dark-text) !important;
 }
 
 .glb-border-dark-disabled {
-  border-color: var(--sp-dark-text-disabled) !important;
+  border-color: vars(--sp-dark-text-disabled) !important;
 }
 
 .glb-border-neutral {
-  border-color: var(--sp-background-neutral);
+  border-color: vars(--sp-background-neutral);
 }
 
 .glb-darker-input-border {

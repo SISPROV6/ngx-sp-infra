@@ -1,12 +1,12 @@
-@use '../../styles/global-variables' as global-var;
-@import '../../styles/global-styles.scss';
+@use '../../../assets/styles/variables' as vars;
+@import '../../../assets/styles/global.scss';
 
 div.search-input {
   transition: .2s;
 
   span.search {
     background-color: transparent;
-    color: global-var.$input-color;
+    color: vars.$input-color;
   }
 
   input.border-left-none {

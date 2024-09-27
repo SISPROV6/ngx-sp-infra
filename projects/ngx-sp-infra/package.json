@@ -19,6 +19,10 @@
     "type": "git",
     "url": "https://github.com/SISPROV6/ngx-sp-infra"
   },
+  "files": [
+    "src/assets/styles",
+    "../../dist"
+  ],
   "peerDependencies": {
     "@angular/common": "^17.3.12",
     "@angular/core": "^17.3.12",

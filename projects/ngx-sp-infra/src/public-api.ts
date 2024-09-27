@@ -14,7 +14,6 @@ export * from './lib/message/save/save.component';
 export * from './lib/message/message.service';
 export * from './lib/message/message-enum';
 
-
 /** Models */
 export * from './lib/models/DownloadArquivos';
 export * from './lib/models/email-model';

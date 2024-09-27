@@ -1,0 +1,101 @@
+// Este arquivo servirá para agrupar os antgios "sispro-variables.scss" e "_global-variables.scss"
+
+// _global-variables.scss
+// ----- CORES PRINCIPAIS -----
+// Usadas para os elementos e trechos principais como, por exemplo, cores de containers, cores de fundo, entre outros...
+$white: #ffffff;
+$gray: #e9ecef;
+
+$main-color: #007BFF;
+$basic-text-color: #212529;
+$text-color: #0D6EFD;
+
+$footer-text-color: #2847A0;
+
+$border-color: #dee2e6;
+$input-color: #6C757D;
+$header-table: #C4C4C4;
+
+$hover: #BDD4EC;
+
+$background-pdf: #E0E6EC;
+
+$steps-text-color: #6C757D;
+
+$default-border: 1px solid rgba(15, 15, 15, 0.3);
+// ----- CORES SECUNDÁRIAS -----
+// Usadas para componentes e trechos separados como, por exemplo, cores de botões secundários, inputs, trechos mais 
+// isolados de componentes, entre outros...
+
+// #region CORES DE CÍRCULOS DE STATUS
+$status-active-color: #28A745;
+$status-inactive-color: #a72828;
+
+$sisglobal-fase-rascunho: #fff;
+$sisglobal-fase-elaboracao: #6c757d;
+$sisglobal-fase-aprovacao: #007bff;
+$sisglobal-fase-assinatura: #ffc107;
+$sisglobal-fase-vigente: #198754;
+$sisglobal-fase-encerrado: #dc3545;
+// #endregion CORES DE CÍRCULOS DE STATUS
+
+
+
+// ----- FONTES -----
+$title-font-size: 1.5rem;
+$input-font-size: 1rem;
+$audit-font-size: .75rem;
+$search-buttons-font-size: 0.875rem;
+
+
+
+// sispro-variables.scss
+// ----- CORES PRINCIPAIS -----
+// Usadas para os elementos e trechos principais como, por exemplo, cores de containers, cores de fundo, entre outros...
+$white: #ffffff;
+$gray: #e9ecef;
+
+//PRIMÁRIAS
+$primary-dark-bg: #213B70; //Menu
+$primary-medium-bg: #2847A0;
+$primary-light-bg: #3767b2;
+$primary-disabled-bg: #7395C9;
+$neutral-bg: #F5F5F5; //Background do sistema
+
+//TEXTOS
+$primary-text-color: #212529;
+$disabled-text-color: #6C757D;
+$white-text-color: #fff;
+$primary-text-medium: #2847A0;
+$primary-text-light: #3767B2;
+
+//OUTLINES
+$outline-error: #B23737;
+$outline-normal: #CED4DA;
+$outline-dark: #BAC3CC;
+$outline-active: #3767B2;
+
+//ALERTAS
+$alert-primary-text: #084298;
+$alert-primary-bg: #CFE2FF;
+$alert-secondary-text: #055160;
+$alert-secondary-bg: #CFF4FC;
+$alert-error-text: #842029;
+$alert-error-bg: #F8D7DA;
+$alert-success-text: #0F5132;
+$alert-success-bg: #D1E7DD;
+$alert-warning-text: #664D03;
+$alert-warning-bg: #FFF3CD;
+$alert-grey-text: #41464B;
+$alert-grey-bg: #E2E3E5;
+
+//BORDA
+$border-container: #C4C4C4;
+
+/*----------------------------*\
+       FONTES E TIPOGRAFIA
+\*----------------------------*/
+$title-font-size: 1.5rem;
+$input-font-size: 1rem;
+$audit-font-size: .75rem;
+$search-buttons-font-size: 0.875rem;
