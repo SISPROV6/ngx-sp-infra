@@ -106,6 +106,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Exemplo de string com a contagem:
   public get itemsDisplayText(): string {
+    if (this.recordsList && this.recordsList.length === 0) { return `Exibindo ${this.recordsList?.length ?? 0} registros`; }
     return `Exibindo ${ this.countOptions ? this.firstItemOfPage+"-"+this.lastItemOfPage + " de" : "" } ${this.recordsList?.length ?? 0} registros`;
   }
   // #endregion PUBLIC
