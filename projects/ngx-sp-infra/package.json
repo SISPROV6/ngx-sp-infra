@@ -22,13 +22,5 @@
   "files": [
     "src/assets/styles",
     "../../dist"
-  ],
-  "peerDependencies": {
-    "@angular/common": "^17.3.12",
-    "@angular/core": "^17.3.12",
-    "ngx-bootstrap": "^12.0.0"
-  },
-  "dependencies": {
-    "tslib": "^2.6.3"
-  }
+  ]
 }
