@@ -48,7 +48,6 @@ jobs:
 
 
     - name: Get the version tag
-      if: env.should_publish == 'true'
       run: |
         TAG=$(node scripts/tag.js)
         echo "Tag encontrada: $TAG"
