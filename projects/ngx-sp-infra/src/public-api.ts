@@ -73,6 +73,7 @@ export * from './lib/utils/utils';
 /** Services */
 export * from './lib/service/modal-utils.service';
 export * from './lib/service/ip-service.service';
+export * from './lib/service/file.service';
 
 
 /** Validators */
