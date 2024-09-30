@@ -176,7 +176,10 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) this.updateSelectedValue();
-    if (changes["outerControl"]?.currentValue) this.updateSelectedValue((changes["outerControl"].currentValue as FormControl).value);
+    if (changes["outerControl"]?.currentValue) {
+      this.setValidator();
+      this.updateSelectedValue((changes["outerControl"].currentValue as FormControl).value);
+    }
   }
 
   ngOnDestroy(): void {

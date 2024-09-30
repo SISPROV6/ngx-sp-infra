@@ -1,0 +1,21 @@
+@import '../../styles/styles.scss';
+
+
+// #region CONTENT
+.breadcrumb {
+  font-size: .75rem !important;
+  color: var(--sp-dark-text-disabled) !important;
+
+  .breadcrumb-item+.breadcrumb-item::before {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.lib-fs-24 { font-size: 24px !important; }
+
+.header { background-color: #EEEEEE !important; }
+
+.w-35 { width: 35% !important; }
+.w-65 { width: 65% !important; }
+// #endregion CONTENT
