@@ -11,10 +11,6 @@
     "build:minor": "cd projects/ngx-sp-infra/src/scripts/ && node version.js minor && node tag.js && cd ../../../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js",
     "build:major": "cd projects/ngx-sp-infra/src/scripts/ && node version.js major && node tag.js && cd ../../../../ && ng build && node projects/ngx-sp-infra/src/scripts/commit.js"
   },
-  "files": [
-    "projects/ngx-sp-infra/src/assets/styles",
-    "dist"
-  ],
   "private": false,
   "dependencies": {
     "@angular/animations": "^17.3.12",

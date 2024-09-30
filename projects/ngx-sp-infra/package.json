@@ -18,9 +18,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/SISPROV6/ngx-sp-infra"
-  },
-  "files": [
-    "src/assets/styles",
-    "../../dist"
-  ]
+  }
 }

@@ -2,13 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ngx-sp-infra",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "styleIncludePaths": [
-      "src/assets/styles",
-      "../../dist"
-    ]
-  },
-  "assets": [
-    "src/assets/**/*"
-  ]
+    "entryFile": "src/public-api.ts"
+  }
 }
