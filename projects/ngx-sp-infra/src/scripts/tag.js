@@ -57,9 +57,9 @@ const rl = readline.createInterface({
 });
 
 // Pergunta ao usuário se ele deseja prosseguir com o commit da tag
-rl.question("\n\nVocê quer commitar a tag de versão? (S/N): ", (answer) => {
+rl.question("\nVocê quer commitar a tag de versão? (S/N): ", (answer) => {
    if (answer.trim().toUpperCase() === "S") commitTag();
-  else console.log("\nTag não commitada por escolha do usuário. Prosseguindo com processo...\n");
+  else console.log("Tag não commitada por escolha do usuário. Prosseguindo com processo...\n");
 
   rl.close();
 });

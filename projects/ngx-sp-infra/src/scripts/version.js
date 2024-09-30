@@ -35,7 +35,7 @@ const rl = readline.createInterface({
 });
 
 // Pergunta ao usuário se ele deseja adicionar um sufixo à versão
-rl.question("\n\nCaso deseje, digite aqui um sufixo para a versão: ", (answer) => {
+rl.question("Caso deseje, digite aqui um sufixo para a versão: ", (answer) => {
   updateVersion(version, answer ?? "");
   rl.close();
 });
