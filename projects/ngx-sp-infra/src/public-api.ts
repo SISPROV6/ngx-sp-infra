@@ -28,6 +28,19 @@ export * from './lib/models/combobox/ret-records-combobox';
 export * from './lib/models/icons/icon.model';
 export * from './lib/models/forms/custom-form-control';
 
+export * from './lib/models/file-model'
+export * from './lib/models/infra-estabelecimento'
+export * from './lib/models/multi-status-list'
+export * from './lib/models/ret-estabelecimentos'
+
+export * from './lib/models/cep/endereco-by-cep'
+export * from './lib/models/cep/ret-cep'
+export * from './lib/models/basic-ret-types/ret-boolean'
+export * from './lib/models/basic-ret-types/ret-number'
+export * from './lib/models/basic-ret-types/ret-object-list'
+export * from './lib/models/basic-ret-types/ret-string'
+export * from './lib/models/basic-ret-types/ret-string-list'
+
 
 /** Pipes */
 export * from './lib/pipes/cpf-cnpj.pipe';
