@@ -53,15 +53,24 @@ const rl = readline.createInterface({
 
 // Pergunta ao usuário se ele deseja fazer commit no repositório GIT (https://github.com/SISPROV6/ngx-sp-infra)...
 rl.question("\n\nDeseja fazer commit no repositório GIT (https://github.com/SISPROV6/ngx-sp-infra)? (S/N): ", (useGit) => {
-
-  // ...se SIM...pergunta ao usuário em que branch será feito o commit
+  
+  // ...se SIM...pega a branch atual e pergunta ao usuário se será feito o commit nela
   if (useGit.trim().toUpperCase() === "S") {
-    rl.question("\n\nInforme a branch para commit (se não informada irá para 'main'): ", (branchName) => {
-      const branch = branchName.trim() || "main"; // Se não for informada explicitamente, usar 'main'
-      commit(branch);
+    try {
+      // Obtém a branch atual
+      const currentBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+      console.log(`Branch atual: ${currentBranch}`);
+      
+      rl.question("\n\nInforme a branch para commit (pressione Enter para usar a branch atual): ", (branchName) => {
+        const branch = branchName.trim() || currentBranch; // Se não for informada, usar a branch atual
+        commit(branch);
 
+        rl.close();
+      });
+    } catch (error) {
+      console.error(`Erro ao obter a branch atual: ${error.message}`);
       rl.close();
-    });
+    }
   }
   else {
     console.log("Operação de commit cancelada.\n");
