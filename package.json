@@ -27,7 +27,7 @@
     "@angular/router": "^17.3.12",
     "bootstrap": "^5.3.3",
     "ngx-bootstrap": "^12.0.0",
-    "ngx-currency": "^4.0.0",
+    "ngx-currency": "^17.0.0",
     "ngx-mask": "^16.2.8",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.1",
