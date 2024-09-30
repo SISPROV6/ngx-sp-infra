@@ -2,7 +2,7 @@ const fs = require('fs');
 
 
 // Lê o conteúdo do package.json
-const packageJson = JSON.parse(fs.readFileSync('../NgxSpInfra/projects/ngx-sp-infra/package.json', 'utf8'));
+const packageJson = JSON.parse(fs.readFileSync('./projects/ngx-sp-infra/package.json', 'utf8'));
 
 
 // Extrai a versão
