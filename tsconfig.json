@@ -13,8 +13,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
       "infra": [
-        "dist/SpNgInfra/SpNgInfra",
-        "dist/SpNgInfra"
+        "dist/SpNgxInfra/SpNgxInfra",
+        "dist/SpNgxInfra"
       ]
     },
     "noImplicitReturns": true,
