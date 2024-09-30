@@ -43,16 +43,17 @@ jobs:
       if: env.should_publish == 'true'
       run: npm run build
 
-    - name: Get the version tag
-      run: |
-        TAG=$(node scripts/tag.js)
-        echo "Tag encontrada: $TAG"
-        echo "TAG=$TAG" >> $GITHUB_ENV
-
     - name: Publish to NPM
       if: env.should_publish == 'true'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         cd dist/ngx-sp-infra
-        npm publish --access public --tag $TAG
+        
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          npm publish --access public --tag latest
+        elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
+          npm publish --access public --tag test
+        elif [ "${{ github.ref }}" == "refs/heads/next" ]; then
+          npm publish --access public --tag next
+        fi
