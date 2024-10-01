@@ -37,7 +37,12 @@ import { RecordCombobox } from '../../models/combobox/record-combobox';
 @Component({
   selector: 'lib-combobox',
   templateUrl: './lib-combobox.component.html',
-  styleUrl: './lib-combobox.component.scss'
+  styles: `
+    .glb-max-height-350px { max-height: 350px !important; }
+    .form-label { font-size: 16px !important; }
+    .z-index-1020 { z-index: 1020 !important; }
+    .cursor-pointer { cursor: pointer !important; }
+  `
 })
 export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -97,10 +102,9 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() public labelText?: string;
 
   /** (opcional) Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
-   * ! SERÁ DEPRECIADO EM BREVE
    * @type {boolean}
    * @default false */
-  @Input() public libRequired?: boolean = false;
+  @Input() public libRequired: boolean = false;
 
   /** (opcional) Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
    * @type {boolean}
@@ -176,6 +180,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) this.updateSelectedValue();
+    if (changes["libRequired"]?.currentValue) this.setValidator();
     if (changes["outerControl"]?.currentValue) {
       this.setValidator();
       this.updateSelectedValue((changes["outerControl"].currentValue as FormControl).value);
@@ -241,7 +246,9 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private setValidator(): void {
-    if (this._outerControl.hasValidator(Validators.required)) {
+    console.log("Validação validator", this._outerControl.hasValidator(Validators.required) || this.libRequired === true);
+    
+    if (this._outerControl.hasValidator(Validators.required) || this.libRequired === true) {
       this.innerControl.addValidators(Validators.required);
       this.isRequired = true;
     }
