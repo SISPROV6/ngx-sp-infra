@@ -87,6 +87,10 @@ export * from './lib/templates/header/header.component';
 //export * from './lib/templates/simple-header/simple-header.component';
 
 
+/** Components */
+export * from './lib/components/page-not-authorized/page-not-authorized.component';
+
+
 /** Widgets */
 export * from './lib/widgets/breadcrumb/infra-breadcrumb/infra-breadcrumb.component';
 export * from './lib/widgets/breadcrumb/infra-breadcrumb-item/infra-breadcrumb-item.component';

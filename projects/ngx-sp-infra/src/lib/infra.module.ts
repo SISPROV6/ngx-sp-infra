@@ -67,9 +67,12 @@ import { LibHeaderComponent } from './widgets/lib-header/lib-header.component';
 import { InputTrimComponent } from './widgets/input-trim/input-trim.component';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { PageNotAuthorizedComponent } from './components/page-not-authorized/page-not-authorized.component';
 
 @NgModule({
   declarations: [
+    PageNotAuthorizedComponent,
+    
     LoadingComponent,
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
@@ -146,6 +149,8 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     RouterModule
   ],
   exports: [
+    PageNotAuthorizedComponent,
+    
     LoadingComponent,
     FieldControlErrorComponent,
     FieldErrorMessageComponent,
