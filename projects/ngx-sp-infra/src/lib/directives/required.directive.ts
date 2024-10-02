@@ -56,7 +56,7 @@ export class RequiredDirective implements OnInit, OnChanges {
   get showMarker(): boolean { return this._showMarker; }
 
   /** Identificador único para o elemento <span> criado. */
-  @Input("sisID") spanID: string = "";
+  @Input("requiredID") spanID: string = "";
 
 
   ngOnInit(): void {

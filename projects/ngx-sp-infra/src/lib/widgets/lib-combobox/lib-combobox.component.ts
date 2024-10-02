@@ -37,7 +37,12 @@ import { RecordCombobox } from '../../models/combobox/record-combobox';
 @Component({
   selector: 'lib-combobox',
   templateUrl: './lib-combobox.component.html',
-  styleUrl: './lib-combobox.component.scss'
+  styles: `
+    .glb-max-height-350px { max-height: 350px !important; }
+    .form-label { font-size: 16px !important; }
+    .z-index-1020 { z-index: 1020 !important; }
+    .cursor-pointer { cursor: pointer !important; }
+  `
 })
 export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -59,6 +64,8 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   protected invalid: boolean = false;
   protected dirty: boolean = false;
   protected touched: boolean = false;
+
+  protected comboboxID: string;
   // #endregion PROTECTED
 
   // #region PRIVATE
@@ -97,10 +104,9 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() public labelText?: string;
 
   /** (opcional) Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
-   * ! SERÁ DEPRECIADO EM BREVE
-   * @type {boolean}
-   * @default false */
-  @Input() public libRequired?: boolean = false;
+   * @type {boolean} */
+  @Input()
+  public libRequired?: boolean;
 
   /** (opcional) Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
    * @type {boolean}
@@ -164,6 +170,9 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
+    this.comboboxID = `lib-combobox-${Math.random() * 100}`;
+    console.log("comboboxID: ", this.comboboxID);
+
     this.adjustDropdownWidth();
 
     this.setValidator();
@@ -176,6 +185,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) this.updateSelectedValue();
+    if (changes["libRequired"]?.currentValue != undefined) this.setValidator();
     if (changes["outerControl"]?.currentValue) {
       this.setValidator();
       this.updateSelectedValue((changes["outerControl"].currentValue as FormControl).value);
@@ -240,14 +250,28 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /** Serve para aplicar ou remover o Validator.required do controle.
+   * Por padrão ele priorizará a propriedade libRequired para esta validação. */
   private setValidator(): void {
-    if (this._outerControl.hasValidator(Validators.required)) {
-      this.innerControl.addValidators(Validators.required);
-      this.isRequired = true;
+    if (this.libRequired !== undefined) {
+      if (this.libRequired) {
+        this.innerControl.addValidators(Validators.required);
+        this.isRequired = true;
+      }
+      else {
+        this.innerControl.removeValidators(Validators.required);
+        this.isRequired = false;
+      }
     }
     else {
-      this.innerControl.removeValidators(Validators.required);
-      this.isRequired = false;
+      if (this._outerControl.hasValidator(Validators.required)) {
+        this.innerControl.addValidators(Validators.required);
+        this.isRequired = true;
+      }
+      else {
+        this.innerControl.removeValidators(Validators.required);
+        this.isRequired = false;
+      }
     }
   }
 

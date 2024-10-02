@@ -1,11 +1,11 @@
-<label *ngIf="labelText && labelText != ''" [libRequired]="isRequired" class="form-label fw-bold">{{ labelText }}</label>
+<label *ngIf="labelText && labelText != ''" [libRequired]="isRequired" [requiredID]="comboboxID" class="form-label fw-bold">{{ labelText }}</label>
 <div class="input-group dropdown flex-fill glb-max-height-350px">
 
    <!-- Este elemento ng-content com o atributo [btnLeft] permite que o usuário final forneça conteúdo personalizado para ser exibido no lado esquerdo do combobox de pesquisa.
    Ao usar o atributo [btnLeft], o usuário pode facilmente adicionar botões ou outros elementos para melhorar a funcionalidade ou aparência do combobox de pesquisa. -->
    <ng-content select="[btnLeft]"></ng-content>
 
-   <input  #mainInput class="form-select text-start rounded-end" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
+   <input  #mainInput class="form-select text-start rounded-end cursor-pointer" type="text" data-bs-toggle="dropdown" [placeholder]="mainInputPlaceholder"
             [formControl]="innerControl" data-bs-auto-close="outside" aria-expanded="false" readonly [class.is-invalid]="invalidControl"
             (click)="ariaExpanded = !ariaExpanded; searchInput.focus()" (focus)="searchInput.focus()">
 
