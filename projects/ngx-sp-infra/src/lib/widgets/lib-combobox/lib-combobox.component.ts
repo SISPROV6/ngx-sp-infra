@@ -64,6 +64,8 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   protected invalid: boolean = false;
   protected dirty: boolean = false;
   protected touched: boolean = false;
+
+  protected comboboxID: string;
   // #endregion PROTECTED
 
   // #region PRIVATE
@@ -102,9 +104,9 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() public labelText?: string;
 
   /** (opcional) Define se o campo é obrigatório, vai exibir o '*' vermelho ao lado do label (se ele estiver presente)
-   * @type {boolean}
-   * @default false */
-  @Input() public libRequired: boolean = false;
+   * @type {boolean} */
+  @Input()
+  public libRequired?: boolean;
 
   /** (opcional) Define se o campo está desabilitado. Deve ser usado para validações de habilitação dinâmica do campo
    * @type {boolean}
@@ -168,6 +170,9 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
+    this.comboboxID = `lib-combobox-${Math.random() * 100}`;
+    console.log("comboboxID: ", this.comboboxID);
+
     this.adjustDropdownWidth();
 
     this.setValidator();
@@ -180,7 +185,7 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["comboboxList"]?.currentValue) this.updateSelectedValue();
-    if (changes["libRequired"]?.currentValue) this.setValidator();
+    if (changes["libRequired"]?.currentValue != undefined) this.setValidator();
     if (changes["outerControl"]?.currentValue) {
       this.setValidator();
       this.updateSelectedValue((changes["outerControl"].currentValue as FormControl).value);
@@ -245,16 +250,28 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /** Serve para aplicar ou remover o Validator.required do controle.
+   * Por padrão ele priorizará a propriedade libRequired para esta validação. */
   private setValidator(): void {
-    console.log("Validação validator", this._outerControl.hasValidator(Validators.required) || this.libRequired === true);
-    
-    if (this._outerControl.hasValidator(Validators.required) || this.libRequired === true) {
-      this.innerControl.addValidators(Validators.required);
-      this.isRequired = true;
+    if (this.libRequired !== undefined) {
+      if (this.libRequired) {
+        this.innerControl.addValidators(Validators.required);
+        this.isRequired = true;
+      }
+      else {
+        this.innerControl.removeValidators(Validators.required);
+        this.isRequired = false;
+      }
     }
     else {
-      this.innerControl.removeValidators(Validators.required);
-      this.isRequired = false;
+      if (this._outerControl.hasValidator(Validators.required)) {
+        this.innerControl.addValidators(Validators.required);
+        this.isRequired = true;
+      }
+      else {
+        this.innerControl.removeValidators(Validators.required);
+        this.isRequired = false;
+      }
     }
   }
 
