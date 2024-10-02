@@ -171,7 +171,6 @@ export class LibComboboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.comboboxID = `lib-combobox-${Math.random() * 100}`;
-    console.log("comboboxID: ", this.comboboxID);
 
     this.adjustDropdownWidth();
 
