@@ -28,6 +28,7 @@ export * from './lib/models/combobox/ret-records-combobox';
 export * from './lib/models/icons/icon.model';
 export * from './lib/models/forms/custom-form-control';
 
+export * from './lib/models/basic-filters';
 export * from './lib/models/file-model'
 export * from './lib/models/infra-estabelecimento'
 export * from './lib/models/multi-status-list'
