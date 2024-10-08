@@ -61,7 +61,9 @@ export class FormUtils {
       'cpcnpjInvalidDigit': `Este ${fieldName} tem um dígito inválido.`,
       'incorrect': `Este campo está inválido.`,
       'email': `Este e-mail está inválido.`,
-      'mask': `O valor informado não corresponde ao formato esperado`
+      'mask': `O valor informado não corresponde ao formato esperado`,
+      'minDate': `A data informada deve ser superior à ${validatorValue.minDate}`,
+      'maxDate': `A data informada deve ser inferior à ${validatorValue.maxDate}`
     };
 
     return (customErrorMessage
