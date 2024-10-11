@@ -5,19 +5,15 @@ h5 {
 }
 
 .arrow-pos-size {
-	background-color: white !important;
+	background-color: white;
 	border: none;
 	width: 15px;
 	height: 15px;
+	transition: 0.3s;
+}
 
-	img {
-		background-color: white;
-	}
-
-	.invertImage {
-		transform: rotate(180deg);
-		background-color: white;
-	}
+.invertImage {
+	transform: rotate(180deg);
 }
 
 span {

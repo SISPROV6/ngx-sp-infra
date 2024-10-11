@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 @Component( {
       selector: 'app-custom-acordion',
@@ -9,10 +9,35 @@ export class CustomAcordionComponent implements OnInit {
       constructor () { }
       customClass = 'customClass';
 
-      @Input() public name = 'Filtro Avançado';
+      @Input() public name = 'Filtro avançado';
       @Input() public haveArrow = true;
       @Input() public haveMarginTop = false;
-      @Input() public isOpen = false;
+      @Input() public isOpen: boolean;
 
-      ngOnInit (): void { }
+      public posicaoIcon:boolean; 
+
+	@ViewChild('icon') iconRef: ElementRef;
+
+      ngOnInit (): void {       
+            this.posicaoIcon = this.isOpen;
+
+            this.toogleIcon();
+      }
+
+      public setIsOpen(){
+            
+            this.toogleIcon();
+
+            this.posicaoIcon = !this.posicaoIcon;
+      }
+
+      public toogleIcon(){
+            if(this.iconRef){
+                  if(this.posicaoIcon){
+                        this.iconRef.nativeElement.classList.add('invertImage');
+                  } else {
+                        this.iconRef.nativeElement.classList.remove('invertImage');
+                  }
+            }
+      }
 }
