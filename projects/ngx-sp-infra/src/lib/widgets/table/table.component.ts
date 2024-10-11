@@ -123,13 +123,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {
-    if (this.recordsList && this.showCounter && this.usePagination) {
-      this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length;
-    }
-    else {
-      this.itemsPerPage = 1;
-    }
-
+    this.updateCounterInfo();
     this.validateHeaders();
   }
 
@@ -142,6 +136,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['recordsList'].currentValue) {
       this.resetPagination(this.recordsList ?? []);
+      this.updateCounterInfo();
     }
 
     if (changes['headersList']) { this.validateHeaders(); }
@@ -167,11 +162,22 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
 
+  private updateCounterInfo(): void {
+    if (this.recordsList && this.showCounter && this.usePagination) {
+      this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length;
+    }
+    else if (!this.recordsList && this.showCounter && this.usePagination) {
+      this.itemsPerPage = 1;
+    }
+  }
+
+
   /** Modifica a quantidade de itens a ser mostrada na lista.
    * @param event parâmetro de evento que irá selecionar a nova quantidade. */
   public onSelectChange(event: any) {
     this.itemsPerPage = parseInt(event.target.value, 10);
     this.page = 1;
+    this.pageChange.emit(this.page);
     this.itemsPerPageChange.emit(this.itemsPerPage);
   }
 
