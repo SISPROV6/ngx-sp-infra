@@ -123,8 +123,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {
-    if (this.recordsList) { this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length }
-    else { this.itemsPerPage = this.countOptions[0] ?? 10 }
+    if (this.recordsList && this.showCounter && this.usePagination) {
+      this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length;
+    }
+    else {
+      this.itemsPerPage = 1;
+    }
 
     this.validateHeaders();
   }
@@ -147,15 +151,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   // #region ==========> UTILITÁRIOS <==========
   private validateHeaders(): void {
-    let headersUseOldWidth: boolean = this.headersList.every(header => header.col != undefined);
-    console.log("headersUseOldWidth", headersUseOldWidth);
+    let headersUseOldWidth: boolean = this.headersList.every(header => header.col && header.col != undefined);
     
     let headersUseCol: boolean = this.headersList.every(header => header.widthClass && header.widthClass.includes('col-'));
-    console.log("headersUseCol", headersUseCol);
-    
     let headersUsePercent: boolean = this.headersList.every(header => header.widthClass && header.widthClass.includes('w-'));
-    console.log("headersUsePercent", headersUsePercent);
-
 
     if (headersUseOldWidth) { this.headersUseOldWidth = true; }
     else {
@@ -165,9 +164,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
         console.error("A largura das colunas está em um formato inválido. Certifique-se que todas elas utilizam apenas 'col-' ou 'w-'");
       }
     }
-
-    console.log("headersUseOldWidth", headersUseOldWidth);
-    
   }
 
 
