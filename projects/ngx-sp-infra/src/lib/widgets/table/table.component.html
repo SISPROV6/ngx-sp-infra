@@ -10,7 +10,10 @@
                <tr>
                   <!-- Itera sobre a lista de cabeçalhos para criar as colunas -->
                   <th *ngFor="let header of headersList" scope="col"
-                     class="align-middle text-dark-grey {{ header.col > 0 ? 'col-'+header.col : 'col' }} {{ header.customClasses }}">
+                  class="align-middle text-dark-grey {{ header.customClasses }}
+                     {{ headersUseOldWidth
+                        ? header.col && header.col > 0 ? 'col-'+header.col : 'col'
+                        : header.widthClass }}" >
                      {{ header.name }}
 
                      <app-ordering *ngIf="header.orderColumn" [(sortDirection)]="sortDirection[header.orderColumn]"

@@ -58,7 +58,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
    * @required */
   @Input({ alias: 'headers', required: true }) public headersList: {
     name: string,
-    col: number,
+    col?: number,
+    widthClass?: string,
     customClasses?: string,
     orderColumn?: string
   }[];
@@ -109,6 +110,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.recordsList && this.recordsList.length === 0) { return `Exibindo ${this.recordsList?.length ?? 0} registros`; }
     return `Exibindo ${ this.countOptions ? this.firstItemOfPage+"-"+this.lastItemOfPage + " de" : "" } ${this.recordsList?.length ?? 0} registros`;
   }
+
+
+  public headersUseOldWidth?: boolean;
   // #endregion PUBLIC
 
   // #endregion ==========> PROPRIEDADES <==========
@@ -119,8 +123,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** Inicializa o componente e define o número inicial de itens por página. */
   ngOnInit(): void {
-    if (this.recordsList) { this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length }
-    else { this.itemsPerPage = this.countOptions[0] ?? 10 }
+    this.updateCounterInfo();
+    this.validateHeaders();
   }
 
   ngAfterViewInit(): void {
@@ -132,23 +136,48 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['recordsList'].currentValue) {
       this.resetPagination(this.recordsList ?? []);
-
-      let maxColumns = this.headersList.reduce((n, {col}) => n + col, 0);
-      if (maxColumns >= 13) {
-        throw new Error("A soma de largura (classe com prefixo 'col-') de todas as colunas não pode ser maior que 12.");
-      }
+      this.updateCounterInfo();
     }
+
+    if (changes['headersList']) { this.validateHeaders(); }
   }
   // #endregion ==========> INICIALIZAÇÃO <==========
 
 
   // #region ==========> UTILITÁRIOS <==========
+  private validateHeaders(): void {
+    let headersUseOldWidth: boolean = this.headersList.every(header => header.col && header.col != undefined);
+    
+    let headersUseCol: boolean = this.headersList.every(header => header.widthClass && header.widthClass.includes('col-'));
+    let headersUsePercent: boolean = this.headersList.every(header => header.widthClass && header.widthClass.includes('w-'));
+
+    if (headersUseOldWidth) { this.headersUseOldWidth = true; }
+    else {
+      this.headersUseOldWidth = false;
+
+      if (!headersUseCol && !headersUsePercent) {
+        console.error("A largura das colunas está em um formato inválido. Certifique-se que todas elas utilizam apenas 'col-' ou 'w-'");
+      }
+    }
+  }
+
+
+  private updateCounterInfo(): void {
+    if (this.recordsList && this.showCounter && this.usePagination) {
+      this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length;
+    }
+    else if (!this.recordsList && this.showCounter && this.usePagination) {
+      this.itemsPerPage = 1;
+    }
+  }
+
 
   /** Modifica a quantidade de itens a ser mostrada na lista.
    * @param event parâmetro de evento que irá selecionar a nova quantidade. */
   public onSelectChange(event: any) {
     this.itemsPerPage = parseInt(event.target.value, 10);
     this.page = 1;
+    this.pageChange.emit(this.page);
     this.itemsPerPageChange.emit(this.itemsPerPage);
   }
 
@@ -156,9 +185,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
    * @param list Lista de registros para resetar a paginação. */
   public resetPagination(list: any[]): void {
     const startIndex = (this.page - 1) * this.itemsPerPage;
-    if (list.length <= startIndex) {
-      this.page = 1;
-    }
+    if (list.length <= startIndex) this.page = 1;
   }
 
 
@@ -181,7 +208,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 		if (this.currentSortColumn === column) {
 			// Alterna entre 'asc' e 'desc' para a direção de ordenação da coluna
 			this.sortDirection[column] = this.sortDirection[column] === 'asc' ? 'asc' : 'desc';
-		} else {
+		}
+    else {
 			// Define a nova coluna e a direção de ordenação como 'asc'
 			this.currentSortColumn = column;
 			this.sortDirection = { [column]: 'asc' };
@@ -193,7 +221,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
 	// Função de ordenação dos dados da tabela
 	private sortData() {
-
 		if (this.recordsList) {
 			const gruposList = this.recordsList;
 
@@ -203,9 +230,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
 				return this.compareProperties(a, b, attribute, direction);
 			});
-
 		}
-
 	}
 
 	// Compara os valores das propriedades entre dois objetos
@@ -213,24 +238,15 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 		const propertyA = this.getProperty(a, attribute).toUpperCase();
 		const propertyB = this.getProperty(b, attribute).toUpperCase();
 
-		if (propertyA < propertyB) {
-			return direction === 'asc' ? -1 : 1;
-		}
-
-		if (propertyA > propertyB) {
-			return direction === 'asc' ? 1 : -1;
-		}
+		if (propertyA < propertyB) return direction === 'asc' ? -1 : 1;
+		if (propertyA > propertyB) return direction === 'asc' ? 1 : -1;
 
 		return 0;
 	}
 
 	// Obtém o valor de uma propriedade específica de um objeto
 	private getProperty(obj: any, path: string | string[]): string {
-		
-		if (typeof path === 'string') {
-			path = path.split('.');
-		}
-
+		if (typeof path === 'string') path = path.split('.');
 		return path.reduce((value, property) => value ? value[property] : '', obj);
 	}
 	//#endregion Ordering, Sorting ou apenas Ordenação
