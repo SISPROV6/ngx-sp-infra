@@ -9,6 +9,12 @@
             <thead>
                <tr>
                   <!-- Itera sobre a lista de cabeçalhos para criar as colunas -->
+                  <th *ngIf="useSelection" >
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="tableCheckAll" [(ngModel)]="selection" (ngModelChange)="selectionChange.emit($event)">
+                     </div>
+                  </th>
+
                   <th *ngFor="let header of headersList" scope="col"
                   class="align-middle text-dark-grey {{ header.customClasses }}
                      {{ headersUseOldWidth

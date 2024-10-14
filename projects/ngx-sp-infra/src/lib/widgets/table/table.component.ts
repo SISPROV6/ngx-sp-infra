@@ -32,10 +32,14 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   // #region PUBLIC
 
+  @Input() public selection: boolean | undefined = false;
+
+  /** Determina se haverá uma coluna inicial para seleção de registros na tabela. */
+  @Input() public useSelection: boolean = false;
+
   /** Determina se a tabela deve usar paginação.
    * @default true */
   @Input() public usePagination: boolean = true;
-
   
   /** Lista de registros a serem exibidos na tabela.
    * @required */
@@ -43,16 +47,13 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   public get recordsList(): any[] | undefined { return this._recordsList; }
   public set recordsList(value: any[] | undefined) { this._recordsList = value; }
 
-
   /** Opções de contagem de itens por página disponíveis para o usuário.
    * @required */
   @Input('counts') public countOptions: number[];
 
-
   /** Posicionamento dos controles de paginação.
    * @default 'end' */
   @Input('placement') public paginationPlacement: 'start' | 'center' | 'end' | 'between' = 'end';
-
 
   /** Lista de cabeçalhos para as colunas da tabela, incluindo o nome, a largura da coluna e classes customizadas.
    * @required */
@@ -64,16 +65,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     orderColumn?: string
   }[];
 
-
   /** Mensagem customizada para lista vazia */
   @Input('emptyListMessage') public emptyListMessage?: string;
 
-
   /** Informa se o counter de registros deve aparecer ou não.
-   * @default true
-  */
+   * @default true */
   @Input('showCounter') public showCounter: boolean = true;
-
 
   /** Informa um ID para a paginação da tabela específica. Deve ser utilizada em caso de múltiplas tabelas na mesma tela. */
   @Input()
@@ -88,6 +85,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** Evento emitido quando a página é alterada. */
   @Output() public pageChange: EventEmitter<number> = new EventEmitter<number>();
+
+  /** Evento emitido quando o checkbox de seleção se alterar. */
+  @Output() public selectionChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   /** Página atual da tabela. */
 	public get page(): number { return this._currentPage; }
@@ -105,13 +106,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     return Math.min(this.page * this.itemsPerPage, this.recordsList?.length ?? 0);
   }
 
-  // Exemplo de string com a contagem:
   public get itemsDisplayText(): string {
     if (this.recordsList && this.recordsList.length === 0) { return `Exibindo ${this.recordsList?.length ?? 0} registros`; }
     return `Exibindo ${ this.countOptions ? this.firstItemOfPage+"-"+this.lastItemOfPage + " de" : "" } ${this.recordsList?.length ?? 0} registros`;
   }
 
-
+  
   public headersUseOldWidth?: boolean;
   // #endregion PUBLIC
 
@@ -134,7 +134,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   /** Monitora as mudanças nas entradas do componente e realiza ajustes, como resetar a paginação ou validar o layout das colunas.
    * @param changes Objeto que contém as mudanças nas entradas do componente. */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['recordsList'].currentValue) {
+    if (changes['recordsList'] && changes['recordsList'].currentValue) {
       this.resetPagination(this.recordsList ?? []);
       this.updateCounterInfo();
     }
@@ -161,7 +161,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-
   private updateCounterInfo(): void {
     if (this.recordsList && this.showCounter && this.usePagination) {
       this.itemsPerPage = this.countOptions ? this.countOptions[0] : this.recordsList.length;
@@ -187,8 +186,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     const startIndex = (this.page - 1) * this.itemsPerPage;
     if (list.length <= startIndex) this.page = 1;
   }
-
-
 
 	//#region Ordering, Sorting ou apenas Ordenação
 
