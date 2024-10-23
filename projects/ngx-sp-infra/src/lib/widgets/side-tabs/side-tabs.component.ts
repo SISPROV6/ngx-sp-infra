@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 interface CustomIconsConfig {
   class: string;
@@ -28,6 +28,9 @@ export class SideTabsComponent implements OnInit {
   
   @Input() public icons: any[] = [];
   @Input() public customIcons: CustomIconsConfig[] = [];
+
+  // VERIFICAR
+  @Input() public extra: { color: string, tooltip: string }[] = [];
 
   @Output() public indexPage: EventEmitter<number> = new EventEmitter<number>();
 

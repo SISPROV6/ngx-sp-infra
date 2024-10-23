@@ -29,6 +29,8 @@ export class ComboboxMultipleChoiceComponent {
   @Input({ required: true }) public options: RecordCombobox[];
   @Input() public placeholder: string = 'Selecione uma ou mais opções';
   @Input() public disabled: boolean = false;
+  // REVISAR
+  @Input() public showLimparBtn: boolean = true;
   // #endregion PUBLIC
 
   // #endregion ==========> PROPERTIES <==========

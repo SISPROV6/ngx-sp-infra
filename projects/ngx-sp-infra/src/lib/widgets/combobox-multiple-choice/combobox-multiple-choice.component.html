@@ -3,7 +3,8 @@
 
     <button class="form-select text-start border glb-cursor-pointer-none" type="button" [disabled]="disabled"
       data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"
-      [class.glb-text-gray]="selectedLabels.length === 0" [class]="selectedOptions.length > 0 && !disabled ? 'border-radius-filter' : ''">
+      [class.glb-text-gray]="selectedLabels.length === 0" [class]="showLimparBtn && selectedOptions.length > 0 && !disabled ? 'border-radius-filter' : ''">
+      <!-- [class.glb-text-gray]="selectedLabels.length === 0" [class]="selectedOptions.length > 0 && !disabled ? 'border-radius-filter' : ''"> -->
       {{ selectedLabels.length > 0 ? selectedLabels : placeholder }}
     </button>
 
@@ -54,8 +55,15 @@
       <!-- #endregion LISTA DOS NÃO SELECIONADOS -->
     </ul>
   </div>
-  <div *ngIf="selectedOptions.length > 0 && !disabled">
+
+  @if (showLimparBtn && selectedOptions.length > 0) {
+    <div>
+      <button class="btn btn-outline-primary border-radius-limpar" type="button"
+        (click)="resetFilter()"> Limpar </button>
+    </div>
+  }
+  <!-- <div *ngIf="selectedOptions.length > 0 && !disabled">
     <button class="btn btn-outline-primary border-radius-limpar" type="button"
       (click)="resetFilter()"> Limpar </button>
-  </div>
+  </div> -->
 </div>

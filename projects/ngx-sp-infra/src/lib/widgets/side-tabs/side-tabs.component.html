@@ -20,6 +20,11 @@
       </ng-container>
       <!-- #endregion ÍCONES/ELEMENTOS CUSTOMIZADOS -->
 
+      <!-- REVIZAR -->
+      @if (extra.length > 0) {
+        <div [tooltip]="extra[i].tooltip" [style]="'background-color: ' + extra[i].color" class="circle"></div>
+      }
+
       <!-- #region TÍTULO E SUBTÍTULO -->
       <div class="title-unique">
         <span class="fs-6" [class.glb-text-primary]="i == selectedIndex" [title]="title"> {{ title }} </span>
