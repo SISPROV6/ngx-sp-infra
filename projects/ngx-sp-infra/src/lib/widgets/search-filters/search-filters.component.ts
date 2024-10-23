@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BasicFilters } from '../../models/basic-filters';
 
 @Component({
@@ -23,6 +23,9 @@ export class SearchFiltersComponent {
   @Input() public placeholder: string = '';
   @Input() public useIsActive: boolean = true;
   @Input() public useNewStyles: boolean = false;
+
+  // VERIFICAR NECESSIDADE
+  @Input() public basicFilters: BasicFilters = new BasicFilters();
   
   search: string = '';
   selected: any ;
@@ -39,6 +42,10 @@ export class SearchFiltersComponent {
         TEXTO_PESQUISA: this.search.trim(),
         IS_ATIVO: this.isActive
       };
+
+      // VERIFICAR NECESSIDADE
+      this.basicFilters.TEXTO_PESQUISA = this.search.trim();
+      this.basicFilters.IS_ATIVO = this.isActive;
 
       this._executeGetBySearch.emit(basicFilters);
 
